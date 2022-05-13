@@ -1,0 +1,135 @@
+{
+  "graph": {
+    "nodes": {
+      "ngx-dsfr": {
+        "name": "ngx-dsfr",
+        "type": "lib",
+        "data": {
+          "root": "libs/ngx-dsfr",
+          "projectType": "library",
+          "sourceRoot": "libs/ngx-dsfr/src",
+          "prefix": "dsfr",
+          "targets": {
+            "build": {
+              "executor": "@nrwl/angular:package",
+              "outputs": [
+                "dist/libs/ngx-dsfr"
+              ],
+              "options": {
+                "project": "libs/ngx-dsfr/ng-package.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "libs/ngx-dsfr/tsconfig.lib.prod.json"
+                },
+                "development": {
+                  "tsConfig": "libs/ngx-dsfr/tsconfig.lib.json"
+                }
+              },
+              "defaultConfiguration": "production"
+            },
+            "test": {
+              "executor": "@nrwl/jest:jest",
+              "outputs": [
+                "coverage/libs/ngx-dsfr"
+              ],
+              "options": {
+                "jestConfig": "libs/ngx-dsfr/jest.config.ts",
+                "passWithNoTests": true
+              }
+            },
+            "lint": {
+              "executor": "@nrwl/linter:eslint",
+              "options": {
+                "lintFilePatterns": [
+                  "libs/ngx-dsfr/**/*.ts",
+                  "libs/ngx-dsfr/**/*.html"
+                ]
+              }
+            }
+          },
+          "tags": [],
+          "files": [
+            {
+              "file": "libs/ngx-dsfr/.browserslistrc",
+              "hash": "4f9ac26980c156a3d525267010d5f78144b43519"
+            },
+            {
+              "file": "libs/ngx-dsfr/.eslintrc.json",
+              "hash": "8a521277017856412cf53f99e030b7f0110d0c6f"
+            },
+            {
+              "file": "libs/ngx-dsfr/jest.config.ts",
+              "hash": "f566cc62126d13ae5f35ae5b039cee0690a756ff"
+            },
+            {
+              "file": "libs/ngx-dsfr/ng-package.json",
+              "hash": "42bc5c4557ccde40fe23cc1fbcc9d174de054192"
+            },
+            {
+              "file": "libs/ngx-dsfr/package.json",
+              "hash": "3efd035486e8830fb77b818c3c23a82cb1661ee5",
+              "deps": [
+                "npm:tslib",
+                "npm:@angular/common",
+                "npm:@angular/core"
+              ]
+            },
+            {
+              "file": "libs/ngx-dsfr/project.json",
+              "hash": "6eaa7ab598d051fca870677ed070dd724e083601"
+            },
+            {
+              "file": "libs/ngx-dsfr/README.md",
+              "hash": "909c0efc4f77ae81374731f1de79ab6e08062b13"
+            },
+            {
+              "file": "libs/ngx-dsfr/src/index.ts",
+              "hash": "7114cb77d0dff5d24f7aaed703ba722ccff97b41"
+            },
+            {
+              "file": "libs/ngx-dsfr/src/lib/ngx-dsfr.module.ts",
+              "hash": "cce471703d406710d7dda1a25d94a54fb29c661e",
+              "deps": [
+                "npm:@angular/core",
+                "npm:@angular/common"
+              ]
+            },
+            {
+              "file": "libs/ngx-dsfr/src/test-setup.ts",
+              "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
+              "deps": [
+                "npm:jest-preset-angular"
+              ]
+            },
+            {
+              "file": "libs/ngx-dsfr/tsconfig.json",
+              "hash": "92d5a13833a8b80a6161739da0abf089a78b19e2"
+            },
+            {
+              "file": "libs/ngx-dsfr/tsconfig.lib.json",
+              "hash": "898e5e6227d4dfbec7f11b58509f9c19787223ec"
+            },
+            {
+              "file": "libs/ngx-dsfr/tsconfig.lib.prod.json",
+              "hash": "2a2faa884cf3a054c72288f62b9a9f9560ca4996"
+            },
+            {
+              "file": "libs/ngx-dsfr/tsconfig.spec.json",
+              "hash": "c5db02778f96a2a200d787c0a7b376fe0d6c36f7"
+            }
+          ]
+        }
+      }
+    },
+    "dependencies": {
+      "ngx-dsfr": []
+    }
+  },
+  "affectedProjects": [
+    "ngx-dsfr"
+  ],
+  "criticalPath": [
+    "ngx-dsfr"
+  ]
+}
