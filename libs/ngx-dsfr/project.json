@@ -30,7 +30,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/ngx-dsfr/**/*.ts", "libs/ngx-dsfr/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ngx-dsfr/**/*.ts",
+          "libs/ngx-dsfr/**/*.html",
+          "libs/ngx-dsfr/link/**/*.ts",
+          "libs/ngx-dsfr/link/**/*.html"
+        ]
       }
     }
   },
