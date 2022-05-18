@@ -1,1 +1,6 @@
-<p>link works!</p>
+<ng-container *ngIf='isExternal else internalLink'>
+  External : {{link}}
+</ng-container>
+<ng-template #internalLink>
+  text <a href='*'>Internal : {{link}}</a> text
+</ng-template>

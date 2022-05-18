@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/playground",
         "index": "apps/playground/src/index.html",
@@ -17,7 +19,10 @@
           "apps/playground/src/favicon.ico",
           "apps/playground/src/assets"
         ],
-        "styles": ["apps/playground/src/styles.scss"],
+        "styles": [
+          "apps/playground/src/styles.scss",
+          "node_modules/@gouvfr/dsfr/dist/core/core.min.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -82,7 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/playground"],
+      "outputs": [
+        "coverage/apps/playground"
+      ],
       "options": {
         "jestConfig": "apps/playground/jest.config.ts",
         "passWithNoTests": true
