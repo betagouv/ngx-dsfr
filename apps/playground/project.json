@@ -21,7 +21,7 @@
         ],
         "styles": [
           "apps/playground/src/styles.scss",
-          "node_modules/@gouvfr/dsfr/dist/core/core.min.css"
+          "node_modules/@betagouv/ngx-dsfr/assets/styling/core-styling.css"
         ],
         "scripts": []
       },
