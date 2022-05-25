@@ -3,7 +3,7 @@
   "sourceRoot": "libs/ngx-dsfr/src",
   "prefix": "dsfr",
   "targets": {
-    "build": {
+    "build-base": {
       "executor": "@nrwl/angular:package",
       "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
@@ -19,6 +19,18 @@
       },
       "defaultConfiguration": "production"
     },
+    "build": {
+      "executor": "@nrwl/workspace:run-commands",
+      "dependsOn": ["build-base"],
+      "options": {
+        "commands": [
+          "sass core-styling.scss core-styling.css --load-path=../../../../../node_modules",
+          "rm core-styling.scss"
+        ],
+        "cwd": "dist/libs/ngx-dsfr/assets/styling",
+        "parallel": false
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/ngx-dsfr"],
@@ -31,8 +43,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/ngx-dsfr/**/*.ts",
-          "libs/ngx-dsfr/**/*.html",
+          "libs/ngx-dsfr/src/**/*.ts",
+          "libs/ngx-dsfr/src/**/*.html",
           "libs/ngx-dsfr/link/**/*.ts",
           "libs/ngx-dsfr/link/**/*.html"
         ]
