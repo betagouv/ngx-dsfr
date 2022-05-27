@@ -3,6 +3,7 @@
  */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 /**
  * 3rd-party imports
@@ -16,7 +17,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, DsfrLinkModule],
+  imports: [BrowserModule, DsfrLinkModule, RouterModule.forRoot([])],
   providers: [],
   bootstrap: [AppComponent]
 })
