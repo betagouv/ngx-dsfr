@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "architect",
+  "version": "0.0.1",
+  "generators": {
+    "architect": {
+      "factory": "./src/generators/architect/generator",
+      "schema": "./src/generators/architect/schema.json",
+      "description": "architect generator"
+    }
+  }
+}
