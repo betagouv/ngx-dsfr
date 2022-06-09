@@ -1,7 +1,12 @@
-<ng-container *ngIf='isExternal else internalLink'>
-  <a [class]='classes' [href]='link' target='_blank' rel='noopener'
-     [title]='title + " - ouvre une nouvelle fenêtre"'>External : {{link}}</a>
+<ng-container [ngSwitch]='template'>
+  <ng-container *ngSwitchCase='templateType.BACK_TO_TOP'>
+    <a class='fr-link fr-icon-arrow-up-fill fr-link--icon-left' href='#top'>Haut de page</a>
+  </ng-container>
+  <ng-container *ngSwitchCase='templateType.INTERNAL'>
+    <a [class]='classes' [routerLink]='link'>Internal : {{link}}</a>
+  </ng-container>
+  <ng-container *ngSwitchCase='templateType.EXTERNAL'>
+    <a [class]='classes' [href]='link' target='_blank' rel='noopener'
+       [title]='title + " - ouvre une nouvelle fenêtre"'>External : {{link}}</a>
+  </ng-container>
 </ng-container>
-<ng-template #internalLink>
-  <a [class]='classes' [routerLink]='link'>Internal : {{link}}</a>
-</ng-template>

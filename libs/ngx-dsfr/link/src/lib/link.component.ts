@@ -18,6 +18,12 @@ export enum IconAlignment {
   LEFT = 'left'
 }
 
+enum TemplateType {
+  BACK_TO_TOP,
+  INTERNAL,
+  EXTERNAL
+}
+
 @Component({
   selector: 'dsfr-link',
   templateUrl: './link.component.html',
@@ -30,7 +36,10 @@ export class DsfrLinkComponent implements OnInit {
   @Input() inline: boolean = true;
   @Input() icon: string | undefined;
   @Input() iconAlignment: IconAlignment = IconAlignment.RIGHT;
+  @Input() backToTop: boolean = false;
 
+  template: TemplateType = TemplateType.INTERNAL;
+  templateType: typeof TemplateType = TemplateType;
   isExternal: boolean = false;
   classes: string = '';
 
@@ -47,8 +56,20 @@ export class DsfrLinkComponent implements OnInit {
       throw EMPTY_TITLE_ERROR;
     }
 
+    this.determineTemplate();
+
     if (!this.inline) {
       this.initClasses();
+    }
+  }
+
+  private determineTemplate(): void {
+    if (this.backToTop) {
+      this.template = TemplateType.BACK_TO_TOP;
+    } else if (this.isExternal) {
+      this.template = TemplateType.EXTERNAL;
+    } else {
+      this.template = TemplateType.INTERNAL;
     }
   }
 
