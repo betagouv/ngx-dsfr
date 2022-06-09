@@ -1,7 +1,7 @@
 <ng-container *ngIf='isExternal else internalLink'>
-  <a [href]='link' target='_blank' rel='noopener'
+  <a [class]='classes' [href]='link' target='_blank' rel='noopener'
      [title]='title + " - ouvre une nouvelle fenêtre"'>External : {{link}}</a>
 </ng-container>
 <ng-template #internalLink>
-  <a [routerLink]='link'>Internal : {{link}}</a>
+  <a [class]='classes' [routerLink]='link'>Internal : {{link}}</a>
 </ng-template>

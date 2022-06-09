@@ -13,6 +13,11 @@ export const EMPTY_LINK_ERROR: string =
 export const EMPTY_TITLE_ERROR: string =
   'You MUST provide a value for the title attribute 😡 !!!';
 
+export enum IconAlignment {
+  RIGHT = 'right',
+  LEFT = 'left'
+}
+
 @Component({
   selector: 'dsfr-link',
   templateUrl: './link.component.html',
@@ -22,8 +27,12 @@ export class DsfrLinkComponent implements OnInit {
   @Input() label: string = '';
   @Input() link: string = '';
   @Input() title: string = '';
+  @Input() inline: boolean = true;
+  @Input() icon: string | undefined;
+  @Input() iconAlignment: IconAlignment = IconAlignment.RIGHT;
 
   isExternal: boolean = false;
+  classes: string = '';
 
   ngOnInit(): void {
     if (!this.label) {
@@ -36,6 +45,18 @@ export class DsfrLinkComponent implements OnInit {
     this.isExternal = this.link.indexOf('http') > -1;
     if (this.isExternal && !this.title) {
       throw EMPTY_TITLE_ERROR;
+    }
+
+    if (!this.inline) {
+      this.initClasses();
+    }
+  }
+
+  private initClasses(): void {
+    this.classes += 'fr-link';
+
+    if (this.icon) {
+      this.classes += ` fr-icon-${this.icon} fr-link--icon-${this.iconAlignment}`;
     }
   }
 }
