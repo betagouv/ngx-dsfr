@@ -18,6 +18,12 @@ export enum IconAlignment {
   LEFT = 'left'
 }
 
+export enum LinkSize {
+  SMALL = 'sm',
+  MEDIUM = 'md',
+  LARGE = 'lg'
+}
+
 enum TemplateType {
   BACK_TO_TOP,
   INTERNAL,
@@ -37,6 +43,7 @@ export class DsfrLinkComponent implements OnInit {
   @Input() icon: string | undefined;
   @Input() iconAlignment: IconAlignment = IconAlignment.RIGHT;
   @Input() backToTop: boolean = false;
+  @Input() size: LinkSize = LinkSize.MEDIUM;
 
   template: TemplateType = TemplateType.INTERNAL;
   templateType: typeof TemplateType = TemplateType;
@@ -74,7 +81,7 @@ export class DsfrLinkComponent implements OnInit {
   }
 
   private initClasses(): void {
-    this.classes += 'fr-link';
+    this.classes += `fr-link fr-link--${this.size}`;
 
     if (this.icon) {
       this.classes += ` fr-icon-${this.icon} fr-link--icon-${this.iconAlignment}`;

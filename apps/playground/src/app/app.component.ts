@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 /**
  * 3rd-party imports
  */
-import { IconAlignment } from '@betagouv/ngx-dsfr/link';
+import { IconAlignment, LinkSize } from '@betagouv/ngx-dsfr/link';
 
 @Component({
   selector: 'play-root',
@@ -16,4 +16,5 @@ import { IconAlignment } from '@betagouv/ngx-dsfr/link';
 export class AppComponent {
   title = 'playground';
   iconAlignment: typeof IconAlignment = IconAlignment;
+  linkSize: typeof LinkSize = LinkSize;
 }
