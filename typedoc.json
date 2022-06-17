@@ -1,0 +1,7 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "tsconfig": "libs/ngx-dsfr/tsconfig.json",
+  "entryPoints": ["./libs/ngx-dsfr/link/src/lib/testing"],
+  "entryPointStrategy": "Expand",
+  "out": "docs"
+}
