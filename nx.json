@@ -19,14 +19,6 @@
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
   "generators": {
     "@nrwl/angular:application": {
       "style": "scss",
@@ -42,5 +34,10 @@
       "style": "scss"
     }
   },
-  "defaultProject": "ngx-dsfr"
+  "defaultProject": "ngx-dsfr",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    }
+  }
 }
