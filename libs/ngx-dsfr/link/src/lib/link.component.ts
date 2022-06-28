@@ -51,32 +51,28 @@ export class DsfrLinkComponent implements OnInit {
   classes: string = '';
 
   ngOnInit(): void {
-    if (!this.label) {
-      throw EMPTY_LABEL_ERROR;
-    }
-    if (!this.link) {
-      throw EMPTY_LINK_ERROR;
-    }
-
-    this.isExternal = this.link.indexOf('http') > -1;
-    if (this.isExternal && !this.title) {
-      throw EMPTY_TITLE_ERROR;
-    }
-
-    this.determineTemplate();
-
-    if (!this.inline) {
-      this.initClasses();
-    }
-  }
-
-  private determineTemplate(): void {
     if (this.backToTop) {
       this.template = TemplateType.BACK_TO_TOP;
-    } else if (this.isExternal) {
-      this.template = TemplateType.EXTERNAL;
     } else {
-      this.template = TemplateType.INTERNAL;
+      if (!this.label) {
+        throw EMPTY_LABEL_ERROR;
+      }
+      if (!this.link) {
+        throw EMPTY_LINK_ERROR;
+      }
+
+      this.isExternal = this.link.indexOf('http') > -1;
+      if (this.isExternal && !this.title) {
+        throw EMPTY_TITLE_ERROR;
+      }
+
+      this.template = this.isExternal
+        ? TemplateType.EXTERNAL
+        : TemplateType.INTERNAL;
+
+      if (!this.inline) {
+        this.initClasses();
+      }
     }
   }
 
