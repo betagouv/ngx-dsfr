@@ -3,16 +3,17 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DsfrLinkComponent } from './link.component';
+import { RouterModule } from '@angular/router';
 
 /**
  * Internal imports
  */
-import { RouterModule } from '@angular/router';
+import { DsfrLinkComponent } from './link.component';
+import { TestHostComponent } from './testing/test-host.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [DsfrLinkComponent],
+  declarations: [DsfrLinkComponent, TestHostComponent],
   exports: [DsfrLinkComponent]
 })
 export class DsfrLinkModule {}
