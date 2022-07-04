@@ -21,6 +21,7 @@
           "apps/playground/src/assets"
         ],
         "styles": [
+          "node_modules/the-new-css-reset/css/reset.css",
           "node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
           "apps/playground/src/styles.scss",
           "node_modules/@betagouv/ngx-dsfr/assets/styling/core-styling.css",
