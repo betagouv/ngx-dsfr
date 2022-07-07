@@ -9,11 +9,10 @@ import { Component } from '@angular/core';
 import { IconAlignment, LinkSize } from '@betagouv/ngx-dsfr/link';
 
 @Component({
-  selector: 'play-link-wrapper',
-  templateUrl: './link-wrapper.component.html',
-  styleUrls: ['./link-wrapper.component.scss']
+  templateUrl: './link-module.component.html',
+  styleUrls: ['./link-module.component.scss']
 })
-export class LinkWrapperComponent {
+export class LinkModuleComponent {
   iconAlignment: typeof IconAlignment = IconAlignment;
   linkSize: typeof LinkSize = LinkSize;
 }

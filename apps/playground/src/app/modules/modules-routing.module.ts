@@ -7,7 +7,7 @@ import { Route, RouterModule } from '@angular/router';
 /**
  * Internal imports
  */
-import { LinkWrapperComponent } from './components/link-wrapper/link-wrapper.component';
+import { LinkModuleComponent } from './components/link-module/link-module.component';
 
 /**
  * TypeScript entities and constants
@@ -15,7 +15,7 @@ import { LinkWrapperComponent } from './components/link-wrapper/link-wrapper.com
 const routes: Route[] = [
   {
     path: 'link',
-    component: LinkWrapperComponent
+    component: LinkModuleComponent
   }
 ];
 

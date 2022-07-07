@@ -12,10 +12,11 @@ import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
  * Internal imports
  */
 import { ModulesRoutingModule } from './modules-routing.module';
-import { LinkWrapperComponent } from './components/link-wrapper/link-wrapper.component';
+import { LinkModuleComponent } from './components/link-module/link-module.component';
+import { SimulatorComponent } from './components/simulator/simulator.component';
 
 @NgModule({
-  imports: [ModulesRoutingModule, DsfrLinkModule],
-  declarations: [LinkWrapperComponent]
+  imports: [DsfrLinkModule, ModulesRoutingModule],
+  declarations: [LinkModuleComponent, SimulatorComponent]
 })
 export class ModulesModule {}

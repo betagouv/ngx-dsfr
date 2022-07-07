@@ -18,15 +18,24 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/playground/src/favicon.ico",
-          "apps/playground/src/assets"
+          "apps/playground/src/assets",
+          {
+            "glob": "core-styling.css",
+            "input": "./node_modules/@betagouv/ngx-dsfr/assets/styling/",
+            "output": "/",
+            "followSymlinks": true
+          },
+          {
+            "glob": "**/*",
+            "input": "./node_modules/@betagouv/ngx-dsfr/assets/icons/",
+            "output": "/icons/",
+            "followSymlinks": true
+          }
         ],
         "styles": [
           "node_modules/the-new-css-reset/css/reset.css",
           "node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-          "apps/playground/src/styles.scss",
-          "node_modules/@betagouv/ngx-dsfr/assets/styling/core-styling.css",
-          "node_modules/@betagouv/ngx-dsfr/assets/icons/system/icons-system.min.css",
-          "node_modules/@betagouv/ngx-dsfr/assets/icons/buildings/icons-buildings.min.css"
+          "apps/playground/src/styles.scss"
         ],
         "scripts": []
       },

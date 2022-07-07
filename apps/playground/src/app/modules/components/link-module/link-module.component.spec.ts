@@ -1,17 +1,23 @@
+/**
+ * Angular imports
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LinkWrapperComponent } from './link-wrapper.component';
+/**
+ * Internal imports
+ */
+import { LinkModuleComponent } from './link-module.component';
 
 describe('LinkWrapperComponent', () => {
-  let component: LinkWrapperComponent;
-  let fixture: ComponentFixture<LinkWrapperComponent>;
+  let component: LinkModuleComponent;
+  let fixture: ComponentFixture<LinkModuleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LinkWrapperComponent]
+      declarations: [LinkModuleComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LinkWrapperComponent);
+    fixture = TestBed.createComponent(LinkModuleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
