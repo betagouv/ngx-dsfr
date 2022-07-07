@@ -1,0 +1,45 @@
+// Local Variables
+$basic-spacing: 8px;
+$nav-item-offset: 40px;
+
+// Actual Styling
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#side-nav {
+  flex: 1;
+
+  #side-nav-tree {
+    .invisible-child-node {
+      display: none;
+    }
+
+    .mat-tree-node {
+      padding: 0 $basic-spacing;
+
+      button {
+        margin-right: $basic-spacing;
+      }
+
+      &:hover .nav-item-label {
+        font-weight: bold;
+      }
+    }
+
+    .mat-nested-tree-node div[role=group] {
+      padding-left: $nav-item-offset;
+
+      & > .mat-tree-node {
+        padding-left: $nav-item-offset;
+      }
+    }
+  }
+
+  .mat-sidenav-content {
+    padding: $basic-spacing ($basic-spacing * 2);
+  }
+}
+

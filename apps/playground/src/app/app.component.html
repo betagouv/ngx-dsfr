@@ -1,12 +1,32 @@
-<p>Just some text before,
-  <dsfr-link
-    label='DSFR Link works 😁'
-    title='An article about noopener'
-    [inline]='false'
-    [iconAlignment]='iconAlignment.RIGHT'
-    icon='ancient-gate-fill'
-    [size]='linkSize.MEDIUM'
-    [backToTop]='false'
-    link='cloud-public.com/amazon-web-services/'></dsfr-link>
-  ... and after
-</p>
+<mat-toolbar color='primary' role='banner'>
+  <h1>Ngx-DSFR Playground</h1>
+</mat-toolbar>
+
+<mat-sidenav-container id='side-nav'>
+  <mat-sidenav mode='side' opened role='navigation'>
+    <mat-tree [dataSource]='treeDataSource' [treeControl]='treeControl' id='side-nav-tree'>
+      <mat-nested-tree-node *matTreeNodeDef='let node; when: hasChild'>
+        <div class='mat-tree-node'>
+          <button mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'Déplie ou replie l\'entrée de menu ' + node.label">
+            <mat-icon class='mat-icon-rtl-mirror'>
+              {{treeControl.isExpanded( node ) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <span class='nav-item-label'>{{node.label}}</span>
+        </div>
+        <div [class.invisible-child-node]='!treeControl.isExpanded(node)'
+             role='group'>
+          <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+      </mat-nested-tree-node>
+
+      <mat-tree-node *matTreeNodeDef='let node' matTreeNodeToggle>
+        <a class='nav-item-label' [routerLink]='node.path'>{{node.label}}</a>
+      </mat-tree-node>
+    </mat-tree>
+  </mat-sidenav>
+  <mat-sidenav-content role='main'>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
