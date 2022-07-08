@@ -23,28 +23,41 @@
       "defaultConfiguration": "production"
     },
     "adapt-css-paths": {
-      "executor": "@ngx-dsfr/architect:adapt-css-paths",
-      "dependsOn": [
-        "build-base"
-      ],
+      "executor": "@ngx-dsfr/architect:mass-updator",
       "outputs": [
         "dist/libs/ngx-dsfr"
       ],
       "options": {
-        "directory": "assets/icons"
+        "directory": "assets/icons",
+        "glob": "**/*.css",
+        "searchValue": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
+        "flags": "g",
+        "replacement": "url(./$1)"
+      }
+    },
+    "adapt-to-shadow-dom": {
+      "executor": "@ngx-dsfr/architect:mass-updator",
+      "outputs": [
+        "dist/libs/ngx-dsfr"
+      ],
+      "options": {
+        "directory": "assets/styling",
+        "glob": "core-styling.css",
+        "searchValue": ":root",
+        "flags": "g",
+        "replacement": ":host",
+        "rewrite": false,
+        "suffix": "shadow"
       }
     },
     "build": {
       "executor": "@nrwl/workspace:run-commands",
-      "dependsOn": [
-        "adapt-css-paths"
-      ],
       "options": {
         "commands": [
-          "sass core-styling.scss core-styling.css --load-path=../../../../../node_modules",
-          "rm core-styling.scss"
+          "nx run ngx-dsfr:build-base",
+          "nx run ngx-dsfr:adapt-css-paths",
+          "nx run ngx-dsfr:adapt-to-shadow-dom"
         ],
-        "cwd": "dist/libs/ngx-dsfr/assets/styling",
         "parallel": false
       }
     },

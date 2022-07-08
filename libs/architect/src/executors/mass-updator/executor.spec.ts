@@ -1,14 +1,21 @@
 /**
  * Internal imports
  */
-import { AdaptCssPathsExecutorSchema } from './schema';
+import { MassUpdatorSchema } from './schema';
 import executor from './executor';
 
-const options: AdaptCssPathsExecutorSchema = {
-  directory: '.'
+/**
+ * TypeScript entities and constants
+ */
+const options: MassUpdatorSchema = {
+  directory: '.',
+  glob: '',
+  searchValue: '',
+  flags: '',
+  replacement: ''
 };
 
-describe('Adapt CSS Paths Executor', () => {
+describe('Mass Updator Executor', () => {
   it('can run', async () => {
     const output = await executor(options, {
       cwd: '',

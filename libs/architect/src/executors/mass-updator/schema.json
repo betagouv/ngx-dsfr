@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Mass Updator executor",
+  "description": "This executor executes updates on several files",
+  "type": "object",
+  "properties": {
+    "directory": {
+      "type": "string",
+      "description": "The directory, from the root of what is outputted by the build of the library, where we can expect the files to update",
+      "alias": "d",
+      "default": ""
+    },
+    "glob": {
+      "type": "string",
+      "description": "The pattern, from the directory given in the associated option, to select which files to update",
+      "alias": "g"
+    },
+    "searchValue": {
+      "type": "string",
+      "description": "The pattern to detect a substring we want to replace in each file",
+      "alias": "s"
+    },
+    "flags": {
+      "type": "string",
+      "description": "The flags to use when we need to detect the substring we want to replace in each file",
+      "alias": "f"
+    },
+    "replacement": {
+      "type": "string",
+      "description": "The pattern, mostly with $1, $2 and so on, to replace the 'search' substring in each file",
+      "alias": "r"
+    },
+    "rewrite": {
+      "type": "boolean",
+      "description": "If true, each file will be updated, if not, a duplicate with the updated content will be created",
+      "default": true
+    },
+    "suffix": {
+      "type": "string",
+      "description": "The suffix to add to each filename if 'rewrite' is false and we create duplicates",
+      "default": "updated"
+    }
+  },
+  "required": [
+    "glob",
+    "searchValue",
+    "flags",
+    "replacement"
+  ]
+}
