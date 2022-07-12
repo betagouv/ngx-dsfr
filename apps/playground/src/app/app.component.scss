@@ -29,7 +29,7 @@ $nav-item-offset: 40px;
       }
     }
 
-    .mat-nested-tree-node div[role=group] {
+    .mat-nested-tree-node div[role="group"] {
       padding-left: $nav-item-offset;
 
       & > .mat-tree-node {
@@ -42,4 +42,3 @@ $nav-item-offset: 40px;
     padding: $basic-spacing ($basic-spacing * 2);
   }
 }
-

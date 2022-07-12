@@ -2,5 +2,13 @@
   "singleQuote": true,
   "trailingComma": "none",
   "bracketSameLine": true,
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "overrides": [
+    {
+      "files": ["**/*.css", "**/*.scss", "**/*.html"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
