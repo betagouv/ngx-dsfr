@@ -2,6 +2,8 @@
  * Angular imports
  */
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /**
  * 3rd-party imports
@@ -16,7 +18,12 @@ import { LinkModuleComponent } from './components/link-module/link-module.compon
 import { SimulatorComponent } from './components/simulator/simulator.component';
 
 @NgModule({
-  imports: [DsfrLinkModule, ModulesRoutingModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DsfrLinkModule,
+    ModulesRoutingModule
+  ],
   declarations: [LinkModuleComponent, SimulatorComponent]
 })
 export class ModulesModule {}
