@@ -1,0 +1,13 @@
+.simulation {
+  display: flex;
+
+  .settings {
+    width: 50%;
+    background-color: indianred;
+  }
+
+  play-simulator {
+    width: 50%;
+    background-color: teal;
+  }
+}

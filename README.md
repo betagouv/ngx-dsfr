@@ -1,8 +1,16 @@
 
 
-# NgxDsfr
+# Ngx-DSFR
 
-This project was generated using [Nx](https://nx.dev).
+This MonoRepo holds everything pertaining to the development of the adaptation of the official French State Design System
+( _aka **DSFR**_ ).
+
+See individual `README` files in each folder within the `apps/` and `libs/` directories for further details about each of these
+projects.
+
+<hr/>
+
+_This project was generated using [Nx](https://nx.dev)._
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
@@ -33,7 +41,7 @@ There are also many [community plugins](https://nx.dev/community) you could add.
 
 ## Generate an application
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Run `nx g @nrwl/angular:app my-app` to generate an application.
 
 > You can use any of the plugins above to generate applications as well.
 
@@ -41,7 +49,7 @@ When using Nx, you can create multiple applications and libraries in the same wo
 
 ## Generate a library
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+Run `nx g @nrwl/angular:lib my-lib` to generate a library.
 
 > You can also use any of the plugins above to generate libraries as well.
 
@@ -53,7 +61,7 @@ Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The 
 
 ## Code scaffolding
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+Run `nx g @nrwl/angular:component my-component --project=my-app` to generate a new component.
 
 ## Build
 

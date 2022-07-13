@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/playground/src",
   "prefix": "play",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/playground",
         "index": "apps/playground/src/index.html",
@@ -15,9 +18,25 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/playground/src/favicon.ico",
-          "apps/playground/src/assets"
+          "apps/playground/src/assets",
+          {
+            "glob": "*.css",
+            "input": "./node_modules/@betagouv/ngx-dsfr/assets/styling/",
+            "output": "/",
+            "followSymlinks": true
+          },
+          {
+            "glob": "**/*",
+            "input": "./node_modules/@betagouv/ngx-dsfr/assets/icons/",
+            "output": "/icons/",
+            "followSymlinks": true
+          }
         ],
-        "styles": ["apps/playground/src/styles.scss"],
+        "styles": [
+          "node_modules/the-new-css-reset/css/reset.css",
+          "node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+          "apps/playground/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -82,7 +101,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/playground"],
+      "outputs": [
+        "coverage/apps/playground"
+      ],
       "options": {
         "jestConfig": "apps/playground/jest.config.ts",
         "passWithNoTests": true

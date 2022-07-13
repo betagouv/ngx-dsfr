@@ -1,0 +1,34 @@
+<section class="module-description">
+  <h2>Description</h2>
+  <p>Some description</p>
+</section>
+
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <div
+    class="simulation"
+    *ngIf="formInlineTrue">
+    <div class="settings">
+      <form
+        [formGroup]="formInlineTrue"
+        novalidate>
+        <input formControlName="label" />
+      </form>
+    </div>
+    <play-simulator>
+      <p>
+        Just some text before,
+        <dsfr-link
+          [label]="formInlineTrue.value.label"
+          title="An article about noopener"
+          [inline]="true"
+          [iconAlignment]="iconAlignment.RIGHT"
+          icon="ancient-gate-fill"
+          [size]="linkSize.MEDIUM"
+          [backToTop]="false"
+          link="cloud-public.com/amazon-web-services/"></dsfr-link>
+        ... and after
+      </p>
+    </play-simulator>
+  </div>
+</section>

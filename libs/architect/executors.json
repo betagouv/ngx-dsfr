@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "executors": {
+    "mass-updator": {
+      "implementation": "./src/executors/mass-updator/executor",
+      "schema": "./src/executors/mass-updator/schema.json",
+      "description": "This executor executes updates on several files"
+    }
+  }
+}

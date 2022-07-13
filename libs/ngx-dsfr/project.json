@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/ngx-dsfr/src",
   "prefix": "dsfr",
   "targets": {
-    "build": {
+    "build-base": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/ngx-dsfr"],
+      "outputs": [
+        "dist/libs/ngx-dsfr"
+      ],
       "options": {
         "project": "libs/ngx-dsfr/ng-package.json"
       },
@@ -19,9 +22,50 @@
       },
       "defaultConfiguration": "production"
     },
+    "adapt-css-paths": {
+      "executor": "@ngx-dsfr/architect:mass-updator",
+      "outputs": [
+        "dist/libs/ngx-dsfr"
+      ],
+      "options": {
+        "directory": "assets/icons",
+        "glob": "**/*.css",
+        "searchValue": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
+        "flags": "g",
+        "replacement": "url(./$1)"
+      }
+    },
+    "adapt-to-shadow-dom": {
+      "executor": "@ngx-dsfr/architect:mass-updator",
+      "outputs": [
+        "dist/libs/ngx-dsfr"
+      ],
+      "options": {
+        "directory": "assets/styling",
+        "glob": "core-styling.css",
+        "searchValue": ":root",
+        "flags": "g",
+        "replacement": ":host",
+        "rewrite": false,
+        "suffix": "shadow"
+      }
+    },
+    "build": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx run ngx-dsfr:build-base",
+          "nx run ngx-dsfr:adapt-css-paths",
+          "nx run ngx-dsfr:adapt-to-shadow-dom"
+        ],
+        "parallel": false
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ngx-dsfr"],
+      "outputs": [
+        "coverage/libs/ngx-dsfr"
+      ],
       "options": {
         "jestConfig": "libs/ngx-dsfr/jest.config.ts",
         "passWithNoTests": true
@@ -30,7 +74,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/ngx-dsfr/**/*.ts", "libs/ngx-dsfr/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ngx-dsfr/src/**/*.ts",
+          "libs/ngx-dsfr/src/**/*.html",
+          "libs/ngx-dsfr/link/**/*.ts",
+          "libs/ngx-dsfr/link/**/*.html"
+        ]
       }
     }
   },

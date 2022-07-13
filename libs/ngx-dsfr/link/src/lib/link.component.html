@@ -1,0 +1,29 @@
+<ng-container [ngSwitch]="template">
+  <ng-container *ngSwitchCase="templateType.BACK_TO_TOP">
+    <a
+      [class]="
+        'fr-link fr-icon-arrow-up-fill fr-link--icon-left fr-link--' + size
+      "
+      href="#top">
+      Haut de page
+    </a>
+  </ng-container>
+  <ng-container *ngSwitchCase="templateType.INTERNAL">
+    <a
+      [class]="classes"
+      [title]="title"
+      [routerLink]="link">
+      {{ label }}
+    </a>
+  </ng-container>
+  <ng-container *ngSwitchCase="templateType.EXTERNAL">
+    <a
+      [class]="classes"
+      [href]="link"
+      target="_blank"
+      rel="noopener"
+      [title]="title + ' - ouvre une nouvelle fenêtre'">
+      {{ label }}
+    </a>
+  </ng-container>
+</ng-container>
