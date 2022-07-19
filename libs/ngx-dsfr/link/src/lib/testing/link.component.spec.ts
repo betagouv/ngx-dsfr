@@ -11,6 +11,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
  * 3rd-party imports
  */
 import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
+import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
 /**
  * Internal imports
@@ -20,10 +21,10 @@ import {
   EMPTY_LABEL_ERROR,
   EMPTY_LINK_ERROR,
   EMPTY_TITLE_ERROR,
-  IconAlignment
 } from '../link.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrLinkHarness } from './link.harness';
+
 
 describe('DsfrLinkComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -171,7 +172,7 @@ describe('DsfrLinkComponent', () => {
         testHost.testLink = testExternalLink;
         testHost.testTitle = testTitle;
         testHost.testIcon = 'ancient-gate-fill';
-        testHost.testIconAlignment = IconAlignment.RIGHT;
+        testHost.testIconAlignment = ElementAlignment.RIGHT;
       });
 
       describe(' and inline is set to true ( default ), ', () => {

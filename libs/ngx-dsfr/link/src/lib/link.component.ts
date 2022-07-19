@@ -2,6 +2,8 @@
  * Angular imports
  */
 import { Component, Input, OnInit } from '@angular/core';
+import { ElementSize, ElementAlignment } from '@betagouv/ngx-dsfr';
+
 
 /**
  * TypeScript entities and constants
@@ -12,17 +14,6 @@ export const EMPTY_LINK_ERROR: string =
   'You MUST provide a value for the link attribute 😡 !!!';
 export const EMPTY_TITLE_ERROR: string =
   'You MUST provide a value for the title attribute 😡 !!!';
-
-export enum IconAlignment {
-  RIGHT = 'right',
-  LEFT = 'left'
-}
-
-export enum LinkSize {
-  SMALL = 'sm',
-  MEDIUM = 'md',
-  LARGE = 'lg'
-}
 
 enum TemplateType {
   BACK_TO_TOP,
@@ -41,9 +32,9 @@ export class DsfrLinkComponent implements OnInit {
   @Input() title: string = '';
   @Input() inline: boolean = true;
   @Input() icon: string | undefined;
-  @Input() iconAlignment: IconAlignment = IconAlignment.RIGHT;
+  @Input() iconAlignment: ElementAlignment = ElementAlignment.RIGHT;
   @Input() backToTop: boolean = false;
-  @Input() size: LinkSize = LinkSize.MEDIUM;
+  @Input() size: ElementSize = ElementSize.MEDIUM;
 
   template: TemplateType = TemplateType.INTERNAL;
   templateType: typeof TemplateType = TemplateType;

@@ -17,6 +17,7 @@
     "paths": {
       "@betagouv/ngx-dsfr": ["libs/ngx-dsfr/src/index.ts"],
       "@betagouv/ngx-dsfr/link": ["libs/ngx-dsfr/link/src/index.ts"],
+      "@betagouv/ngx-dsfr/button": ["libs/ngx-dsfr/button/src/index.ts"],
       "@betagouv/ngx-dsfr/testing": ["libs/ngx-dsfr/src/lib/testing/index.ts"],
       "@ngx-dsfr/architect": ["libs/architect/src/index.ts"]
     }
