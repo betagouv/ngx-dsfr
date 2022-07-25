@@ -1,7 +1,6 @@
 /**
  * Angular imports
  */
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
@@ -15,9 +14,13 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 /**
  * Internal imports
  */
+import {
+  EMPTY_LABEL_ERROR,
+} from '../button.component';
 import { DsfrButtonComponent } from '../button.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrButtonHarness } from './button.harness';
+import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
 describe('DsfrButtonComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -58,4 +61,40 @@ describe('DsfrButtonComponent', () => {
     expect(componentUnderTest).toBeTruthy();
   });
 
+  it('should throw an error when no label is provided', async () => {
+    try {
+      fixture.detectChanges();
+      throw 'It should have thrown an error about "label"';
+    } catch (error) {
+      expect(error).toBe(EMPTY_LABEL_ERROR);
+    }
+  });
+
+  describe(' all required properties are provided, ', () => {
+    beforeEach(() => {
+      testHost.testLabel = testLabel;
+    });
+
+    describe(' and inline is set to false, ', () => {
+      beforeEach(async () => {
+        /*
+         * We're retrieving the Test Harness HERE since we can now,
+         * without any problem, trigger the Change Detection mechanism
+         *
+         * WARNING: Triggers the Change Detection mechanism
+         */
+        dsfrButtonHarness = await harnessLoader.getHarness<DsfrButtonHarness>(
+          DsfrButtonHarness
+        );
+      });
+
+      it('should have added classes', async () => {
+        const classes: string | null =
+          await dsfrButtonHarness.getAnchorAttribute('class');
+        expect(classes).toContain('fr-btn');
+        expect(classes).toContain('fr-btn--primary');
+        expect(classes).toContain('fr-btn--md');
+      });
+    });
+  });
 });
