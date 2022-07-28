@@ -23,7 +23,7 @@ import { ButtonHtmlType, ButtonType } from '../button.component';
       [size]="testSize"
       [icon]="testIcon"
       [iconAlignment]="testIconAlignment"
-      [htmlType]="testhtmlType">
+      [htmlType]="testHtmlType">
     </dsfr-button>
   `
 })
@@ -35,5 +35,5 @@ export class TestHostComponent {
   @Input() testDisabled: boolean = true;
   @Input() testIcon: string | undefined;
   @Input() testIconAlignment?: ElementAlignment = ElementAlignment.RIGHT;
-  @Input() testhtmlType: ButtonHtmlType = ButtonHtmlType.BUTTON;
+  @Input() testHtmlType: ButtonHtmlType = ButtonHtmlType.BUTTON;
 }
