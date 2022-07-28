@@ -28,10 +28,10 @@ import { ButtonHtmlType, ButtonType } from '../button.component';
   `
 })
 export class TestHostComponent {
-  @Input() testLabel: string = '';
+  @Input() testLabel?: string;
   @Input() testType: ButtonType = ButtonType.PRIMARY;
   @Input() testSize: ElementSize = ElementSize.MEDIUM;
-  @Input() testTitle: string = '';
+  @Input() testTitle?: string;
   @Input() testDisabled: boolean = true;
   @Input() testIcon: string | undefined;
   @Input() testIconAlignment?: ElementAlignment = ElementAlignment.RIGHT;

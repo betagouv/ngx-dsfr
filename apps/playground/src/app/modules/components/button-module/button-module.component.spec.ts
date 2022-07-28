@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  */
 import { ButtonModuleComponent } from './button-module.component';
 
-describe('ButtonWrapperComponent', () => {
+describe('ButtonModuleComponent', () => {
   let component: ButtonModuleComponent;
   let fixture: ComponentFixture<ButtonModuleComponent>;
 

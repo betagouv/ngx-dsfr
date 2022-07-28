@@ -17,30 +17,30 @@ import {
 export class DsfrButtonHarness extends ComponentHarness {
   static hostSelector = 'dsfr-button';
 
-  private getAnchorElement: AsyncFactoryFn<TestElement> = this.locatorFor('button');
+  private getButtonElement: AsyncFactoryFn<TestElement> = this.locatorFor('button');
 
   /**
-   * Retrieves the value for the requested attribute of the anchor tag
+   * Retrieves the value for the requested attribute of the button tag
    * in the DsfrButtonComponent's Template
    *
    * @returns A Promise that resolves to the value as a string or null
    * if the requested attribute is not found
    */
-  async getAnchorAttribute(name: string): Promise<string | null> {
-    const anchor: TestElement = await this.getAnchorElement();
+  async getButtonAttribute(name: string): Promise<string | null> {
+    const button: TestElement = await this.getButtonElement();
 
-    return anchor.getAttribute(name);
+    return button.getAttribute(name);
   }
 
   /**
-   * Retrieves the text content of the anchor tag
+   * Retrieves the text content of the button tag
    * in the DsfrButtonComponent's Template
    *
-   * @returns A Promise that resolves to the text between tags of the anchor
+   * @returns A Promise that resolves to the text between tags of the button
    */
-  async getAnchorText(): Promise<string> {
-    const anchor: TestElement = await this.getAnchorElement();
+  async getButtonText(): Promise<string> {
+    const button: TestElement = await this.getButtonElement();
 
-    return anchor.text();
+    return button.text();
   }
 }

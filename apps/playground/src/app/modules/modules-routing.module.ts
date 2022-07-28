@@ -3,12 +3,12 @@
  */
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { ButtonModuleComponent } from './components/button-module/button-module.component';
 
 /**
  * Internal imports
  */
 import { LinkModuleComponent } from './components/link-module/link-module.component';
+import { ButtonModuleComponent } from './components/button-module/button-module.component';
 
 /**
  * TypeScript entities and constants

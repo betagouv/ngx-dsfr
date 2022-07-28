@@ -7,20 +7,18 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 /**
- * 3rd-party imports
+ * 3rd imports
  */
-
+import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
 /**
  * Internal imports
  */
-import {
-  EMPTY_LABEL_ERROR,
-} from '../button.component';
+import { EMPTY_LABEL_AND_ICON_ERROR } from '../button.component';
 import { DsfrButtonComponent } from '../button.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrButtonHarness } from './button.harness';
-import { ElementAlignment } from '@betagouv/ngx-dsfr';
+
 
 describe('DsfrButtonComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -30,7 +28,7 @@ describe('DsfrButtonComponent', () => {
   let dsfrButtonHarness: DsfrButtonHarness;
 
   const testLabel = 'Test Label';
-  const testTitle = 'Test Title';
+  const testIcon = 'fr-icon-checkbox-circle-line'
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -61,40 +59,42 @@ describe('DsfrButtonComponent', () => {
     expect(componentUnderTest).toBeTruthy();
   });
 
-  it('should throw an error when no label is provided', async () => {
+  it('should throw an error when no label and icon are provided', async () => {
     try {
       fixture.detectChanges();
-      throw 'It should have thrown an error about "label"';
+      throw 'It should have thrown an error about "label and icon"';
     } catch (error) {
-      expect(error).toBe(EMPTY_LABEL_ERROR);
+      expect(error).toBe(EMPTY_LABEL_AND_ICON_ERROR);
     }
   });
 
   describe(' all required properties are provided, ', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       testHost.testLabel = testLabel;
+      testHost.testIcon = testIcon;
+      dsfrButtonHarness = await harnessLoader.getHarness<DsfrButtonHarness>(
+        DsfrButtonHarness
+      );
     });
 
-    describe(' and inline is set to false, ', () => {
-      beforeEach(async () => {
-        /*
-         * We're retrieving the Test Harness HERE since we can now,
-         * without any problem, trigger the Change Detection mechanism
-         *
-         * WARNING: Triggers the Change Detection mechanism
-         */
-        dsfrButtonHarness = await harnessLoader.getHarness<DsfrButtonHarness>(
-          DsfrButtonHarness
-        );
-      });
+    it('should set title identic to label when no title provided', async () => {
+      const title: string | null = await dsfrButtonHarness.getButtonAttribute('title');
+      const label: string | null = await (dsfrButtonHarness.getButtonText());
 
-      it('should have added classes', async () => {
-        const classes: string | null =
-          await dsfrButtonHarness.getAnchorAttribute('class');
-        expect(classes).toContain('fr-btn');
-        expect(classes).toContain('fr-btn--primary');
-        expect(classes).toContain('fr-btn--md');
-      });
+      expect(title).toContain(label);
+    });
+
+    it('should add icon class when icon is provided', async () => {
+      const classes: string | null = await dsfrButtonHarness.getButtonAttribute('class');
+      expect(classes).toContain('fr-icon-checkbox-circle-line');
+    });
+
+    it('should have added classes', async () => {
+      const classes: string | null =
+        await dsfrButtonHarness.getButtonAttribute('class');
+      expect(classes).toContain('fr-btn');
+      expect(classes).toContain('fr-btn--primary');
+      expect(classes).toContain('fr-btn--md');
     });
   });
 });
