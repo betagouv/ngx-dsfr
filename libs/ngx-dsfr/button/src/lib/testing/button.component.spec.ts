@@ -7,7 +7,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 /**
- * 3rd imports
+ * 3rd party imports
  */
 import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
@@ -28,7 +28,7 @@ describe('DsfrButtonComponent', () => {
   let dsfrButtonHarness: DsfrButtonHarness;
 
   const testLabel = 'Test Label';
-  const testIcon = 'fr-icon-checkbox-circle-line'
+  const testIcon = 'checkbox-circle-line'
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -77,11 +77,11 @@ describe('DsfrButtonComponent', () => {
       );
     });
 
-    it('should set title identic to label when no title provided', async () => {
+    it('should set title identical to label when no title provided', async () => {
       const title: string | null = await dsfrButtonHarness.getButtonAttribute('title');
-      const label: string | null = await (dsfrButtonHarness.getButtonText());
+      const label: string | null = await dsfrButtonHarness.getButtonText();
 
-      expect(title).toContain(label);
+      expect(title).toBe(label);
     });
 
     it('should add icon class when icon is provided', async () => {
