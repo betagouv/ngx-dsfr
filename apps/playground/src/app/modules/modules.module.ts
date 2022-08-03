@@ -18,6 +18,8 @@ import { ModulesRoutingModule } from './modules-routing.module';
 import { ButtonModuleComponent } from './components/button-module/button-module.component';
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { SimulatorComponent } from './components/simulator/simulator.component';
+import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
+import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
 
 @NgModule({
   imports: [
@@ -25,11 +27,14 @@ import { SimulatorComponent } from './components/simulator/simulator.component';
     ReactiveFormsModule,
     DsfrLinkModule,
     DsfrButtonModule,
+    DsfrBadgeModule,
     ModulesRoutingModule
   ],
   declarations: [
     LinkModuleComponent,
     SimulatorComponent,
-    ButtonModuleComponent]
+    ButtonModuleComponent,
+    BadgeModuleComponent
+  ]
 })
 export class ModulesModule { }

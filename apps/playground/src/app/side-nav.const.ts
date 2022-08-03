@@ -16,12 +16,16 @@ export const SIDE_NAV: NavItem[] = [
     label: 'Modules',
     children: [
       {
-        label: 'Link',
-        path: '/modules/link'
+        label: 'Badge',
+        path: '/modules/badge'
       },
       {
         label: 'Button',
         path: '/modules/button'
+      },
+      {
+        label: 'Link',
+        path: '/modules/link'
       }
     ]
   }

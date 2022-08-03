@@ -1,0 +1,82 @@
+<section class="module-description">
+  <h2>Description</h2>
+  <p>Some description</p>
+</section>
+
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <div
+    class="simulation">
+    <div class="settings" *ngIf="form">
+      <form
+        [formGroup]="form"
+        novalidate>
+        <input formControlName="label" />
+      </form>
+    </div>
+    <play-simulator>
+      <div>
+        Simple badges :
+        <dsfr-badge
+          [theme]="theme.INFO"
+          [label]="'Info badge'">
+        </dsfr-badge>
+        <dsfr-badge
+          [theme]="theme.NEW"
+          [label]="'New Badge'">
+        </dsfr-badge>
+        <dsfr-badge
+          [theme]="theme.SUCCESS"
+          [label]="'Success badge'">
+        </dsfr-badge>
+        <dsfr-badge
+          [theme]="theme.ERROR"
+          [label]="'Error badge'">
+        </dsfr-badge>
+        <dsfr-badge
+          [theme]="theme.WARNING"
+          [label]="'Warning badge'">
+        </dsfr-badge>
+
+        <hr>
+
+        Badge without icon :
+        <dsfr-badge
+          [theme]="theme.INFO"
+          [label]="'Info badge'"
+          [noIcon]="true">
+        </dsfr-badge>
+
+        <hr>
+
+        Some specific badges:
+        <dsfr-badge
+          [theme]="theme.PINK_MACARON"
+          [label]="'Badge'">
+        </dsfr-badge>
+
+        <dsfr-badge
+          [theme]="theme.BLUE_CUMULUS"
+          [label]="'Badge'">
+        </dsfr-badge>
+
+        <dsfr-badge
+          [theme]="theme.BROWN_CAFE_CREME"
+          [label]="'Badge'">
+        </dsfr-badge>
+
+        <dsfr-badge
+          [theme]="theme.GREY"
+          [label]="'Badge'">
+        </dsfr-badge>
+
+        <dsfr-badge
+          [theme]="theme.GREEN_MENTHE"
+          [label]="'Badge'">
+        </dsfr-badge>
+
+        <hr>
+      </div>
+    </play-simulator>
+  </div>
+</section>
