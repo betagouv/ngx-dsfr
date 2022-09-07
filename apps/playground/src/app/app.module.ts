@@ -22,6 +22,7 @@ import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
  */
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DsfrNavigationModule } from '@betagouv/ngx-dsfr/navigation';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     DsfrLinkModule,
+    DsfrNavigationModule,
     MatToolbarModule,
     MatSidenavModule,
     MatTreeModule,
