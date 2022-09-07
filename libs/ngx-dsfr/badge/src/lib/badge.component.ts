@@ -26,7 +26,7 @@ export class DsfrBadgeComponent implements OnInit {
   @Input() label: string | undefined;
   @Input() theme: ThemeColor | undefined;
   @Input() noIcon?: boolean = false;
-  @Input() size?: ElementSize = ElementSize.MEDIUM;
+  @Input() size?: Omit<ElementSize, "LARGE"> = ElementSize.MEDIUM;
 
   classes: string = '';
 

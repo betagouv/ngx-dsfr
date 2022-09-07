@@ -12,7 +12,7 @@ import { ThemeColor } from '@betagouv/ngx-dsfr';
 export class BadgeModuleComponent implements OnInit {
 
   form: FormGroup | undefined;
-  theme = ThemeColor;
+  theme: typeof ThemeColor = ThemeColor;
 
   constructor(private formBuilder: FormBuilder) { }
 

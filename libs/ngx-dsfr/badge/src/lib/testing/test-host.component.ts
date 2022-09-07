@@ -4,10 +4,6 @@
 import { Component, Input } from '@angular/core';
 import { ElementSize, ThemeColor } from '@betagouv/ngx-dsfr';
 
-/**
- * Internal imports
- */
-
 @Component({
   template: `
     <dsfr-badge
@@ -22,5 +18,5 @@ export class TestHostComponent {
   @Input() testLabel: string | undefined;
   @Input() testTheme: ThemeColor | undefined;
   @Input() testNoIcon?: boolean = false;
-  @Input() testSize?: ElementSize = ElementSize.MEDIUM;
+  @Input() testSize?: Omit<ElementSize, "LARGE"> = ElementSize.MEDIUM;
 }

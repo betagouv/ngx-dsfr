@@ -1,7 +1,6 @@
 /**
  * Angular imports
  */
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
@@ -64,7 +63,7 @@ describe('DsfrBadgeComponent', () => {
     expect(componentUnderTest).toBeTruthy();
   });
 
-  it('should throw an error when no label and no theme is provided', async () => {
+  it('should throw an error when no label and no theme are provided', async () => {
     try {
       fixture.detectChanges();
       throw 'It should have thrown an error about "label and theme"';
@@ -93,7 +92,7 @@ describe('DsfrBadgeComponent', () => {
     }
   });
 
-  describe(' all required properties are provided, ', () => {
+  describe('when all required properties are provided, ', () => {
     beforeEach(async () => {
       testHost.testLabel = testLabel;
       testHost.testTheme = testTheme;

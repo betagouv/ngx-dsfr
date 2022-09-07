@@ -34,9 +34,9 @@ import { AppRoutingModule } from './app-routing.module';
     MatTreeModule,
     MatIconModule,
     MatButtonModule,
-    AppRoutingModule,
     DsfrBadgeModule,
-    DsfrButtonModule
+    DsfrButtonModule,
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 })
