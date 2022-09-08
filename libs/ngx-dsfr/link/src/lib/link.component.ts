@@ -4,7 +4,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ElementSize, ElementAlignment } from '@betagouv/ngx-dsfr';
 
-
 /**
  * TypeScript entities and constants
  */
@@ -20,7 +19,6 @@ enum TemplateType {
   INTERNAL,
   EXTERNAL
 }
-
 @Component({
   selector: 'dsfr-link',
   templateUrl: './link.component.html',

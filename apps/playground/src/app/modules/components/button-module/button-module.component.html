@@ -6,9 +6,8 @@
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
   <div
-    class="simulation"
-    *ngIf="formInlineTrue">
-    <div class="settings">
+    class="simulation">
+    <div class="settings" *ngIf="form">
       <form
         [formGroup]="form"
         novalidate>

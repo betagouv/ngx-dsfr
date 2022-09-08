@@ -9,18 +9,23 @@ import { Route, RouterModule } from '@angular/router';
  */
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { ButtonModuleComponent } from './components/button-module/button-module.component';
+import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
 
 /**
  * TypeScript entities and constants
  */
 const routes: Route[] = [
   {
-    path: 'link',
-    component: LinkModuleComponent
+    path: 'badge',
+    component: BadgeModuleComponent
   },
   {
     path: 'button',
     component: ButtonModuleComponent
+  },
+  {
+    path: 'link',
+    component: LinkModuleComponent
   }
 ];
 
