@@ -1,13 +1,20 @@
+// Imports
+@use "variables" as var;
+
+// Actual styling
 .simulation {
   display: flex;
 
-  .settings {
-    width: 50%;
-    background-color: indianred;
+  & > * {
+    flex: 1;
   }
 
-  play-simulator {
-    width: 50%;
-    background-color: aqua;
+  .settings {
+    //background-color: indianred;
+  }
+
+  .simulator-wrapper {
+    //background-color: aqua;
+    //padding: var.$default-padding;
   }
 }

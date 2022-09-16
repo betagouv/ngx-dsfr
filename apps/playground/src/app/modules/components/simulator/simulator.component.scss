@@ -1,0 +1,10 @@
+// Imports
+@use "variables" as var;
+
+// Actual styling
+.content-wrapper {
+  background-color: snow;
+  height: 100%;
+  padding: var.$default-padding;
+  color: black;
+}
