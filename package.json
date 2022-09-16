@@ -67,7 +67,7 @@
     "@angular/platform-browser-dynamic": "14.2.2",
     "@angular/router": "14.2.2",
     "@gouvfr/dsfr": "^1.5.1",
-    "rxjs": "~7.4.0",
+    "rxjs": "~7.5.0",
     "the-new-css-reset": "^1.7.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
