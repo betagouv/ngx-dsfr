@@ -16,6 +16,11 @@
         "polyfills": "apps/playground/src/polyfills.ts",
         "tsConfig": "apps/playground/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "apps/playground/src/assets/styling"
+          ]
+        },
         "assets": [
           "apps/playground/src/favicon.ico",
           "apps/playground/src/assets",
