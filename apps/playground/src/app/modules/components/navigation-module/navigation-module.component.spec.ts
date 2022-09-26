@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  */
 import { NavigationModuleComponent } from './navigation-module.component';
 
-describe('LinkWrapperComponent', () => {
+describe('NavigationWrapperComponent', () => {
   let component: NavigationModuleComponent;
   let fixture: ComponentFixture<NavigationModuleComponent>;
 

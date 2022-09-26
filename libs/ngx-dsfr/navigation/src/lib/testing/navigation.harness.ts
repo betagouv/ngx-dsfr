@@ -15,9 +15,9 @@ import {
  * To see more : https://material.angular.io/cdk/test-harnesses/overview
  */
 export class DsfrNavigationHarness extends ComponentHarness {
-  static hostSelector: string = 'dsfr-link';
+  static hostSelector: string = 'dsfr-navigation';
 
-  private getNavigationElement: AsyncFactoryFn<TestElement> = this.locatorFor('div');
+  private getNavigationElement: AsyncFactoryFn<TestElement> = this.locatorFor('nav');
 
   /**
    * Retrieves the value for the requested attribute of the anchor tag

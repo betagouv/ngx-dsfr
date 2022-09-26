@@ -1,26 +1,25 @@
 /**
  * Angular imports
  */
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { Router } from '@angular/router';
 
 /**
  * 3rd-party imports
  */
 import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
-import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
 /**
  * Internal imports
  */
 import {
   DsfrNavigationComponent,
-  EMPTY_LABEL_ERROR,
-  EMPTY_LINK_ERROR,
-  EMPTY_TITLE_ERROR,
+  EMPTY_NAVIGATION_ERROR,
+  Navigation,
 } from '../navigation.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrNavigationHarness } from './navigation.harness';
@@ -33,18 +32,160 @@ describe('DsfrLinkComponent', () => {
   let harnessLoader: HarnessLoader;
   let dsfrNavigationHarness: DsfrNavigationHarness;
 
-  const testLabel: string = 'Test Label';
-  const testExternalLink: string = 'https://angular.io/guide/testing';
-  const testInternalLink: string = '/another/route';
-  const testTitle: string = 'Test Title';
+  const testNavigation: Navigation = [
+    {
+      "id": "a",
+      "icon": "dashboard",
+      "label": "MEGA MENU",
+      "isShow": false,
+      "userRoles": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ],
+      "href": "modules",
+      "isChildAvailable": true,
+      "child": {
+        "isMega": true,
+        "title": "Titre éditorialisé",
+        "description": "Lorem [...] elit ut.",
+        "items": [
+          {
+            "id": "b",
+            "icon": "cog",
+            "label": "Config",
+            "isShow": false,
+            "href": "admin/dashboard/config",
+            "categories": [
+              {
+                "id": 'c',
+                "label": "Config 1",
+                "href": "admin/dashboard/config",
+              },
+              {
+                "id": 'f',
+                "label": "Config 2",
+                "href": "/modules/navigation"
+              },
+            ]
+          },
+          {
+            "id": "b2",
+            "icon": "cog",
+            "label": "Config",
+            "isShow": false,
+            "href": "admin/dashboard/config",
+            "categories": [
+              {
+                "id": 'eec',
+                "label": "ConfigEE 1",
+                "href": "admin/dashboard/config",
+              },
+              {
+                "id": 'fee',
+                "label": "Configee 2",
+                "href": "admin/dashboard/config"
+              },
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "k",
+      "icon": "dashboard",
+      "label": "MEGA MENU 2",
+      "isShow": false,
+      "userRoles": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ],
+      "href": "dash",
+      "isChildAvailable": true,
+      "child": {
+        "isMega": true,
+        "title": "title",
+        "description": "description",
+        "items": [
+          {
+            "id": "l",
+            "icon": "cog",
+            "label": "Config",
+            "isShow": false,
+            "href": "admin/dashboard/config",
+            "categories": [
+              {
+                "id": 'm',
+                "label": "Config",
+                "href": "admin/dashboard/config",
+              },
+              {
+                "id": 'p',
+                "label": "Config",
+                "href": "admin/dashboard/config"
+              },
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "g",
+      "icon": "dashboard",
+      "label": "Simple Menu",
+      "isShow": false,
+      "userRoles": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ],
+      "href": "dashboard",
+      "isChildAvailable": true,
+      "child": {
+        "isMega": false,
+        "items": [
+          {
+            "id": 'h',
+            "icon": "cog",
+            "label": "Config",
+            "isShow": false,
+            "href": "admin/dashboard/config",
+          },
+          {
+            "id": 'i',
+            "icon": "cog",
+            "label": "Config",
+            "isShow": false,
+            "href": "admin/dashboard/config",
+          },
+        ]
+      }
+    },
+    {
+      "id": "j",
+      "icon": "dashboard",
+      "label": "Acces direct",
+      "isShow": false,
+      "userRoles": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ],
+      "href": "dashboard",
+      "isChildAvailable": false,
+    },
+  ];
 
   beforeEach(async () => {
+    const routerSpy = jest.fn();
     await TestBed.configureTestingModule({
       declarations: [
         DsfrNavigationComponent,
         TestHostComponent,
         RouterLinkDirectiveStub
-      ]
+      ],
+      providers: [ // [1]
+        { provide: Router, useValue: routerSpy },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -55,7 +196,7 @@ describe('DsfrLinkComponent', () => {
 
     /*
      * We're retrieving a HarnessLoader HERE to be able to get
-     * the Test Harness for the DsfrLinkComponent LATER.
+     * the Test Harness for the DsfrNavigationComponent LATER.
      *
      * We're NOT doing both HERE since getHarness() triggers
      * indirectly the Change Detection mechanism and thus,
@@ -68,79 +209,28 @@ describe('DsfrLinkComponent', () => {
     expect(componentUnderTest).toBeTruthy();
   });
 
-  it('should display the right template when backToTop is set to true', async () => {
-    testHost.testBackToTop = true;
-
-    /*
-     * We're retrieving the Test Harness HERE since we can now,
-     * without any problem, trigger the Change Detection mechanism
-     *
-     * WARNING: Triggers the Change Detection mechanism
-     */
-    dsfrNavigationHarness = await harnessLoader.getHarness<DsfrNavigationHarness>(
-      DsfrNavigationHarness
-    );
-    expect(await dsfrNavigationHarness.getNavigationText()).toBe('Haut de page');
-    expect(await dsfrNavigationHarness.getNavigationAttribute('href')).toBe('#top');
+  describe('when navigation is not provided or is undefined, ', () => {
+    it('should throw an error when no navigation is provided', async () => {
+      try {
+        fixture.detectChanges();
+        throw 'It should have thrown an error about "navigation"';
+      } catch (error) {
+        expect(error).toBe(EMPTY_NAVIGATION_ERROR);
+      }
+    });
   });
 
-  describe(', when backToTop is not provided or is false, ', () => {
-    it('should throw an error when no label is provided', async () => {
-      try {
-        fixture.detectChanges();
-        throw 'It should have thrown an error about "label"';
-      } catch (error) {
-        expect(error).toBe(EMPTY_LABEL_ERROR);
-      }
-    });
+  // describe(' all required properties are provided, ', () => {
+  //   beforeEach(async () => {
+  //     testHost.navigation = testNavigation;
 
-    it('should throw an error when no link is provided', () => {
-      try {
-        testHost.testLabel = testLabel;
-        fixture.detectChanges();
-        throw 'It should have thrown an error about "link"';
-      } catch (error) {
-        expect(error).toBe(EMPTY_LINK_ERROR);
-      }
-    });
+  //     dsfrNavigationHarness = await harnessLoader.getHarness<DsfrNavigationHarness>(
+  //       DsfrNavigationHarness
+  //     );
+  //   });
+  //   it('should have NO added classes', async () => {
+  //     expect(await dsfrNavigationHarness.getNavigationAttribute('class')).toBe(null);
+  //   });
+  // });
 
-    it('should throw an error when no title is provided with an external link', () => {
-      try {
-        testHost.testLabel = testLabel;
-        testHost.testLink = testExternalLink;
-        fixture.detectChanges();
-        throw 'It should have thrown an error about "title"';
-      } catch (error) {
-        expect(error).toBe(EMPTY_TITLE_ERROR);
-      }
-    });
-
-    describe(' all required properties are provided, ', () => {
-      beforeEach(() => {
-        testHost.testLabel = testLabel;
-        testHost.testLink = testExternalLink;
-        testHost.testTitle = testTitle;
-        testHost.testIcon = 'ancient-gate-fill';
-        testHost.testIconAlignment = ElementAlignment.RIGHT;
-      });
-
-      describe(' and inline is set to true ( default ), ', () => {
-        beforeEach(async () => {
-          /*
-           * We're retrieving the Test Harness HERE since we can now,
-           * without any problem, trigger the Change Detection mechanism
-           *
-           * WARNING: Triggers the Change Detection mechanism
-           */
-          dsfrNavigationHarness = await harnessLoader.getHarness<DsfrNavigationHarness>(
-            DsfrNavigationHarness
-          );
-        });
-
-        it('should have NO added classes', async () => {
-          expect(await dsfrNavigationHarness.getNavigationAttribute('class')).toBe(null);
-        });
-      });
-    });
-  });
 });

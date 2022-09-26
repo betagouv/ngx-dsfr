@@ -1,1 +1,13 @@
 @use "@gouvfr/dsfr/dist/component/navigation/navigation.min";
+@use "@gouvfr/dsfr/dist/component/link/link.min";
+
+.fr-collapse--expanded {
+   max-height: none !important;
+   margin-left: -1.25rem;
+   margin-right: -1.25rem;
+}
+
+nav {
+  position: relative;
+  color: var(--text-default-grey);
+}
