@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 /**
  * 3rd-party imports
@@ -39,6 +40,7 @@ import { InputPropertyControlComponent } from './components/input-property-contr
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatSlideToggleModule,
     ModulesRoutingModule
   ],
   declarations: [

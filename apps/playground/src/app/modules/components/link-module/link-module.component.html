@@ -51,7 +51,8 @@
             formControlName="label"
             name="label"
             type="string"
-            description="the text displayed as the link">
+            description="the text displayed as the link"
+            [error]="formInlineTrueErrors?.label">
           </play-input-property-control>
           <button
             mat-button

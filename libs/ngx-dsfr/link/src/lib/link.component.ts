@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ElementSize, ElementAlignment } from '@betagouv/ngx-dsfr';
 
 /**
@@ -19,12 +19,13 @@ enum TemplateType {
   INTERNAL,
   EXTERNAL
 }
+
 @Component({
   selector: 'dsfr-link',
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss']
 })
-export class DsfrLinkComponent implements OnInit {
+export class DsfrLinkComponent implements OnChanges {
   @Input() label: string = '';
   @Input() link: string = '';
   @Input() title: string = '';
@@ -39,7 +40,7 @@ export class DsfrLinkComponent implements OnInit {
   isExternal: boolean = false;
   classes: string = '';
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if (this.backToTop) {
       this.template = TemplateType.BACK_TO_TOP;
     } else {
@@ -61,6 +62,8 @@ export class DsfrLinkComponent implements OnInit {
 
       if (!this.inline) {
         this.initClasses();
+      } else {
+        this.classes = '';
       }
     }
   }
