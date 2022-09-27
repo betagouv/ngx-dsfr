@@ -25,7 +25,7 @@ import { TestHostComponent } from './test-host.component';
 import { DsfrNavigationHarness } from './navigation.harness';
 
 
-describe('DsfrLinkComponent', () => {
+describe('DsfrNavigationComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
   let componentUnderTest: DsfrNavigationComponent;
@@ -174,15 +174,18 @@ describe('DsfrLinkComponent', () => {
   ];
 
   beforeEach(async () => {
-    const routerSpy = jest.fn();
+
     await TestBed.configureTestingModule({
       declarations: [
         DsfrNavigationComponent,
         TestHostComponent,
         RouterLinkDirectiveStub
       ],
-      providers: [ // [1]
-        { provide: Router, useValue: routerSpy },
+      providers: [
+        {
+          provide: Router,
+          useValue: { url: '' }
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
@@ -220,17 +223,21 @@ describe('DsfrLinkComponent', () => {
     });
   });
 
-  // describe(' all required properties are provided, ', () => {
-  //   beforeEach(async () => {
-  //     testHost.navigation = testNavigation;
+  describe(' all required properties are provided, ', () => {
+    beforeEach(async () => {
+      testHost.navigation = testNavigation;
 
-  //     dsfrNavigationHarness = await harnessLoader.getHarness<DsfrNavigationHarness>(
-  //       DsfrNavigationHarness
-  //     );
-  //   });
-  //   it('should have NO added classes', async () => {
-  //     expect(await dsfrNavigationHarness.getNavigationAttribute('class')).toBe(null);
-  //   });
-  // });
+      dsfrNavigationHarness = await harnessLoader.getHarness<DsfrNavigationHarness>(
+        DsfrNavigationHarness
+      );
+    });
+    it('should have NO added classes', async () => {
+      expect(await dsfrNavigationHarness.getNavigationAttribute('class')).toBe('fr-nav');
+    });
+
+    it('should have the mega menu class on the first item', async () => {
+      expect(await dsfrNavigationHarness.getFirstItemNavigation()).toContain('fr-mega-menu');
+    });
+  });
 
 });
