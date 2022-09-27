@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 /**
  * 3rd-party imports
@@ -24,6 +25,7 @@ import { ButtonModuleComponent } from './components/button-module/button-module.
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { SimulatorComponent } from './components/simulator/simulator.component';
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
+import { InputPropertyControlComponent } from './components/input-property-control/input-property-control.component';
 
 @NgModule({
   imports: [
@@ -36,11 +38,13 @@ import { BadgeModuleComponent } from './components/badge-module/badge-module.com
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatButtonModule,
     ModulesRoutingModule
   ],
   declarations: [
-    LinkModuleComponent,
+    InputPropertyControlComponent,
     SimulatorComponent,
+    LinkModuleComponent,
     ButtonModuleComponent,
     BadgeModuleComponent
   ]

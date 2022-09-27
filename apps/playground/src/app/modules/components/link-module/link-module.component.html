@@ -31,18 +31,33 @@
   <mat-card *ngIf="formInlineTrue">
     <mat-card-header>
       <mat-card-title>Link within text</mat-card-title>
+      <mat-card-subtitle>
+        With <code>inline</code> set to <code>true</code>
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="simulation">
       <div class="settings">
         <form
           [formGroup]="formInlineTrue"
           novalidate>
-          <mat-form-field>
-            <mat-label>Label</mat-label>
-            <input
-              matInput
-              formControlName="label" />
-          </mat-form-field>
+          <play-input-property-control
+            formControlName="inline"
+            name="inline"
+            type="boolean"
+            description="whether the link is supposed to be displayed within a text or not">
+          </play-input-property-control>
+          <hr />
+          <play-input-property-control
+            formControlName="label"
+            name="label"
+            type="string"
+            description="the text displayed as the link">
+          </play-input-property-control>
+          <button
+            mat-button
+            (click)="formInlineTrue.reset()">
+            Reset
+          </button>
         </form>
       </div>
       <div class="simulator-wrapper mat-elevation-z4">
@@ -50,9 +65,9 @@
           <p>
             Just some text before,
             <dsfr-link
-              [label]="formInlineTrue.value.label"
+              [label]="formInlineTrue.getRawValue().label"
               title="An article about noopener"
-              [inline]="true"
+              [inline]="formInlineTrue.getRawValue().inline"
               [iconAlignment]="iconAlignment.RIGHT"
               icon="ancient-gate-fill"
               [size]="linkSize.MEDIUM"

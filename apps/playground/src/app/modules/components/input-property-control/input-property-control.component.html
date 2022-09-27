@@ -1,0 +1,23 @@
+<div class="form-control">
+  <label>
+    <code>{{ name }}</code> : ( <span class="property-type">{{ type }}</span> )
+    <span class="property-description">{{ description }}</span>
+  </label>
+  <mat-form-field>
+    <mat-label>{{ name | titlecase }}</mat-label>
+    <ng-container [ngSwitch]="type">
+      <input
+        *ngSwitchCase="'string'"
+        #input
+        matInput
+        (input)="onInput($event)"
+        (blur)="onBlur()" />
+      <input
+        *ngSwitchCase="'boolean'"
+        #input
+        matInput
+        (input)="onInput($event)"
+        (blur)="onBlur()" />
+    </ng-container>
+  </mat-form-field>
+</div>
