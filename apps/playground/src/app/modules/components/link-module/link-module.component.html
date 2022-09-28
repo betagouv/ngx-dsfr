@@ -52,7 +52,23 @@
             name="label"
             type="string"
             description="the text displayed as the link"
-            [error]="formInlineTrueErrors?.label">
+            [error]="formInlineTrueErrors['label']">
+          </play-input-property-control>
+          <hr />
+          <play-input-property-control
+            formControlName="link"
+            name="link"
+            type="string"
+            description="the URL this link will redirect to"
+            [error]="formInlineTrueErrors['link']">
+          </play-input-property-control>
+          <hr />
+          <play-input-property-control
+            formControlName="title"
+            name="title"
+            type="string"
+            description="the title of this link ( necessary for accessibility )"
+            [error]="formInlineTrueErrors['_form_']">
           </play-input-property-control>
           <button
             mat-button
@@ -67,13 +83,13 @@
             Just some text before,
             <dsfr-link
               [label]="formInlineTrue.getRawValue().label"
-              title="An article about noopener"
+              [title]="formInlineTrue.getRawValue().title"
               [inline]="formInlineTrue.getRawValue().inline"
               [iconAlignment]="iconAlignment.RIGHT"
               icon="ancient-gate-fill"
               [size]="linkSize.MEDIUM"
               [backToTop]="false"
-              link="cloud-public.com/amazon-web-services/"></dsfr-link>
+              [link]="formInlineTrue.getRawValue().link"></dsfr-link>
             ... and after
           </p>
         </play-simulator>

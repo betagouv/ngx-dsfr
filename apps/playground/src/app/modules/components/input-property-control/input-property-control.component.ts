@@ -2,19 +2,22 @@
  * Angular imports
  */
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   forwardRef,
   Input,
   OnChanges,
-  Renderer2,
-  SimpleChanges,
-  ViewChild
+  SimpleChanges
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MatInput } from '@angular/material/input';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
+
+/**
+ * 3rd-party imports
+ */
+import { Subject, takeUntil } from 'rxjs';
 
 /**
  * TypeScript entities and constants
@@ -34,7 +37,7 @@ type PropertyType = 'string' | 'boolean' | 'enum';
   ]
 })
 export class InputPropertyControlComponent
-  implements ControlValueAccessor, AfterViewInit, OnChanges
+  implements ControlValueAccessor, OnChanges
 {
   @Input() name: string = '';
   @Input() type: PropertyType = 'string';
@@ -42,16 +45,12 @@ export class InputPropertyControlComponent
   @Input() enum: Record<string, string> | {} = {};
   @Input() error: string | undefined = '';
 
-  @ViewChild('control') inputElement: ElementRef<HTMLInputElement> | undefined;
-  @ViewChild('control', { read: MatInput }) matInput: MatInput | undefined;
-
   onControlValueChanges!: (_: any) => void;
   onControlTouched!: () => void;
 
-  formControlValue: any;
-  isDisabled: boolean = false;
+  formControl: FormControl = new FormControl<any>(undefined);
 
-  constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {}
+  private unsubscribe$ = new Subject<void>();
 
   /*******************************************************************************************************************\
    *                                                                                                                 *
@@ -60,24 +59,10 @@ export class InputPropertyControlComponent
    \******************************************************************************************************************/
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.matInput) {
-      this.matInput.errorState = !!changes['error']?.currentValue;
+    const error: string = changes['error']?.currentValue;
+    if (error) {
+      this.formControl.setErrors({ error });
     }
-  }
-
-  ngAfterViewInit(): void {
-    /*
-     * We have to wait up until this lifecycle hook to have this.inputElement
-     * not undefined. But setting these properties here trigger an
-     * ExpressionChangedAfterItHasBeenCheckedError, so we're waiting
-     * for a tick before actually setting them
-     */
-    setTimeout(() => {
-      if (this.inputElement) {
-        this.setValueOnHtmlElement(this.inputElement.nativeElement);
-        this.setDisabledOnHtmlElement(this.inputElement.nativeElement);
-      }
-    }, 0);
   }
 
   /*******************************************************************************************************************\
@@ -88,6 +73,11 @@ export class InputPropertyControlComponent
 
   registerOnChange(fn: (_: any) => void): void {
     this.onControlValueChanges = fn;
+    this.formControl.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe({
+      next: (value: any) => {
+        this.onControlValueChanges(value);
+      }
+    });
   }
 
   registerOnTouched(fn: () => void): void {
@@ -95,17 +85,11 @@ export class InputPropertyControlComponent
   }
 
   writeValue(obj: any): void {
-    this.formControlValue = obj;
-    if (this.inputElement) {
-      this.setValueOnHtmlElement(this.inputElement.nativeElement);
-    }
+    this.formControl.setValue(obj);
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-    if (this.inputElement) {
-      this.setDisabledOnHtmlElement(this.inputElement.nativeElement);
-    }
+    isDisabled ? this.formControl.disable() : this.formControl.enable();
   }
 
   /*******************************************************************************************************************\
@@ -114,34 +98,7 @@ export class InputPropertyControlComponent
    *                                                                                                                 *
    \******************************************************************************************************************/
 
-  onValueChanges(event: Event | MatSlideToggleChange): void {
-    switch (this.type) {
-      case 'string':
-        const input: HTMLInputElement = (event as InputEvent)
-          .target as HTMLInputElement;
-        this.onControlValueChanges(input.value);
-        break;
-      case 'boolean':
-        this.onControlValueChanges((event as MatSlideToggleChange).checked);
-        break;
-    }
-  }
-
   onBlur(): void {
     this.onControlTouched();
-  }
-
-  /*******************************************************************************************************************\
-   *                                                                                                                 *
-   *                                                   Helpers                                                       *
-   *                                                                                                                 *
-   \******************************************************************************************************************/
-
-  private setValueOnHtmlElement(element: HTMLInputElement): void {
-    this._renderer.setProperty(element, 'value', this.formControlValue);
-  }
-
-  private setDisabledOnHtmlElement(element: HTMLInputElement): void {
-    this._renderer.setProperty(element, 'disabled', this.isDisabled);
   }
 }

@@ -60,10 +60,10 @@ export class DsfrLinkComponent implements OnChanges {
         ? TemplateType.EXTERNAL
         : TemplateType.INTERNAL;
 
+      this.classes = '';
+
       if (!this.inline) {
         this.initClasses();
-      } else {
-        this.classes = '';
       }
     }
   }

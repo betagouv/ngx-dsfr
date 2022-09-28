@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 /**
  * 3rd-party imports
@@ -41,6 +42,7 @@ import { InputPropertyControlComponent } from './components/input-property-contr
     MatIconModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatSelectModule,
     ModulesRoutingModule
   ],
   declarations: [
