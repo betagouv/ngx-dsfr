@@ -4,12 +4,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 /**
  * 3rd-party imports
  */
 import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
 import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
+import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
 
 /**
  * Internal imports
@@ -19,7 +27,7 @@ import { ButtonModuleComponent } from './components/button-module/button-module.
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { SimulatorComponent } from './components/simulator/simulator.component';
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
-import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
+import { InputPropertyControlComponent } from './components/input-property-control/input-property-control.component';
 
 @NgModule({
   imports: [
@@ -28,13 +36,21 @@ import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
     DsfrLinkModule,
     DsfrButtonModule,
     DsfrBadgeModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatSelectModule,
     ModulesRoutingModule
   ],
   declarations: [
-    LinkModuleComponent,
+    InputPropertyControlComponent,
     SimulatorComponent,
+    LinkModuleComponent,
     ButtonModuleComponent,
     BadgeModuleComponent
   ]
 })
-export class ModulesModule { }
+export class ModulesModule {}

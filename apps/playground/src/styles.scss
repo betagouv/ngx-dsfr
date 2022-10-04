@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+code {
+  font-family: "Ubuntu Mono", monospace;
+  background-color: #666666;
+  padding: 0.2em 0.3em;
+  border-radius: 3px;
+  color: white;
+}
+
+a {
+  border-bottom: thin solid currentColor;
+
+  .mat-icon {
+    height: auto;
+    width: auto;
+    font-size: 1em;
+    margin-bottom: -2px;
+  }
+}

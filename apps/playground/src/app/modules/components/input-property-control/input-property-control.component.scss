@@ -1,0 +1,21 @@
+// Imports
+@use "variables" as var;
+
+// Actual styling
+.form-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  label {
+    margin-bottom: var.$default-margin;
+  }
+
+  .property-type {
+    font-style: italic;
+  }
+
+  .string-property {
+    width: 100%;
+  }
+}

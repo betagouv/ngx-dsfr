@@ -1,0 +1,40 @@
+<div class="form-control">
+  <label>
+    <code>{{ name }}</code> : ( <span class="property-type">{{ type }}</span> )
+    <span class="property-description">{{ description }}</span>
+  </label>
+  <ng-container [ngSwitch]="type">
+    <mat-form-field
+      *ngSwitchCase="'string'"
+      class="string-property">
+      <mat-label>{{ name | titlecase }}</mat-label>
+      <input
+        matInput
+        [formControl]="formControl"
+        (blur)="onBlur()" />
+      <mat-error>{{ error }}</mat-error>
+    </mat-form-field>
+
+    <mat-slide-toggle
+      *ngSwitchCase="'boolean'"
+      #toggle
+      [formControl]="formControl"
+      (blur)="onBlur()">
+      {{ toggle.checked ? "True" : "False" }}
+    </mat-slide-toggle>
+
+    <mat-form-field *ngSwitchCase="'enum'">
+      <mat-label>{{ name | titlecase }}</mat-label>
+      <mat-select
+        [formControl]="formControl"
+        (blur)="onBlur()">
+        <mat-option
+          *ngFor="let item of enum | keyvalue"
+          [value]="item.value">
+          {{ item.key }}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{ error }}</mat-error>
+    </mat-form-field>
+  </ng-container>
+</div>

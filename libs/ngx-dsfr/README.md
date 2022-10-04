@@ -4,7 +4,29 @@ This library aims to enable developers to use the [DSFR](https://gouvfr.atlassia
 
 The DSFR is the official Design System to be used in any web app linked to the French 🇫🇷 government.
 
-This project is built on top of the [@gouvfr/dsfr](https://www.npmjs.com/package/@gouvfr/dsfr) package.
+This project is built on top of the [@gouvfr/dsfr](https://www.npmjs.com/package/@gouvfr/dsfr) package and currently uses the version **1.7.2**.
+
+## How to update to a new version of the DSFR ?
+
+1. Update the NPM package
+   ```shell
+   npm update @gouvfr/dsfr --save
+   ```
+2. Copy / Paste all fonts into `libs/ngx-dsfr/assets/fonts`
+3. Copy / Paste all icons folders, from `~/@gouvfr/dsfr/dist/icons` into `libs/ngx-dsfr/assets/icons`
+4. Copy / Paste all icons CSS definition files ( the `.min` version ), from `~/@gouvfr/dsfr/dist/utility/icons` into each associated folder in `libs/ngx-dsfr/assets/icons` :
+   for instance, put `~/@gouvfr/dsfr/dist/utility/icons/icons-buildings/icons-buildings.min.css` into `libs/ngx-dsfr/assets/icons/buildings`
+5. Copy / Paste the content of the core styling file `~/@gouvfr/dsfr/dist/core/core.min.css` into `libs/ngx-dsfr/assets/styling/core-styling.css`
+6. Rebuild the `ngx-dsfr` library
+    ```shell
+    nx build ngx-dsfr
+    ```
+7. Re-establish a link between the new build of your library and this workspace, so that
+   you can use it in the `playground` app
+    ```shell
+    npm link # Inside dist/libs/ngx-dsfr
+    npm link @betagouv/ngx-dsfr # Inside the root of this workspace
+    ```
 
 ## How to use it ?
 
