@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 /**
  * 3rd-party imports
  */
-import { ElementAlignment, ElementSize } from '@betagouv/ngx-dsfr';
 import { Navigation } from '@betagouv/ngx-dsfr/navigation';
 
 @Component({
@@ -16,34 +15,27 @@ import { Navigation } from '@betagouv/ngx-dsfr/navigation';
 })
 export class NavigationModuleComponent implements OnInit {
 
-  iconAlignment: typeof ElementAlignment = ElementAlignment;
-  linkSize: typeof ElementSize = ElementSize;
   form: FormGroup | undefined;
 
   navigation: Navigation = [
     {
       "id": "a",
-      "icon": "dashboard",
       "label": "MEGA MENU",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "modules",
-      "isChildAvailable": true,
       "child": {
         "isMega": true,
         "title": "Titre éditorialisé",
         "description": "Lorem [...] elit ut.",
-        "items": [
+        "children": [
           {
             "id": "b",
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
-            "categories": [
+            "children": [
               {
                 "id": 'c',
                 "label": "Config 1",
@@ -58,11 +50,9 @@ export class NavigationModuleComponent implements OnInit {
           },
           {
             "id": "b2",
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
-            "categories": [
+            "children": [
               {
                 "id": 'eec',
                 "label": "ConfigEE 1",
@@ -80,27 +70,22 @@ export class NavigationModuleComponent implements OnInit {
     },
     {
       "id": "k",
-      "icon": "dashboard",
       "label": "MEGA MENU 2",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "dash",
-      "isChildAvailable": true,
       "child": {
         "isMega": true,
         "title": "title",
         "description": "description",
-        "items": [
+        "children": [
           {
             "id": "l",
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
-            "categories": [
+            "children": [
               {
                 "id": 'm',
                 "label": "Config",
@@ -118,30 +103,23 @@ export class NavigationModuleComponent implements OnInit {
     },
     {
       "id": "g",
-      "icon": "dashboard",
       "label": "Simple Menu",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "dashboard",
-      "isChildAvailable": true,
       "child": {
         "isMega": false,
-        "items": [
+        "children": [
           {
             "id": 'h',
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
           },
           {
             "id": 'i',
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
           },
         ]
@@ -149,15 +127,12 @@ export class NavigationModuleComponent implements OnInit {
     },
     {
       "id": "j",
-      "icon": "dashboard",
       "label": "Acces direct",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "dashboard",
-      "isChildAvailable": false,
     },
   ];
 

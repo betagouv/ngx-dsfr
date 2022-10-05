@@ -13,20 +13,24 @@ import { UserRole } from '@betagouv/ngx-dsfr';
  * TypeScript entities and constants
  */
 export const EMPTY_NAVIGATION_ERROR: string =
-  'You MUST provide a navigation data for this component 😡 !!!';
+  'You MUST provide navigation data for this component 😡 !!!';
 
-export interface NavigationItem {
+interface NavigationItem extends LinkNavigation {
+  child?: ChildNavigation;
+}
+
+interface LinkNavigation {
   id: string;
-  icon?: string;
   label: string;
   href: string;
-  isShow?: boolean;
+  children?: LinkNavigation[];
   userRoles?: UserRole[];
-  isChildAvailable?: boolean;
+}
+interface ChildNavigation {
+  isMega?: boolean;
   title?: string;
-  categories?: NavigationItem[];
   description?: string;
-  child?: Pick<NavigationItem, 'title' | 'description'> & { items: NavigationItem[], isMega?: boolean }
+  children: LinkNavigation[];
 }
 
 export type Navigation = NavigationItem[];
@@ -67,14 +71,14 @@ export class DsfrNavigationComponent implements OnInit {
     }
   }
 
-  selectDropdownElementRef(idAttribute: string): ElementRef | undefined {
+  private selectDropdownElementRef(idAttribute: string): ElementRef | undefined {
     if (!this.dropdownMenus) {
       return;
     }
     return this.dropdownMenus.filter(element => element.nativeElement.id === idAttribute)[0];
   }
 
-  selectButtonElementRef(id: string): ElementRef | undefined {
+  private selectButtonElementRef(id: string): ElementRef | undefined {
     if (!this.menuButtonItems) {
       return;
     }
@@ -94,7 +98,7 @@ export class DsfrNavigationComponent implements OnInit {
     }
   }
 
-  isActiveDropdownMenu(dropdownMenu: ElementRef): boolean {
+  private isActiveDropdownMenu(dropdownMenu: ElementRef): boolean {
     return dropdownMenu.nativeElement.classList.contains(this.expandedClass);
   }
 

@@ -1,7 +1,6 @@
 /**
  * Angular imports
  */
-import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
@@ -24,7 +23,6 @@ import {
 import { TestHostComponent } from './test-host.component';
 import { DsfrNavigationHarness } from './navigation.harness';
 
-
 describe('DsfrNavigationComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
@@ -35,15 +33,12 @@ describe('DsfrNavigationComponent', () => {
   const testNavigation: Navigation = [
     {
       "id": "a",
-      "icon": "dashboard",
       "label": "MEGA MENU",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "modules",
-      "isChildAvailable": true,
       "child": {
         "isMega": true,
         "title": "Titre éditorialisé",
@@ -51,9 +46,7 @@ describe('DsfrNavigationComponent', () => {
         "items": [
           {
             "id": "b",
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
             "categories": [
               {
@@ -70,9 +63,7 @@ describe('DsfrNavigationComponent', () => {
           },
           {
             "id": "b2",
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
             "categories": [
               {
@@ -92,15 +83,12 @@ describe('DsfrNavigationComponent', () => {
     },
     {
       "id": "k",
-      "icon": "dashboard",
       "label": "MEGA MENU 2",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "dash",
-      "isChildAvailable": true,
       "child": {
         "isMega": true,
         "title": "title",
@@ -108,9 +96,7 @@ describe('DsfrNavigationComponent', () => {
         "items": [
           {
             "id": "l",
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
             "categories": [
               {
@@ -130,30 +116,23 @@ describe('DsfrNavigationComponent', () => {
     },
     {
       "id": "g",
-      "icon": "dashboard",
       "label": "Simple Menu",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "dashboard",
-      "isChildAvailable": true,
       "child": {
         "isMega": false,
         "items": [
           {
             "id": 'h',
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
           },
           {
             "id": 'i',
-            "icon": "cog",
             "label": "Config",
-            "isShow": false,
             "href": "admin/dashboard/config",
           },
         ]
@@ -161,15 +140,12 @@ describe('DsfrNavigationComponent', () => {
     },
     {
       "id": "j",
-      "icon": "dashboard",
       "label": "Acces direct",
-      "isShow": false,
       "userRoles": [
         "ROLE_USER",
         "ROLE_ADMIN"
       ],
       "href": "dashboard",
-      "isChildAvailable": false,
     },
   ];
 
@@ -186,9 +162,7 @@ describe('DsfrNavigationComponent', () => {
           provide: Router,
           useValue: { url: '' }
         },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);

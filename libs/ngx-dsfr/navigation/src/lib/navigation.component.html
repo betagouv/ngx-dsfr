@@ -2,7 +2,7 @@
   <ul class="fr-nav__list">
     <ng-container *ngFor="let menuItem of navigation">
       <li class="fr-nav__item">
-        <ng-container *ngIf="!menuItem.isChildAvailable; else childMenuItem">
+        <ng-container *ngIf="!menuItem.child; else childMenuItem">
           <a
             class="fr-nav__link"
             routerLinkActive="active"
@@ -23,7 +23,7 @@
               [attr.aria-controls]="menuItem.id">
               {{ menuItem.label }}
             </button>
-            <div #dropdownItem *ngIf="menuItem.isChildAvailable" class="fr-collapse fr-mega-menu" [id]="menuItem.id" tabindex="-1">
+            <div #dropdownItem *ngIf="menuItem.child" class="fr-collapse fr-mega-menu" [id]="menuItem.id" tabindex="-1">
               <div class="fr-container fr-container--fluid fr-container-lg">
                 <button (click)="hideActiveDropdown()" class="fr-link--close fr-link" [attr.aria-controls]="menuItem.id">Fermer</button>
                 <div class="fr-grid-row fr-grid-row-lg--gutters">
@@ -37,7 +37,7 @@
                       </a>
                     </div>
                   </div>
-                  <div class="fr-col-12 fr-col-lg-3" *ngFor="let item of menuItem.child?.items">
+                  <div class="fr-col-12 fr-col-lg-3" *ngFor="let item of menuItem.child?.children">
                     <h5 class="fr-mega-menu__category">
                       <a
                         [routerLink]="[item.href]"
@@ -49,11 +49,12 @@
                       </a>
                     </h5>
                     <ul class="fr-mega-menu__list">
-                      <li *ngFor="let link of item.categories">
+                      <li *ngFor="let link of item.children">
                         <a
                           [routerLink]="[link.href]"
                           routerLinkActive="active"
                           ariaCurrentWhenActive="page"
+                          routerLinkActive="active"
                           class="fr-nav__link"
                           target="_self">
                           {{link.label}}
@@ -78,7 +79,7 @@
             </button>
             <div #dropdownItem class="fr-collapse fr-menu" [id]="menuItem.id">
               <ul class="fr-menu__list">
-                <li *ngFor="let link of menuItem.child?.items">
+                <li *ngFor="let link of menuItem.child?.children">
                   <a
                     class="fr-nav__link"
                     [routerLink]="[link.href]"

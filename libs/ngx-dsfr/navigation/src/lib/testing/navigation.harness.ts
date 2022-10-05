@@ -34,24 +34,12 @@ export class DsfrNavigationHarness extends ComponentHarness {
   }
 
   /**
-   * Retrieves the text content of the element tag
+   * Retrieves the class attribute of the first element tag
    * in the DsfrNavigationComponent's Template
    *
    * @returns A Promise that resolves to the text between tags of the element
    */
-  async getNavigationText(): Promise<string> {
-    const navigation: TestElement = await this.getNavigationElement();
-
-    return navigation.text();
-  }
-
-  /**
-   * Retrieves the text content of the element tag
-   * in the DsfrNavigationComponent's Template
-   *
-   * @returns A Promise that resolves to the text between tags of the element
-   */
-  async getFirstItemNavigation(): Promise<string | null> {
+  async getFirstNavItemClass(): Promise<string | null> {
     const allItemsNavigation: TestElement = await this.getAllItemsNavigation();
 
     return allItemsNavigation.getAttribute('class');

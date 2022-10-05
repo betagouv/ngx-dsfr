@@ -11,33 +11,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 /**
- * 3rd-party imports
- */
-import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
-import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
-import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
-
-/**
  * Internal imports
  */
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DsfrNavigationModule } from '@betagouv/ngx-dsfr/navigation';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DsfrLinkModule,
-    DsfrNavigationModule,
     MatToolbarModule,
     MatSidenavModule,
     MatTreeModule,
     MatIconModule,
     MatButtonModule,
-    DsfrBadgeModule,
-    DsfrButtonModule,
     AppRoutingModule,
   ],
   bootstrap: [AppComponent]
