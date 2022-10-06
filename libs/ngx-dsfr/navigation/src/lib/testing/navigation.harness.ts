@@ -18,7 +18,7 @@ export class DsfrNavigationHarness extends ComponentHarness {
   static hostSelector: string = 'dsfr-navigation';
 
   private getNavigationElement: AsyncFactoryFn<TestElement> = this.locatorFor('nav');
-  private getAllItemsNavigation: AsyncFactoryFn<TestElement> = this.locatorFor('nav ul li button + div');
+  private getFirstNavItem: AsyncFactoryFn<TestElement> = this.locatorFor('nav ul li button + div');
 
   /**
    * Retrieves the value for the requested attribute of the element tag
@@ -37,10 +37,10 @@ export class DsfrNavigationHarness extends ComponentHarness {
    * Retrieves the class attribute of the first element tag
    * in the DsfrNavigationComponent's Template
    *
-   * @returns A Promise that resolves to the text between tags of the element
+   * @returns A Promise that resolves to the class of the element
    */
   async getFirstNavItemClass(): Promise<string | null> {
-    const allItemsNavigation: TestElement = await this.getAllItemsNavigation();
+    const allItemsNavigation: TestElement = await this.getFirstNavItem();
 
     return allItemsNavigation.getAttribute('class');
   }

@@ -74,6 +74,7 @@
               (click)="handleMenu(menuItem.id)"
               #menuButtonItem
               class="fr-nav__btn"
+              [attr.aria-current]="isRouterLinkActive(menuItem.href) ? true : undefined"
               [attr.aria-controls]="menuItem.id">
               {{ menuItem.label }}
             </button>

@@ -43,12 +43,12 @@ describe('DsfrNavigationComponent', () => {
         "isMega": true,
         "title": "Titre éditorialisé",
         "description": "Lorem [...] elit ut.",
-        "items": [
+        "children": [
           {
             "id": "b",
             "label": "Config",
             "href": "admin/dashboard/config",
-            "categories": [
+            "children": [
               {
                 "id": 'c',
                 "label": "Config 1",
@@ -65,7 +65,7 @@ describe('DsfrNavigationComponent', () => {
             "id": "b2",
             "label": "Config",
             "href": "admin/dashboard/config",
-            "categories": [
+            "children": [
               {
                 "id": 'eec',
                 "label": "ConfigEE 1",
@@ -93,12 +93,12 @@ describe('DsfrNavigationComponent', () => {
         "isMega": true,
         "title": "title",
         "description": "description",
-        "items": [
+        "children": [
           {
             "id": "l",
             "label": "Config",
             "href": "admin/dashboard/config",
-            "categories": [
+            "children": [
               {
                 "id": 'm',
                 "label": "Config",
@@ -124,7 +124,7 @@ describe('DsfrNavigationComponent', () => {
       "href": "dashboard",
       "child": {
         "isMega": false,
-        "items": [
+        "children": [
           {
             "id": 'h',
             "label": "Config",
