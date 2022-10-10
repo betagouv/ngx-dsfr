@@ -3,7 +3,7 @@
  */
 import { Component, Input } from '@angular/core';
 import { ElementSize } from '@betagouv/ngx-dsfr';
-import { IRadioItem } from '../radio.component';
+import { RadioItem } from '../radio.component';
 
 /**
  * Internal imports
@@ -30,7 +30,7 @@ export class TestHostComponent {
   @Input() testLegend = '';
   @Input() testName = '';
   @Input() testHint = '';
-  @Input() testItems: IRadioItem[] = [];
+  @Input() testItems: RadioItem[] = [];
   @Input() testInline = false;
   @Input() testDisabled = false;
   @Input() testSize = ElementSize.MEDIUM;

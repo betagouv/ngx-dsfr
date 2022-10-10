@@ -22,7 +22,7 @@
         </dsfr-radio>
         Selected value is: {{templateDrivenSelected}}
         <hr>
-        <form [formGroup]="reactiveFormsGroup">
+        <form *ngIf="reactiveFormsGroup" [formGroup]="reactiveFormsGroup">
           <dsfr-radio legend="Reactive forms test" name="reactiveFormsTest" [items]="reactiveFormsItems"
                       formControlName="radios">
           </dsfr-radio>

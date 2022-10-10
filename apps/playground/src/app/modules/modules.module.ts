@@ -50,7 +50,7 @@ import { RadioModuleComponent } from './components/radio-module/radio-module.com
     MatButtonModule,
     MatSlideToggleModule,
     MatSelectModule,
-    ModulesRoutingModule,
+    ModulesRoutingModule
   ],
   declarations: [
     InputPropertyControlComponent,

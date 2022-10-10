@@ -96,18 +96,14 @@ export class RadioModuleComponent implements OnInit {
     }
   ];
   templateDrivenSelected = '2';
-  reactiveFormsGroup: FormGroup;
+  reactiveFormsGroup: FormGroup | undefined;
   inlineModel = '1';
   successModel = '1';
   errorModel = '1';
   disabledModel = '1';
   smallSize = ElementSize.SMALL;
 
-  constructor (private formBuilder: FormBuilder) {
-    this.reactiveFormsGroup = formBuilder.group({
-      radios: ['3']
-    });
-  }
+  constructor (private formBuilder: FormBuilder) {}
 
   ngOnInit (): void {
     this.initForms();
@@ -116,6 +112,9 @@ export class RadioModuleComponent implements OnInit {
   private initForms (): void {
     this.form = this.formBuilder.group({
       label: 'DSFR Radio works 😁'
+    });
+    this.reactiveFormsGroup = this.formBuilder.group({
+      radios: ['3']
     });
   }
 }

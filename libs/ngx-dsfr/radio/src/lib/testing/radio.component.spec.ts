@@ -8,7 +8,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 /**
  * Internal imports
  */
-import { DsfrRadioComponent, EMPTY_LEGEND_ERROR, IRadioItem } from '../radio.component';
+import { DsfrRadioComponent, EMPTY_LEGEND_ERROR, RadioItem } from '../radio.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrRadioHarness } from './radio.harness';
 import { FormControl, FormsModule, NgControl } from '@angular/forms';
@@ -22,7 +22,7 @@ describe('DsfrRadioComponent', () => {
 
   const testLegend = 'testLegend';
   const testName = 'testName';
-  const testItems: IRadioItem[] = [{
+  const testItems: RadioItem[] = [{
     label: 'item 1',
     id: 'item_1',
     value: 'item_1'

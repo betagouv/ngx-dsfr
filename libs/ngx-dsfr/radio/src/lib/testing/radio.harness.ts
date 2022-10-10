@@ -60,7 +60,7 @@ export class DsfrRadioHarness extends ComponentHarness {
    * @returns A Promise that resolves to the values as a strings or null
    */
   async getRadioInputsValues (): Promise<(string | null)[]> {
-    return this.getRadioInputsAttributes('ng-reflect-value');
+    return this.getRadioInputsAttributes('value');
   }
 
   /**
@@ -70,6 +70,6 @@ export class DsfrRadioHarness extends ComponentHarness {
    * @returns A Promise that resolves to the name values as a strings or null
    */
   async getRadioInputsNames (): Promise<(string | null)[]> {
-    return this.getRadioInputsAttributes('ng-reflect-name');
+    return this.getRadioInputsAttributes('name');
   }
 }

@@ -9,13 +9,13 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
  * TypeScript entities and constants
  */
 export const EMPTY_LEGEND_ERROR: string =
-  'You MUST provide a legend for this radio buttons 😡 !!!';
+  'You MUST provide a legend for these radio buttons 😡 !!!';
 export const EMPTY_NAME_ERROR: string =
-  'You MUST provide a name for this radio buttons 😡 !!!';
+  'You MUST provide a name for these radio buttons 😡 !!!';
 export const EMPTY_ITEMS_ERROR: string =
   'You MUST provide a value for the items attribute 😡 !!!';
 
-export interface IRadioItem {
+export interface RadioItem {
   id: string;
   label: string;
   value: string;
@@ -32,7 +32,7 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit {
   @Input() legend = '';
   @Input() name = '';
   @Input() hint = '';
-  @Input() items: IRadioItem[] = [];
+  @Input() items: RadioItem[] = [];
   @Input() inline = false;
   @Input() disabled = false;
   @Input() size = ElementSize.MEDIUM;
@@ -44,6 +44,8 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit {
   };
   onTouched = (_: string) => {
   };
+  fieldSetClasses: Record<string, boolean> = {};
+  ariaLabelledBy: string | null = null;
 
   get value (): string {
     return this._value;
@@ -69,10 +71,28 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit {
     if (this.items.length === 0) {
       throw EMPTY_ITEMS_ERROR;
     }
-    this.ngControl.control?.valueChanges.subscribe(value => {
-      if (this._value === value) return;
-      this.writeValue(value);
-    });
+    this.setFieldSetClasses();
+    this.setAriaLabelledBy();
+  }
+
+  setFieldSetClasses () {
+    this.fieldSetClasses = {
+      'fr-fieldset--inline': this.inline,
+      'fr-fieldset--error': this.hasFailed,
+      'fr-fieldset--valid': this.hasSucceeded
+    };
+  }
+
+  setAriaLabelledBy () {
+    if (this.hasFailed) {
+      this.ariaLabelledBy = 'radio-error-legend radio-error-desc-error';
+      return;
+    }
+    if (this.hasSucceeded) {
+      this.ariaLabelledBy = 'radio-valid-legend radio-valid-desc-valid';
+      return;
+    }
+    this.ariaLabelledBy = null;
   }
 
   registerOnChange (fn: (_: string) => void): void {
@@ -90,9 +110,5 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit {
 
   setDisabledState (isDisabled: boolean) {
     this.disabled = isDisabled;
-  }
-
-  valueChanged (event: string) {
-    this.onChange(event);
   }
 }
