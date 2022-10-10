@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
 import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
 import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
+import { DsfrNavigationModule } from '@betagouv/ngx-dsfr/navigation';
 
 /**
  * Internal imports
@@ -28,6 +29,7 @@ import { LinkModuleComponent } from './components/link-module/link-module.compon
 import { SimulatorComponent } from './components/simulator/simulator.component';
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
 import { InputPropertyControlComponent } from './components/input-property-control/input-property-control.component';
+import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
 
 @NgModule({
   imports: [
@@ -43,7 +45,8 @@ import { InputPropertyControlComponent } from './components/input-property-contr
     MatButtonModule,
     MatSlideToggleModule,
     MatSelectModule,
-    ModulesRoutingModule
+    DsfrNavigationModule,
+    ModulesRoutingModule,
   ],
   declarations: [
     InputPropertyControlComponent,
@@ -51,6 +54,8 @@ import { InputPropertyControlComponent } from './components/input-property-contr
     LinkModuleComponent,
     ButtonModuleComponent,
     BadgeModuleComponent
+    ,
+    NavigationModuleComponent
   ]
 })
-export class ModulesModule {}
+export class ModulesModule { }
