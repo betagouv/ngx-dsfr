@@ -6,9 +6,7 @@
   "targets": {
     "build-base": {
       "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/ngx-dsfr"
-      ],
+      "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
         "project": "libs/ngx-dsfr/ng-package.json"
       },
@@ -24,9 +22,7 @@
     },
     "adapt-css-paths": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": [
-        "dist/libs/ngx-dsfr"
-      ],
+      "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
         "directory": "assets/icons",
         "glob": "**/*.css",
@@ -37,9 +33,7 @@
     },
     "adapt-to-shadow-dom": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": [
-        "dist/libs/ngx-dsfr"
-      ],
+      "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
         "directory": "assets/styling",
         "glob": "core-styling.css",
@@ -63,9 +57,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/ngx-dsfr"
-      ],
+      "outputs": ["coverage/libs/ngx-dsfr"],
       "options": {
         "jestConfig": "libs/ngx-dsfr/jest.config.ts",
         "passWithNoTests": true
@@ -78,7 +70,9 @@
           "libs/ngx-dsfr/src/**/*.ts",
           "libs/ngx-dsfr/src/**/*.html",
           "libs/ngx-dsfr/link/**/*.ts",
-          "libs/ngx-dsfr/link/**/*.html"
+          "libs/ngx-dsfr/link/**/*.html",
+          "libs/ngx-dsfr/header/**/*.ts",
+          "libs/ngx-dsfr/header/**/*.html"
         ]
       }
     }
