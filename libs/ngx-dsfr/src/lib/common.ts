@@ -44,9 +44,10 @@ export enum ThemeColor {
 /**
  * Common DSFR Type
  */
-
+export type UserRole = 'ROLE_USER' | 'ROLE_ADMIN';
 
 
 /**
  * Common DSFR Constant
  */
+
