@@ -4,7 +4,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+/**
+ * Internal imports
+ */
+import { DsfrHeaderComponent } from './header.component';
+
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule],
+  declarations: [DsfrHeaderComponent],
+  exports: [DsfrHeaderComponent]
 })
-export class HeaderModule {}
+export class DsfrHeaderModule {}
