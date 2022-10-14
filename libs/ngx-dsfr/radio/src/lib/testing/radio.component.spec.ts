@@ -22,6 +22,7 @@ describe('DsfrRadioComponent', () => {
 
   const testLegend = 'testLegend';
   const testName = 'testName';
+  const testFieldSetId = 'testFieldSetId';
   const testItems: RadioItem[] = [{
     label: 'item 1',
     id: 'item_1',
@@ -89,6 +90,7 @@ describe('DsfrRadioComponent', () => {
     beforeEach(async () => {
       testHost.testLegend = testLegend;
       testHost.testName = testName;
+      testHost.testFieldSetId = testFieldSetId;
       testHost.testItems = testItems;
       dsfrRadioHarness = await harnessLoader.getHarness<DsfrRadioHarness>(
         DsfrRadioHarness

@@ -4,13 +4,14 @@
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.role]="hasFailed || hasSucceeded ? 'group' : null"
             [disabled]="disabled">
-    <legend class="fr-fieldset__legend fr-text--regular">
+    <legend class="fr-fieldset__legend fr-text--regular" [id]="fieldSetId">
       {{legend}}
       <span *ngIf="hint" class="fr-hint-text">{{hint}}</span>
     </legend>
     <div class="fr-fieldset__content">
       <div *ngFor="let item of items" [class]="'fr-radio-group fr-radio-group--' + size">
-        <input [checked]="item.value === value" (change)="onChange(item.value)" type="radio" [id]="item.id" [name]="name"
+        <input [checked]="item.value === value" (change)="onChange(item.value)" type="radio" [id]="item.id"
+               [name]="name"
                [value]="item.value">
         <label class="fr-label" [for]="item.id">
           {{item.label}}
@@ -18,10 +19,10 @@
         </label>
       </div>
     </div>
-    <p *ngIf="hasFailed" class="fr-error-text">
+    <p *ngIf="hasFailed" [id]="failureId" class="fr-error-text">
       {{failureMessage}}
     </p>
-    <p *ngIf="hasSucceeded" class="fr-valid-text">
+    <p *ngIf="hasSucceeded" [id]="successId" class="fr-valid-text">
       {{successMessage}}
     </p>
   </fieldset>

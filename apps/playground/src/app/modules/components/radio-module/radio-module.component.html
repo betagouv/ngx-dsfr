@@ -8,42 +8,47 @@
 
   <div
     class="simulation">
-    <div class="settings" *ngIf="form">
-      <form
-        [formGroup]="form"
-        novalidate>
-        <input formControlName="label"/>
-      </form>
-    </div>
+        <div class="settings" *ngIf="form">
+          <form
+            [formGroup]="form"
+            novalidate>
+            <input formControlName="label"/>
+          </form>
+        </div>
     <play-simulator>
       <div class="simulation__container">
-        <dsfr-radio legend="Template driven test" name="templateDrivenTest" [items]="templateDrivenItems"
+        <dsfr-radio legend="Template driven test" name="templateDrivenTest" fieldSetId="templateDrivenTest"
+                    [items]="templateDrivenItems"
                     [(ngModel)]="templateDrivenSelected">
         </dsfr-radio>
         Selected value is: {{templateDrivenSelected}}
         <hr>
         <form *ngIf="reactiveFormsGroup" [formGroup]="reactiveFormsGroup">
-          <dsfr-radio legend="Reactive forms test" name="reactiveFormsTest" [items]="reactiveFormsItems"
+          <dsfr-radio legend="Reactive forms test" name="reactiveFormsTest" fieldSetId="reactiveFormsTest"
+                      [items]="reactiveFormsItems"
                       formControlName="radios">
           </dsfr-radio>
           Selected value is: {{reactiveFormsGroup.controls['radios'].value}}
         </form>
         <hr>
-        <dsfr-radio legend="Inline test with hint" name="inlineTest" hint="Ceci est un test"
+        <dsfr-radio legend="Inline test with hint" name="inlineTest" hint="Ceci est un test" fieldSetId="inlineTest"
                     [items]="inlineItemsWithHint" [(ngModel)]="inlineModel" [inline]="true">
         </dsfr-radio>
         Selected value is: {{inlineModel}}
         <hr>
-        <dsfr-radio legend="Success test" name="successTest" [hasSucceeded]="true" successMessage="Success message"
+        <dsfr-radio legend="Success test" name="successTest" fieldSetId="successTest" [hasSucceeded]="true"
+                    successMessage="Success message" successId="successTest-valid"
                     [items]="successItems" [(ngModel)]="successModel">
         </dsfr-radio>
         Selected value is: {{successModel}}
         <hr>
-        <dsfr-radio legend="Error test" name="errorTest" [hasFailed]="true" failureMessage="Error message"
+        <dsfr-radio legend="Error test" name="errorTest" fieldSetId="errorTest" [hasFailed]="true"
+                    failureId="errorTest-failure" failureMessage="Error message"
                     [items]="errorItems" [(ngModel)]="errorModel" [inline]="true">
         </dsfr-radio>
         Selected value is: {{errorModel}}
-        <dsfr-radio legend="Disabled and small test" name="disabledTest" [disabled]="true" [size]="smallSize"
+        <dsfr-radio legend="Disabled and small test" name="disabledTest" fieldSetId="disabledTest" [disabled]="true"
+                    [size]="smallSize"
                     [items]="disabledItems" [(ngModel)]="disabledModel" [inline]="true">
         </dsfr-radio>
         Selected value is: {{disabledModel}}

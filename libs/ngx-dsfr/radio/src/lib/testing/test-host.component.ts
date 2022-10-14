@@ -14,6 +14,7 @@ import { RadioItem } from '../radio.component';
     <dsfr-radio
       [legend]="testLegend"
       [name]="testName"
+      [fieldSetId]="testFieldSetId"
       [hint]="testHint"
       [items]="testItems"
       [inline]="testInline"
@@ -21,14 +22,17 @@ import { RadioItem } from '../radio.component';
       [size]="testSize"
       [hasFailed]="testHasFailed"
       [failureMessage]="testFailureMessage"
+      [failureId]="testFailureId"
       [hasSucceeded]="testHasSucceeded"
       [successMessage]="testSuccessMessage"
+      [successId]="testSuccessId"
     ></dsfr-radio>
   `
 })
 export class TestHostComponent {
   @Input() testLegend = '';
   @Input() testName = '';
+  @Input() testFieldSetId = '';
   @Input() testHint = '';
   @Input() testItems: RadioItem[] = [];
   @Input() testInline = false;
@@ -36,6 +40,8 @@ export class TestHostComponent {
   @Input() testSize = ElementSize.MEDIUM;
   @Input() testHasFailed = false;
   @Input() testFailureMessage = '';
+  @Input() testFailureId = '';
   @Input() testHasSucceeded = false;
   @Input() testSuccessMessage = '';
+  @Input() testSuccessId = '';
 }
