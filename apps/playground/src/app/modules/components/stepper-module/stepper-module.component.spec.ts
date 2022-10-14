@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  */
 import { StepperModuleComponent } from './stepper-module.component';
 
-describe('LinkWrapperComponent', () => {
+describe('StepperModuleComponent', () => {
   let component: StepperModuleComponent;
   let fixture: ComponentFixture<StepperModuleComponent>;
 

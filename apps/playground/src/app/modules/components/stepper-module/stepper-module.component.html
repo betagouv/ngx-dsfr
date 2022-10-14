@@ -5,33 +5,23 @@
 
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <div
-    class="simulation">
-    <div class="settings" *ngIf="form">
-      <form
-        [formGroup]="form"
-        novalidate>
-        <input formControlName="label"/>
-      </form>
-    </div>
+  <div class="simulation">
     <play-simulator>
-      <div>
-        <h3>Stepper without stepNumber's value nor stepSubtitle's</h3>
+      <div class="stepper-container">
+        <h3>Stepper without stepNumber's value</h3>
         <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="3"
                       nextStepTitle="Next step's title"></dsfr-stepper>
       </div>
       <hr>
-      <div>
-        <h3>Stepper with all values</h3>
+      <div class="stepper-container">
+        <h3>Stepper with stepNumber's value</h3>
         <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="4" nextStepTitle="Next step's title"
-                      stepSubtitle="Actual step's subtitle" [stepNumber]="2"
-                      nextStepSubTitle="Next step's subtitle"></dsfr-stepper>
+                      [stepNumber]="2"></dsfr-stepper>
       </div>
       <hr>
-      <div>
+      <div class="stepper-container">
         <h3>Stepper in the last step</h3>
-        <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="5" stepSubtitle="Actual step's subtitle"
-                      [stepNumber]="5"></dsfr-stepper>
+        <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="5" [stepNumber]="5"></dsfr-stepper>
       </div>
     </play-simulator>
   </div>

@@ -18,7 +18,7 @@ import {
 import { TestHostComponent } from './test-host.component';
 import { DsfrStepperHarness } from './stepper.harness';
 
-describe('DsfrBadgeComponent', () => {
+describe('DsfrStepperComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
   let componentUnderTest: DsfrStepperComponent;
@@ -61,16 +61,17 @@ describe('DsfrBadgeComponent', () => {
   it('should throw an error when no title for the current step is provided', async () => {
     try {
       fixture.detectChanges();
-      throw 'It should have thrown an error about "title"';
+      throw 'It should have thrown an error about "stepTitle"';
     } catch (error) {
       expect(error).toBe(EMPTY_TITLE_ERROR);
     }
   });
 
-  it('should throw an error when no number of steps is provided', async () => {
+  it.only('should throw an error when no number of steps is provided', async () => {
     testHost.testStepTitle = testStepTitle;
     try {
       fixture.detectChanges();
+      console.log("test");
       throw 'It should have thrown an error about "numberOfSteps"';
     } catch (error) {
       expect(error).toBe(EMPTY_STEPS_ERROR);
@@ -105,7 +106,7 @@ describe('DsfrBadgeComponent', () => {
       );
     });
 
-    it('should have initialized step subtitle', async () => {
+    it('should display the proper step title with current step index', async () => {
       const fullTitle = await dsfrStepperHarness.getStepperFullTitle();
       expect(fullTitle).toContain(testStepTitle);
       expect(fullTitle).toContain(testNumberOfSteps.toString());

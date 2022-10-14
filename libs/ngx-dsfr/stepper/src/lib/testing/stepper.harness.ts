@@ -21,7 +21,7 @@ export class DsfrStepperHarness extends ComponentHarness {
   private getStepperStepsElement: AsyncFactoryFn<TestElement> = this.locatorFor('div.fr-stepper__steps');
 
   /**
-   * Retrieves the value for the requested attribute of the element tag
+   * Retrieves the value for the requested attribute of the steps element
    * in the DsfrStepperComponent's Template
    *
    * @returns A Promise that resolves to the value as a string or null

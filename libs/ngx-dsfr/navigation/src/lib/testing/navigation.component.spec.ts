@@ -210,7 +210,7 @@ describe('DsfrNavigationComponent', () => {
     });
 
     it('should have the mega menu class on the first item', async () => {
-      expect(await dsfrNavigationHarness.getFirstItemNavigation()).toContain('fr-mega-menu');
+      expect(await dsfrNavigationHarness.getFirstNavItemClass()).toContain('fr-mega-menu');
     });
   });
 
