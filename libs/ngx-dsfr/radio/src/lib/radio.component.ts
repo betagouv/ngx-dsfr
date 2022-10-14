@@ -13,13 +13,13 @@ export const EMPTY_LEGEND_ERROR: string =
 export const EMPTY_NAME_ERROR: string =
   'You MUST provide a name for these radio buttons 😡 !!!';
 export const EMPTY_FIELDSET_ID_ERROR: string =
-  'You MUST provide a value for the fieldsetId attribute 😡 !!!';
+  'You MUST provide a value for the fieldSetId attribute 😡 !!!';
 export const EMPTY_ITEMS_ERROR: string =
   'You MUST provide a value for the items attribute 😡 !!!';
-export const EMPTY_FAILURE_ID_OR_MESSAGE_ERROR: string =
-  'You MUST provide a value for the failureId and failureMessage attributes when hasFailed is true 😡 !!!';
-export const EMPTY_SUCCESS_ID_OR_MESSAGE_ERROR: string =
-  'You MUST provide a value for the successId and successMessage attributes when hasSucceeded is true 😡 !!!';
+export const EMPTY_FAILURE_MESSAGE_ERROR: string =
+  'You MUST provide a value for the failureMessage attribute when hasFailed is true 😡 !!!';
+export const EMPTY_SUCCESS_MESSAGE_ERROR: string =
+  'You MUST provide a value for the successMessage attribute when hasSucceeded is true 😡 !!!';
 
 export interface RadioItem {
   id: string;
@@ -45,10 +45,8 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit, OnChang
   @Input() size = ElementSize.MEDIUM;
   @Input() hasFailed = false;
   @Input() failureMessage = '';
-  @Input() failureId = '';
   @Input() hasSucceeded = false;
   @Input() successMessage = '';
-  @Input() successId = '';
   onChange = (_: string) => {
   };
   onTouched = (_: string) => {
@@ -71,11 +69,11 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit, OnChang
   }
 
   ngOnChanges (changes: SimpleChanges): void {
-    if (this.hasFailed && (!this.failureId || !this.failureMessage)) {
-      throw EMPTY_FAILURE_ID_OR_MESSAGE_ERROR;
+    if (this.hasFailed && !this.failureMessage) {
+      throw EMPTY_FAILURE_MESSAGE_ERROR;
     }
-    if (this.hasSucceeded && (!this.successId || !this.successMessage)) {
-      throw EMPTY_SUCCESS_ID_OR_MESSAGE_ERROR;
+    if (this.hasSucceeded && !this.successMessage) {
+      throw EMPTY_SUCCESS_MESSAGE_ERROR;
     }
     this.setFieldSetClasses();
     this.setAriaLabelledBy();
@@ -106,11 +104,11 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit, OnChang
 
   private setAriaLabelledBy () {
     if (this.hasFailed) {
-      this.ariaLabelledBy = `${this.fieldSetId} ${this.failureId}`;
+      this.ariaLabelledBy = `${this.fieldSetId} ${this.fieldSetId}-error`;
       return;
     }
     if (this.hasSucceeded) {
-      this.ariaLabelledBy = `${this.fieldSetId} ${this.successId}`;
+      this.ariaLabelledBy = `${this.fieldSetId} ${this.fieldSetId}-valid`;
       return;
     }
     this.ariaLabelledBy = this.fieldSetId;
