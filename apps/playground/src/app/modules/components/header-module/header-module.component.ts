@@ -13,13 +13,7 @@ import {
 /**
  * 3rd-party imports
  */
-import { ElementAlignment, ElementSize } from '@betagouv/ngx-dsfr';
 import { Subject, takeUntil } from 'rxjs';
-
-/**
- * Internal imports
- */
-import { titleRequiredWhenExternalValidator } from './title-required-when-external.validator';
 
 /**
  * TypeScript entities and constants
@@ -36,8 +30,6 @@ type FormInlineTrue = {
   styleUrls: ['./header-module.component.scss']
 })
 export class HeaderModuleComponent implements OnInit, OnDestroy {
-  iconAlignment: typeof ElementAlignment = ElementAlignment;
-  linkSize: typeof ElementSize = ElementSize;
   formInlineTrue: FormGroup<FormInlineTrue> | undefined;
   formInlineTrueErrors: Record<string, string> = {};
 
@@ -50,15 +42,12 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
   }
 
   private initForms(): void {
-    this.formInlineTrue = this.formBuilder.group(
-      {
-        inline: [{ value: true, disabled: true }],
-        label: ['DSFR Link works 😁', Validators.required],
-        link: ['https://www.systeme-de-design.gouv.fr/', Validators.required],
-        title: 'the documentation about the DSFR'
-      },
-      { validators: titleRequiredWhenExternalValidator }
-    );
+    this.formInlineTrue = this.formBuilder.group({
+      inline: [{ value: true, disabled: true }],
+      label: ['DSFR Link works 😁', Validators.required],
+      link: ['https://www.systeme-de-design.gouv.fr/', Validators.required],
+      title: 'the documentation about the DSFR'
+    });
 
     this.handleErrors('Please, enter a label for this Component', 'label');
     this.handleErrors('Please, enter a URL for this Component', 'link');

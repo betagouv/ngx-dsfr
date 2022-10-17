@@ -1,7 +1,14 @@
 /**
  * Angular imports
  */
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 /**
@@ -38,19 +45,21 @@ export type Navigation = NavigationItem[];
 @Component({
   selector: 'dsfr-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss'],
-
+  styleUrls: ['./navigation.component.scss']
 })
 export class DsfrNavigationComponent implements OnInit {
-
-  @ViewChildren('dropdownItem') dropdownMenus: QueryList<ElementRef> | undefined;
-  @ViewChildren('menuButtonItem') menuButtonItems: QueryList<ElementRef> | undefined;
+  @ViewChildren('dropdownItem') dropdownMenus:
+    | QueryList<ElementRef>
+    | undefined;
+  @ViewChildren('menuButtonItem') menuButtonItems:
+    | QueryList<ElementRef>
+    | undefined;
 
   @Input() navigation: Navigation | undefined;
 
   expandedClass: string = 'fr-collapse--expanded';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     if (!this.navigation) {
@@ -71,18 +80,24 @@ export class DsfrNavigationComponent implements OnInit {
     }
   }
 
-  private selectDropdownElementRef(idAttribute: string): ElementRef | undefined {
+  private selectDropdownElementRef(
+    idAttribute: string
+  ): ElementRef | undefined {
     if (!this.dropdownMenus) {
       return;
     }
-    return this.dropdownMenus.filter(element => element.nativeElement.id === idAttribute)[0];
+    return this.dropdownMenus.filter(
+      (element) => element.nativeElement.id === idAttribute
+    )[0];
   }
 
   private selectButtonElementRef(id: string): ElementRef | undefined {
     if (!this.menuButtonItems) {
       return;
     }
-    return this.menuButtonItems.filter(element => element.nativeElement.getAttribute('aria-controls') === id)[0];
+    return this.menuButtonItems.filter(
+      (element) => element.nativeElement.getAttribute('aria-controls') === id
+    )[0];
   }
 
   hideActiveDropdown(): void {
