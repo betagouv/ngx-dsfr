@@ -1,9 +1,9 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnChanges, OnInit, Self, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ElementSize } from '@betagouv/ngx-dsfr';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * TypeScript entities and constants
@@ -31,7 +31,14 @@ export interface RadioItem {
 @Component({
   selector: 'dsfr-radio',
   templateUrl: './radio.component.html',
-  styleUrls: ['./radio.component.scss']
+  styleUrls: ['./radio.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DsfrRadioComponent),
+      multi: true
+    }
+  ]
 })
 
 export class DsfrRadioComponent implements ControlValueAccessor, OnInit, OnChanges {
@@ -63,10 +70,6 @@ export class DsfrRadioComponent implements ControlValueAccessor, OnInit, OnChang
   }
 
   private _value!: string;
-
-  constructor (@Self() private ngControl: NgControl) {
-    ngControl.valueAccessor = this;
-  }
 
   ngOnChanges (changes: SimpleChanges): void {
     if (this.hasFailed && !this.failureMessage) {

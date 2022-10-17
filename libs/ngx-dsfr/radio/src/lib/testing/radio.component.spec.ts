@@ -11,7 +11,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { DsfrRadioComponent, EMPTY_LEGEND_ERROR, RadioItem } from '../radio.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrRadioHarness } from './radio.harness';
-import { FormControl, FormsModule, NgControl } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 describe('DsfrRadioComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -35,26 +35,13 @@ describe('DsfrRadioComponent', () => {
     }];
 
   beforeEach(async () => {
-    const NG_CONTROL_PROVIDER = {
-      provide: NgControl,
-      useClass: class extends NgControl {
-        control = new FormControl();
-
-        // tslint:disable-next-line: no-empty
-        viewToModelUpdate () {
-        }
-      }
-    };
     await TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [
         DsfrRadioComponent,
         TestHostComponent
       ]
-    }).overrideComponent(DsfrRadioComponent, {
-      add: {providers: [NG_CONTROL_PROVIDER]}
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;
