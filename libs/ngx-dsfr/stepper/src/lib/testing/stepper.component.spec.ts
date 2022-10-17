@@ -67,11 +67,10 @@ describe('DsfrStepperComponent', () => {
     }
   });
 
-  it.only('should throw an error when no number of steps is provided', async () => {
+  it('should throw an error when no number of steps is provided', async () => {
     testHost.testStepTitle = testStepTitle;
     try {
       fixture.detectChanges();
-      console.log("test");
       throw 'It should have thrown an error about "numberOfSteps"';
     } catch (error) {
       expect(error).toBe(EMPTY_STEPS_ERROR);

@@ -7,19 +7,19 @@
   <h2>Play with the Component 😃</h2>
   <div class="simulation">
     <play-simulator>
-      <div class="stepper-container">
+      <div>
         <h3>Stepper without stepNumber's value</h3>
         <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="3"
                       nextStepTitle="Next step's title"></dsfr-stepper>
       </div>
       <hr>
-      <div class="stepper-container">
+      <div>
         <h3>Stepper with stepNumber's value</h3>
         <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="4" nextStepTitle="Next step's title"
                       [stepNumber]="2"></dsfr-stepper>
       </div>
       <hr>
-      <div class="stepper-container">
+      <div>
         <h3>Stepper in the last step</h3>
         <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="5" [stepNumber]="5"></dsfr-stepper>
       </div>

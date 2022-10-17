@@ -14,8 +14,8 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class TestHostComponent {
-  @Input() testStepTitle: string | undefined = undefined;
-  @Input() testStepNumber: number | undefined = undefined;
-  @Input() testNumberOfSteps: number | undefined = undefined;
-  @Input() testNextStepTitle: string | undefined = undefined;
+  @Input() testStepTitle!: string;
+  @Input() testStepNumber: number = 1;
+  @Input() testNumberOfSteps!: number;
+  @Input() testNextStepTitle!: string;
 }
