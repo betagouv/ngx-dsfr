@@ -11,6 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 /**
+ * 3rd-party imports
+ */
+import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
+import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
+import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
+import { DsfrRadioModule } from '@betagouv/ngx-dsfr/radio';
+
+/**
  * Internal imports
  */
 import { AppComponent } from './app.component';
@@ -26,8 +34,13 @@ import { AppRoutingModule } from './app-routing.module';
     MatTreeModule,
     MatIconModule,
     MatButtonModule,
-    AppRoutingModule,
+    DsfrLinkModule,
+    DsfrBadgeModule,
+    DsfrButtonModule,
+    DsfrRadioModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -5,12 +5,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-
-/**
- * 3rd party imports
- */
-import { ElementAlignment } from '@betagouv/ngx-dsfr';
-
 /**
  * Internal imports
  */
