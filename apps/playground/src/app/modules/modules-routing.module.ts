@@ -11,6 +11,7 @@ import { LinkModuleComponent } from './components/link-module/link-module.compon
 import { ButtonModuleComponent } from './components/button-module/button-module.component';
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
+import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
 
 /**
  * TypeScript entities and constants
@@ -31,6 +32,10 @@ const routes: Route[] = [
   {
     path: 'navigation',
     component: NavigationModuleComponent
+  },
+  {
+    path: 'stepper',
+    component: StepperModuleComponent
   }
 ];
 

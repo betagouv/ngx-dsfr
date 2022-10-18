@@ -30,6 +30,10 @@ export const SIDE_NAV: NavItem[] = [
       {
         label: 'Navigation',
         path: '/modules/navigation'
+      },
+      {
+        label: 'Stepper',
+        path: '/modules/stepper'
       }
     ]
   }
