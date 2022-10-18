@@ -80,7 +80,9 @@
           "libs/ngx-dsfr/link/**/*.ts",
           "libs/ngx-dsfr/link/**/*.html",
           "libs/ngx-dsfr/radio/**/*.ts",
-          "libs/ngx-dsfr/radio/**/*.html"
+          "libs/ngx-dsfr/radio/**/*.html",
+          "libs/ngx-dsfr/stepper/**/*.ts",
+          "libs/ngx-dsfr/stepper/**/*.html"
         ]
       }
     }

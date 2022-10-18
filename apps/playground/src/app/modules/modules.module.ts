@@ -20,6 +20,7 @@ import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
 import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
 import { DsfrNavigationModule } from '@betagouv/ngx-dsfr/navigation';
 import { DsfrRadioModule } from '@betagouv/ngx-dsfr/radio';
+import { DsfrStepperModule } from '@betagouv/ngx-dsfr/stepper';
 
 /**
  * Internal imports
@@ -32,6 +33,7 @@ import { BadgeModuleComponent } from './components/badge-module/badge-module.com
 import { InputPropertyControlComponent } from './components/input-property-control/input-property-control.component';
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
+import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import { RadioModuleComponent } from './components/radio-module/radio-module.com
     DsfrBadgeModule,
     DsfrNavigationModule,
     DsfrRadioModule,
+    DsfrStepperModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -59,7 +62,8 @@ import { RadioModuleComponent } from './components/radio-module/radio-module.com
     ButtonModuleComponent,
     BadgeModuleComponent,
     NavigationModuleComponent,
-    RadioModuleComponent
+    RadioModuleComponent,
+    StepperModuleComponent
   ]
 })
 export class ModulesModule { }
