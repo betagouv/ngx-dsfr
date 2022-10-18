@@ -1,0 +1,29 @@
+<div class="fr-form-group">
+  <fieldset class="fr-fieldset"
+            [ngClass]="fieldSetClasses"
+            [attr.aria-labelledby]="ariaLabelledBy"
+            [attr.role]="hasFailed || hasSucceeded ? 'group' : null"
+            [disabled]="disabled">
+    <legend class="fr-fieldset__legend fr-text--regular" [id]="fieldSetId">
+      {{legend}}
+      <span *ngIf="hint" class="fr-hint-text">{{hint}}</span>
+    </legend>
+    <div class="fr-fieldset__content">
+      <div *ngFor="let item of items" [class]="'fr-radio-group fr-radio-group--' + size">
+        <input [checked]="item.value === value" (change)="onChange(item.value)" type="radio" [id]="item.id"
+               [name]="name"
+               [value]="item.value">
+        <label class="fr-label" [for]="item.id">
+          {{item.label}}
+          <span *ngIf="item.hint" class="fr-hint-text">{{item.hint}}</span>
+        </label>
+      </div>
+    </div>
+    <p *ngIf="hasFailed" [id]="fieldSetId + '-error'" class="fr-error-text">
+      {{failureMessage}}
+    </p>
+    <p *ngIf="hasSucceeded" [id]="fieldSetId + '-valid'" class="fr-valid-text">
+      {{successMessage}}
+    </p>
+  </fieldset>
+</div>

@@ -12,6 +12,8 @@ import { ButtonModuleComponent } from './components/button-module/button-module.
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
 import { HeaderModuleComponent } from './components/header-module/header-module.component';
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
+import { RadioModuleComponent } from './components/radio-module/radio-module.component';
+import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 
 /**
  * TypeScript entities and constants
@@ -36,6 +38,14 @@ const routes: Route[] = [
   {
     path: 'navigation',
     component: NavigationModuleComponent
+  },
+  {
+    path: 'radio',
+    component: RadioModuleComponent
+  },
+  {
+    path: 'stepper',
+    component: StepperModuleComponent
   }
 ];
 

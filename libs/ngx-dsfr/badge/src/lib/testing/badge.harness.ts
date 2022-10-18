@@ -34,7 +34,7 @@ export class DsfrBadgeHarness extends ComponentHarness {
 
   /**
    * Retrieves the text content of the element tag
-   * in the DsfrLinkComponent's Template
+   * in the DsfrBadgeComponent's Template
    *
    * @returns A Promise that resolves to the text between tags of the element
    */
