@@ -7,18 +7,52 @@
         <div class="fr-header__brand fr-enlarge-link">
           <div class="fr-header__brand-top">
             <div class="fr-header__logo">
-              <p class="fr-logo">République <br />Française</p>
+              <ng-container
+                *ngIf="
+                  !operatorLogoSrc && !appName;
+                  then logoWithLink;
+                  else logo
+                "></ng-container>
+              <ng-template #logoWithLink>
+                <a
+                  [routerLink]="link"
+                  [title]="'Accueil - ' + institutionInlined">
+                  <ng-container *ngTemplateOutlet="logo"></ng-container>
+                </a>
+              </ng-template>
+              <ng-template #logo>
+                <p class="fr-logo">
+                  <ng-container
+                    *ngFor="let string of institutionArray; last as isLast">
+                    {{ string }} <br *ngIf="!isLast" />
+                  </ng-container>
+                </p>
+              </ng-template>
             </div>
-            <div class="fr-header__operator">
-              <img
-                class="fr-responsive-img"
-                style="max-width: 9.0625rem"
-                src="../../../example/img/placeholder.16x9.png"
-                alt="[À MODIFIER - texte alternatif de l’image]" />
-              <!-- L’alternative de l’image (attribut alt) doit impérativement être renseignée et reprendre le texte visible dans l’image -->
+            <div
+              class="fr-header__operator"
+              *ngIf="operatorLogoSrc">
+              <ng-container
+                *ngIf="!appName; then imgWithLink; else img"></ng-container>
+              <ng-template #imgWithLink>
+                <a
+                  [routerLink]="link"
+                  [title]="
+                    'Accueil - ' + operatorLogoAlt + ' - République Française'
+                  ">
+                  <ng-container *ngTemplateOutlet="img"></ng-container>
+                </a>
+              </ng-template>
+              <ng-template #img>
+                <img
+                  class="fr-responsive-img"
+                  [src]="operatorLogoSrc"
+                  [alt]="operatorLogoAlt" />
+              </ng-template>
             </div>
             <div class="fr-header__navbar">
               <button
+                *ngIf="searchBar"
                 class="fr-btn--search fr-btn"
                 data-fr-opened="false"
                 aria-controls="modal-575"
@@ -37,14 +71,18 @@
               </button>
             </div>
           </div>
-          <div class="fr-header__service">
+          <div
+            class="fr-header__service"
+            *ngIf="appName">
             <a
-              href="/"
-              title="Accueil - [À MODIFIER - Nom du site / service] - [À MODIFIER - texte alternatif de l’image : nom de l'opérateur ou du site serviciel] - République Française">
-              <p class="fr-header__service-title">Nom du site / service</p></a
-            >
-            <p class="fr-header__service-tagline">
-              baseline - précisions sur l‘organisation
+              [routerLink]="link"
+              [title]="appLinkTitle">
+              <p class="fr-header__service-title">{{ appName }}</p>
+            </a>
+            <p
+              class="fr-header__service-tagline"
+              *ngIf="appDescription">
+              {{ appDescription }}
             </p>
           </div>
         </div>
@@ -75,6 +113,7 @@
             </ul>
           </div>
           <div
+            *ngIf="searchBar"
             class="fr-header__search fr-modal"
             id="modal-575">
             <div class="fr-container fr-container-lg--fluid">

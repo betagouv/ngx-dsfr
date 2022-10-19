@@ -33,6 +33,9 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
   formInlineTrue: FormGroup<FormInlineTrue> | undefined;
   formInlineTrueErrors: Record<string, string> = {};
 
+  institution: string =
+    "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation";
+
   private unsubscribe$ = new Subject<void>();
 
   constructor(private formBuilder: NonNullableFormBuilder) {}
