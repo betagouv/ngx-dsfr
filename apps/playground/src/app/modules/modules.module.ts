@@ -19,6 +19,7 @@ import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
 import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
 import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
 import { DsfrNavigationModule } from '@betagouv/ngx-dsfr/navigation';
+import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 
 /**
  * Internal imports
@@ -30,6 +31,8 @@ import { SimulatorComponent } from './components/simulator/simulator.component';
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
 import { InputPropertyControlComponent } from './components/input-property-control/input-property-control.component';
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
+import { InputModuleComponent } from './components/input-module/input-module.component';
+import { DsfrFormFieldModule } from '@betagouv/ngx-dsfr/form-field';
 
 @NgModule({
   imports: [
@@ -46,6 +49,8 @@ import { NavigationModuleComponent } from './components/navigation-module/naviga
     MatSlideToggleModule,
     MatSelectModule,
     DsfrNavigationModule,
+    DsfrInputModule,
+    DsfrFormFieldModule,
     ModulesRoutingModule,
   ],
   declarations: [
@@ -53,9 +58,9 @@ import { NavigationModuleComponent } from './components/navigation-module/naviga
     SimulatorComponent,
     LinkModuleComponent,
     ButtonModuleComponent,
-    BadgeModuleComponent
-    ,
-    NavigationModuleComponent
+    BadgeModuleComponent,
+    NavigationModuleComponent,
+    InputModuleComponent,
   ]
 })
 export class ModulesModule { }

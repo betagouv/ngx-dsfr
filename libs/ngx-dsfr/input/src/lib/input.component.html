@@ -1,0 +1,21 @@
+<div
+  class="fr-input-group"
+  [ngClass]="{'fr-input-group--error': showError,  'fr-input-group--valid': showValid}">
+  <label class="fr-label">
+    {{ label }}
+    <span class="fr-hint-text" *ngIf="description">
+      {{ description }}
+    </span>
+  </label>
+  <input
+    [type]="type"
+    [attr.id]="identifier"
+    [attr.name]="name"
+    class="fr-input"
+    (blur)="onInputBlur($event)"
+    (focus)="onInputFocus($event)"
+    (input)="onValueChange($event)"
+    [ngClass]="{'fr-input--error': showError,  'fr-input--valid': showValid}"
+    [(ngModel)]="value"
+    #inputElement>
+</div>

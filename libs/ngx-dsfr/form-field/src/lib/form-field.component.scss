@@ -1,0 +1,7 @@
+:host ::ng-deep {
+  > dsfr-input,
+  > dsfr-select,
+  > dsfr-textarea {
+    width: 100%;
+  }
+}

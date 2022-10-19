@@ -38,12 +38,12 @@ type FormInlineTrue = {
 export class LinkModuleComponent implements OnInit, OnDestroy {
   iconAlignment: typeof ElementAlignment = ElementAlignment;
   linkSize: typeof ElementSize = ElementSize;
-  formInlineTrue: FormGroup<FormInlineTrue> | undefined;
+  formInlineTrue: FormGroup<FormInlineTrue> | any | undefined;
   formInlineTrueErrors: Record<string, string> = {};
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  constructor(private formBuilder: NonNullableFormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();
@@ -53,7 +53,7 @@ export class LinkModuleComponent implements OnInit, OnDestroy {
     this.formInlineTrue = this.formBuilder.group(
       {
         inline: [{ value: true, disabled: true }],
-        label: ['DSFR Link works 😁', Validators.required],
+        label: ['DSFR Link works blabla 😁', Validators.required],
         link: ['https://www.systeme-de-design.gouv.fr/', Validators.required],
         title: 'the documentation about the DSFR'
       },

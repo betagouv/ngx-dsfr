@@ -20,6 +20,8 @@
       "@betagouv/ngx-dsfr/button": ["libs/ngx-dsfr/button/src/index.ts"],
       "@betagouv/ngx-dsfr/link": ["libs/ngx-dsfr/link/src/index.ts"],
       "@betagouv/ngx-dsfr/navigation": ["libs/ngx-dsfr/navigation/src/index.ts"],
+      "@betagouv/ngx-dsfr/input": ["libs/ngx-dsfr/input/src/index.ts"],
+      "@betagouv/ngx-dsfr/form-field": ["libs/ngx-dsfr/form-field/src/index.ts"],
       "@betagouv/ngx-dsfr/testing": ["libs/ngx-dsfr/src/lib/testing/index.ts"],
       "@ngx-dsfr/architect": ["libs/architect/src/index.ts"]
     }

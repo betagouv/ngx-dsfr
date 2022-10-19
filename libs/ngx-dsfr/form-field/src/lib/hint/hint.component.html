@@ -1,0 +1,4 @@
+<p [ngClass]="successMessage ? 'fr-valid-text' : 'fr-error-text'"
+  *ngIf="control?.touched && !control?.disabled && ((control?.valid && successMessage) || (!control?.valid && errorMessage))">
+  {{ control?.valid ? successMessage : errorMessage }}
+</p>
