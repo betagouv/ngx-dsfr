@@ -1,0 +1,8 @@
+<div *ngIf="!isClosed" [class]="classes">
+  <h3 class="fr-alert__title">{{title}}</h3>
+  <p *ngIf="description && !isSmall">{{description}}</p>
+  <button *ngIf="hasCloseButton && !isSmall" class="fr-btn--close fr-btn" title="Masquer le message"
+          (click)="closeAlert()">
+    Masquer le message
+  </button>
+</div>

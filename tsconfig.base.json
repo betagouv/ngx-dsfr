@@ -10,21 +10,48 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@betagouv/ngx-dsfr": ["libs/ngx-dsfr/src/index.ts"],
-      "@betagouv/ngx-dsfr/badge": ["libs/ngx-dsfr/badge/src/index.ts"],
-      "@betagouv/ngx-dsfr/button": ["libs/ngx-dsfr/button/src/index.ts"],
-      "@betagouv/ngx-dsfr/link": ["libs/ngx-dsfr/link/src/index.ts"],
-      "@betagouv/ngx-dsfr/navigation": ["libs/ngx-dsfr/navigation/src/index.ts"],
-      "@betagouv/ngx-dsfr/radio": ["libs/ngx-dsfr/radio/src/index.ts"],
-      "@betagouv/ngx-dsfr/stepper": ["libs/ngx-dsfr/stepper/src/index.ts"],
-      "@betagouv/ngx-dsfr/testing": ["libs/ngx-dsfr/src/lib/testing/index.ts"],
-      "@ngx-dsfr/architect": ["libs/architect/src/index.ts"]
+      "@betagouv/ngx-dsfr": [
+        "libs/ngx-dsfr/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/badge": [
+        "libs/ngx-dsfr/badge/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/button": [
+        "libs/ngx-dsfr/button/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/link": [
+        "libs/ngx-dsfr/link/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/navigation": [
+        "libs/ngx-dsfr/navigation/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/radio": [
+        "libs/ngx-dsfr/radio/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/stepper": [
+        "libs/ngx-dsfr/stepper/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/alert": [
+        "libs/ngx-dsfr/alert/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/testing": [
+        "libs/ngx-dsfr/src/lib/testing/index.ts"
+      ],
+      "@ngx-dsfr/architect": [
+        "libs/architect/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

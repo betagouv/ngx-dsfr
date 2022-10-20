@@ -13,6 +13,7 @@ import { BadgeModuleComponent } from './components/badge-module/badge-module.com
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
+import { AlertModuleComponent } from './components/alert-module/alert-module.component';
 
 /**
  * TypeScript entities and constants
@@ -41,6 +42,10 @@ const routes: Route[] = [
   {
     path: 'stepper',
     component: StepperModuleComponent
+  },
+  {
+    path: 'alert',
+    component: AlertModuleComponent
   }
 ];
 

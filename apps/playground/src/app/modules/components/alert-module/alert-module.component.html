@@ -1,0 +1,31 @@
+<section class="module-description">
+  <h2>Description</h2>
+  <p>Some description</p>
+</section>
+
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <div class="simulation">
+    <play-simulator>
+      <div>
+        <p>Minimalistic error alert</p>
+        <dsfr-alert title="Error alert de test" [type]="errorType"></dsfr-alert>
+        <hr>
+        <p>Success alert with a small description</p>
+        <dsfr-alert title="Success alert de test" [type]="successType"
+                    description="This is a small description"></dsfr-alert>
+        <hr>
+        <p>Info alert with a long description</p>
+        <dsfr-alert title="Info alert de test" [type]="infoType"
+                    description="Lorem ipsum dolor sit amet. Eum minus magnam itaque quia non quasi esse qui suscipit recusandae sit mollitia exercitationem. Qui quas nemo est quia doloribus qui exercitationem inventore non omnis libero."></dsfr-alert>
+        <hr>
+        <p>Small warning alert</p>
+        <dsfr-alert title="Warning alert de test" [type]="warningType" [size]="smallSize"></dsfr-alert>
+        <hr>
+        <p>Alert with close button</p>
+        <dsfr-alert title="Alert avec bouton de fermeture" [type]="errorType" [hasCloseButton]="true"
+                    description="This is a small description"></dsfr-alert>
+      </div>
+    </play-simulator>
+  </div>
+</section>
