@@ -15,6 +15,7 @@ import { NavigationModuleComponent } from './components/navigation-module/naviga
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
+import { InputModuleComponent } from './components/input-module/input-module.component';
 
 /**
  * TypeScript entities and constants
@@ -31,6 +32,10 @@ const routes: Route[] = [
   {
     path: 'header',
     component: HeaderModuleComponent
+  },
+  {
+    path: 'input',
+    component: InputModuleComponent
   },
   {
     path: 'link',
@@ -58,4 +63,4 @@ const routes: Route[] = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ModulesRoutingModule {}
+export class ModulesRoutingModule { }

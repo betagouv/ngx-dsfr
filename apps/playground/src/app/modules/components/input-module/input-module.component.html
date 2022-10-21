@@ -1,0 +1,72 @@
+<section class="module-description">
+  <h2>Description</h2>
+  <p>Some description</p>
+</section>
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <div class="simulation">
+    <div class="settings" *ngIf="form">
+      <form
+        [formGroup]="form"
+        novalidate>
+        <input formControlName="label"/>
+      </form>
+    </div>
+    <play-simulator>
+      <div class="simulation__container" *ngIf="inputForm">
+        <form [formGroup]="inputForm">
+          <dsfr-input
+            formControlName="trytest"
+            label="This is a label"
+            id="testId"
+            hint="This is a description"
+            placeholder="Please enter a text..."
+            [name]="'testName'">
+          </dsfr-input>
+
+          Selected value is: {{inputForm.controls['trytest'].value}}
+
+          <dsfr-input
+            formControlName="trytest"
+            label="Label with disabled input"
+            id="testId"
+            [disabled]="true"
+            hint="Ceci est une description"
+            placeholder="This input is disabled"
+            [name]="'testName'">
+          </dsfr-input>
+          <dsfr-input
+            formControlName="trytest"
+            label="Input with error"
+            id="testId"
+            hint="Ceci est une description"
+            placeholder="Input"
+            [hasFailed]="true"
+            failureMessage="Failure message"
+            name="testName">
+          </dsfr-input>
+          <dsfr-input
+            formControlName="trytest"
+            label="Input success"
+            id="testId"
+            hint="Ceci est une description"
+            placeholder="Cette input est 'disabled'"
+            [hasSucceeded]="true"
+            successMessage="Success message"
+            name="testName">
+          </dsfr-input>
+
+          <dsfr-input
+            type="textarea"
+            formControlName="trytest"
+            label="Textarea..."
+            id="testId"
+            hint="Ceci est une description"
+            placeholder="Cette input est 'disabled'"
+            name="testName">
+          </dsfr-input>
+        </form>
+      </div>
+    </play-simulator>
+  </div>
+</section>

@@ -28,6 +28,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/header'
       },
       {
+        label: 'Input',
+        path: '/modules/input'
+      },
+      {
         label: 'Link',
         path: '/modules/link'
       },
