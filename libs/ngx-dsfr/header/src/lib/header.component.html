@@ -12,7 +12,8 @@
                   !operatorLogoSrc && !appName;
                   then logoWithLink;
                   else logo
-                "></ng-container>
+                ">
+              </ng-container>
               <ng-template #logoWithLink>
                 <a
                   [routerLink]="link"
@@ -32,13 +33,13 @@
             <div
               class="fr-header__operator"
               *ngIf="operatorLogoSrc">
-              <ng-container
-                *ngIf="!appName; then imgWithLink; else img"></ng-container>
+              <ng-container *ngIf="!appName; then imgWithLink; else img">
+              </ng-container>
               <ng-template #imgWithLink>
                 <a
                   [routerLink]="link"
                   [title]="
-                    'Accueil - ' + operatorLogoAlt + ' - République Française'
+                    'Accueil - ' + operatorLogoAlt + ' - ' + institutionInlined
                   ">
                   <ng-container *ngTemplateOutlet="img"></ng-container>
                 </a>
@@ -54,7 +55,6 @@
               <button
                 *ngIf="searchBar"
                 class="fr-btn--search fr-btn"
-                data-fr-opened="false"
                 aria-controls="modal-575"
                 id="button-576"
                 title="Rechercher">
@@ -62,10 +62,10 @@
               </button>
               <button
                 class="fr-btn--menu fr-btn"
-                data-fr-opened="false"
-                aria-controls="modal-577"
+                aria-controls="responsive-popup-menu"
                 aria-haspopup="menu"
-                id="button-578"
+                id="button-burger-menu"
+                (click)="isMobileMenuOpened = true"
                 title="Menu">
                 Menu
               </button>
@@ -88,29 +88,7 @@
         </div>
         <div class="fr-header__tools">
           <div class="fr-header__tools-links">
-            <ul class="fr-btns-group">
-              <li>
-                <a
-                  class="fr-btn fr-icon-add-circle-line"
-                  href="[url - à modifier]">
-                  Créer un espace
-                </a>
-              </li>
-              <li>
-                <a
-                  class="fr-btn fr-icon-lock-line"
-                  href="[url - à modifier]">
-                  Se connecter
-                </a>
-              </li>
-              <li>
-                <a
-                  class="fr-btn fr-icon-account-line"
-                  href="[url - à modifier]">
-                  S’enregistrer
-                </a>
-              </li>
-            </ul>
+            <ng-content></ng-content>
           </div>
           <div
             *ngIf="searchBar"
@@ -152,56 +130,24 @@
   </div>
   <div
     class="fr-header__menu fr-modal"
-    id="modal-577"
-    aria-labelledby="button-578">
+    [class.fr-modal--opened]="isMobileMenuOpened"
+    id="responsive-popup-menu"
+    role="dialog"
+    [attr.aria-modal]="isMobileMenuOpened ? 'true' : undefined"
+    [attr.open]="isMobileMenuOpened ? 'true' : undefined"
+    aria-labelledby="button-burger-menu">
     <div class="fr-container">
-      <button
-        class="fr-btn--close fr-btn"
-        aria-controls="modal-577"
-        title="Fermer">
-        Fermer
-      </button>
-      <div class="fr-header__menu-links"></div>
-      <nav
-        class="fr-nav"
-        id="navigation-581"
-        role="navigation"
-        aria-label="Menu principal">
-        <ul class="fr-nav__list">
-          <li class="fr-nav__item">
-            <a
-              class="fr-nav__link"
-              href="#"
-              target="_self"
-              >accès direct</a
-            >
-          </li>
-          <li class="fr-nav__item">
-            <a
-              class="fr-nav__link"
-              href="#"
-              target="_self"
-              >accès direct</a
-            >
-          </li>
-          <li class="fr-nav__item">
-            <a
-              class="fr-nav__link"
-              href="#"
-              target="_self"
-              >accès direct</a
-            >
-          </li>
-          <li class="fr-nav__item">
-            <a
-              class="fr-nav__link"
-              href="#"
-              target="_self"
-              >accès direct</a
-            >
-          </li>
-        </ul>
-      </nav>
+      <dsfr-button
+        label="Fermer"
+        title="Fermer"
+        ariaControls="responsive-popup-menu"
+        (click)="isMobileMenuOpened = false"
+        [type]="buttonTypes.CLOSE">
+      </dsfr-button>
+      <div class="fr-header__menu-links">
+        <ng-content></ng-content>
+      </div>
+      <ng-content select="dsfr-navigation"></ng-content>
     </div>
   </div>
 </header>

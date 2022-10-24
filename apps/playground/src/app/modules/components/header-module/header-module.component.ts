@@ -14,6 +14,7 @@ import {
  * 3rd-party imports
  */
 import { Subject, takeUntil } from 'rxjs';
+import { Navigation } from '@betagouv/ngx-dsfr/navigation';
 
 /**
  * TypeScript entities and constants
@@ -35,6 +36,82 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
 
   institution: string =
     "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation";
+  navigation: Navigation = [
+    {
+      id: 'a',
+      label: 'MEGA MENU',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: './',
+      child: {
+        isMega: true,
+        title: 'Titre éditorialisé',
+        description: 'Lorem [...] elit ut.',
+        children: [
+          {
+            id: 'b',
+            label: 'Catégorie 1',
+            href: './',
+            children: [
+              {
+                id: 'c',
+                label: 'Sous-page 1-1',
+                href: './'
+              },
+              {
+                id: 'f',
+                label: 'Sous-page 1-2',
+                href: './'
+              }
+            ]
+          },
+          {
+            id: 'b2',
+            label: 'Catégorie 2',
+            href: './',
+            children: [
+              {
+                id: 'eec',
+                label: 'Sous-page 2-1',
+                href: './'
+              },
+              {
+                id: 'fee',
+                label: 'Sous-page 2-2',
+                href: './'
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      id: 'g',
+      label: 'Simple menu',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: './',
+      child: {
+        isMega: false,
+        children: [
+          {
+            id: 'h',
+            label: 'Page 1',
+            href: './'
+          },
+          {
+            id: 'i',
+            label: 'Page 2',
+            href: './'
+          }
+        ]
+      }
+    },
+    {
+      id: 'j',
+      label: 'Lien direct',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: './'
+    }
+  ];
 
   private unsubscribe$ = new Subject<void>();
 

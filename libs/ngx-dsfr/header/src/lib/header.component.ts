@@ -4,6 +4,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 /**
+ * 3rd-party imports
+ */
+import { ButtonType } from '@betagouv/ngx-dsfr/button';
+
+/**
  * TypeScript entities and constants
  */
 export const EMPTY_ALT_ERROR: string =
@@ -21,11 +26,15 @@ export class DsfrHeaderComponent implements OnInit {
   @Input() appName: string | undefined;
   @Input() appDescription: string | undefined;
   @Input() link: string = '/';
-  @Input() searchBar: boolean = false;
+
+  // To be changed into an Input property when we add searchBar functionality
+  searchBar: boolean = false;
 
   institutionArray!: string[];
   institutionInlined!: string;
   appLinkTitle: string | undefined;
+  isMobileMenuOpened: boolean = false;
+  buttonTypes: typeof ButtonType = ButtonType;
 
   ngOnInit(): void {
     // Dealing with everything needed to represent the institution behind the operator
