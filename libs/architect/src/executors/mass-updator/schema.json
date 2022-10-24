@@ -16,9 +16,16 @@
       "description": "The pattern, from the directory given in the associated option, to select which files to update",
       "alias": "g"
     },
-    "searchValue": {
-      "type": "string",
-      "description": "The pattern to detect a substring we want to replace in each file",
+    "searchValues": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        }
+      ],
+      "description": "The pattern(s) to detect a substring we want to replace in each file",
       "alias": "s"
     },
     "flags": {
@@ -26,9 +33,16 @@
       "description": "The flags to use when we need to detect the substring we want to replace in each file",
       "alias": "f"
     },
-    "replacement": {
-      "type": "string",
-      "description": "The pattern, mostly with $1, $2 and so on, to replace the 'search' substring in each file",
+    "replacements": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        }
+      ],
+      "description": "The pattern(s), mostly with $1, $2 and so on, to replace the 'search' substring in each file",
       "alias": "r"
     },
     "rewrite": {
@@ -44,8 +58,8 @@
   },
   "required": [
     "glob",
-    "searchValue",
+    "searchValues",
     "flags",
-    "replacement"
+    "replacements"
   ]
 }

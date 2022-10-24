@@ -26,9 +26,9 @@
       "options": {
         "directory": "assets/icons",
         "glob": "**/*.css",
-        "searchValue": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
+        "searchValues": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
         "flags": "g",
-        "replacement": "url(./$1)"
+        "replacements": "url(./$1)"
       }
     },
     "adapt-to-shadow-dom": {
@@ -37,9 +37,9 @@
       "options": {
         "directory": "assets/styling",
         "glob": "core-styling.css",
-        "searchValue": ":root",
+        "searchValues": [":root", "body"],
         "flags": "g",
-        "replacement": ":host",
+        "replacements": [":host", ".content-wrapper"],
         "rewrite": false,
         "suffix": "shadow"
       }

@@ -2,6 +2,7 @@
  * Node.js imports
  */
 import * as fs from 'fs/promises';
+import * as path from 'path';
 
 /**
  * Nx imports
@@ -17,7 +18,6 @@ import * as fg from 'fast-glob';
  * Internal imports
  */
 import { MassUpdatorSchema } from './schema';
-import * as path from 'path';
 
 export default async function runExecutor(
   options: MassUpdatorSchema,
@@ -40,10 +40,21 @@ export default async function runExecutor(
       encoding: 'utf8'
     });
 
-    const replacedContent: string = fileContent.replace(
-      new RegExp(options.searchValue, options.flags),
-      options.replacement
-    );
+    const searchValues: string[] =
+      typeof options.searchValues === 'string'
+        ? [options.searchValues]
+        : options.searchValues;
+    const replacements: string[] =
+      typeof options.replacements === 'string'
+        ? [options.replacements]
+        : options.replacements;
+    let replacedContent: string = '';
+    for (let i = 0; i < searchValues.length; i++) {
+      replacedContent = fileContent.replace(
+        new RegExp(searchValues[i], options.flags),
+        replacements[i]
+      );
+    }
 
     if (options.rewrite) {
       await fs.writeFile(filePath, replacedContent);

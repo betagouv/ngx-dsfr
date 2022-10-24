@@ -4,9 +4,9 @@
 export interface MassUpdatorSchema {
   directory?: string;
   glob: string;
-  searchValue: string;
+  searchValues: string | string[];
   flags: string;
-  replacement: string;
+  replacements: string | string[];
   rewrite?: boolean;
   suffix?: string;
 }
