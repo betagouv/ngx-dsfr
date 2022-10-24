@@ -2,12 +2,15 @@
  * Angular imports
  */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+/**
+ * 3rd-party imports
+ */
 import { ElementAlignment, ElementSize } from '@betagouv/ngx-dsfr';
 
 /**
  * TypeScript entities and constants
  */
-
 export const EMPTY_LABEL_AND_ICON_ERROR: string =
   'You MUST provide a label and/or an icon for this button 😡 !!!';
 
@@ -15,7 +18,8 @@ export enum ButtonType {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
-  TERTIARY_NO_OUTLINE = 'tertiary-no-outline'
+  TERTIARY_NO_OUTLINE = 'tertiary-no-outline',
+  CLOSE = 'close'
 }
 
 export enum ButtonHtmlType {
@@ -38,6 +42,7 @@ export class DsfrButtonComponent implements OnInit {
   @Input() iconAlignment?: ElementAlignment = ElementAlignment.LEFT;
   @Input() title?: string;
   @Input() htmlType?: ButtonHtmlType = ButtonHtmlType.BUTTON;
+  @Input() ariaControls?: string;
 
   @Output() click = new EventEmitter<Event>();
 
