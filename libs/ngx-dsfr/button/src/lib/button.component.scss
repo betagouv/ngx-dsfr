@@ -1,1 +1,7 @@
-@use '@gouvfr/dsfr/dist/component/button/button.min';
+// Imports
+@use "@gouvfr/dsfr/dist/component/button/button.min";
+
+// Actual styling
+:host {
+  display: block;
+}

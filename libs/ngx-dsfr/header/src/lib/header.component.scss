@@ -1,3 +1,13 @@
+// Imports
 @use "@gouvfr/dsfr/dist/component/header/header.min";
 @use "@gouvfr/dsfr/dist/component/logo/logo.min";
 @use "@gouvfr/dsfr/dist/component/modal/modal.min";
+
+// Actual styling
+.fr-header .fr-modal .fr-container > dsfr-button {
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 62em) {
+    display: none;
+  }
+}

@@ -8,4 +8,10 @@
   height: 100%;
   padding: var.$default-padding;
   color: black;
+
+  /*
+   * Adding this to create a new stacking context and
+   * completely isolate the CSS within the simulator
+   */
+  transform: translate(0, 0);
 }
