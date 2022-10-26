@@ -23,55 +23,64 @@ export default async function runExecutor(
   options: MassUpdatorSchema,
   context: ExecutorContext
 ): Promise<{ success: boolean }> {
-  const stream = fg.stream([options.glob], {
-    cwd: path.join(context.root, context.target.outputs[0], options.directory),
-    ignore: ['**/node_modules']
-  });
+  // Normalizing options that can be of 2 types
+  const directories: string[] =
+    typeof options.directories === 'string'
+      ? [options.directories]
+      : options.directories;
+  const searchValues: string[] =
+    typeof options.searchValues === 'string'
+      ? [options.searchValues]
+      : options.searchValues;
+  const replacements: string[] =
+    typeof options.replacements === 'string'
+      ? [options.replacements]
+      : options.replacements;
 
-  for await (const entry of stream) {
-    const filePath: string = path.join(
-      context.root,
-      context.target.outputs[0],
-      options.directory,
-      entry as string
-    );
-
-    const fileContent: string = await fs.readFile(filePath, {
-      encoding: 'utf8'
+  for (const directory of directories) {
+    const stream = fg.stream([options.glob], {
+      cwd: path.join(context.root, context.target.outputs[0], directory),
+      ignore: ['**/node_modules']
     });
 
-    const searchValues: string[] =
-      typeof options.searchValues === 'string'
-        ? [options.searchValues]
-        : options.searchValues;
-    const replacements: string[] =
-      typeof options.replacements === 'string'
-        ? [options.replacements]
-        : options.replacements;
-    let replacedContent: string = '';
-    for (let i = 0; i < searchValues.length; i++) {
-      replacedContent = fileContent.replace(
-        new RegExp(searchValues[i], options.flags),
-        replacements[i]
-      );
-    }
-
-    if (options.rewrite) {
-      await fs.writeFile(filePath, replacedContent);
-    } else {
-      const extension: string = (entry as string).split('.').pop();
-      const suffixedFilename: string = (entry as string).replace(
-        extension,
-        options.suffix + '.' + extension
-      );
-      const duplicateFilePath: string = path.join(
+    for await (const entry of stream) {
+      const filePath: string = path.join(
         context.root,
         context.target.outputs[0],
-        options.directory,
-        suffixedFilename
+        directory,
+        entry as string
       );
 
-      await fs.writeFile(duplicateFilePath, replacedContent);
+      const fileContent: string = await fs.readFile(filePath, {
+        encoding: 'utf8'
+      });
+
+      let replacedContent: string = fileContent;
+
+      for (let i = 0; i < searchValues.length; i++) {
+        replacedContent = replacedContent.replace(
+          new RegExp(searchValues[i], options.flags),
+          replacements[i]
+        );
+      }
+
+      if (options.rewrite) {
+        await fs.writeFile(filePath, replacedContent);
+      } else {
+        const extension: string = (entry as string).split('.').pop();
+        const suffixedFilename: string = (entry as string).replace(
+          extension,
+          options.suffix + '.' + extension
+        );
+        const duplicateFilePath: string = path.join(
+          context.root,
+          context.target.outputs[0],
+          directory,
+          suffixedFilename
+        );
+
+        await fs.writeFile(duplicateFilePath, replacedContent);
+      }
     }
   }
 

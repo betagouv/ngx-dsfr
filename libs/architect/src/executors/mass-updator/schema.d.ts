@@ -2,7 +2,7 @@
  * TypeScript entities and constants
  */
 export interface MassUpdatorSchema {
-  directory?: string;
+  directories?: string | string[];
   glob: string;
   searchValues: string | string[];
   flags: string;

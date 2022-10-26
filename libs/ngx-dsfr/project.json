@@ -20,13 +20,24 @@
       },
       "defaultConfiguration": "production"
     },
-    "adapt-css-paths": {
+    "adapt-css-paths-in-icons-files": {
       "executor": "@ngx-dsfr/architect:mass-updator",
       "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
-        "directory": "assets/icons",
+        "directories": "assets/icons",
         "glob": "**/*.css",
         "searchValues": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
+        "flags": "g",
+        "replacements": "url(./$1)"
+      }
+    },
+    "adapt-css-paths-in-components-files": {
+      "executor": "@ngx-dsfr/architect:mass-updator",
+      "outputs": ["dist/libs/ngx-dsfr"],
+      "options": {
+        "directories": ["esm2020", "fesm2015", "fesm2020"],
+        "glob": "**/*.mjs",
+        "searchValues": "url\\(..\\/..\\/icons\\/.+?\\/(.+?)\\)",
         "flags": "g",
         "replacements": "url(./$1)"
       }
@@ -35,7 +46,7 @@
       "executor": "@ngx-dsfr/architect:mass-updator",
       "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
-        "directory": "assets/styling",
+        "directories": "assets/styling",
         "glob": "core-styling.css",
         "searchValues": [":root", "body"],
         "flags": "g",
@@ -49,7 +60,8 @@
       "options": {
         "commands": [
           "nx run ngx-dsfr:build-base",
-          "nx run ngx-dsfr:adapt-css-paths",
+          "nx run ngx-dsfr:adapt-css-paths-in-icons-files",
+          "nx run ngx-dsfr:adapt-css-paths-in-components-files",
           "nx run ngx-dsfr:adapt-to-shadow-dom"
         ],
         "parallel": false
