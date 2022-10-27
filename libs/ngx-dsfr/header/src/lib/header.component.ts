@@ -1,12 +1,25 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  ContentChildren,
+  Input,
+  OnInit,
+  QueryList
+} from '@angular/core';
 
 /**
  * 3rd-party imports
  */
 import { ButtonType } from '@betagouv/ngx-dsfr/button';
+
+/**
+ * Internal imports
+ */
+import { DsfrHeaderActionDirective } from './header-action.directive';
+import { DsfrNavigationComponent } from '@betagouv/ngx-dsfr/navigation';
 
 /**
  * TypeScript entities and constants
@@ -26,6 +39,10 @@ export class DsfrHeaderComponent implements OnInit {
   @Input() appName: string | undefined;
   @Input() appDescription: string | undefined;
   @Input() link: string = '/';
+
+  @ContentChildren(DsfrHeaderActionDirective)
+  actions!: QueryList<DsfrHeaderActionDirective>;
+  @ContentChild(DsfrNavigationComponent) nav?: DsfrNavigationComponent;
 
   // To be changed into an Input property when we add searchBar functionality
   searchBar: boolean = false;

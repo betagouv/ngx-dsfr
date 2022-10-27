@@ -84,29 +84,33 @@
             operatorLogoSrc="assets/illustrations/Logo ANCT.svg"
             operatorLogoAlt="agence nationale de la cohésion des territoires"
             appName="Infrastructures Numériques">
-            <ul class="fr-btns-group">
-              <li>
-                <a
-                  class="fr-btn fr-icon-add-circle-line"
-                  href="[url - à modifier]">
-                  Créer un espace
-                </a>
-              </li>
-              <li>
-                <a
-                  class="fr-btn fr-icon-lock-line"
-                  href="[url - à modifier]">
-                  Se connecter
-                </a>
-              </li>
-              <li>
-                <a
-                  class="fr-btn fr-icon-account-line"
-                  href="[url - à modifier]">
-                  S’enregistrer
-                </a>
-              </li>
-            </ul>
+            <ng-template dsfrHeaderAction>
+              <dsfr-link
+                label="Être tenu informé"
+                link="./"
+                [inline]="false"
+                icon="notification-3-line"
+                [iconAlignment]="iconAlignment.LEFT">
+              </dsfr-link>
+            </ng-template>
+            <ng-template dsfrHeaderAction>
+              <dsfr-link
+                label="Aide et documentation"
+                link="./"
+                [inline]="false"
+                icon="information-line"
+                [iconAlignment]="iconAlignment.LEFT">
+              </dsfr-link>
+            </ng-template>
+            <ng-template dsfrHeaderAction>
+              <dsfr-button
+                label="Se connecter"
+                [type]="buttonTypes.TERTIARY"
+                icon="account-line"
+                (click)="test()"
+                [iconAlignment]="iconAlignment.LEFT">
+              </dsfr-button>
+            </ng-template>
             <dsfr-navigation [navigation]="navigation"></dsfr-navigation>
           </dsfr-header>
         </play-simulator>

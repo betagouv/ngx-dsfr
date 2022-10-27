@@ -4,10 +4,44 @@
 @use "@gouvfr/dsfr/dist/component/modal/modal.min";
 
 // Actual styling
-.fr-header .fr-modal .fr-container > dsfr-button {
-  margin-bottom: 1.5rem;
+.fr-header {
+  .fr-header__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
 
-  @media (min-width: 62em) {
-    display: none;
+  .fr-header__tools-links .fr-header__actions {
+    @media (min-width: 62em) {
+      justify-content: flex-end;
+      margin: 0 -0.25rem;
+
+      & > li {
+        align-items: center;
+        display: inline-flex;
+        padding: 0.25rem 0.75rem;
+      }
+    }
+  }
+
+  .fr-header__menu-links .fr-header__actions {
+    flex-direction: column-reverse;
+
+    li {
+      display: flex;
+      align-items: center;
+      min-height: 3rem;
+      padding: 0.25rem 0;
+    }
+  }
+
+  .fr-modal .fr-container > dsfr-button.close-modal {
+    margin-bottom: 1.5rem;
+
+    @media (min-width: 62em) {
+      display: none;
+    }
   }
 }

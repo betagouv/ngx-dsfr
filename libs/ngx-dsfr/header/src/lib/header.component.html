@@ -61,6 +61,7 @@
                 Rechercher
               </button>
               <button
+                *ngIf="actions.length || nav"
                 class="fr-btn--menu fr-btn"
                 aria-controls="responsive-popup-menu"
                 aria-haspopup="menu"
@@ -86,9 +87,16 @@
             </p>
           </div>
         </div>
-        <div class="fr-header__tools">
+        <div
+          class="fr-header__tools"
+          *ngIf="actions.length">
           <div class="fr-header__tools-links">
-            <ng-content></ng-content>
+            <ul class="fr-header__actions">
+              <li *ngFor="let action of actions">
+                <ng-container
+                  *ngTemplateOutlet="action.templateRef"></ng-container>
+              </li>
+            </ul>
           </div>
           <div
             *ngIf="searchBar"
@@ -129,6 +137,7 @@
     </div>
   </div>
   <div
+    *ngIf="actions.length || nav"
     class="fr-header__menu fr-modal"
     [class.fr-modal--opened]="isMobileMenuOpened"
     id="responsive-popup-menu"
@@ -138,6 +147,7 @@
     aria-labelledby="button-burger-menu">
     <div class="fr-container">
       <dsfr-button
+        class="close-modal"
         label="Fermer"
         title="Fermer"
         ariaControls="responsive-popup-menu"
@@ -145,7 +155,11 @@
         [type]="buttonTypes.CLOSE">
       </dsfr-button>
       <div class="fr-header__menu-links">
-        <ng-content></ng-content>
+        <ul class="fr-header__actions">
+          <li *ngFor="let action of actions">
+            <ng-container *ngTemplateOutlet="action.templateRef"></ng-container>
+          </li>
+        </ul>
       </div>
       <ng-content select="dsfr-navigation"></ng-content>
     </div>

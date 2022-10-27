@@ -14,10 +14,11 @@ import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
  * Internal imports
  */
 import { DsfrHeaderComponent } from './header.component';
+import { DsfrHeaderActionDirective } from './header-action.directive';
 
 @NgModule({
   imports: [CommonModule, RouterModule, DsfrButtonModule],
-  declarations: [DsfrHeaderComponent],
-  exports: [DsfrHeaderComponent]
+  declarations: [DsfrHeaderComponent, DsfrHeaderActionDirective],
+  exports: [DsfrHeaderComponent, DsfrHeaderActionDirective]
 })
 export class DsfrHeaderModule {}
