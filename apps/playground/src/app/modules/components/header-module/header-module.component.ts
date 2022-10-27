@@ -15,6 +15,8 @@ import {
  */
 import { Subject, takeUntil } from 'rxjs';
 import { Navigation } from '@betagouv/ngx-dsfr/navigation';
+import { ElementAlignment } from '@betagouv/ngx-dsfr';
+import { ButtonType } from '@betagouv/ngx-dsfr/button';
 
 /**
  * TypeScript entities and constants
@@ -112,6 +114,8 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
       href: './'
     }
   ];
+  iconAlignment: typeof ElementAlignment = ElementAlignment;
+  buttonTypes: typeof ButtonType = ButtonType;
 
   private unsubscribe$ = new Subject<void>();
 

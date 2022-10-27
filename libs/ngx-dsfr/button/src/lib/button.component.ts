@@ -44,7 +44,7 @@ export class DsfrButtonComponent implements OnInit {
   @Input() htmlType?: ButtonHtmlType = ButtonHtmlType.BUTTON;
   @Input() ariaControls?: string;
 
-  @Output() click = new EventEmitter<Event>();
+  @Output() buttonClicked = new EventEmitter<Event>();
 
   classes: string = '';
 
@@ -61,7 +61,7 @@ export class DsfrButtonComponent implements OnInit {
   }
 
   onClick(event: Event): void {
-    this.click.emit(event);
+    this.buttonClicked.emit(event);
   }
 
   private initClasses(): void {
