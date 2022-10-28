@@ -15,10 +15,19 @@ import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
  */
 import { DsfrHeaderComponent } from './header.component';
 import { DsfrHeaderActionDirective } from './header-action.directive';
+import { TestHostComponent } from './testing/test-host.component';
+import { TestHostBasicComponent } from './testing/test-host-basic.component';
+import { TestHostCompleteComponent } from './testing/test-host-complete.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, DsfrButtonModule],
-  declarations: [DsfrHeaderComponent, DsfrHeaderActionDirective],
+  declarations: [
+    DsfrHeaderComponent,
+    DsfrHeaderActionDirective,
+    TestHostComponent,
+    TestHostBasicComponent,
+    TestHostCompleteComponent
+  ],
   exports: [DsfrHeaderComponent, DsfrHeaderActionDirective]
 })
 export class DsfrHeaderModule {}

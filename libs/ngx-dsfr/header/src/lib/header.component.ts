@@ -7,6 +7,7 @@ import {
   ContentChildren,
   Input,
   OnChanges,
+  OnInit,
   QueryList,
   SimpleChanges
 } from '@angular/core';
@@ -33,7 +34,7 @@ export const EMPTY_ALT_ERROR: string =
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class DsfrHeaderComponent implements OnChanges {
+export class DsfrHeaderComponent implements OnInit, OnChanges {
   @Input() institution: string = 'République\nFrançaise';
   @Input() operatorLogoSrc: string | undefined;
   @Input() operatorLogoAlt: string | undefined;
@@ -54,18 +55,18 @@ export class DsfrHeaderComponent implements OnChanges {
   isMobileMenuOpened: boolean = false;
   buttonTypes: typeof ButtonType = ButtonType;
 
+  ngOnInit(): void {
+    this.handleInstitution();
+
+    // Dealing with everything needed to represent the operator behind the app
+    if (this.operatorLogoSrc && !this.operatorLogoAlt) {
+      throw EMPTY_ALT_ERROR;
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['institution'] && changes['institution'].currentValue) {
-      // Dealing with everything needed to represent the institution behind the operator
-      this.institutionArray = this.institution.split('\n');
-      this.institutionInlined = this.institution.replaceAll('\n', ' ');
-    }
-
-    if (changes['operatorLogoSrc'] && changes['operatorLogoSrc'].currentValue) {
-      // Dealing with everything needed to represent the operator behind the app
-      if (this.operatorLogoSrc && !this.operatorLogoAlt) {
-        throw EMPTY_ALT_ERROR;
-      }
+      this.handleInstitution();
     }
 
     if (changes['appName'] && changes['appName'].currentValue) {
@@ -78,5 +79,11 @@ export class DsfrHeaderComponent implements OnChanges {
         this.appLinkTitle += this.institutionInlined;
       }
     }
+  }
+
+  private handleInstitution(): void {
+    // Dealing with everything needed to represent the institution behind the operator
+    this.institutionArray = this.institution.split('\n');
+    this.institutionInlined = this.institution.replaceAll('\n', ' ');
   }
 }

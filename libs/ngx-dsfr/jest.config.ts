@@ -21,8 +21,11 @@ export default {
     'jest-preset-angular/build/serializers/ng-snapshot',
     'jest-preset-angular/build/serializers/html-comment'
   ],
-  moduleNameMapper: pathsToModuleNameMapper({
-    '@betagouv/ngx-dsfr': ['./src/index.ts'],
-    '@betagouv/ngx-dsfr/testing': ['./src/lib/testing/index.ts']
-  })
+  moduleNameMapper: pathsToModuleNameMapper(
+    {
+      '@betagouv/ngx-dsfr': ['./src/index.ts'],
+      '@betagouv/ngx-dsfr/testing': ['./src/lib/testing/index.ts']
+    },
+    { prefix: '<rootDir>/' }
+  )
 };
