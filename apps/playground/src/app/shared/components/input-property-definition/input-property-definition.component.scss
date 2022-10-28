@@ -1,0 +1,52 @@
+// Imports
+@use "@angular/material" as mat;
+@use "mixins" as mixins;
+@use "variables" as var;
+
+// Variables
+$primary-palette: mat.$pink-palette;
+$primary-color: mat.get-color-from-palette($primary-palette, 300);
+$accent-palette: mat.$blue-grey-palette;
+$accent-color: mat.get-color-from-palette($accent-palette, 300);
+
+// Actual styling
+:host {
+  display: block;
+  margin-top: var.$default-margin;
+}
+
+dt {
+  padding-left: 0.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+dd {
+  margin: 0.5rem 1.5rem;
+  line-height: 1.5rem;
+
+  .optional-mandatory {
+    background-color: $primary-color;
+    margin-right: 0.2rem;
+    @include mixins.badge-like;
+    color: black;
+    font-weight: bold;
+  }
+
+  .input-property-type {
+    display: block;
+    font-style: italic;
+  }
+
+  .input-property-default {
+    display: block;
+
+    &:before {
+      content: "Default value";
+      background-color: $accent-color;
+      margin-right: 0.5rem;
+      @include mixins.badge-like;
+      color: black;
+    }
+  }
+}

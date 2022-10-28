@@ -21,23 +21,36 @@ import { ButtonType } from '@betagouv/ngx-dsfr/button';
 /**
  * TypeScript entities and constants
  */
-type FormInlineTrue = {
-  inline: FormControl<boolean>;
-  label: FormControl<string>;
-  link: FormControl<string>;
-  title: FormControl<string>;
-};
+interface FormHeaderWithAppName {
+  institution: FormControl<string>;
+  appName: FormControl<string>;
+  appDescription: FormControl<string>;
+}
+
+interface FormHeaderWithLogo extends FormHeaderWithAppName {
+  operatorLogoAlt: FormControl<string>;
+}
 
 @Component({
   templateUrl: './header-module.component.html',
   styleUrls: ['./header-module.component.scss']
 })
 export class HeaderModuleComponent implements OnInit, OnDestroy {
-  formInlineTrue: FormGroup<FormInlineTrue> | undefined;
-  formInlineTrueErrors: Record<string, string> = {};
+  formHeaderWithAppName: FormGroup<FormHeaderWithAppName> | undefined;
+  formHeaderWithLogo: FormGroup<FormHeaderWithLogo> | undefined;
+  formHeaderComplete: FormGroup<FormHeaderWithLogo> | undefined;
+  errors: Record<string, string> = {
+    formHeaderWithLogo: '',
+    formHeaderComplete: ''
+  };
 
-  institution: string =
-    "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation";
+  possibleInstitutions: Record<string, string> = {
+    "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation":
+      "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
+    "Secrétariat d'État\nchargé de l'égalité\nentre les femmes\net les hommes et\nde la lutte contre\nles discriminations":
+      "Secrétariat d'État\nchargé de l'égalité\nentre les femmes\net les hommes et\nde la lutte contre\nles discriminations",
+    'République\nFrançaise': 'République\nFrançaise'
+  };
   navigation: Navigation = [
     {
       id: 'a',
@@ -126,47 +139,53 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
   }
 
   private initForms(): void {
-    this.formInlineTrue = this.formBuilder.group({
-      inline: [{ value: true, disabled: true }],
-      label: ['DSFR Link works 😁', Validators.required],
-      link: ['https://www.systeme-de-design.gouv.fr/', Validators.required],
-      title: 'the documentation about the DSFR'
+    this.formHeaderWithAppName = this.formBuilder.group({
+      institution:
+        "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
+      appName: '',
+      appDescription: ''
     });
 
-    this.handleErrors('Please, enter a label for this Component', 'label');
-    this.handleErrors('Please, enter a URL for this Component', 'link');
-    this.handleErrors(
-      'Please, enter a title for this Component if the link is external'
-    );
+    this.formHeaderWithLogo = this.formBuilder.group({
+      institution:
+        "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
+      appName: '',
+      appDescription: '',
+      operatorLogoAlt: [
+        'agence nationale de la cohésion des territoires',
+        Validators.required
+      ]
+    });
+
+    this.formHeaderComplete = this.formBuilder.group({
+      institution:
+        "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
+      appName: '',
+      appDescription: '',
+      operatorLogoAlt: [
+        'agence nationale de la cohésion des territoires',
+        Validators.required
+      ]
+    });
+
+    this.handleError(this.formHeaderWithLogo, 'formHeaderWithLogo');
+    this.handleError(this.formHeaderComplete, 'formHeaderComplete');
   }
 
-  private handleErrors(errorMsg: string, controlName?: string): void {
-    if (controlName) {
-      this.formInlineTrue
-        ?.get(controlName)
-        ?.statusChanges.pipe(takeUntil(this.unsubscribe$))
-        .subscribe({
-          next: (value: FormControlStatus) => {
-            if (value === 'INVALID') {
-              this.formInlineTrueErrors[controlName] = errorMsg;
-            } else {
-              this.formInlineTrueErrors = {};
-            }
+  private handleError(form: FormGroup, formName: string): void {
+    form
+      .get('operatorLogoAlt')
+      ?.statusChanges.pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (value: FormControlStatus) => {
+          if (value === 'INVALID') {
+            this.errors[formName] =
+              'The operatorLogoAlt property is required if operatorLogoSrc has a value';
+          } else {
+            this.errors[formName] = '';
           }
-        });
-    } else {
-      this.formInlineTrue?.statusChanges
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe({
-          next: (value: FormControlStatus) => {
-            if (value === 'INVALID') {
-              this.formInlineTrueErrors['_form_'] = errorMsg;
-            } else {
-              this.formInlineTrueErrors = {};
-            }
-          }
-        });
-    }
+        }
+      });
   }
 
   ngOnDestroy(): void {

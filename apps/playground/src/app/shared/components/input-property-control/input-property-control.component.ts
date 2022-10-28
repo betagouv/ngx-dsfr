@@ -40,8 +40,8 @@ export class InputPropertyControlComponent
   implements ControlValueAccessor, OnChanges
 {
   @Input() name: string = '';
+  @Input() label: string = '';
   @Input() type: PropertyType = 'string';
-  @Input() description: string = '';
   @Input() enum: Record<string, string> | {} = {};
   @Input() error: string | undefined = '';
 
