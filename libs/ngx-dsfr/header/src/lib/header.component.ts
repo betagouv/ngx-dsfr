@@ -6,8 +6,9 @@ import {
   ContentChild,
   ContentChildren,
   Input,
-  OnInit,
-  QueryList
+  OnChanges,
+  QueryList,
+  SimpleChanges
 } from '@angular/core';
 
 /**
@@ -32,7 +33,7 @@ export const EMPTY_ALT_ERROR: string =
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class DsfrHeaderComponent implements OnInit {
+export class DsfrHeaderComponent implements OnChanges {
   @Input() institution: string = 'République\nFrançaise';
   @Input() operatorLogoSrc: string | undefined;
   @Input() operatorLogoAlt: string | undefined;
@@ -53,23 +54,29 @@ export class DsfrHeaderComponent implements OnInit {
   isMobileMenuOpened: boolean = false;
   buttonTypes: typeof ButtonType = ButtonType;
 
-  ngOnInit(): void {
-    // Dealing with everything needed to represent the institution behind the operator
-    this.institutionArray = this.institution.split('\n');
-    this.institutionInlined = this.institution.replaceAll('\n', ' ');
-
-    // Dealing with everything needed to represent the operator behind the app
-    if (this.operatorLogoSrc && !this.operatorLogoAlt) {
-      throw EMPTY_ALT_ERROR;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['institution'] && changes['institution'].currentValue) {
+      // Dealing with everything needed to represent the institution behind the operator
+      this.institutionArray = this.institution.split('\n');
+      this.institutionInlined = this.institution.replaceAll('\n', ' ');
     }
 
-    // Dealing with everything needed to represent the app
-    if (this.appName) {
-      this.appLinkTitle = `Accueil - ${this.appName} - `;
-      this.appLinkTitle += this.operatorLogoSrc
-        ? `${this.operatorLogoAlt} - `
-        : '';
-      this.appLinkTitle += this.institutionInlined;
+    if (changes['operatorLogoSrc'] && changes['operatorLogoSrc'].currentValue) {
+      // Dealing with everything needed to represent the operator behind the app
+      if (this.operatorLogoSrc && !this.operatorLogoAlt) {
+        throw EMPTY_ALT_ERROR;
+      }
+    }
+
+    if (changes['appName'] && changes['appName'].currentValue) {
+      // Dealing with everything needed to represent the app
+      if (this.appName) {
+        this.appLinkTitle = `Accueil - ${this.appName} - `;
+        this.appLinkTitle += this.operatorLogoSrc
+          ? `${this.operatorLogoAlt} - `
+          : '';
+        this.appLinkTitle += this.institutionInlined;
+      }
     }
   }
 }
