@@ -2,7 +2,8 @@
  * Angular imports
  */
 import { Component, Input } from '@angular/core';
-import { AlertType, ElementSize } from '@betagouv/ngx-dsfr';
+import { ElementSize } from '@betagouv/ngx-dsfr';
+import { AlertType } from '../alert.component';
 
 @Component({
   template: `
@@ -16,7 +17,7 @@ import { AlertType, ElementSize } from '@betagouv/ngx-dsfr';
   `
 })
 export class TestHostComponent {
-  @Input() testTitle!: string;
+  @Input() testTitle: string | undefined;
   @Input() testType!: AlertType;
   @Input() testDescription: string = '';
   @Input() testSize: Omit<ElementSize, 'LARGE'> = ElementSize.MEDIUM;

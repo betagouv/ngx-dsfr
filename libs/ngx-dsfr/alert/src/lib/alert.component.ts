@@ -2,15 +2,22 @@
  * Angular imports
  */
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertType, ElementSize } from '@betagouv/ngx-dsfr';
+import { ElementSize } from '@betagouv/ngx-dsfr';
 
 /**
  * TypeScript entities and constants
  */
-export const EMPTY_TITLE_ERROR: string =
-  'You MUST provide a title for this alert 😡 !!!';
+export const EMPTY_TITLE_OR_DESCRIPTION_ERROR: string =
+  'You MUST provide at least a title or a description for this alert 😡 !!!';
 export const EMPTY_TYPE_ERROR: string =
   'You MUST provide a type for this alert 😡 !!!';
+
+export enum AlertType {
+  INFO = 'info',
+  WARNING = 'warning',
+  SUCCESS = 'success',
+  ERROR = 'error'
+}
 
 @Component({
   selector: 'dsfr-alert',
@@ -18,24 +25,23 @@ export const EMPTY_TYPE_ERROR: string =
   styleUrls: ['./alert.component.scss']
 })
 export class DsfrAlertComponent implements OnInit {
-  @Input() title!: string;
   @Input() type!: AlertType;
+  @Input() title: string | undefined;
   @Input() description = '';
   @Input() hasCloseButton = false;
+  @Input() hasRole = false;
   @Input() size: Omit<ElementSize, 'LARGE'> = ElementSize.MEDIUM;
 
   classes: string = '';
-  isSmall = false;
   isClosed = false;
 
   ngOnInit (): void {
-    if (!this.title) {
-      throw EMPTY_TITLE_ERROR;
+    if (!this.title && !this.description) {
+      throw EMPTY_TITLE_OR_DESCRIPTION_ERROR;
     }
     if (!this.type) {
       throw EMPTY_TYPE_ERROR;
     }
-    this.isSmall = this.size === ElementSize.SMALL;
 
     this.initClasses();
   }
@@ -46,9 +52,5 @@ export class DsfrAlertComponent implements OnInit {
     if (this.size === ElementSize.SMALL) {
       this.classes += ` fr-alert--${this.size}`;
     }
-  }
-
-  closeAlert (): void {
-    this.isClosed = true;
   }
 }

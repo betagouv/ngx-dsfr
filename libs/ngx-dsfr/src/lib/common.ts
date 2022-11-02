@@ -41,13 +41,6 @@ export enum ThemeColor {
   BEIGE_GRIS_GALET = 'beige-gris-galet'
 }
 
-export enum AlertType {
-  INFO = 'info',
-  WARNING = 'warning',
-  SUCCESS = 'success',
-  ERROR = 'error'
-};
-
 /**
  * Common DSFR Type
  */

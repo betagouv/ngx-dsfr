@@ -2,7 +2,8 @@
  * Angular imports
  */
 import { Component } from '@angular/core';
-import { AlertType, ElementSize } from '@betagouv/ngx-dsfr';
+import { ElementSize } from '@betagouv/ngx-dsfr';
+import { AlertType } from '@betagouv/ngx-dsfr/alert';
 
 @Component({
   templateUrl: './alert-module.component.html',

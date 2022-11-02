@@ -1,8 +1,8 @@
-<div *ngIf="!isClosed" [class]="classes">
-  <h3 class="fr-alert__title">{{title}}</h3>
-  <p *ngIf="description && !isSmall">{{description}}</p>
-  <button *ngIf="hasCloseButton && !isSmall" class="fr-btn--close fr-btn" title="Masquer le message"
-          (click)="closeAlert()">
+<div *ngIf="!isClosed" [class]="classes" [attr.role]="hasRole ? 'alert' : null">
+  <h3 *ngIf="title" class="fr-alert__title">{{title}}</h3>
+  <p *ngIf="description">{{description}}</p>
+  <button *ngIf="hasCloseButton" class="fr-btn--close fr-btn" title="Masquer le message"
+          (click)="isClosed = true">
     Masquer le message
   </button>
 </div>

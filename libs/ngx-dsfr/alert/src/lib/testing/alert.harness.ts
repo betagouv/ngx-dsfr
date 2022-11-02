@@ -17,33 +17,44 @@ import {
 export class DsfrAlertHarness extends ComponentHarness {
   static hostSelector: string = 'dsfr-alert';
 
-  private getAlertTitleTag: AsyncFactoryFn<TestElement> = this.locatorFor('h3');
-  private getAlertDescriptionTag: AsyncFactoryFn<TestElement> = this.locatorFor('p');
+  private getAlertTitleTag: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('h3');
+  private getAlertDescriptionTag: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('p');
+  private getAlertDivTag: AsyncFactoryFn<TestElement> = this.locatorFor('div');
 
   /**
-   * Retrieves the content of the title in the DsfrAlertComponent's Template
+   * Retrieves the content of the title in the DsfrAlertComponent's Template if available
    *
-   * @returns A Promise that resolves to the title of the alert
+   * @returns A Promise that resolves to the title of the alert or
+   * undefined if no title is provided
    */
-  async getAlertTitle (): Promise<string> {
-    const alert: TestElement = await this.getAlertTitleTag();
+  async getAlertTitle (): Promise<string | undefined> {
+    const alert: TestElement | null = await this.getAlertTitleTag();
 
-    return alert.text();
+    return alert?.text();
   }
 
   /**
    * Retrieves the content of the description in the DsfrAlertComponent's Template if available
    *
-   * @returns A Promise that resolves to the value as a string or null
-   * if the description is not found
+   * @returns A Promise that resolves to the description of the alert or
+   * undefined if no description is provided
    */
-  async getAlertDescription (): Promise<string | null> {
-    let alert: TestElement;
-    try {
-      alert = await this.getAlertDescriptionTag();
-      return alert.text();
-    } catch (e) {
-      return null;
-    }
+  async getAlertDescription (): Promise<string | undefined> {
+    const alert: TestElement | null = await this.getAlertDescriptionTag();
+    return alert?.text();
+  }
+
+  /**
+   * Retrieves the classes for the div tag in the DsfrAlertComponent's Template
+   *
+   * @returns A Promise that resolves to an array of strings or an
+   * empty array in there are no classes
+   */
+  async getDivClasses (): Promise<string[]> {
+    const alertDiv: TestElement = await this.getAlertDivTag();
+
+    const classesString = await alertDiv.getAttribute('class');
+
+    return classesString ? classesString.split(' ') : [];
   }
 }

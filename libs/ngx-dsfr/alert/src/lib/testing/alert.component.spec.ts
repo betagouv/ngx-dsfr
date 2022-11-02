@@ -7,20 +7,17 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 /**
- * 3rd-party imports
- */
-import { AlertType } from '@betagouv/ngx-dsfr';
-
-/**
  * Internal imports
  */
 import {
+  AlertType,
   DsfrAlertComponent,
-  EMPTY_TITLE_ERROR,
+  EMPTY_TITLE_OR_DESCRIPTION_ERROR,
   EMPTY_TYPE_ERROR
 } from '../alert.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrAlertHarness } from './alert.harness';
+import { ElementSize } from '@betagouv/ngx-dsfr';
 
 describe('DsfrAlertComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -31,6 +28,7 @@ describe('DsfrAlertComponent', () => {
 
   const testTitle: string = 'Test Label';
   const testType: AlertType = AlertType.WARNING;
+  const testSize: ElementSize = ElementSize.SMALL;
   const testDescription: string = 'Test Description';
 
   beforeEach(async () => {
@@ -67,7 +65,7 @@ describe('DsfrAlertComponent', () => {
       fixture.detectChanges();
       throw 'It should have thrown an error about "title"';
     } catch (error) {
-      expect(error).toBe(EMPTY_TITLE_ERROR);
+      expect(error).toBe(EMPTY_TITLE_OR_DESCRIPTION_ERROR);
     }
   });
 
@@ -85,6 +83,7 @@ describe('DsfrAlertComponent', () => {
     beforeEach(async () => {
       testHost.testTitle = testTitle;
       testHost.testType = testType;
+      testHost.testSize = testSize;
 
       /*
        * We're retrieving the Test Harness HERE since we can now,
@@ -97,23 +96,27 @@ describe('DsfrAlertComponent', () => {
       );
     });
 
+    it('should have the right classes for the alert div', async () => {
+      const classes = await dsfrAlertHarness.getDivClasses();
+      expect(classes).toContain('fr-alert')
+      expect(classes).toContain('fr-alert--sm')
+      expect(classes).toContain('fr-alert--warning')
+    });
+
     it('should have the right title', async () => {
-      const title: string | null =
-        await dsfrAlertHarness.getAlertTitle();
+      const title = await dsfrAlertHarness.getAlertTitle();
       expect(title).toEqual(testTitle);
     });
 
     it('shouldn\'t have a description', async () => {
-      const description: string | null =
-        await dsfrAlertHarness.getAlertDescription();
-      expect(description).toBeNull();
+      const description = await dsfrAlertHarness.getAlertDescription();
+      expect(description).toBeUndefined();
     });
 
     it('should have the right description', async () => {
       testHost.testDescription = testDescription;
       fixture.detectChanges();
-      const description: string | null =
-        await dsfrAlertHarness.getAlertDescription();
+      const description = await dsfrAlertHarness.getAlertDescription();
       expect(description).toEqual(testDescription);
     });
   });
