@@ -57,6 +57,7 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
   inputGroupClasses: Record<string, boolean> = {};
   inputClasses: Record<string, boolean> = {};
   ariaDescribedby: string | null = null;
+  iconClass: string | null = '';
 
   get value(): string {
     return this._value;
@@ -99,6 +100,8 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
       'fr-input--error': this.hasFailed,
       'fr-input--valid': this.hasSucceeded
     };
+
+    this.iconClass = this.icon ? 'fr-input-wrap ' + this.icon : '';
   }
 
   private setAriaDescribedBy() {

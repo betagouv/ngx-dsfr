@@ -17,7 +17,7 @@ import {
 export class DsfrInputHarness extends ComponentHarness {
   static hostSelector: string = 'dsfr-input';
 
-  private getInputElement: AsyncFactoryFn<TestElement> = this.locatorFor('input[type=text]');
+  private getInputElement: AsyncFactoryFn<TestElement> = this.locatorFor('input');
 
   private async getInputAttribute(name: string): Promise<(string | null)> {
     const input: TestElement = await this.getInputElement();
@@ -27,7 +27,7 @@ export class DsfrInputHarness extends ComponentHarness {
   }
 
   /**
-   * Retrieves the id value of the input tags
+   * Retrieves the id value of the input tag
    * in the DsfrInputComponent's Template
    *
    * @returns A Promise that resolves to the id value as a strings or null
@@ -37,7 +37,7 @@ export class DsfrInputHarness extends ComponentHarness {
   }
 
   /**
-   * Retrieves the values of the input tags
+   * Retrieves the values of the input tag
    * in the DsfrInputComponent's Template
    *
    * @returns A Promise that resolves to the values as a strings or null
@@ -47,7 +47,7 @@ export class DsfrInputHarness extends ComponentHarness {
   }
 
   /**
-   * Retrieves the placeholder value of the input tags
+   * Retrieves the placeholder value of the input tag
    * in the DsfrInputComponent's Template
    *
    * @returns A Promise that resolves to the name values as a strings or null

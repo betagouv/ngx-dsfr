@@ -23,7 +23,7 @@
     </textarea>
   </ng-container>
   <ng-template #standardInput>
-    <div [ngClass]="icon ? 'fr-input-wrap ' + icon : ''">
+    <div [class]="iconClass">
       <input
         class="fr-input"
         [type]="type"
@@ -32,7 +32,7 @@
         [placeholder]="placeholder"
         [attr.aria-describedby]="ariaDescribedby"
         [disabled]="disabled"
-        [ngClass]="{'fr-input--error': hasFailed, 'fr-input--valid': hasSucceeded}"
+        [ngClass]="inputClasses"
         (blur)="onBlur($event)"
         (keyUp)="onKeyup($event)"
         (focus)="onFocus($event)"
