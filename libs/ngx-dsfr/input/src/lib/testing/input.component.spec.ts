@@ -65,7 +65,7 @@ describe('DsfrInputComponent', () => {
     }
   });
 
-  describe('only id  s provided, ', () => {
+  describe('only ID is provided, ', () => {
     beforeEach(async () => {
       testHost.testId = testId;
     });
