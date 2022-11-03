@@ -38,12 +38,12 @@ type FormInlineTrue = {
 export class LinkModuleComponent implements OnInit, OnDestroy {
   iconAlignment: typeof ElementAlignment = ElementAlignment;
   linkSize: typeof ElementSize = ElementSize;
-  formInlineTrue: FormGroup<FormInlineTrue> | undefined;
+  formInlineTrue: FormGroup<any> | undefined;
   formInlineTrueErrors: Record<string, string> = {};
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  constructor(private formBuilder: NonNullableFormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();

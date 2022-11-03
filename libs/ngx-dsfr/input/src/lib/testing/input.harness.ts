@@ -9,7 +9,7 @@ import {
 
 /**
  * This class inherits from ComponentHarness and its purpose
- * is to serve as a wrapper around an instance of DsfrRadioComponent
+ * is to serve as a wrapper around an instance of DsfrInputComponent
  * within Unit Tests
  *
  * To see more : https://material.angular.io/cdk/test-harnesses/overview
@@ -21,9 +21,9 @@ export class DsfrInputHarness extends ComponentHarness {
 
   private async getInputAttribute(name: string): Promise<(string | null)> {
     const input: TestElement = await this.getInputElement();
-    const attributes = await input.getAttribute(name);
+    const attribute = await input.getAttribute(name);
 
-    return attributes;
+    return attribute;
   }
 
   /**

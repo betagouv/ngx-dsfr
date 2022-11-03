@@ -26,7 +26,7 @@ export class TestHostComponent {
   @Input() testName: string | undefined;
   @Input() testId: string | undefined;
   @Input() testType: InputType = 'text';
-  @Input() testPlaceholder: string | undefined;
+  @Input() testPlaceholder: string = '';
   @Input() testHasFailed = false;
   @Input() testFailureMessage: string | undefined;;
   @Input() testHasSucceeded = false;

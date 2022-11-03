@@ -9,7 +9,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 /**
  * Internal imports
  */
-import { DsfrInputComponent, EMPTY_ID_ERROR } from '../input.component';
+import { DsfrInputComponent, EMPTY_ID_ERROR, EMPTY_LABEL_ERROR } from '../input.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrInputHarness } from './input.harness';
 import { FormsModule } from '@angular/forms';
@@ -19,9 +19,10 @@ describe('DsfrInputComponent', () => {
   let testHost: TestHostComponent;
   let componentUnderTest: DsfrInputComponent;
   let harnessLoader: HarnessLoader;
-  let dsfrRadioHarness: DsfrInputHarness;
+  let dsfrInputHarness: DsfrInputHarness;
 
   const testName = 'testName';
+  const testLabel = 'testLabel';
   const testId = 'testId';
   const testPlaceholder = 'Enter some text...';
 
@@ -64,23 +65,38 @@ describe('DsfrInputComponent', () => {
     }
   });
 
+  describe('only id  s provided, ', () => {
+    beforeEach(async () => {
+      testHost.testId = testId;
+    });
+    it('should throw an error when no label is provided', async () => {
+      try {
+        fixture.detectChanges();
+        throw 'It should have thrown an error about "LABEL"';
+      } catch (error) {
+        expect(error).toBe(EMPTY_LABEL_ERROR);
+      }
+    });
+  });
+
   describe('all required properties are provided, ', () => {
     beforeEach(async () => {
       testHost.testName = testName;
       testHost.testId = testId;
+      testHost.testLabel = testLabel;
       testHost.testPlaceholder = testPlaceholder;
-      dsfrRadioHarness = await harnessLoader.getHarness<DsfrInputHarness>(
+      dsfrInputHarness = await harnessLoader.getHarness<DsfrInputHarness>(
         DsfrInputHarness
       );
     });
 
     it('should have the right placeholder for the input attribute', async () => {
-      const placeholder = await dsfrRadioHarness.getInputPlaceholderAttribute();
+      const placeholder = await dsfrInputHarness.getInputPlaceholderAttribute();
       expect(placeholder).toEqual(testPlaceholder);
     });
 
     it('should have the right id for the input attribute', async () => {
-      const id = await dsfrRadioHarness.getInputId();
+      const id = await dsfrInputHarness.getInputId();
       expect(id).toEqual(testId);
     });
   });

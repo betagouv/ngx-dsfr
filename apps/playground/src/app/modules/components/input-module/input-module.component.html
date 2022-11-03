@@ -21,10 +21,13 @@
             id="testId"
             hint="This is a description"
             placeholder="Please enter a text..."
-            [name]="'testName'">
+            name="testName">
           </dsfr-input>
 
+          <br>
           Selected value is: {{inputForm.controls['trytest'].value}}
+
+          <hr>
 
           <dsfr-input
             formControlName="trytest"
@@ -33,28 +36,36 @@
             [disabled]="true"
             hint="Ceci est une description"
             placeholder="This input is disabled"
-            [name]="'testName'">
+            name="testName">
           </dsfr-input>
+
+          <hr>
+
           <dsfr-input
             formControlName="trytest"
             label="Input with error"
             id="testId"
             hint="Ceci est une description"
-            placeholder="Input"
+            placeholder="Input with error"
             [hasFailed]="true"
             failureMessage="Failure message"
             name="testName">
           </dsfr-input>
+
+          <hr>
+
           <dsfr-input
             formControlName="trytest"
             label="Input success"
             id="testId"
             hint="Ceci est une description"
-            placeholder="Cette input est 'disabled'"
+            placeholder="Input with success"
             [hasSucceeded]="true"
             successMessage="Success message"
             name="testName">
           </dsfr-input>
+
+          <hr>
 
           <dsfr-input
             type="textarea"
@@ -62,7 +73,18 @@
             label="Textarea..."
             id="testId"
             hint="Ceci est une description"
-            placeholder="Cette input est 'disabled'"
+            placeholder="This is a textarea"
+            name="testName">
+          </dsfr-input>
+
+          <hr>
+
+          <dsfr-input
+            type="date"
+            formControlName="trytest"
+            label="It is a date"
+            id="testId"
+            hint="Ceci est une description"
             name="testName">
           </dsfr-input>
         </form>

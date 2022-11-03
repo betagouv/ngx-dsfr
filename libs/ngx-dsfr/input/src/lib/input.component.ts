@@ -13,15 +13,11 @@ export const EMPTY_LABEL_ERROR: string =
   'You MUST provide a label for this input 😡 !!!';
 export const EMPTY_NAME_ERROR: string =
   'You MUST provide a name for this input 😡 !!!';
-export const EMPTY_PLACEHOLDER_ERROR: string =
-  'You MUST provide a placeholder for these radio buttons 😡 !!!';
 export const EMPTY_FAILURE_MESSAGE_ERROR: string =
   'You MUST provide a value for the failureMessage attribute when hasFailed is true 😡 !!!';
-export const EMPTY_SUCCESS_MESSAGE_ERROR: string =
-  'You MUST provide a value for the successMessage attribute when hasSucceeded is true 😡 !!!';
 
 
-export type InputType = 'text' | 'textarea' | 'password' | 'number';
+export type InputType = 'text' | 'textarea' | 'password' | 'number' | 'date';
 
 @Component({
   selector: 'dsfr-input',
@@ -42,13 +38,13 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
   @Input() name: string | undefined;
   @Input() id: string | undefined;
   @Input() type: InputType = 'text';
-  @Input() placeholder: string | undefined;
+  @Input() placeholder: string = '';
   @Input() hasFailed = false;
   @Input() failureMessage: string | undefined;;
   @Input() hasSucceeded = false;
   @Input() successMessage: string | undefined;
-  @Input() icon?: string | undefined;
-  @Input() hint?: string | undefined;
+  @Input() icon: string | undefined;
+  @Input() hint: string | undefined;
   @Input() disabled: boolean = false;
 
   @Output() focus = new EventEmitter<FocusEvent>();
@@ -58,8 +54,9 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
   onChange = (_: string) => { };
   onTouched = (_: string) => { };
 
-  fieldSetClasses: Record<string, boolean> = {};
-  ariaLabelledBy: string | null = null;
+  inputGroupClasses: Record<string, boolean> = {};
+  inputClasses: Record<string, boolean> = {};
+  ariaDescribedby: string | null = null;
 
   get value(): string {
     return this._value;
@@ -75,19 +72,16 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
     if (this.hasFailed && !this.failureMessage) {
       throw EMPTY_FAILURE_MESSAGE_ERROR;
     }
-    if (this.hasSucceeded && !this.successMessage) {
-      throw EMPTY_SUCCESS_MESSAGE_ERROR;
-    }
-    this.setFieldSetClasses();
-    this.setAriaLabelledBy();
+    this.setSuccessOrErrorClasses();
+    this.setAriaDescribedBy();
   }
 
   ngOnInit(): void {
     if (!this.id) {
       throw EMPTY_ID_ERROR;
     }
-    if (!this.placeholder) {
-      throw EMPTY_PLACEHOLDER_ERROR;
+    if (!this.label) {
+      throw EMPTY_LABEL_ERROR;
     }
     if (!this.name) {
       throw EMPTY_NAME_ERROR;
@@ -95,24 +89,29 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
 
   }
 
-  private setFieldSetClasses() {
-    this.fieldSetClasses = {
-      'fr-fieldset--error': this.hasFailed,
-      'fr-fieldset--valid': this.hasSucceeded
+  private setSuccessOrErrorClasses() {
+    this.inputGroupClasses = {
+      'fr-input-group--error': this.hasFailed,
+      'fr-input-group--valid': this.hasSucceeded
+    };
+
+    this.inputClasses = {
+      'fr-input--error': this.hasFailed,
+      'fr-input--valid': this.hasSucceeded
     };
   }
 
-  private setAriaLabelledBy() {
+  private setAriaDescribedBy() {
     if (this.id) {
       if (this.hasFailed) {
-        this.ariaLabelledBy = `${this.id} ${this.id}-error`;
+        this.ariaDescribedby = `${this.id} ${this.id}-error`;
         return;
       }
       if (this.hasSucceeded) {
-        this.ariaLabelledBy = `${this.id} ${this.id}-valid`;
+        this.ariaDescribedby = `${this.id} ${this.id}-valid`;
         return;
       }
-      this.ariaLabelledBy = this.id;
+      this.ariaDescribedby = this.id;
     }
   }
 

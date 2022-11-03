@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  */
 import { InputModuleComponent } from './input-module.component';
 
-describe('RadioModuleComponent', () => {
+describe('InputModuleComponent', () => {
   let component: InputModuleComponent;
   let fixture: ComponentFixture<InputModuleComponent>;
 
