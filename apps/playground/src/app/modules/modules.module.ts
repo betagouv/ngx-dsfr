@@ -16,6 +16,7 @@ import { DsfrBadgeModule } from '@betagouv/ngx-dsfr/badge';
 import { DsfrHeaderModule } from '@betagouv/ngx-dsfr/header';
 import { DsfrNavigationModule } from '@betagouv/ngx-dsfr/navigation';
 import { DsfrRadioModule } from '@betagouv/ngx-dsfr/radio';
+import { DsfrCheckboxModule } from '@betagouv/ngx-dsfr/checkbox';
 import { DsfrStepperModule } from '@betagouv/ngx-dsfr/stepper';
 import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
@@ -37,6 +38,7 @@ import { SharedModule } from '../shared/shared.module';
 import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
+import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 
 @NgModule({
   imports: [
@@ -52,6 +54,7 @@ import { TileModuleComponent } from './components/tile-module/tile-module.compon
     DsfrHeaderModule,
     DsfrInputModule,
     DsfrTileModule,
+    DsfrCheckboxModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -69,6 +72,8 @@ import { TileModuleComponent } from './components/tile-module/tile-module.compon
     HeaderModuleComponent,
     InputModuleComponent,
     TileModuleComponent,
+    CheckboxModuleComponent,
+    StepperModuleComponent
   ]
 })
 export class ModulesModule { }

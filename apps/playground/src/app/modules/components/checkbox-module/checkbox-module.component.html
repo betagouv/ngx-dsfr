@@ -1,0 +1,98 @@
+<section class="module-description">
+  <h2>Description</h2>
+  <p>Some description</p>
+</section>
+
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+
+  <div class="simulation">
+    <div class="settings" *ngIf="form">
+      <form
+        [formGroup]="form"
+        novalidate>
+        <input formControlName="label"/>
+      </form>
+    </div>
+    <play-simulator>
+      <div class="simulation__container">
+        <dsfr-checkbox
+          legend="Template driven test"
+          name="templateDrivenTest"
+          fieldSetId="templateDrivenTest"
+          [items]="templateDrivenItems"
+          [(ngModel)]="templateDrivenSelected">
+        </dsfr-checkbox>
+        Selected value is: {{ templateDrivenSelected | json }}
+
+        <hr>
+
+        <form *ngIf="reactiveFormsGroup" [formGroup]="reactiveFormsGroup">
+          <dsfr-checkbox
+            legend="Reactive forms test"
+            name="reactiveFormsTest"
+            fieldSetId="reactiveFormsTest"
+            [items]="reactiveFormsItems"
+            formControlName="checkbox">
+          </dsfr-checkbox>
+          Selected value is: {{ reactiveFormsGroup.controls['checkbox'].value | json }}
+        </form>
+
+        <hr>
+
+        <dsfr-checkbox
+          legend="Inline test with hint"
+          name="inlineTest"
+          hint="Ceci est un test"
+          fieldSetId="inlineTest"
+          [items]="inlineItemsWithHint"
+          [(ngModel)]="inlineModel"
+          [inline]="true">
+        </dsfr-checkbox>
+        Selected value is: {{inlineModel | json}}
+
+        <hr>
+
+        <dsfr-checkbox
+          legend="Success test"
+          name="successTest"
+          fieldSetId="successTest"
+          [hasSucceeded]="true"
+          successMessage="Success message"
+          successId="successTest-valid"
+          [items]="successItems"
+          [(ngModel)]="successModel">
+        </dsfr-checkbox>
+        Selected value is: {{successModel | json}}
+
+        <hr>
+
+        <dsfr-checkbox
+          legend="Error test"
+          name="errorTest"
+          fieldSetId="errorTest"
+          [hasFailed]="true"
+          failureId="errorTest-failure"
+          failureMessage="Error message"
+          [items]="errorItems"
+          [(ngModel)]="errorModel"
+          [inline]="true">
+        </dsfr-checkbox>
+        Selected value is: {{errorModel | json}}
+
+        <dsfr-checkbox
+          legend="Disabled and small test"
+          name="disabledTest"
+          fieldSetId="disabledTest"
+          [disabled]="true"
+          [size]="smallSize"
+          [items]="disabledItems"
+          [(ngModel)]="disabledModel"
+          [inline]="true">
+        </dsfr-checkbox>
+        Selected value is: {{disabledModel | json}}
+
+      </div>
+    </play-simulator>
+  </div>
+</section>
