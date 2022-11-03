@@ -1,0 +1,48 @@
+<div
+  class="fr-input-group"
+  [ngClass]="inputGroupClasses">
+  <label class="fr-label" [for]="id">
+    {{ label }}
+    <span *ngIf="hint" class="fr-hint-text">
+      {{ hint }}
+    </span>
+  </label>
+  <ng-container *ngIf="type === 'textarea'; else standardInput">
+    <textarea
+      class="fr-input"
+      [name]="name ? name : ''"
+      [id]="id"
+      [placeholder]="placeholder"
+      [attr.aria-describedby]="ariaDescribedby"
+      [disabled]="disabled ? 'disabled' : false"
+      [ngClass]="inputClasses"
+      (blur)="onBlur($event)"
+      (keyUp)="onKeyup($event)"
+      (focus)="onFocus($event)"
+      [(ngModel)]="value">
+    </textarea>
+  </ng-container>
+  <ng-template #standardInput>
+    <div [class]="iconClass">
+      <input
+        class="fr-input"
+        [type]="type"
+        [name]="name ? name : ''"
+        [id]="id"
+        [placeholder]="placeholder"
+        [attr.aria-describedby]="ariaDescribedby"
+        [disabled]="disabled"
+        [ngClass]="inputClasses"
+        (blur)="onBlur($event)"
+        (keyUp)="onKeyup($event)"
+        (focus)="onFocus($event)"
+        [(ngModel)]="value">
+    </div>
+  </ng-template>
+  <p *ngIf="hasFailed" [id]="id + '-error'" class="fr-error-text">
+    {{ failureMessage }}
+  </p>
+  <p *ngIf="hasSucceeded" [id]="id + '-valid'" class="fr-valid-text">
+    {{ successMessage }}
+  </p>
+</div>

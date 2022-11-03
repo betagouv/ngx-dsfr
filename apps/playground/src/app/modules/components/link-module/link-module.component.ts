@@ -43,7 +43,7 @@ export class LinkModuleComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  constructor(private formBuilder: NonNullableFormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();
