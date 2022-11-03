@@ -18,7 +18,7 @@ import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
 import {
   DsfrNavigationComponent,
   EMPTY_NAVIGATION_ERROR,
-  Navigation,
+  Navigation
 } from '../navigation.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrNavigationHarness } from './navigation.harness';
@@ -32,121 +32,121 @@ describe('DsfrNavigationComponent', () => {
 
   const testNavigation: Navigation = [
     {
-      "id": "a",
-      "label": "MEGA MENU",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
+      'id': 'a',
+      'label': 'MEGA MENU',
+      'userRoles': [
+        'ROLE_USER',
+        'ROLE_ADMIN'
       ],
-      "href": "modules",
-      "child": {
-        "isMega": true,
-        "title": "Titre éditorialisé",
-        "description": "Lorem [...] elit ut.",
-        "children": [
+      'href': 'modules',
+      'child': {
+        'isMega': true,
+        'title': 'Titre éditorialisé',
+        'description': 'Lorem [...] elit ut.',
+        'children': [
           {
-            "id": "b",
-            "label": "Config",
-            "href": "admin/dashboard/config",
-            "children": [
+            'id': 'b',
+            'label': 'Config',
+            'href': 'admin/dashboard/config',
+            'children': [
               {
-                "id": 'c',
-                "label": "Config 1",
-                "href": "admin/dashboard/config",
+                'id': 'c',
+                'label': 'Config 1',
+                'href': 'admin/dashboard/config'
               },
               {
-                "id": 'f',
-                "label": "Config 2",
-                "href": "/modules/navigation"
-              },
+                'id': 'f',
+                'label': 'Config 2',
+                'href': '/modules/navigation'
+              }
             ]
           },
           {
-            "id": "b2",
-            "label": "Config",
-            "href": "admin/dashboard/config",
-            "children": [
+            'id': 'b2',
+            'label': 'Config',
+            'href': 'admin/dashboard/config',
+            'children': [
               {
-                "id": 'eec',
-                "label": "ConfigEE 1",
-                "href": "admin/dashboard/config",
+                'id': 'eec',
+                'label': 'ConfigEE 1',
+                'href': 'admin/dashboard/config'
               },
               {
-                "id": 'fee',
-                "label": "Configee 2",
-                "href": "admin/dashboard/config"
-              },
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "id": "k",
-      "label": "MEGA MENU 2",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
-      ],
-      "href": "dash",
-      "child": {
-        "isMega": true,
-        "title": "title",
-        "description": "description",
-        "children": [
-          {
-            "id": "l",
-            "label": "Config",
-            "href": "admin/dashboard/config",
-            "children": [
-              {
-                "id": 'm',
-                "label": "Config",
-                "href": "admin/dashboard/config",
-              },
-              {
-                "id": 'p',
-                "label": "Config",
-                "href": "admin/dashboard/config"
-              },
+                'id': 'fee',
+                'label': 'Configee 2',
+                'href': 'admin/dashboard/config'
+              }
             ]
           }
         ]
       }
     },
     {
-      "id": "g",
-      "label": "Simple Menu",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
+      'id': 'k',
+      'label': 'MEGA MENU 2',
+      'userRoles': [
+        'ROLE_USER',
+        'ROLE_ADMIN'
       ],
-      "href": "dashboard",
-      "child": {
-        "isMega": false,
-        "children": [
+      'href': 'dash',
+      'child': {
+        'isMega': true,
+        'title': 'title',
+        'description': 'description',
+        'children': [
           {
-            "id": 'h',
-            "label": "Config",
-            "href": "admin/dashboard/config",
-          },
-          {
-            "id": 'i',
-            "label": "Config",
-            "href": "admin/dashboard/config",
-          },
+            'id': 'l',
+            'label': 'Config',
+            'href': 'admin/dashboard/config',
+            'children': [
+              {
+                'id': 'm',
+                'label': 'Config',
+                'href': 'admin/dashboard/config'
+              },
+              {
+                'id': 'p',
+                'label': 'Config',
+                'href': 'admin/dashboard/config'
+              }
+            ]
+          }
         ]
       }
     },
     {
-      "id": "j",
-      "label": "Acces direct",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
+      'id': 'g',
+      'label': 'Simple Menu',
+      'userRoles': [
+        'ROLE_USER',
+        'ROLE_ADMIN'
       ],
-      "href": "dashboard",
+      'href': 'dashboard',
+      'child': {
+        'isMega': false,
+        'children': [
+          {
+            'id': 'h',
+            'label': 'Config',
+            'href': 'admin/dashboard/config'
+          },
+          {
+            'id': 'i',
+            'label': 'Config',
+            'href': 'admin/dashboard/config'
+          }
+        ]
+      }
     },
+    {
+      'id': 'j',
+      'label': 'Acces direct',
+      'userRoles': [
+        'ROLE_USER',
+        'ROLE_ADMIN'
+      ],
+      'href': 'dashboard'
+    }
   ];
 
   beforeEach(async () => {
@@ -160,8 +160,8 @@ describe('DsfrNavigationComponent', () => {
       providers: [
         {
           provide: Router,
-          useValue: { url: '' }
-        },
+          useValue: {url: ''}
+        }
       ]
     }).compileComponents();
 

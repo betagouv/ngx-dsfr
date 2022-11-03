@@ -42,6 +42,9 @@
       "@betagouv/ngx-dsfr/stepper": [
         "libs/ngx-dsfr/stepper/src/index.ts"
       ],
+      "@betagouv/ngx-dsfr/alert": [
+        "libs/ngx-dsfr/alert/src/index.ts"
+      ],
       "@betagouv/ngx-dsfr/testing": [
         "libs/ngx-dsfr/src/lib/testing/index.ts"
       ],
