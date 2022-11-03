@@ -6,9 +6,7 @@
   "targets": {
     "build-base": {
       "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/ngx-dsfr"
-      ],
+      "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
         "project": "libs/ngx-dsfr/ng-package.json"
       },
@@ -22,30 +20,37 @@
       },
       "defaultConfiguration": "production"
     },
-    "adapt-css-paths": {
+    "adapt-css-paths-in-icons-files": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": [
-        "dist/libs/ngx-dsfr"
-      ],
+      "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
-        "directory": "assets/icons",
+        "directories": "assets/icons",
         "glob": "**/*.css",
-        "searchValue": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
+        "searchValues": "url\\(..\\/..\\/..\\/icons\\/.+?\\/(.+?)\\)",
         "flags": "g",
-        "replacement": "url(./$1)"
+        "replacements": "url(./$1)"
+      }
+    },
+    "adapt-css-paths-in-components-files": {
+      "executor": "@ngx-dsfr/architect:mass-updator",
+      "outputs": ["dist/libs/ngx-dsfr"],
+      "options": {
+        "directories": ["esm2020", "fesm2015", "fesm2020"],
+        "glob": "**/*.mjs",
+        "searchValues": "url\\(..\\/..\\/icons\\/.+?\\/(.+?)\\)",
+        "flags": "g",
+        "replacements": "url(./$1)"
       }
     },
     "adapt-to-shadow-dom": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": [
-        "dist/libs/ngx-dsfr"
-      ],
+      "outputs": ["dist/libs/ngx-dsfr"],
       "options": {
-        "directory": "assets/styling",
+        "directories": "assets/styling",
         "glob": "core-styling.css",
-        "searchValue": ":root",
+        "searchValues": [":root", "body"],
         "flags": "g",
-        "replacement": ":host",
+        "replacements": [":host", ".content-wrapper"],
         "rewrite": false,
         "suffix": "shadow"
       }
@@ -55,7 +60,8 @@
       "options": {
         "commands": [
           "nx run ngx-dsfr:build-base",
-          "nx run ngx-dsfr:adapt-css-paths",
+          "nx run ngx-dsfr:adapt-css-paths-in-icons-files",
+          "nx run ngx-dsfr:adapt-css-paths-in-components-files",
           "nx run ngx-dsfr:adapt-to-shadow-dom"
         ],
         "parallel": false
@@ -63,9 +69,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/ngx-dsfr"
-      ],
+      "outputs": ["coverage/libs/ngx-dsfr"],
       "options": {
         "jestConfig": "libs/ngx-dsfr/jest.config.ts",
         "passWithNoTests": true
@@ -84,7 +88,9 @@
           "libs/ngx-dsfr/stepper/**/*.ts",
           "libs/ngx-dsfr/stepper/**/*.html",
           "libs/ngx-dsfr/alert/**/*.ts",
-          "libs/ngx-dsfr/alert/**/*.html"
+          "libs/ngx-dsfr/alert/**/*.html",
+          "libs/ngx-dsfr/header/**/*.ts",
+          "libs/ngx-dsfr/header/**/*.html"
         ]
       }
     }

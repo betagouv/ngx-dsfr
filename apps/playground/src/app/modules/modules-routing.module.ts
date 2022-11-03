@@ -10,6 +10,7 @@ import { Route, RouterModule } from '@angular/router';
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { ButtonModuleComponent } from './components/button-module/button-module.component';
 import { BadgeModuleComponent } from './components/badge-module/badge-module.component';
+import { HeaderModuleComponent } from './components/header-module/header-module.component';
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
@@ -26,6 +27,10 @@ const routes: Route[] = [
   {
     path: 'button',
     component: ButtonModuleComponent
+  },
+  {
+    path: 'header',
+    component: HeaderModuleComponent
   },
   {
     path: 'link',
@@ -53,5 +58,4 @@ const routes: Route[] = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ModulesRoutingModule {
-}
+export class ModulesRoutingModule {}

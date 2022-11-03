@@ -1,4 +1,9 @@
-<nav *ngIf="navigation" class="fr-nav" id="header-navigation" role="navigation" aria-label="Menu principal">
+<nav
+  *ngIf="navigation"
+  class="fr-nav"
+  id="header-navigation"
+  role="navigation"
+  aria-label="Menu principal">
   <ul class="fr-nav__list">
     <ng-container *ngFor="let menuItem of navigation">
       <li class="fr-nav__item">
@@ -19,25 +24,43 @@
               (click)="handleMenu(menuItem.id)"
               #menuButtonItem
               class="fr-nav__btn"
-              [attr.aria-current]="isRouterLinkActive(menuItem.href) ? true : undefined"
+              [attr.aria-current]="
+                isRouterLinkActive(menuItem.href) ? true : undefined
+              "
               [attr.aria-controls]="menuItem.id">
               {{ menuItem.label }}
             </button>
-            <div #dropdownItem *ngIf="menuItem.child" class="fr-collapse fr-mega-menu" [id]="menuItem.id" tabindex="-1">
+            <div
+              #dropdownItem
+              *ngIf="menuItem.child"
+              class="fr-collapse fr-mega-menu"
+              [id]="menuItem.id"
+              tabindex="-1">
               <div class="fr-container fr-container--fluid fr-container-lg">
-                <button (click)="hideActiveDropdown()" class="fr-link--close fr-link" [attr.aria-controls]="menuItem.id">Fermer</button>
+                <button
+                  (click)="hideActiveDropdown()"
+                  class="fr-link--close fr-link"
+                  [attr.aria-controls]="menuItem.id">
+                  Fermer
+                </button>
                 <div class="fr-grid-row fr-grid-row-lg--gutters">
-                  <div class="fr-col-12 fr-col-lg-8 fr-col-offset-lg-4--right fr-mb-4v">
+                  <div
+                    class="fr-col-12 fr-col-lg-8 fr-col-offset-lg-4--right fr-mb-4v">
                     <div class="fr-mega-menu__leader">
-                      <h4 class="fr-h4 fr-mb-2v">{{ menuItem.child?.title }}</h4>
-                      <p class="fr-hidden fr-displayed-lg">{{ menuItem.child?.description }}</p>
-                      <a class="fr-link fr-fi-arrow-right-line fr-link--icon-right fr-link--align-on-content"
+                      <h4 class="fr-h4 fr-mb-2v">{{ menuItem.child.title }}</h4>
+                      <p class="fr-hidden fr-displayed-lg">
+                        {{ menuItem.child.description }}
+                      </p>
+                      <a
+                        class="fr-link fr-fi-arrow-right-line fr-link--icon-right fr-link--align-on-content"
                         [routerLink]="menuItem.href">
                         Voir toute la rubrique
                       </a>
                     </div>
                   </div>
-                  <div class="fr-col-12 fr-col-lg-3" *ngFor="let item of menuItem.child?.children">
+                  <div
+                    class="fr-col-12 fr-col-lg-3"
+                    *ngFor="let item of menuItem.child?.children">
                     <h5 class="fr-mega-menu__category">
                       <a
                         [routerLink]="[item.href]"
@@ -45,7 +68,7 @@
                         ariaCurrentWhenActive="page"
                         class="fr-nav__link"
                         target="_self">
-                        {{item.label}}
+                        {{ item.label }}
                       </a>
                     </h5>
                     <ul class="fr-mega-menu__list">
@@ -57,7 +80,7 @@
                           routerLinkActive="active"
                           class="fr-nav__link"
                           target="_self">
-                          {{link.label}}
+                          {{ link.label }}
                         </a>
                       </li>
                     </ul>
@@ -74,11 +97,16 @@
               (click)="handleMenu(menuItem.id)"
               #menuButtonItem
               class="fr-nav__btn"
-              [attr.aria-current]="isRouterLinkActive(menuItem.href) ? true : undefined"
+              [attr.aria-current]="
+                isRouterLinkActive(menuItem.href) ? true : undefined
+              "
               [attr.aria-controls]="menuItem.id">
               {{ menuItem.label }}
             </button>
-            <div #dropdownItem class="fr-collapse fr-menu" [id]="menuItem.id">
+            <div
+              #dropdownItem
+              class="fr-collapse fr-menu"
+              [id]="menuItem.id">
               <ul class="fr-menu__list">
                 <li *ngFor="let link of menuItem.child?.children">
                   <a
@@ -87,7 +115,7 @@
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page"
                     target="_self">
-                    {{link.label}}
+                    {{ link.label }}
                   </a>
                 </li>
               </ul>

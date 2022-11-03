@@ -1,13 +1,12 @@
 <div class="form-control">
   <label>
-    <code>{{ name }}</code> : ( <span class="property-type">{{ type }}</span> )
-    <span class="property-description">{{ description }}</span>
+    <code>{{ name }}</code>
   </label>
   <ng-container [ngSwitch]="type">
     <mat-form-field
       *ngSwitchCase="'string'"
       class="string-property">
-      <mat-label>{{ name | titlecase }}</mat-label>
+      <mat-label>{{ label || (name | titlecase) }}</mat-label>
       <input
         matInput
         [formControl]="formControl"

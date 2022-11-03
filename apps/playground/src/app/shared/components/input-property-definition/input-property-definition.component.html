@@ -1,0 +1,11 @@
+<dt>
+  <code>{{ name }}</code>
+</dt>
+<dd>
+  <span class="optional-mandatory">{{ requiredBadgeValue }}</span>
+  <ng-content></ng-content>
+  <span
+    class="input-property-type"
+    [innerHTML]="type"></span>
+  <span class="input-property-default">{{ default }}</span>
+</dd>

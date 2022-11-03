@@ -23,17 +23,17 @@
         },
         "assets": [
           "apps/playground/src/favicon.ico",
-          "apps/playground/src/assets",
+          "apps/playground/src/assets/illustrations",
           {
             "glob": "*.css",
             "input": "./node_modules/@betagouv/ngx-dsfr/assets/styling/",
-            "output": "/",
+            "output": "/assets/styling/",
             "followSymlinks": true
           },
           {
             "glob": "**/*",
             "input": "./node_modules/@betagouv/ngx-dsfr/assets/icons/",
-            "output": "/icons/",
+            "output": "/assets/icons/",
             "followSymlinks": true
           }
         ],
@@ -54,8 +54,8 @@
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumWarning": "20kb",
+              "maximumError": "40kb"
             }
           ],
           "fileReplacements": [

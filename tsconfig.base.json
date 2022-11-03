@@ -11,7 +11,7 @@
     "target": "es2015",
     "module": "esnext",
     "lib": [
-      "es2017",
+      "es2021",
       "dom"
     ],
     "skipLibCheck": true,
@@ -26,6 +26,9 @@
       ],
       "@betagouv/ngx-dsfr/button": [
         "libs/ngx-dsfr/button/src/index.ts"
+      ],
+      "@betagouv/ngx-dsfr/header": [
+        "libs/ngx-dsfr/header/src/index.ts"
       ],
       "@betagouv/ngx-dsfr/link": [
         "libs/ngx-dsfr/link/src/index.ts"
