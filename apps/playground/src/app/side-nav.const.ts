@@ -16,6 +16,10 @@ export const SIDE_NAV: NavItem[] = [
     label: 'Modules',
     children: [
       {
+        label: 'Alert',
+        path: '/modules/alert'
+      },
+      {
         label: 'Badge',
         path: '/modules/badge'
       },
@@ -48,9 +52,9 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/stepper'
       },
       {
-        label: 'Alert',
-        path: '/modules/alert'
-      }
+        label: 'Tile',
+        path: '/modules/tile'
+      },
     ]
   }
 ];
