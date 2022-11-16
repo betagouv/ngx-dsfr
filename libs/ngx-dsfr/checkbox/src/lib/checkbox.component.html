@@ -1,34 +1,59 @@
-<div class="fr-form-group">
-  <fieldset
-    class="fr-fieldset"
-    [ngClass]="fieldSetClasses"
-    [attr.aria-labelledby]="ariaLabelledBy"
-    [attr.role]="hasFailed || hasSucceeded ? 'group' : null"
-    [disabled]="disabled">
-    <legend class="fr-fieldset__legend fr-text--regular" [id]="fieldSetId">
-      {{legend}}
-      <span *ngIf="hint" class="fr-hint-text">{{hint}}</span>
-    </legend>
-    <div class="fr-fieldset__content">
-      <div *ngFor="let item of items" [class]="'fr-checkbox-group fr-checkbox-group--' + size">
-        <input
-          [checked]="isChecked(item.value)"
-          (change)="onInputChange($event)"
-          [id]="item.id"
-          type="checkbox"
-          [value]="item.value"
-          [name]="name">
-          <label class="fr-label" [for]="item.id">
-            {{item.label}}
-            <span *ngIf="item.hint" class="fr-hint-text">{{item.hint}}</span>
-          </label>
+<ng-container *ngIf="items.length === 1; else groupTemplate">
+  <div [class]="'fr-checkbox-group fr-checkbox-group--' + size">
+    <input
+      [checked]="isChecked(items[0].value)"
+      (change)="onInputChange($event)"
+      [id]="items[0].id"
+      type="checkbox"
+      [value]="items[0].value"
+      [name]="items[0].name">
+      <label class="fr-label" [for]="items[0].id">
+        {{items[0].label}}
+        <span *ngIf="items[0].hint" class="fr-hint-text">{{items[0].hint}}</span>
+      </label>
+      <p *ngIf="hasFailed" [id]="fieldSetId + '-error'" class="fr-error-text">
+        {{failureMessage}}
+      </p>
+      <p *ngIf="hasSucceeded" [id]="fieldSetId + '-valid'" class="fr-valid-text">
+        {{successMessage}}
+      </p>
+  </div>
+</ng-container>
+<ng-template #groupTemplate>
+  <div class="fr-form-group">
+    <fieldset
+      class="fr-fieldset"
+      [ngClass]="fieldSetClasses"
+      [attr.aria-labelledby]="ariaLabelledBy"
+      [attr.role]="hasFailed || hasSucceeded ? 'group' : null"
+      [disabled]="disabled">
+      <legend class="fr-fieldset__legend fr-text--regular" [id]="fieldSetId">
+        {{legend}}
+        <span *ngIf="hint" class="fr-hint-text">{{hint}}</span>
+      </legend>
+      <div class="fr-fieldset__content">
+        <div *ngFor="let item of items" [class]="'fr-checkbox-group fr-checkbox-group--' + size">
+          <input
+            [checked]="isChecked(item.value)"
+            (change)="onInputChange($event)"
+            [id]="item.id"
+            type="checkbox"
+            [value]="item.value"
+            [name]="item.name">
+            <label class="fr-label" [for]="item.id">
+              {{item.label}}
+              <span *ngIf="item.hint" class="fr-hint-text">{{item.hint}}</span>
+            </label>
+        </div>
       </div>
-    </div>
-    <p *ngIf="hasFailed" [id]="fieldSetId + '-error'" class="fr-error-text">
-      {{failureMessage}}
-    </p>
-    <p *ngIf="hasSucceeded" [id]="fieldSetId + '-valid'" class="fr-valid-text">
-      {{successMessage}}
-    </p>
-  </fieldset>
-</div>
+      <p *ngIf="hasFailed" [id]="fieldSetId + '-error'" class="fr-error-text">
+        {{failureMessage}}
+      </p>
+      <p *ngIf="hasSucceeded" [id]="fieldSetId + '-valid'" class="fr-valid-text">
+        {{successMessage}}
+      </p>
+    </fieldset>
+  </div>
+</ng-template>
+
+

@@ -12,7 +12,6 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { DsfrCheckboxComponent, EMPTY_LEGEND_ERROR, CheckboxItem } from '../checkbox.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrCheckboxHarness } from './checkbox.harness';
-import { FormsModule } from '@angular/forms';
 
 describe('DsfrCheckboxComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -27,17 +26,19 @@ describe('DsfrCheckboxComponent', () => {
   const testItems: CheckboxItem[] = [{
     label: 'item 1',
     id: 'item_1',
+    name: 'item_1',
     value: 'item_1'
   },
   {
     label: 'item 2',
     id: 'item_2',
+    name: 'item_2',
     value: 'item_2'
   }];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [],
       declarations: [
         DsfrCheckboxComponent,
         TestHostComponent

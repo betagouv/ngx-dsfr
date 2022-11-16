@@ -47,7 +47,7 @@ export class DsfrCheckboxHarness extends ComponentHarness {
    * Retrieves the id values of the checkbox input tags
    * in the DsfrCheckboxComponent's Template
    *
-   * @returns A Promise that resolves to the id values as a strings or null
+   * @returns A Promise that resolves to an array of id values as strings or null
    */
   async getCheckboxInputsIds(): Promise<(string | null)[]> {
     return this.getCheckboxInputsAttributes('id');
@@ -57,7 +57,7 @@ export class DsfrCheckboxHarness extends ComponentHarness {
    * Retrieves the values of the checkbox input tags
    * in the DsfrCheckboxComponent's Template
    *
-   * @returns A Promise that resolves to the values as a strings or null
+   * @returns A Promise that resolves to an array with the input values as strings or null
    */
   async getCheckboxInputsValues(): Promise<(string | null)[]> {
     return this.getCheckboxInputsAttributes('value');
@@ -67,7 +67,7 @@ export class DsfrCheckboxHarness extends ComponentHarness {
    * Retrieves the name values of the checkbox input tags
    * in the DsfrCheckboxComponent's Template
    *
-   * @returns A Promise that resolves to the name values as a strings or null
+   * @returns A Promise that resolves to an array of name values as strings or null
    */
   async getCheckboxInputsNames(): Promise<(string | null)[]> {
     return this.getCheckboxInputsAttributes('name');

@@ -9,13 +9,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * TypeScript entities and constants
  */
 export const EMPTY_LEGEND_ERROR: string =
-  'You MUST provide a legend for these radio buttons 😡 !!!';
-export const EMPTY_NAME_ERROR: string =
-  'You MUST provide a name for these radio buttons 😡 !!!';
+  'You MUST provide a legend for that group of checkboxes 😡 !!!';
 export const EMPTY_FIELDSET_ID_ERROR: string =
   'You MUST provide a value for the fieldSetId attribute 😡 !!!';
 export const EMPTY_ITEMS_ERROR: string =
-  'You MUST provide a value for the items attribute 😡 !!!';
+  'You MUST provide a non-empty array for the items attribute 😡 !!!';
 export const EMPTY_FAILURE_MESSAGE_ERROR: string =
   'You MUST provide a value for the failureMessage attribute when hasFailed is true 😡 !!!';
 export const EMPTY_SUCCESS_MESSAGE_ERROR: string =
@@ -25,6 +23,7 @@ export interface CheckboxItem {
   id: string;
   label: string;
   value: string;
+  name: string;
   hint?: string;
 }
 
@@ -43,7 +42,6 @@ export interface CheckboxItem {
 
 export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() legend = '';
-  @Input() name = '';
   @Input() fieldSetId = '';
   @Input() hint = '';
   @Input() items: CheckboxItem[] = [];
@@ -83,15 +81,16 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   }
 
   ngOnInit(): void {
-    if (!this.legend) {
-      throw EMPTY_LEGEND_ERROR;
+
+    if (this.items?.length && this.items.length > 1) {
+      if (!this.legend) {
+        throw EMPTY_LEGEND_ERROR;
+      }
+      if (!this.fieldSetId) {
+        throw EMPTY_FIELDSET_ID_ERROR;
+      }
     }
-    if (!this.name) {
-      throw EMPTY_NAME_ERROR;
-    }
-    if (!this.fieldSetId) {
-      throw EMPTY_FIELDSET_ID_ERROR;
-    }
+
     if (this.items.length === 0) {
       throw EMPTY_ITEMS_ERROR;
     }
@@ -136,18 +135,13 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
 
   onInputChange(event: any) {
     if (event.target) {
-      this.handleValues(event.target.value)
+      if (this.values.includes(event.target.value)) {
+        this.values = this.values.filter((element: any) => !(element === event.target.value));
+      } else {
+        this.values.push(event.target.value)
+      }
+      this.onChange(this.values)
     }
-  }
-
-  handleValues(value: string) {
-    if (this.values.includes(value)) {
-      this.values = this.values.filter((element: any) => !(element === value));
-    } else {
-      this.values.push(value)
-    }
-    console.log(this.values);
-    this.onChange(this.values)
   }
 
   isChecked(value: string) {

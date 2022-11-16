@@ -2,7 +2,7 @@
  * Angular imports
  */
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
 @Component({
@@ -17,29 +17,35 @@ export class CheckboxModuleComponent implements OnInit {
     {
       label: '1',
       id: 'Test_1',
-      value: '1'
+      value: '1',
+      name: '1'
     },
     {
       label: '2',
       id: 'Test_2',
-      value: '2'
+      value: '2',
+      name: '2'
     }
   ];
+
   reactiveFormsItems = [
     {
       label: '1',
       id: 'Test-1',
-      value: '1'
+      value: '1',
+      name: '1'
     },
     {
       label: '2',
       id: 'Test-2',
-      value: '2'
+      value: '2',
+      name: '2'
     },
     {
       label: '3',
       id: 'Test-3',
-      value: '3'
+      value: '3',
+      name: '3'
     }
   ];
 
@@ -48,12 +54,14 @@ export class CheckboxModuleComponent implements OnInit {
       label: '1',
       id: 'inline_1',
       value: '1',
+      name: '1',
       hint: 'Description 1'
     },
     {
       label: '2',
       id: 'inline_2',
       value: '2',
+      name: '2',
       hint: 'Description 2'
     }
   ];
@@ -62,12 +70,14 @@ export class CheckboxModuleComponent implements OnInit {
     {
       label: '1',
       id: 'success_1',
-      value: '1'
+      value: '1',
+      name: '1'
     },
     {
       label: '2',
       id: 'success_2',
-      value: '2'
+      value: '2',
+      name: '2'
     }
   ];
 
@@ -75,12 +85,14 @@ export class CheckboxModuleComponent implements OnInit {
     {
       label: '1',
       id: 'error_1',
-      value: '1'
+      value: '1',
+      name: '1'
     },
     {
       label: '2',
       id: 'error_2',
-      value: '2'
+      value: '2',
+      name: '2'
     }
   ];
 
@@ -88,12 +100,14 @@ export class CheckboxModuleComponent implements OnInit {
     {
       label: '1',
       id: 'disabled_1',
-      value: '1'
+      value: '1',
+      name: '1'
     },
     {
       label: '2',
       id: 'disabled_2',
-      value: '2'
+      value: '2',
+      name: '2'
     }
   ];
 

@@ -13,7 +13,6 @@ import { CheckboxItem } from '../checkbox.component';
   template: `
     <dsfr-checkbox
       [legend]="testLegend"
-      [name]="testName"
       [fieldSetId]="testFieldSetId"
       [hint]="testHint"
       [items]="testItems"
@@ -29,7 +28,6 @@ import { CheckboxItem } from '../checkbox.component';
 })
 export class TestHostComponent {
   @Input() testLegend = '';
-  @Input() testName = '';
   @Input() testFieldSetId = '';
   @Input() testHint = '';
   @Input() testItems: CheckboxItem[] = [];
