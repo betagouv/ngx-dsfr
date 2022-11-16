@@ -1,4 +1,5 @@
 {
+  "name": "playground",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/playground/src",
@@ -6,9 +7,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/playground",
         "index": "apps/playground/src/index.html",
@@ -17,9 +16,7 @@
         "tsConfig": "apps/playground/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "apps/playground/src/assets/styling"
-          ]
+          "includePaths": ["apps/playground/src/assets/styling"]
         },
         "assets": [
           "apps/playground/src/favicon.ico",
@@ -106,9 +103,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/playground"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/apps/playground"],
       "options": {
         "jestConfig": "apps/playground/jest.config.ts",
         "passWithNoTests": true
