@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Imports
+@use "@angular/material" as mat;
+@use "mixins" as mixins;
+
+// Variables
+$primary-palette: mat.$pink-palette;
+$primary-color: mat.get-color-from-palette($primary-palette, 300);
+$accent-palette: mat.$blue-grey-palette;
+$accent-color: mat.get-color-from-palette($accent-palette, 300);
+$dark-accent-color: mat.get-color-from-palette($accent-palette, 700);
+
+// Actual styling
+a {
+  border-bottom: thin solid currentColor;
+
+  .mat-icon {
+    height: auto;
+    width: auto;
+    font-size: 1em;
+    margin-bottom: -2px;
+  }
+}
+
+code {
+  font-family: "Ubuntu Mono", monospace;
+  background-color: $dark-accent-color;
+  color: white;
+  @include mixins.badge-like;
+}

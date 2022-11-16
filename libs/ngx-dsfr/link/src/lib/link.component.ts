@@ -1,7 +1,8 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { ElementSize, ElementAlignment } from '@betagouv/ngx-dsfr';
 
 /**
  * TypeScript entities and constants
@@ -12,17 +13,6 @@ export const EMPTY_LINK_ERROR: string =
   'You MUST provide a value for the link attribute 😡 !!!';
 export const EMPTY_TITLE_ERROR: string =
   'You MUST provide a value for the title attribute 😡 !!!';
-
-export enum IconAlignment {
-  RIGHT = 'right',
-  LEFT = 'left'
-}
-
-export enum LinkSize {
-  SMALL = 'sm',
-  MEDIUM = 'md',
-  LARGE = 'lg'
-}
 
 enum TemplateType {
   BACK_TO_TOP,
@@ -35,22 +25,22 @@ enum TemplateType {
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss']
 })
-export class DsfrLinkComponent implements OnInit {
+export class DsfrLinkComponent implements OnChanges {
   @Input() label: string = '';
   @Input() link: string = '';
   @Input() title: string = '';
   @Input() inline: boolean = true;
   @Input() icon: string | undefined;
-  @Input() iconAlignment: IconAlignment = IconAlignment.RIGHT;
+  @Input() iconAlignment: ElementAlignment = ElementAlignment.RIGHT;
   @Input() backToTop: boolean = false;
-  @Input() size: LinkSize = LinkSize.MEDIUM;
+  @Input() size: ElementSize = ElementSize.MEDIUM;
 
   template: TemplateType = TemplateType.INTERNAL;
   templateType: typeof TemplateType = TemplateType;
   isExternal: boolean = false;
   classes: string = '';
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if (this.backToTop) {
       this.template = TemplateType.BACK_TO_TOP;
     } else {
@@ -69,6 +59,8 @@ export class DsfrLinkComponent implements OnInit {
       this.template = this.isExternal
         ? TemplateType.EXTERNAL
         : TemplateType.INTERNAL;
+
+      this.classes = '';
 
       if (!this.inline) {
         this.initClasses();

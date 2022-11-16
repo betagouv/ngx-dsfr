@@ -1,0 +1,16 @@
+// Imports
+@use "variables" as var;
+
+// Actual styling
+.form-control {
+  display: flex;
+  align-items: center;
+
+  label {
+    margin: var.$default-margin;
+  }
+
+  .string-property {
+    width: 100%;
+  }
+}

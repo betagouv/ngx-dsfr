@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  */
 import { LinkModuleComponent } from './link-module.component';
 
-describe('LinkWrapperComponent', () => {
+describe('LinkModuleComponent', () => {
   let component: LinkModuleComponent;
   let fixture: ComponentFixture<LinkModuleComponent>;
 
@@ -22,7 +22,7 @@ describe('LinkWrapperComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -2,11 +2,11 @@
  * Angular imports
  */
 import { Component, Input } from '@angular/core';
+import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
 /**
  * Internal imports
  */
-import { IconAlignment } from '../link.component';
 
 @Component({
   template: `
@@ -26,6 +26,6 @@ export class TestHostComponent {
   @Input() testTitle: string = '';
   @Input() testInline: boolean = true;
   @Input() testIcon: string | undefined;
-  @Input() testIconAlignment: IconAlignment = IconAlignment.RIGHT;
+  @Input() testIconAlignment: ElementAlignment = ElementAlignment.RIGHT;
   @Input() testBackToTop: boolean = false;
 }

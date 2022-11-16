@@ -16,8 +16,40 @@ export const SIDE_NAV: NavItem[] = [
     label: 'Modules',
     children: [
       {
+        label: 'Badge',
+        path: '/modules/badge'
+      },
+      {
+        label: 'Button',
+        path: '/modules/button'
+      },
+      {
+        label: 'Header',
+        path: '/modules/header'
+      },
+      {
+        label: 'Input',
+        path: '/modules/input'
+      },
+      {
         label: 'Link',
         path: '/modules/link'
+      },
+      {
+        label: 'Navigation',
+        path: '/modules/navigation'
+      },
+      {
+        label: 'Radio',
+        path: '/modules/radio'
+      },
+      {
+        label: 'Stepper',
+        path: '/modules/stepper'
+      },
+      {
+        label: 'Alert',
+        path: '/modules/alert'
       }
     ]
   }
