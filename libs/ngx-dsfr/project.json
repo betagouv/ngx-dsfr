@@ -1,4 +1,5 @@
 {
+  "name": "ngx-dsfr",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/ngx-dsfr/src",
@@ -6,7 +7,7 @@
   "targets": {
     "build-base": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/ngx-dsfr"],
+      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
       "options": {
         "project": "libs/ngx-dsfr/ng-package.json"
       },
@@ -22,7 +23,7 @@
     },
     "adapt-css-paths-in-icons-files": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": ["dist/libs/ngx-dsfr"],
+      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
       "options": {
         "directories": "assets/icons",
         "glob": "**/*.css",
@@ -33,7 +34,7 @@
     },
     "adapt-css-paths-in-components-files": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": ["dist/libs/ngx-dsfr"],
+      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
       "options": {
         "directories": ["esm2020", "fesm2015", "fesm2020"],
         "glob": "**/*.mjs",
@@ -44,7 +45,7 @@
     },
     "adapt-to-shadow-dom": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": ["dist/libs/ngx-dsfr"],
+      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
       "options": {
         "directories": "assets/styling",
         "glob": "core-styling.css",
@@ -56,7 +57,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "nx run ngx-dsfr:build-base",
@@ -69,7 +70,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ngx-dsfr"],
+      "outputs": ["{workspaceRoot}/coverage/libs/ngx-dsfr"],
       "options": {
         "jestConfig": "libs/ngx-dsfr/jest.config.ts",
         "passWithNoTests": true
