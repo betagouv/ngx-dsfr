@@ -91,7 +91,9 @@ describe('DsfrTileComponent', () => {
         expect(error).toBe(EMPTY_LINK_ERROR);
       }
     });
+  });
 
+  describe(' required inputs are provided, ', () => {
     it('should display the right template when an external link is provided', async () => {
       testHost.testLink = testExternalLink;
       testHost.testTitle = testTitle;
@@ -135,26 +137,33 @@ describe('DsfrTileComponent', () => {
       );
       expect(routerLinkStubInstance.linkParams).toBe(testInternalLink);
     });
+  });
 
-    describe(' all required properties are provided, ', () => {
-      beforeEach(() => {
-        testHost.testLink = testInternalLink;
-        testHost.testTitle = testTitle;
-        testHost.testDescription = testDescription;
-        testHost.testAlign = testAlign;
-        testHost.testBreakpoint = testBreakpoint;
-        testHost.testImage = testImage;
-      });
+  describe(' all required properties are provided, ', () => {
 
-      it('should the right image path', async () => {
-        dsfrTileHarness = await harnessLoader.getHarness<DsfrTileHarness>(DsfrTileHarness);
-        expect(await dsfrTileHarness.getImageAttribute('src')).toBe(testImage);
-      });
+    beforeEach(async () => {
 
-      it('should the right text description', async () => {
-        dsfrTileHarness = await harnessLoader.getHarness<DsfrTileHarness>(DsfrTileHarness);
-        expect(await dsfrTileHarness.getDescriptionText()).toBe(testDescription);
-      });
+      testHost.testLink = testInternalLink;
+      testHost.testTitle = testTitle;
+      testHost.testDescription = testDescription;
+      testHost.testAlign = testAlign;
+      testHost.testBreakpoint = testBreakpoint;
+      testHost.testImage = testImage;
+      /*
+         * We're retrieving the Test Harness HERE since we can now,
+         * without any problem, trigger the Change Detection mechanism
+         *
+         * WARNING: Triggers the Change Detection mechanism
+         */
+      dsfrTileHarness = await harnessLoader.getHarness<DsfrTileHarness>(DsfrTileHarness);
+    });
+
+    it('should display the right image path', async () => {
+      expect(await dsfrTileHarness.getImageAttribute('src')).toBe(testImage);
+    });
+
+    it('should display the right text description', async () => {
+      expect(await dsfrTileHarness.getDescriptionText()).toBe(testDescription);
     });
   });
 });

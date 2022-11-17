@@ -8,7 +8,7 @@
     <a
       target="_blank"
       hreflang="fr"
-      title="The documentation page for the Header Component in the DSFR"
+      title="The documentation page for the Tile Component in the DSFR"
       href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/tuile">
       Tile
       <mat-icon>open_in_new</mat-icon>
@@ -29,14 +29,14 @@
   <dl class="input-properties">
     <play-input-property-definition
       name="link"
-      required="Required"
+      [required]="true"
       type="It takes a string, it can be routerLink or external like 'http://...'">
     </play-input-property-definition>
     <play-input-property-definition
       name="title"
       required="Required"
       type="It takes a string.">
-      The title of the tile, it display in a H4 tag.
+      The title of the tile, it's displayed in an H4 tag.
     </play-input-property-definition>
     <play-input-property-definition
       name="description"
@@ -70,18 +70,17 @@
 
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <mat-card *ngIf="formTitleDescriptionAndTitle">
+  <mat-card *ngIf="formTileDescriptionAndTitle">
     <mat-card-header>
       <mat-card-title>Tile with description and image</mat-card-title>
       <mat-card-subtitle>
-        Without the operator's logo, header actions or navigation. You can add
-        or remove the app's name and/or description
+        Without image, the description and title will be displayed correctly in the tile.
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="simulation">
       <div class="settings">
         <form
-          [formGroup]="formTitleDescriptionAndTitle"
+          [formGroup]="formTileDescriptionAndTitle"
           novalidate>
           <play-input-property-control
             formControlName="title"
@@ -117,7 +116,7 @@
           <button
             mat-raised-button
             color="accent"
-            (click)="formTitleDescriptionAndTitle.reset()">
+            (click)="formTileDescriptionAndTitle.reset()">
             Reset
           </button>
         </form>
@@ -125,25 +124,25 @@
       <div class="simulator-wrapper mat-elevation-z4">
         <play-simulator>
           <dsfr-tile
-            [title]="formTitleDescriptionAndTitle.getRawValue().title"
-            [align]="formTitleDescriptionAndTitle.getRawValue().align"
+            [title]="formTileDescriptionAndTitle.getRawValue().title"
+            [align]="formTileDescriptionAndTitle.getRawValue().align"
             image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
-            [description]="formTitleDescriptionAndTitle.getRawValue().description"
-            [link]="formTitleDescriptionAndTitle.getRawValue().link"
-            [breakpoint]="formTitleDescriptionAndTitle.getRawValue().breakpoint">
+            [description]="formTileDescriptionAndTitle.getRawValue().description"
+            [link]="formTileDescriptionAndTitle.getRawValue().link"
+            [breakpoint]="formTileDescriptionAndTitle.getRawValue().breakpoint">
           </dsfr-tile>
         </play-simulator>
       </div>
     </mat-card-content>
   </mat-card>
-  <mat-card *ngIf="formTitleWithoutImage">
+  <mat-card *ngIf="formTileWithoutImage">
     <mat-card-header>
       <mat-card-title>Tile without image</mat-card-title>
     </mat-card-header>
     <mat-card-content class="simulation">
       <div class="settings">
         <form
-          [formGroup]="formTitleWithoutImage"
+          [formGroup]="formTileWithoutImage"
           novalidate>
           <play-input-property-control
             formControlName="title"
@@ -166,34 +165,34 @@
           <button
             mat-raised-button
             color="accent"
-            (click)="formTitleWithoutImage.reset()">
+            (click)="formTileWithoutImage.reset()">
             Reset
           </button>
         </form>
       </div>
-      <div class="simulator-wrapper mat-elevation-z4" *ngIf="formTitleWithoutImage">
+      <div class="simulator-wrapper mat-elevation-z4" *ngIf="formTileWithoutImage">
         <play-simulator>
           <dsfr-tile
-            [title]="formTitleWithoutImage.getRawValue().title"
-            [align]="formTitleWithoutImage.getRawValue().align"
-            [description]="formTitleWithoutImage.getRawValue().description"
+            [title]="formTileWithoutImage.getRawValue().title"
+            [align]="formTileWithoutImage.getRawValue().align"
+            [description]="formTileWithoutImage.getRawValue().description"
             link="/modules/tile">
           </dsfr-tile>
         </play-simulator>
       </div>
     </mat-card-content>
   </mat-card>
-  <mat-card *ngIf="formTilegrid">
+  <mat-card *ngIf="formTileGrid">
     <mat-card-header>
       <mat-card-title>Grid tiles</mat-card-title>
       <mat-card-subtitle>
-        You can select the number of tiles do you want in your raw to see the rendering
+        You can select the number of tiles you want in your row to see the rendering
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="simulation">
-      <div class="settings" *ngIf="formTilegrid">
+      <div class="settings">
         <form
-          [formGroup]="formTilegrid"
+          [formGroup]="formTileGrid"
           novalidate>
           <play-input-property-control
             formControlName="nbTiles"
@@ -218,7 +217,7 @@
               <div [class]="colClass">
                 <dsfr-tile
                   title="This is a title"
-                  [align]="formTilegrid.getRawValue().align"
+                  [align]="formTileGrid.getRawValue().align"
                   image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
                   description="This is a description"
                   link="/modules/tile">
@@ -231,105 +230,3 @@
     </mat-card-content>
   </mat-card>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <section class="module-simulations">
-  <h2>Play with the Component 😃</h2>
-  <mat-card *ngIf="formInlineTrue">
-    <mat-card-content class="simulation">
-      <div class="settings">
-      </div>
-      <div class="simulator-wrapper mat-elevation-z4">
-        <play-simulator>
-          <p>Tile with vertical alignment</p>
-          <dsfr-tile
-            label="This is a label"
-            title="This is a title"
-            align="vertical"
-            image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
-            description="This is a description"
-            link="/modules/tile">
-          </dsfr-tile>
-
-          <hr>
-
-          <p>Tile with horizontal alignment</p>
-          <dsfr-tile
-            label="This is a label"
-            title="This is a title"
-            align="horizontal"
-            image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
-            description="This is a description"
-            link="/modules/tile">
-          </dsfr-tile>
-
-          <hr>
-
-          <p>Tile without image</p>
-          <dsfr-tile
-            label="This is a label"
-            title="This is a title"
-            description="This is a description"
-            link="/modules/tile">
-          </dsfr-tile>
-
-          <hr>
-
-          <p>Tile without description</p>
-          <dsfr-tile
-            label="This is a label"
-            title="This is a title"
-            link="/modules/tile">
-          </dsfr-tile>
-
-          <hr>
-
-          <p>Tile with image</p>
-          <div class="fr-grid-row fr-grid-row--gutters">
-            <div class="fr-col-4">
-              <dsfr-tile
-                label="This is a label"
-                title="This is a title"
-                align="vertical"
-                image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
-                description="This is a description"
-                link="/modules/tile">
-              </dsfr-tile>
-            </div>
-            <div class="fr-col-4">
-              <dsfr-tile
-                label="This is a label"
-                title="This is a title"
-                align="vertical"
-                image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
-                description="This is a description"
-                link="/modules/tile">
-              </dsfr-tile>
-            </div>
-            <div class="fr-col-4">
-              <dsfr-tile
-                label="This is a label"
-                title="This is a title"
-                align="vertical"
-                image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
-                description="This is a description"
-                link="/modules/tile">
-              </dsfr-tile>
-            </div>
-          </div>
-
-        </play-simulator>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</section> -->

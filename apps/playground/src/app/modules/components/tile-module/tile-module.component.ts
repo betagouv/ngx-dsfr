@@ -17,13 +17,9 @@ import { Subject } from 'rxjs';
   styleUrls: ['./tile-module.component.scss']
 })
 export class TileModuleComponent implements OnInit, OnDestroy {
-  formTitleDescriptionAndTitle: FormGroup | undefined;
-  formTitleWithoutImage: FormGroup | undefined;
-  formTilegrid: FormGroup | undefined;
-  errors: Record<string, string> = {
-    formTitleWithoutImage: '',
-    formTilegrid: ''
-  };
+  formTileDescriptionAndTitle: FormGroup | undefined;
+  formTileWithoutImage: FormGroup | undefined;
+  formTileGrid: FormGroup | undefined;
 
   possibleAlignment: Record<string, string> = {
     "horizontal": "horizontal",
@@ -53,25 +49,10 @@ export class TileModuleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForms();
-
-    this.formTilegrid?.valueChanges.subscribe((data) => {
-      this.nbTilesIteration = Array(data.nbTiles).fill(0).map((x, i) => i);
-      switch (data.nbTiles.toString()) {
-        case '2':
-          this.colClass = 'fr-col-6';
-          break;
-        case '3':
-          this.colClass = 'fr-col-4';
-          break; ``
-        case '4':
-          this.colClass = 'fr-col-3';
-          break;
-      }
-    });
   }
 
   private initForms(): void {
-    this.formTitleDescriptionAndTitle = this.formBuilder.group({
+    this.formTileDescriptionAndTitle = this.formBuilder.group({
       title: 'This is a title',
       description: 'This is a description',
       align: 'vertical',
@@ -79,15 +60,20 @@ export class TileModuleComponent implements OnInit, OnDestroy {
       breakpoint: 'md'
     });
 
-    this.formTitleWithoutImage = this.formBuilder.group({
+    this.formTileWithoutImage = this.formBuilder.group({
       title: 'This is a title',
       description: 'This is a description',
       align: 'vertical'
     });
 
-    this.formTilegrid = this.formBuilder.group({
+    this.formTileGrid = this.formBuilder.group({
       nbTiles: 3,
       align: 'vertical'
+    });
+
+    this.formTileGrid?.valueChanges.subscribe((data) => {
+      this.nbTilesIteration = Array(data.nbTiles).fill(0).map((x, i) => i);
+      this.colClass = 'fr-col-' + (12 / data.nbTiles);
     });
   }
 

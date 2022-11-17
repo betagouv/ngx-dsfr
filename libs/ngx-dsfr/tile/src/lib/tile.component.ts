@@ -27,7 +27,7 @@ enum TemplateType {
 export class DsfrTileComponent implements OnChanges {
 
   @Input() align: TemplateAlign = 'vertical';
-  @Input() breakpoint: Breakpoint | undefined
+  @Input() breakpoint: Breakpoint | undefined;
   @Input() link: string | undefined;
   @Input() title: string | undefined;
   @Input() image: string | undefined;

@@ -4,6 +4,7 @@
 import {
   AsyncFactoryFn,
   ComponentHarness,
+  LocatorFnResult,
   TestElement
 } from '@angular/cdk/testing';
 
@@ -18,8 +19,8 @@ export class DsfrTileHarness extends ComponentHarness {
   static hostSelector: string = 'dsfr-tile';
 
   private getLinkElement: AsyncFactoryFn<TestElement> = this.locatorFor('a');
-  private getTileDescriptionElement: AsyncFactoryFn<TestElement> = this.locatorFor('.fr-tile__desc');
-  private getTileImageElement: AsyncFactoryFn<TestElement> = this.locatorFor('.fr-tile__img img');
+  private getTileDescriptionElement: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('.fr-tile__desc');
+  private getTileImageElement: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('.fr-tile__img img');
 
   /**
    * Retrieves the value for the requested attribute of the link (<a>) tag
@@ -42,9 +43,9 @@ export class DsfrTileHarness extends ComponentHarness {
    * if the requested attribute is not found
    */
   async getImageAttribute(name: string): Promise<string | null> {
-    const image: TestElement = await this.getTileImageElement();
+    const image: TestElement | null = await this.getTileImageElement();
 
-    return image.getAttribute(name);
+    return image ? image.getAttribute(name) : null;
   }
 
 
@@ -55,9 +56,9 @@ export class DsfrTileHarness extends ComponentHarness {
    *
    * @returns A Promise that resolves to the text between tags of the description
    */
-  async getDescriptionText(): Promise<string> {
-    const description: TestElement = await this.getTileDescriptionElement();
+  async getDescriptionText(): Promise<string | null> {
+    const description: TestElement | null = await this.getTileDescriptionElement();
 
-    return description.text();
+    return description ? description.text() : null;
   }
 }
