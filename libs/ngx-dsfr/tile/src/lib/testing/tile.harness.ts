@@ -4,7 +4,6 @@
 import {
   AsyncFactoryFn,
   ComponentHarness,
-  LocatorFnResult,
   TestElement
 } from '@angular/cdk/testing';
 

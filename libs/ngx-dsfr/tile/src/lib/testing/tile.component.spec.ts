@@ -93,52 +93,6 @@ describe('DsfrTileComponent', () => {
     });
   });
 
-  describe(' required inputs are provided, ', () => {
-    it('should display the right template when an external link is provided', async () => {
-      testHost.testLink = testExternalLink;
-      testHost.testTitle = testTitle;
-
-      /*
-       * We're retrieving the Test Harness HERE since we can now,
-       * without any problem, trigger the Change Detection mechanism
-       *
-       * WARNING: Triggers the Change Detection mechanism
-       */
-      dsfrTileHarness = await harnessLoader.getHarness<DsfrTileHarness>(
-        DsfrTileHarness
-      );
-      expect(await dsfrTileHarness.getLinkElementAttribute('href')).toBe(
-        testExternalLink
-      );
-      expect(await dsfrTileHarness.getLinkElementAttribute('target')).toBe('_blank');
-    });
-
-    it('should display the right template when an internal link is provided', async () => {
-
-      testHost.testLink = testInternalLink;
-      testHost.testTitle = testTitle;
-
-      /*
-       * We're retrieving the Test Harness HERE since we can now,
-       * without any problem, trigger the Change Detection mechanism
-       *
-       * WARNING: Triggers the Change Detection mechanism
-       */
-      dsfrTileHarness = await harnessLoader.getHarness<DsfrTileHarness>(
-        DsfrTileHarness
-      );
-
-      // Retrieving an instance of the RouterLinkDirectiveStub directive
-      const anchorWithRouterLink: DebugElement = fixture.debugElement.query(
-        By.directive(RouterLinkDirectiveStub)
-      );
-      const routerLinkStubInstance = anchorWithRouterLink.injector.get(
-        RouterLinkDirectiveStub
-      );
-      expect(routerLinkStubInstance.linkParams).toBe(testInternalLink);
-    });
-  });
-
   describe(' all required properties are provided, ', () => {
 
     beforeEach(async () => {
@@ -156,6 +110,24 @@ describe('DsfrTileComponent', () => {
          * WARNING: Triggers the Change Detection mechanism
          */
       dsfrTileHarness = await harnessLoader.getHarness<DsfrTileHarness>(DsfrTileHarness);
+    });
+
+    it('should display the right template when an external link is provided', async () => {
+
+      testHost.testLink = testExternalLink;
+
+      expect(await dsfrTileHarness.getLinkElementAttribute('href')).toBe(testExternalLink);
+      expect(await dsfrTileHarness.getLinkElementAttribute('target')).toBe('_blank');
+    });
+
+    it('should display the right template when an internal link is provided', async () => {
+
+      // Retrieving an instance of the RouterLinkDirectiveStub directive
+      const anchorWithRouterLink: DebugElement = fixture.debugElement.query(
+        By.directive(RouterLinkDirectiveStub)
+      );
+      const routerLinkStubInstance = anchorWithRouterLink.injector.get(RouterLinkDirectiveStub);
+      expect(routerLinkStubInstance.linkParams).toBe(testInternalLink);
     });
 
     it('should display the right image path', async () => {

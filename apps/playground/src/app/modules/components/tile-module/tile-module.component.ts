@@ -10,7 +10,7 @@ import {
 /**
  * 3rd-party imports
  */
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   templateUrl: './tile-module.component.html',
@@ -71,10 +71,12 @@ export class TileModuleComponent implements OnInit, OnDestroy {
       align: 'vertical'
     });
 
-    this.formTileGrid?.valueChanges.subscribe((data) => {
-      this.nbTilesIteration = Array(data.nbTiles).fill(0).map((x, i) => i);
-      this.colClass = 'fr-col-' + (12 / data.nbTiles);
-    });
+    this.formTileGrid?.valueChanges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((data) => {
+        this.nbTilesIteration = Array(data.nbTiles).fill(0).map((x, i) => i);
+        this.colClass = 'fr-col-' + (12 / data.nbTiles);
+      });
   }
 
 
