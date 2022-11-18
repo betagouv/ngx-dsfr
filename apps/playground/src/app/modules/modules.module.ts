@@ -19,6 +19,7 @@ import { DsfrRadioModule } from '@betagouv/ngx-dsfr/radio';
 import { DsfrStepperModule } from '@betagouv/ngx-dsfr/stepper';
 import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
+import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 
 /**
  * Internal imports
@@ -35,6 +36,7 @@ import { AlertModuleComponent } from './components/alert-module/alert-module.com
 import { SharedModule } from '../shared/shared.module';
 import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
 import { InputModuleComponent } from './components/input-module/input-module.component';
+import { TileModuleComponent } from './components/tile-module/tile-module.component';
 
 @NgModule({
   imports: [
@@ -49,6 +51,7 @@ import { InputModuleComponent } from './components/input-module/input-module.com
     DsfrAlertModule,
     DsfrHeaderModule,
     DsfrInputModule,
+    DsfrTileModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -65,6 +68,7 @@ import { InputModuleComponent } from './components/input-module/input-module.com
     NavigationModuleComponent,
     HeaderModuleComponent,
     InputModuleComponent,
+    TileModuleComponent,
   ]
 })
 export class ModulesModule { }
