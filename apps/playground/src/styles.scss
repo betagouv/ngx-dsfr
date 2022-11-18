@@ -8,8 +8,8 @@
 $primary-palette: mat.$pink-palette;
 $primary-color: mat.get-color-from-palette($primary-palette, 300);
 $accent-palette: mat.$blue-grey-palette;
-$accent-color: mat.get-color-from-palette($accent-palette, 300);
-$dark-accent-color: mat.get-color-from-palette($accent-palette, 700);
+$accent-color: mat.get-color-from-palette($accent-palette, 700);
+$dark-accent-color: mat.get-color-from-palette($accent-palette, 900);
 
 // Actual styling
 a {
@@ -25,6 +25,15 @@ a {
 
 code {
   font-family: "Ubuntu Mono", monospace;
+  background-color: $accent-color;
+  color: white;
+  @include mixins.badge-like;
+}
+
+pre {
+  font-family: "Ubuntu Mono", monospace;
+  white-space: pre;
+  margin-bottom: 1em;
   background-color: $dark-accent-color;
   color: white;
   @include mixins.badge-like;

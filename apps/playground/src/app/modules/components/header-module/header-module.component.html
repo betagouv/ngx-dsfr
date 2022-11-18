@@ -201,8 +201,7 @@
     </mat-card-header>
     <mat-card-content class="simulation">
       <p>
-        We use the <code>DsfrNavigationComponent</code> for the navigation and
-        the <code>DsfrHeaderActionDirective</code>, applied on an
+        We use the <code>DsfrHeaderActionDirective</code>, applied on an
         <code>ng-template</code> tag, to provide through
         <a
           target="_blank"
@@ -214,6 +213,51 @@
         </a>
         the header actions.
       </p>
+      <p>
+        If you need to provide navigation, you can also use the
+        <code>DsfrNavigationComponent</code> via
+        <a
+          target="_blank"
+          hreflang="en"
+          title="The documentation page for content projection in Angular"
+          href="https://angular.io/guide/content-projection">
+          content projection
+          <mat-icon>open_in_new</mat-icon> </a
+        >.
+      </p>
+      <p>Example:</p>
+      <pre>
+        &lt;dsfr-header
+          appName="My wonderful app 😃"&gt;
+          <span class='highlight-code'>&lt;ng-template dsfrHeaderAction&gt;</span>
+              &lt;dsfr-link
+                label="Être tenu informé"
+                link="./"
+                [inline]="false"
+                icon="notification-3-line"
+                [iconAlignment]="iconAlignment.LEFT"&gt;
+              &lt;/dsfr-link&gt;
+          <span class='highlight-code'>&lt;/ng-template&gt;</span>
+          <span class='highlight-code'>&lt;ng-template dsfrHeaderAction&gt;</span>
+              &lt;dsfr-link
+                label="Aide et documentation"
+                link="./"
+                [inline]="false"
+                icon="information-line"
+                [iconAlignment]="iconAlignment.LEFT"&gt;
+              &lt;/dsfr-link&gt;
+          <span class='highlight-code'>&lt;/ng-template&gt;</span>
+          <span class='highlight-code'>&lt;ng-template dsfrHeaderAction&gt;</span>
+              &lt;dsfr-button
+                label="Se connecter"
+                [type]="buttonTypes.TERTIARY"
+                icon="account-line"
+                [iconAlignment]="iconAlignment.LEFT"&gt;
+              &lt;/dsfr-button&gt;
+          <span class='highlight-code'>&lt;/ng-template&gt;</span>
+          <span class='highlight-code'>&lt;dsfr-navigation [navigation]="navigation"&gt;&lt;/dsfr-navigation&gt;</span>
+        &lt;/dsfr-header&gt;
+      </pre>
       <div class="settings">
         <form
           [formGroup]="formHeaderComplete"
