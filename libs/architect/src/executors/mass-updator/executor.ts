@@ -38,18 +38,18 @@ export default async function runExecutor(
       : options.replacements;
 
   for (const directory of directories) {
+    const pathToDirectory = path.join(
+      context.root,
+      context.target.outputs[0].replace('{workspaceRoot}/', ''),
+      directory
+    );
     const stream = fg.stream([options.glob], {
-      cwd: path.join(context.root, context.target.outputs[0], directory),
+      cwd: pathToDirectory,
       ignore: ['**/node_modules']
     });
 
     for await (const entry of stream) {
-      const filePath: string = path.join(
-        context.root,
-        context.target.outputs[0],
-        directory,
-        entry as string
-      );
+      const filePath: string = path.join(pathToDirectory, entry as string);
 
       const fileContent: string = await fs.readFile(filePath, {
         encoding: 'utf8'
@@ -73,9 +73,7 @@ export default async function runExecutor(
           options.suffix + '.' + extension
         );
         const duplicateFilePath: string = path.join(
-          context.root,
-          context.target.outputs[0],
-          directory,
+          pathToDirectory,
           suffixedFilename
         );
 

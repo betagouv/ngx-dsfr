@@ -22,11 +22,10 @@
       "@betagouv/ngx-dsfr/header": ["libs/ngx-dsfr/header/src/index.ts"],
       "@betagouv/ngx-dsfr/input": ["libs/ngx-dsfr/input/src/index.ts"],
       "@betagouv/ngx-dsfr/link": ["libs/ngx-dsfr/link/src/index.ts"],
-      "@betagouv/ngx-dsfr/navigation": [
-        "libs/ngx-dsfr/navigation/src/index.ts"
-      ],
+      "@betagouv/ngx-dsfr/navigation": ["libs/ngx-dsfr/navigation/src/index.ts"],
       "@betagouv/ngx-dsfr/radio": ["libs/ngx-dsfr/radio/src/index.ts"],
       "@betagouv/ngx-dsfr/stepper": ["libs/ngx-dsfr/stepper/src/index.ts"],
+      "@betagouv/ngx-dsfr/tile": ["libs/ngx-dsfr/tile/src/index.ts"],
       "@betagouv/ngx-dsfr/testing": ["libs/ngx-dsfr/src/lib/testing/index.ts"],
       "@ngx-dsfr/architect": ["libs/architect/src/index.ts"]
     }

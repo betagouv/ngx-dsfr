@@ -1,10 +1,5 @@
 // Imports
-@use "@angular/material" as mat;
 @use "variables" as var;
-
-// Variables
-$primary-palette: mat.$pink-palette;
-$primary-color: mat.get-color-from-palette($primary-palette, A200);
 
 // Actual styling
 .module-simulations {
@@ -20,12 +15,6 @@ $primary-color: mat.get-color-from-palette($primary-palette, A200);
 
       & > * {
         flex: 1;
-      }
-
-      .highlight-code {
-        color: $primary-color;
-        font-weight: bold;
-        letter-spacing: 0.02rem;
       }
 
       .settings {

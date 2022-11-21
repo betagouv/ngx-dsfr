@@ -16,11 +16,16 @@ import { RadioModuleComponent } from './components/radio-module/radio-module.com
 import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
 import { InputModuleComponent } from './components/input-module/input-module.component';
+import { TileModuleComponent } from './components/tile-module/tile-module.component';
 
 /**
  * TypeScript entities and constants
  */
 const routes: Route[] = [
+  {
+    path: 'alert',
+    component: AlertModuleComponent
+  },
   {
     path: 'badge',
     component: BadgeModuleComponent
@@ -54,8 +59,8 @@ const routes: Route[] = [
     component: StepperModuleComponent
   },
   {
-    path: 'alert',
-    component: AlertModuleComponent
+    path: 'tile',
+    component: TileModuleComponent
   }
 ];
 

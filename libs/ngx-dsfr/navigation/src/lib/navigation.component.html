@@ -11,6 +11,7 @@
           <a
             class="fr-nav__link"
             routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             ariaCurrentWhenActive="page"
             [routerLink]="[menuItem.href]"
             target="_self">
@@ -65,6 +66,7 @@
                       <a
                         [routerLink]="[item.href]"
                         routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
                         ariaCurrentWhenActive="page"
                         class="fr-nav__link"
                         target="_self">
@@ -76,8 +78,8 @@
                         <a
                           [routerLink]="[link.href]"
                           routerLinkActive="active"
+                          [routerLinkActiveOptions]="{ exact: true }"
                           ariaCurrentWhenActive="page"
-                          routerLinkActive="active"
                           class="fr-nav__link"
                           target="_self">
                           {{ link.label }}
