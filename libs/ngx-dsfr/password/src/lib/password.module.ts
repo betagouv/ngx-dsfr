@@ -15,11 +15,12 @@ import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
  */
 import { DsfrPasswordComponent } from './password.component';
 import { TestHostComponent } from './testing/test-host.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  imports: [CommonModule, RouterModule, DsfrButtonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   declarations: [DsfrPasswordComponent, TestHostComponent],
   exports: [DsfrPasswordComponent]
 })
-export class DsfrPAsswordModule { }
+export class DsfrPasswordModule { }

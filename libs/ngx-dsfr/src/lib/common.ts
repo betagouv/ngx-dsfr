@@ -47,6 +47,11 @@ export enum ThemeColor {
 export type UserRole = 'ROLE_USER' | 'ROLE_ADMIN';
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
+export type PositiveNumber<
+  N extends number,
+  T extends number[] = []
+> = T["length"] extends N ? T[number] : PositiveNumber<N, [...T, T["length"]]>;
+
 
 /**
  * Common DSFR Constant

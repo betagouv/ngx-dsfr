@@ -44,6 +44,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/navigation'
       },
       {
+        label: 'Password',
+        path: '/modules/password'
+      },
+      {
         label: 'Radio',
         path: '/modules/radio'
       },
