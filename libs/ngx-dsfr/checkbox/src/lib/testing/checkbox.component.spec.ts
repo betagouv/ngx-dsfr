@@ -38,7 +38,6 @@ describe('DsfrCheckboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [],
       declarations: [
         DsfrCheckboxComponent,
         TestHostComponent

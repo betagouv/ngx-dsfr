@@ -44,6 +44,7 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   @Input() legend = '';
   @Input() fieldSetId = '';
   @Input() hint = '';
+  @Input() name = '';
   @Input() items: CheckboxItem[] = [];
   @Input() inline = false;
   @Input() disabled = false;
@@ -126,7 +127,6 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
 
   writeValue(value: string[]): void {
     this._values = value;
-    this.onChange(value);
   }
 
   setDisabledState(isDisabled: boolean) {
@@ -135,10 +135,11 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
 
   onInputChange(event: any) {
     if (event.target) {
-      if (this.values.includes(event.target.value)) {
-        this.values = this.values.filter((element: any) => !(element === event.target.value));
+      const value = event.target.value;
+      if (this.values.includes(value)) {
+        this.values = this.values.filter((element: any) => !(element === value));
       } else {
-        this.values.push(event.target.value)
+        this.values.push(value)
       }
       this.onChange(this.values)
     }
