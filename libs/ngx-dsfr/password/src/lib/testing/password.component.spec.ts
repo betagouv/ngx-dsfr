@@ -7,175 +7,102 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 /**
- * 3rd-party imports
- */
-import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
-
-/**
  * Internal imports
  */
+import { DsfrPasswordComponent, EMPTY_ID_ERROR, EMPTY_LABEL_ERROR } from '../password.component';
 import { TestHostComponent } from './test-host.component';
-import { DsfrHeaderComponent, EMPTY_ALT_ERROR } from '../password.component';
-import { DsfrHeaderHarness } from './header.harness';
+import { DsfrPasswordHarness } from './password.harness';
+import { FormsModule } from '@angular/forms';
 
-describe('DsfrHeaderComponent', () => {
+describe('DsfrPasswordComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
-  let componentUnderTest: DsfrHeaderComponent;
+  let componentUnderTest: DsfrPasswordComponent;
   let harnessLoader: HarnessLoader;
-  let dsfrHeaderHarness: DsfrHeaderHarness;
+  let dsfrPasswordHarness: DsfrPasswordHarness;
 
-  const testInstitution: string =
-    "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation";
-  const testOperatorLogoSrc: string = 'some/path/to/an/image';
-  const testOperatorLogoAlt: string = 'the text in the image';
-  const testAppName: string = 'My Test App';
-
-  const checkTemplate: (
-    matrix: [boolean, boolean, boolean, boolean, boolean]
-  ) => void = async (matrix: [boolean, boolean, boolean, boolean, boolean]) => {
-    expect(
-      (await dsfrHeaderHarness.getInstitutionAnchorElement()) === null
-    ).toBe(matrix[0]);
-    expect((await dsfrHeaderHarness.getOperatorElement()) === null).toBe(
-      matrix[1]
-    );
-    expect((await dsfrHeaderHarness.getOperatorAnchorElement()) === null).toBe(
-      matrix[2]
-    );
-    expect((await dsfrHeaderHarness.getAppNameElement()) === null).toBe(
-      matrix[3]
-    );
-    expect((await dsfrHeaderHarness.getHeaderActions()).length === 0).toBe(
-      matrix[4]
-    );
-  };
+  const testLabel = 'testLabel';
+  const testId = 'testId';
+  const testPlaceholder = 'Enter your password...';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [
-        DsfrHeaderComponent,
-        TestHostComponent,
-        RouterLinkDirectiveStub
+        DsfrPasswordComponent,
+        TestHostComponent
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;
     componentUnderTest = fixture.debugElement.query(
-      By.directive(DsfrHeaderComponent)
+      By.directive(DsfrPasswordComponent)
     ).componentInstance;
 
     /*
      * We're retrieving a HarnessLoader HERE to be able to get
-     * the Test Harness for the DsfrHeaderComponent LATER.
+     * the Test Harness for the DsfrInputComponent LATER.
      *
      * We're NOT doing both HERE since getHarness() triggers
-     * indirectly the Change Detection mechanism and thus,
+     * indirectly the Change Detection mechanism and this,
      * Data Binding and ngOnInit()...
      */
     harnessLoader = TestbedHarnessEnvironment.loader(fixture);
   });
 
-  it('should display the institution properly when it is provided', async () => {
-    testHost.testInstitution = testInstitution;
-
-    /*
-     * We're retrieving the Test Harness HERE since we can now,
-     * without any problem, trigger the Change Detection mechanism
-     *
-     * WARNING: Triggers the Change Detection mechanism
-     */
-    dsfrHeaderHarness = await harnessLoader.getHarness<DsfrHeaderHarness>(
-      DsfrHeaderHarness
-    );
-
-    expect(await dsfrHeaderHarness.getInstitution()).toBe(
-      testInstitution.replaceAll('\n', '  ')
-    );
-    expect(await dsfrHeaderHarness.getInstitutionElementBrs()).toHaveLength(4);
-    checkTemplate([false, true, true, true, true]);
+  it('should be created', () => {
+    expect(componentUnderTest).toBeTruthy();
   });
 
-  it('should throw an error when operatorLogoSrc is provided and not operatorLogoAlt', () => {
+  it('should throw an error when no id is provided', async () => {
     try {
-      testHost.testInstitution = testInstitution;
-      testHost.testOperatorLogoSrc = testOperatorLogoSrc;
       fixture.detectChanges();
-      throw 'It should have thrown an error about "operatorLogoAlt"';
+      throw 'It should have thrown an error about "ID"';
     } catch (error) {
-      expect(error).toBe(EMPTY_ALT_ERROR);
+      expect(error).toBe(EMPTY_ID_ERROR);
     }
   });
 
-  it("should display the operator's logo properly when operatorLogoSrc and operatorLogoAlt are provided", async () => {
-    testHost.testInstitution = testInstitution;
-    testHost.testOperatorLogoSrc = testOperatorLogoSrc;
-    testHost.testOperatorLogoAlt = testOperatorLogoAlt;
-
-    /*
-     * We're retrieving the Test Harness HERE since we can now,
-     * without any problem, trigger the Change Detection mechanism
-     *
-     * WARNING: Triggers the Change Detection mechanism
-     */
-    dsfrHeaderHarness = await harnessLoader.getHarness<DsfrHeaderHarness>(
-      DsfrHeaderHarness
-    );
-
-    expect(await dsfrHeaderHarness.getLinkTitle()).toBe(
-      'Accueil - ' +
-      testOperatorLogoAlt +
-      ' - ' +
-      testInstitution.replaceAll('\n', ' ')
-    );
-    checkTemplate([true, false, false, true, true]);
+  describe('only ID is provided, ', () => {
+    beforeEach(async () => {
+      testHost.testId = testId;
+    });
+    it('should throw an error when no label is provided', async () => {
+      try {
+        fixture.detectChanges();
+        throw 'It should have thrown an error about "LABEL"';
+      } catch (error) {
+        expect(error).toBe(EMPTY_LABEL_ERROR);
+      }
+    });
   });
 
-  it("should display the service's name properly when appName is provided and NOT operatorLogoSrc", async () => {
-    testHost.testInstitution = testInstitution;
-    testHost.testAppName = testAppName;
+  describe('all required properties are provided, ', () => {
+    beforeEach(async () => {
+      testHost.testId = testId;
+      testHost.testLabel = testLabel;
+      testHost.testPlaceholder = testPlaceholder;
+      testHost.testHasFailed = true;
+      dsfrPasswordHarness = await harnessLoader.getHarness<DsfrPasswordHarness>(
+        DsfrPasswordHarness
+      );
+    });
 
-    /*
-     * We're retrieving the Test Harness HERE since we can now,
-     * without any problem, trigger the Change Detection mechanism
-     *
-     * WARNING: Triggers the Change Detection mechanism
-     */
-    dsfrHeaderHarness = await harnessLoader.getHarness<DsfrHeaderHarness>(
-      DsfrHeaderHarness
-    );
+    it('should have the right placeholder for the input attribute', async () => {
+      const placeholder = await dsfrPasswordHarness.getInputPlaceholderAttribute();
+      expect(placeholder).toEqual(testPlaceholder);
+    });
 
-    expect(await dsfrHeaderHarness.getLinkTitle()).toBe(
-      'Accueil - ' + testAppName + ' - ' + testInstitution.replaceAll('\n', ' ')
-    );
-    checkTemplate([true, true, true, false, true]);
-  });
+    it('should have the right id for the input attribute', async () => {
+      const id = await dsfrPasswordHarness.getInputId();
+      expect(id).toEqual(`${testId}-input`);
+    });
 
-  it('should display the proper Template when appName AND operatorLogoSrc are provided', async () => {
-    testHost.testInstitution = testInstitution;
-    testHost.testOperatorLogoSrc = testOperatorLogoSrc;
-    testHost.testOperatorLogoAlt = testOperatorLogoAlt;
-    testHost.testAppName = testAppName;
-
-    /*
-     * We're retrieving the Test Harness HERE since we can now,
-     * without any problem, trigger the Change Detection mechanism
-     *
-     * WARNING: Triggers the Change Detection mechanism
-     */
-    dsfrHeaderHarness = await harnessLoader.getHarness<DsfrHeaderHarness>(
-      DsfrHeaderHarness
-    );
-
-    expect(await dsfrHeaderHarness.getLinkTitle()).toBe(
-      'Accueil - ' +
-      testAppName +
-      ' - ' +
-      testOperatorLogoAlt +
-      ' - ' +
-      testInstitution.replaceAll('\n', ' ')
-    );
-    checkTemplate([true, false, true, false, true]);
+    it('should display the right class when the attribute hasFailed is true', async () => {
+      const classes: string | null =
+        await dsfrPasswordHarness.getContainerComponentAttribute('class');
+      expect(classes).toContain('fr-input-group--error');
+    });
   });
 });

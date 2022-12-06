@@ -3,12 +3,11 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 /**
  * 3rd-party imports
  */
-import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
+import { DsfrLinkModule } from '@betagouv/ngx-dsfr/link';
 
 /**
  * Internal imports
@@ -18,8 +17,9 @@ import { TestHostComponent } from './testing/test-host.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, DsfrLinkModule, FormsModule, ReactiveFormsModule],
   declarations: [DsfrPasswordComponent, TestHostComponent],
   exports: [DsfrPasswordComponent]
 })
