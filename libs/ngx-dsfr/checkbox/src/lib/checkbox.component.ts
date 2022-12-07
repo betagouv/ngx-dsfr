@@ -23,7 +23,6 @@ export interface CheckboxItem {
   id: string;
   label: string;
   value: string;
-  name: string;
   hint?: string;
 }
 
@@ -58,7 +57,7 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   onTouched = (_: string[]) => { };
 
   fieldSetClasses: Record<string, boolean> = {};
-  ariaLabelledBy: string | null = null;
+  ariaAttribute: string | null = null;
 
   get values(): string[] {
     return this._values;
@@ -107,14 +106,14 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
 
   private setAriaLabelledBy() {
     if (this.hasFailed) {
-      this.ariaLabelledBy = `${this.fieldSetId} ${this.fieldSetId}-error`;
+      this.ariaAttribute = `${this.fieldSetId} ${this.fieldSetId}-error`;
       return;
     }
     if (this.hasSucceeded) {
-      this.ariaLabelledBy = `${this.fieldSetId} ${this.fieldSetId}-valid`;
+      this.ariaAttribute = `${this.fieldSetId} ${this.fieldSetId}-valid`;
       return;
     }
-    this.ariaLabelledBy = this.fieldSetId;
+    this.ariaAttribute = this.fieldSetId;
   }
 
   registerOnChange(fn: (_: string[]) => void): void {

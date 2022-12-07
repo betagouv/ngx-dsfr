@@ -3,10 +3,11 @@
     <input
       [checked]="isChecked(items[0].value)"
       (change)="onInputChange($event)"
+      [attr.aria-describedby]="ariaAttribute"
       [id]="items[0].id"
       type="checkbox"
       [value]="items[0].value"
-      [name]="items[0].name">
+      [name]="name">
       <label class="fr-label" [for]="items[0].id">
         {{items[0].label}}
         <span *ngIf="items[0].hint" class="fr-hint-text">{{items[0].hint}}</span>
@@ -24,7 +25,7 @@
     <fieldset
       class="fr-fieldset"
       [ngClass]="fieldSetClasses"
-      [attr.aria-labelledby]="ariaLabelledBy"
+      [attr.aria-labelledby]="ariaAttribute"
       [attr.role]="hasFailed || hasSucceeded ? 'group' : null"
       [disabled]="disabled">
       <legend class="fr-fieldset__legend fr-text--regular" [id]="fieldSetId">
@@ -46,10 +47,10 @@
             </label>
         </div>
       </div>
-      <p *ngIf="hasFailed" [id]="fieldSetId + '-error'" class="fr-error-text">
+      <p *ngIf="hasFailed" [id]="items[0].id + '-error'" class="fr-error-text">
         {{failureMessage}}
       </p>
-      <p *ngIf="hasSucceeded" [id]="fieldSetId + '-valid'" class="fr-valid-text">
+      <p *ngIf="hasSucceeded" [id]="items[0].id + '-valid'" class="fr-valid-text">
         {{successMessage}}
       </p>
     </fieldset>

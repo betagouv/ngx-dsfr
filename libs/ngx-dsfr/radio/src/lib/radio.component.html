@@ -19,10 +19,10 @@
         </label>
       </div>
     </div>
-    <p *ngIf="hasFailed" [id]="items[0].id + '-error'" class="fr-error-text">
+    <p *ngIf="hasFailed" [id]="fieldSetId + '-error'" class="fr-error-text">
       {{failureMessage}}
     </p>
-    <p *ngIf="hasSucceeded" [id]="items[0].id + '-valid'" class="fr-valid-text">
+    <p *ngIf="hasSucceeded" [id]="fieldSetId + '-valid'" class="fr-valid-text">
       {{successMessage}}
     </p>
   </fieldset>
