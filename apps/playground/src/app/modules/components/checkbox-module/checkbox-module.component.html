@@ -19,7 +19,7 @@
         <dsfr-checkbox
           legend="Template driven test"
           name="templateDrivenTest"
-          fieldSetId="templateDrivenTest"
+          legendId="templateDrivenTest"
           [items]="templateDrivenItems"
           [(ngModel)]="templateDrivenSelected">
         </dsfr-checkbox>
@@ -31,7 +31,7 @@
           <dsfr-checkbox
             legend="Reactive forms test"
             name="reactiveFormsTest"
-            fieldSetId="reactiveFormsTest"
+            legendId="reactiveFormsTest"
             [items]="reactiveFormsItems"
             formControlName="checkbox">
           </dsfr-checkbox>
@@ -44,7 +44,7 @@
           legend="Inline test with hint"
           name="inlineTest"
           hint="Ceci est un test"
-          fieldSetId="inlineTest"
+          legendId="inlineTest"
           [items]="inlineItemsWithHint"
           [(ngModel)]="inlineModel"
           [inline]="true">
@@ -56,7 +56,7 @@
         <dsfr-checkbox
           legend="Success test"
           name="successTest"
-          fieldSetId="successTest"
+          legendId="successTest"
           [hasSucceeded]="true"
           successMessage="Success message"
           successId="successTest-valid"
@@ -70,7 +70,7 @@
         <dsfr-checkbox
           legend="Error test"
           name="errorTest"
-          fieldSetId="errorTest"
+          legendId="errorTest"
           [hasFailed]="true"
           failureId="errorTest-failure"
           failureMessage="Error message"
@@ -83,7 +83,7 @@
         <dsfr-checkbox
           legend="Disabled and small test"
           name="disabledTest"
-          fieldSetId="disabledTest"
+          legendId="disabledTest"
           [disabled]="true"
           [size]="smallSize"
           [items]="disabledItems"

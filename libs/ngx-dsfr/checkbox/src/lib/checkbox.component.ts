@@ -11,7 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export const EMPTY_LEGEND_ERROR: string =
   'You MUST provide a legend for that group of checkboxes 😡 !!!';
 export const EMPTY_FIELDSET_ID_ERROR: string =
-  'You MUST provide a value for the fieldSetId attribute 😡 !!!';
+  'You MUST provide a value for the legendId attribute 😡 !!!';
 export const EMPTY_ITEMS_ERROR: string =
   'You MUST provide a non-empty array for the items attribute 😡 !!!';
 export const EMPTY_FAILURE_MESSAGE_ERROR: string =
@@ -41,7 +41,7 @@ export interface CheckboxItem {
 
 export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() legend = '';
-  @Input() fieldSetId = '';
+  @Input() legendId = '';
   @Input() hint = '';
   @Input() name = '';
   @Input() items: CheckboxItem[] = [];
@@ -57,7 +57,8 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   onTouched = (_: string[]) => { };
 
   fieldSetClasses: Record<string, boolean> = {};
-  ariaAttribute: string | null = null;
+  ariaLabelledBy: string | null = null;
+  ariaDescribedBy: string | undefined;
 
   get values(): string[] {
     return this._values;
@@ -86,7 +87,7 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
       if (!this.legend) {
         throw EMPTY_LEGEND_ERROR;
       }
-      if (!this.fieldSetId) {
+      if (!this.legendId) {
         throw EMPTY_FIELDSET_ID_ERROR;
       }
     }
@@ -106,14 +107,17 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
 
   private setAriaLabelledBy() {
     if (this.hasFailed) {
-      this.ariaAttribute = `${this.fieldSetId} ${this.fieldSetId}-error`;
+      this.ariaLabelledBy = `${this.legendId} ${this.legendId}-error`;
+      this.ariaDescribedBy = `${this.items[0].id}-error`;
       return;
     }
     if (this.hasSucceeded) {
-      this.ariaAttribute = `${this.fieldSetId} ${this.fieldSetId}-valid`;
+      this.ariaLabelledBy = `${this.legendId} ${this.legendId}-valid`;
+      this.ariaDescribedBy = `${this.items[0].id}-valid`;
       return;
     }
-    this.ariaAttribute = this.fieldSetId;
+    this.ariaLabelledBy = this.legendId;
+    this.ariaDescribedBy = this.items[0].id;
   }
 
   registerOnChange(fn: (_: string[]) => void): void {
