@@ -17,6 +17,7 @@ import { StepperModuleComponent } from './components/stepper-module/stepper-modu
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
+import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 
 /**
  * TypeScript entities and constants
@@ -33,6 +34,10 @@ const routes: Route[] = [
   {
     path: 'button',
     component: ButtonModuleComponent
+  },
+  {
+    path: 'checkbox',
+    component: CheckboxModuleComponent
   },
   {
     path: 'header',
