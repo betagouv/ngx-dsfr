@@ -2,10 +2,10 @@
  * Angular imports
  */
 import { NgModule } from '@angular/core';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 
 /**
  * 3rd-party imports
@@ -35,7 +35,7 @@ import { NavigationModuleComponent } from './components/navigation-module/naviga
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
 import { SharedModule } from '../shared/shared.module';
-import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
+import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
@@ -58,7 +58,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    ModulesRoutingModule,
+    ModulesRoutingModule
   ],
   declarations: [
     SimulatorComponent,
@@ -76,4 +76,4 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     StepperModuleComponent
   ]
 })
-export class ModulesModule { }
+export class ModulesModule {}
