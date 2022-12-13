@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  */
 import { PasswordModuleComponent } from './password-module.component';
 
-describe('HeaderWrapperComponent', () => {
+describe('PasswordModuleComponent', () => {
   let component: PasswordModuleComponent;
   let fixture: ComponentFixture<PasswordModuleComponent>;
 

@@ -20,14 +20,14 @@ export class DsfrPasswordHarness extends ComponentHarness {
   private getInputElement: AsyncFactoryFn<TestElement> = this.locatorFor('input');
   private getContainerComponentElement: AsyncFactoryFn<TestElement> = this.locatorFor('.fr-password');
 
-  async getInputAttribute(name: string): Promise<(string | null)> {
+  async getInputAttribute(name: string): Promise<string | null> {
     const input: TestElement = await this.getInputElement();
     const attribute = await input.getAttribute(name);
 
     return attribute;
   }
 
-  async getContainerComponentAttribute(name: string): Promise<(string | null)> {
+  async getContainerComponentAttribute(name: string): Promise<string | null> {
     const div: TestElement = await this.getContainerComponentElement();
     const attribute = await div.getAttribute(name);
 
@@ -38,19 +38,19 @@ export class DsfrPasswordHarness extends ComponentHarness {
    * Retrieves the id value of the input tag
    * in the DsfrPasswordComponent's Template
    *
-   * @returns A Promise that resolves to the id value as a strings or null
+   * @returns A Promise that resolves to the id value as a string or null
    */
-  async getInputId(): Promise<(string | null)> {
+  async getInputId(): Promise<string | null> {
     return this.getInputAttribute('id');
   }
 
   /**
-   * Retrieves the values of the input tag
-   * in the DsfrInputComponent's Template
+   * Retrieves the value of the input tag
+   * in the DsfrPasswordComponent's Template
    *
-   * @returns A Promise that resolves to the values as a strings or null
+   * @returns A Promise that resolves to the value as a string or null
    */
-  async getInputValue(): Promise<(string | null)> {
+  async getInputValue(): Promise<string | null> {
     return this.getInputAttribute('value');
   }
 
@@ -58,9 +58,9 @@ export class DsfrPasswordHarness extends ComponentHarness {
    * Retrieves the placeholder value of the input tag
    * in the DsfrPasswordComponent's Template
    *
-   * @returns A Promise that resolves to the name values as a strings or null
+   * @returns A Promise that resolves to the placeholder value as a string or null
    */
-  async getInputPlaceholderAttribute(): Promise<(string | null)> {
+  async getInputPlaceholderAttribute(): Promise<string | null> {
     return this.getInputAttribute('placeholder');
   }
 }

@@ -8,12 +8,12 @@ import {
   NonNullableFormBuilder,
   Validators
 } from '@angular/forms';
-import { PasswordParams } from 'libs/ngx-dsfr/password/src/lib/password.component';
 
 /**
  * 3rd-party imports
  */
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { PasswordParams } from '@betagouv/ngx-dsfr/password';
 
 @Component({
   templateUrl: './password-module.component.html',
@@ -35,14 +35,6 @@ export class PasswordModuleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForms();
-
-    if (this.formSignUpPassword) {
-      this.formSignUpPassword.valueChanges.subscribe(formData => {
-        this.passwordSignUpParams.minSize = formData.minSize;
-        this.passwordSignUpParams.minDigitalCharacters = formData.minDigit;
-        this.passwordSignUpParams.minSpecialCharacters = formData.minSpecial;
-      })
-    }
   }
 
   private initForms(): void {
@@ -50,7 +42,8 @@ export class PasswordModuleComponent implements OnInit, OnDestroy {
     this.formSignUpPassword = this.formBuilder.group({
       label: new FormControl('Enter your password', [Validators.required]),
       hint: new FormControl('This is a description'),
-      minSize: new FormControl(this.passwordSignUpParams.minSize, [Validators.required, Validators.minLength(this.passwordSignUpParams.minSize)]),
+      placeholder: new FormControl('Enter your password...', [Validators.required]),
+      minSize: new FormControl(this.passwordSignUpParams.minSize, [Validators.required]),
       minDigit: new FormControl(this.passwordSignUpParams.minDigitalCharacters, [Validators.required]),
       minSpecial: new FormControl(this.passwordSignUpParams.minSpecialCharacters, [Validators.required]),
       isError: new FormControl(false)
@@ -58,8 +51,21 @@ export class PasswordModuleComponent implements OnInit, OnDestroy {
 
     this.formLoginPassword = this.formBuilder.group({
       label: new FormControl('Enter your password', [Validators.required]),
+      placeholder: new FormControl('Enter your password...', [Validators.required]),
+      forgotPasswordLink: new FormControl('/modules/password'),
       hint: new FormControl('This is a description'),
     });
+
+    if (this.formSignUpPassword) {
+      this.formSignUpPassword.valueChanges
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(formData => {
+          this.passwordSignUpParams.minSize = formData.minSize;
+          this.passwordSignUpParams.minDigitalCharacters = formData.minDigit;
+          this.passwordSignUpParams.minSpecialCharacters = formData.minSpecial;
+        }
+        )
+    }
   }
 
   ngOnDestroy(): void {

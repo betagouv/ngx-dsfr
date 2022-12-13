@@ -23,7 +23,7 @@ describe('DsfrPasswordComponent', () => {
 
   const testLabel = 'testLabel';
   const testId = 'testId';
-  const testPlaceholder = 'Enter your password...';
+  const testPlaceholder = 'testPlaceholder';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -64,7 +64,7 @@ describe('DsfrPasswordComponent', () => {
     }
   });
 
-  describe('only ID is provided, ', () => {
+  describe('when only ID is provided, ', () => {
     beforeEach(async () => {
       testHost.testId = testId;
     });
@@ -84,17 +84,18 @@ describe('DsfrPasswordComponent', () => {
       testHost.testLabel = testLabel;
       testHost.testPlaceholder = testPlaceholder;
       testHost.testHasFailed = true;
+      // testHost.testHasSucceeded = true
       dsfrPasswordHarness = await harnessLoader.getHarness<DsfrPasswordHarness>(
         DsfrPasswordHarness
       );
     });
 
-    it('should have the right placeholder for the input attribute', async () => {
+    it('should have the right placeholder for the input tag', async () => {
       const placeholder = await dsfrPasswordHarness.getInputPlaceholderAttribute();
       expect(placeholder).toEqual(testPlaceholder);
     });
 
-    it('should have the right id for the input attribute', async () => {
+    it('should have the right id for the input tag', async () => {
       const id = await dsfrPasswordHarness.getInputId();
       expect(id).toEqual(`${testId}-input`);
     });
@@ -103,6 +104,12 @@ describe('DsfrPasswordComponent', () => {
       const classes: string | null =
         await dsfrPasswordHarness.getContainerComponentAttribute('class');
       expect(classes).toContain('fr-input-group--error');
+    });
+
+    xit('should display the right class when the attribute hasSucceeded is true', async () => {
+      const classes: string | null =
+        await dsfrPasswordHarness.getContainerComponentAttribute('class');
+      expect(classes).toContain('fr-input-group--valid');
     });
   });
 });
