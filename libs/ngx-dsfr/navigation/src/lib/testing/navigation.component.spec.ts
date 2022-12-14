@@ -10,7 +10,10 @@ import { Router } from '@angular/router';
 /**
  * 3rd-party imports
  */
-import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
+import {
+  RouterLinkDirectiveStub,
+  RouterLinkActiveDirectiveStub
+} from '@betagouv/ngx-dsfr/testing';
 
 /**
  * Internal imports
@@ -32,49 +35,46 @@ describe('DsfrNavigationComponent', () => {
 
   const testNavigation: Navigation = [
     {
-      'id': 'a',
-      'label': 'MEGA MENU',
-      'userRoles': [
-        'ROLE_USER',
-        'ROLE_ADMIN'
-      ],
-      'href': 'modules',
-      'child': {
-        'isMega': true,
-        'title': 'Titre éditorialisé',
-        'description': 'Lorem [...] elit ut.',
-        'children': [
+      id: 'a',
+      label: 'MEGA MENU',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: 'modules',
+      child: {
+        isMega: true,
+        title: 'Titre éditorialisé',
+        description: 'Lorem [...] elit ut.',
+        children: [
           {
-            'id': 'b',
-            'label': 'Config',
-            'href': 'admin/dashboard/config',
-            'children': [
+            id: 'b',
+            label: 'Config',
+            href: 'admin/dashboard/config',
+            children: [
               {
-                'id': 'c',
-                'label': 'Config 1',
-                'href': 'admin/dashboard/config'
+                id: 'c',
+                label: 'Config 1',
+                href: 'admin/dashboard/config'
               },
               {
-                'id': 'f',
-                'label': 'Config 2',
-                'href': '/modules/navigation'
+                id: 'f',
+                label: 'Config 2',
+                href: '/modules/navigation'
               }
             ]
           },
           {
-            'id': 'b2',
-            'label': 'Config',
-            'href': 'admin/dashboard/config',
-            'children': [
+            id: 'b2',
+            label: 'Config',
+            href: 'admin/dashboard/config',
+            children: [
               {
-                'id': 'eec',
-                'label': 'ConfigEE 1',
-                'href': 'admin/dashboard/config'
+                id: 'eec',
+                label: 'ConfigEE 1',
+                href: 'admin/dashboard/config'
               },
               {
-                'id': 'fee',
-                'label': 'Configee 2',
-                'href': 'admin/dashboard/config'
+                id: 'fee',
+                label: 'Configee 2',
+                href: 'admin/dashboard/config'
               }
             ]
           }
@@ -82,32 +82,29 @@ describe('DsfrNavigationComponent', () => {
       }
     },
     {
-      'id': 'k',
-      'label': 'MEGA MENU 2',
-      'userRoles': [
-        'ROLE_USER',
-        'ROLE_ADMIN'
-      ],
-      'href': 'dash',
-      'child': {
-        'isMega': true,
-        'title': 'title',
-        'description': 'description',
-        'children': [
+      id: 'k',
+      label: 'MEGA MENU 2',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: 'dash',
+      child: {
+        isMega: true,
+        title: 'title',
+        description: 'description',
+        children: [
           {
-            'id': 'l',
-            'label': 'Config',
-            'href': 'admin/dashboard/config',
-            'children': [
+            id: 'l',
+            label: 'Config',
+            href: 'admin/dashboard/config',
+            children: [
               {
-                'id': 'm',
-                'label': 'Config',
-                'href': 'admin/dashboard/config'
+                id: 'm',
+                label: 'Config',
+                href: 'admin/dashboard/config'
               },
               {
-                'id': 'p',
-                'label': 'Config',
-                'href': 'admin/dashboard/config'
+                id: 'p',
+                label: 'Config',
+                href: 'admin/dashboard/config'
               }
             ]
           }
@@ -115,52 +112,46 @@ describe('DsfrNavigationComponent', () => {
       }
     },
     {
-      'id': 'g',
-      'label': 'Simple Menu',
-      'userRoles': [
-        'ROLE_USER',
-        'ROLE_ADMIN'
-      ],
-      'href': 'dashboard',
-      'child': {
-        'isMega': false,
-        'children': [
+      id: 'g',
+      label: 'Simple Menu',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: 'dashboard',
+      child: {
+        isMega: false,
+        children: [
           {
-            'id': 'h',
-            'label': 'Config',
-            'href': 'admin/dashboard/config'
+            id: 'h',
+            label: 'Config',
+            href: 'admin/dashboard/config'
           },
           {
-            'id': 'i',
-            'label': 'Config',
-            'href': 'admin/dashboard/config'
+            id: 'i',
+            label: 'Config',
+            href: 'admin/dashboard/config'
           }
         ]
       }
     },
     {
-      'id': 'j',
-      'label': 'Acces direct',
-      'userRoles': [
-        'ROLE_USER',
-        'ROLE_ADMIN'
-      ],
-      'href': 'dashboard'
+      id: 'j',
+      label: 'Acces direct',
+      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
+      href: 'dashboard'
     }
   ];
 
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
       declarations: [
         DsfrNavigationComponent,
         TestHostComponent,
-        RouterLinkDirectiveStub
+        RouterLinkDirectiveStub,
+        RouterLinkActiveDirectiveStub
       ],
       providers: [
         {
           provide: Router,
-          useValue: {url: ''}
+          useValue: { url: '' }
         }
       ]
     }).compileComponents();
@@ -201,17 +192,21 @@ describe('DsfrNavigationComponent', () => {
     beforeEach(async () => {
       testHost.navigation = testNavigation;
 
-      dsfrNavigationHarness = await harnessLoader.getHarness<DsfrNavigationHarness>(
-        DsfrNavigationHarness
-      );
+      dsfrNavigationHarness =
+        await harnessLoader.getHarness<DsfrNavigationHarness>(
+          DsfrNavigationHarness
+        );
     });
     it('should have NO added classes', async () => {
-      expect(await dsfrNavigationHarness.getNavigationAttribute('class')).toBe('fr-nav');
+      expect(await dsfrNavigationHarness.getNavigationAttribute('class')).toBe(
+        'fr-nav'
+      );
     });
 
     it('should have the mega menu class on the first item', async () => {
-      expect(await dsfrNavigationHarness.getFirstNavItemClass()).toContain('fr-mega-menu');
+      expect(await dsfrNavigationHarness.getFirstNavItemClass()).toContain(
+        'fr-mega-menu'
+      );
     });
   });
-
 });

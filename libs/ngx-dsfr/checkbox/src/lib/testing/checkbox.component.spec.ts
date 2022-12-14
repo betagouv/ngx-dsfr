@@ -9,7 +9,13 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 /**
  * Internal imports
  */
-import { DsfrCheckboxComponent, EMPTY_LEGEND_ERROR, CheckboxItem } from '../checkbox.component';
+import {
+  DsfrCheckboxComponent,
+  EMPTY_LEGEND_ERROR,
+  CheckboxItem,
+  EMPTY_ITEMS_ERROR,
+  EMPTY_LEGEND_ID_ERROR
+} from '../checkbox.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrCheckboxHarness } from './checkbox.harness';
 
@@ -22,26 +28,23 @@ describe('DsfrCheckboxComponent', () => {
 
   const testLegend = 'testLegend';
   const testName = 'testName';
-  const testFieldSetId = 'testFieldSetId';
-  const testItems: CheckboxItem[] = [{
-    label: 'item 1',
-    id: 'item_1',
-    name: 'item_1',
-    value: 'item_1'
-  },
-  {
-    label: 'item 2',
-    id: 'item_2',
-    name: 'item_2',
-    value: 'item_2'
-  }];
+  const testLegendId = 'testFieldSetId';
+  const testItems: CheckboxItem[] = [
+    {
+      label: 'item 1',
+      id: 'item_1',
+      value: 'item_1'
+    },
+    {
+      label: 'item 2',
+      id: 'item_2',
+      value: 'item_2'
+    }
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DsfrCheckboxComponent,
-        TestHostComponent
-      ]
+      declarations: [DsfrCheckboxComponent, TestHostComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -65,20 +68,51 @@ describe('DsfrCheckboxComponent', () => {
     expect(componentUnderTest).toBeTruthy();
   });
 
-  it('should throw an error when no legend is provided', async () => {
+  it('should throw an error when no item is provided', async () => {
     try {
       fixture.detectChanges();
-      throw 'It should have thrown an error about "legend"';
+      throw 'It should have thrown an error about "items"';
     } catch (error) {
-      expect(error).toBe(EMPTY_LEGEND_ERROR);
+      expect(error).toBe(EMPTY_ITEMS_ERROR);
     }
   });
 
-  describe('all required properties are provided, ', () => {
+  describe('when items are provided', () => {
+    beforeEach(async () => {
+      testHost.testItems = testItems;
+    });
+
+    it('should throw an error when no legend is provided', async () => {
+      try {
+        fixture.detectChanges();
+        throw 'It should have thrown an error about "legend"';
+      } catch (error) {
+        expect(error).toBe(EMPTY_LEGEND_ERROR);
+      }
+    });
+  });
+
+  describe('when items & a legend are provided', () => {
+    beforeEach(async () => {
+      testHost.testItems = testItems;
+      testHost.testLegend = testLegend;
+    });
+
+    it('should throw an error when no legend ID is provided', async () => {
+      try {
+        fixture.detectChanges();
+        throw 'It should have thrown an error about "legendId"';
+      } catch (error) {
+        expect(error).toBe(EMPTY_LEGEND_ID_ERROR);
+      }
+    });
+  });
+
+  describe('when all required properties are provided, ', () => {
     beforeEach(async () => {
       testHost.testLegend = testLegend;
       testHost.testName = testName;
-      testHost.testFieldSetId = testFieldSetId;
+      testHost.testLegendId = testLegendId;
       testHost.testItems = testItems;
       dsfrCheckboxHarness = await harnessLoader.getHarness<DsfrCheckboxHarness>(
         DsfrCheckboxHarness
