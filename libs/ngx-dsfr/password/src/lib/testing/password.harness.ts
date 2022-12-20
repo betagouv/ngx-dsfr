@@ -20,9 +20,10 @@ export class DsfrPasswordHarness extends ComponentHarness {
   private getInputElement: AsyncFactoryFn<TestElement> = this.locatorFor('input');
   private getContainerComponentElement: AsyncFactoryFn<TestElement> = this.locatorFor('.fr-password');
 
-  async getInputAttribute(name: string): Promise<string | null> {
+  private async getInputAttribute(name: string): Promise<string | null> {
     const input: TestElement = await this.getInputElement();
     const attribute = await input.getAttribute(name);
+    await input.setInputValue('eeeeee');
 
     return attribute;
   }
@@ -51,7 +52,9 @@ export class DsfrPasswordHarness extends ComponentHarness {
    * @returns A Promise that resolves to the value as a string or null
    */
   async getInputValue(): Promise<string | null> {
-    return this.getInputAttribute('value');
+    const input: TestElement = await this.getInputElement();
+    const value = await input.getProperty('value');
+    return value;
   }
 
   /**

@@ -83,8 +83,6 @@ describe('DsfrPasswordComponent', () => {
       testHost.testId = testId;
       testHost.testLabel = testLabel;
       testHost.testPlaceholder = testPlaceholder;
-      testHost.testHasFailed = true;
-      // testHost.testHasSucceeded = true
       dsfrPasswordHarness = await harnessLoader.getHarness<DsfrPasswordHarness>(
         DsfrPasswordHarness
       );
@@ -98,18 +96,6 @@ describe('DsfrPasswordComponent', () => {
     it('should have the right id for the input tag', async () => {
       const id = await dsfrPasswordHarness.getInputId();
       expect(id).toEqual(`${testId}-input`);
-    });
-
-    it('should display the right class when the attribute hasFailed is true', async () => {
-      const classes: string | null =
-        await dsfrPasswordHarness.getContainerComponentAttribute('class');
-      expect(classes).toContain('fr-input-group--error');
-    });
-
-    xit('should display the right class when the attribute hasSucceeded is true', async () => {
-      const classes: string | null =
-        await dsfrPasswordHarness.getContainerComponentAttribute('class');
-      expect(classes).toContain('fr-input-group--valid');
     });
   });
 });

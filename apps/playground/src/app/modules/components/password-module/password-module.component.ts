@@ -46,7 +46,6 @@ export class PasswordModuleComponent implements OnInit, OnDestroy {
       minSize: new FormControl(this.passwordSignUpParams.minSize, [Validators.required]),
       minDigit: new FormControl(this.passwordSignUpParams.minDigitalCharacters, [Validators.required]),
       minSpecial: new FormControl(this.passwordSignUpParams.minSpecialCharacters, [Validators.required]),
-      isError: new FormControl(false)
     });
 
     this.formLoginPassword = this.formBuilder.group({
