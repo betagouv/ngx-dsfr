@@ -21,6 +21,7 @@ import { DsfrStepperModule } from '@betagouv/ngx-dsfr/stepper';
 import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
+import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 
 /**
  * Internal imports
@@ -38,6 +39,7 @@ import { SharedModule } from '../shared/shared.module';
 import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
+import { PasswordModuleComponent } from './components/password-module/password-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 
 @NgModule({
@@ -54,6 +56,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     DsfrHeaderModule,
     DsfrInputModule,
     DsfrTileModule,
+    DsfrPasswordModule,
     DsfrCheckboxModule,
     MatCardModule,
     MatIconModule,
@@ -72,6 +75,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     HeaderModuleComponent,
     InputModuleComponent,
     TileModuleComponent,
+    PasswordModuleComponent,
     CheckboxModuleComponent,
     StepperModuleComponent
   ]
