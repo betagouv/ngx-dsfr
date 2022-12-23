@@ -22,7 +22,7 @@ import { Subject, takeUntil } from 'rxjs';
 /**
  * TypeScript entities and constants
  */
-type PropertyType = 'string' | 'boolean' | 'enum';
+type PropertyType = 'string' | 'boolean' | 'enum' | 'number';
 
 @Component({
   selector: 'play-input-property-control',
@@ -37,8 +37,7 @@ type PropertyType = 'string' | 'boolean' | 'enum';
   ]
 })
 export class InputPropertyControlComponent
-  implements ControlValueAccessor, OnChanges
-{
+  implements ControlValueAccessor, OnChanges {
   @Input() name: string = '';
   @Input() label: string = '';
   @Input() type: PropertyType = 'string';

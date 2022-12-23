@@ -28,6 +28,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/button'
       },
       {
+        label: 'Checkbox',
+        path: '/modules/checkbox'
+      },
+      {
         label: 'Header',
         path: '/modules/header'
       },
@@ -42,6 +46,10 @@ export const SIDE_NAV: NavItem[] = [
       {
         label: 'Navigation',
         path: '/modules/navigation'
+      },
+      {
+        label: 'Password',
+        path: '/modules/password'
       },
       {
         label: 'Radio',

@@ -47,7 +47,6 @@ export enum ThemeColor {
 export type UserRole = 'ROLE_USER' | 'ROLE_ADMIN';
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-
 /**
  * Common DSFR Constant
  */

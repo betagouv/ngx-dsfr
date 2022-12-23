@@ -26,8 +26,9 @@
       "@betagouv/ngx-dsfr/radio": ["libs/ngx-dsfr/radio/src/index.ts"],
       "@betagouv/ngx-dsfr/stepper": ["libs/ngx-dsfr/stepper/src/index.ts"],
       "@betagouv/ngx-dsfr/tile": ["libs/ngx-dsfr/tile/src/index.ts"],
+      "@betagouv/ngx-dsfr/password": ["libs/ngx-dsfr/password/src/index.ts"],
       "@betagouv/ngx-dsfr/testing": ["libs/ngx-dsfr/src/lib/testing/index.ts"],
-      "@ngx-dsfr/architect": ["libs/architect/src/index.ts"]
+      "@ngx-dsfr/architect": ["libs/architect/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]
