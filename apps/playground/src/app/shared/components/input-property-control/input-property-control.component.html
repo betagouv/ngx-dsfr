@@ -14,6 +14,18 @@
       <mat-error>{{ error }}</mat-error>
     </mat-form-field>
 
+    <mat-form-field
+      *ngSwitchCase="'number'"
+      class="string-property">
+      <mat-label>{{ label || (name | titlecase) }}</mat-label>
+      <input
+        matInput
+        type="number"
+        [formControl]="formControl"
+        (blur)="onBlur()" />
+      <mat-error>{{ error }}</mat-error>
+    </mat-form-field>
+
     <mat-slide-toggle
       *ngSwitchCase="'boolean'"
       #toggle
@@ -35,5 +47,7 @@
       </mat-select>
       <mat-error>{{ error }}</mat-error>
     </mat-form-field>
+
+
   </ng-container>
 </div>

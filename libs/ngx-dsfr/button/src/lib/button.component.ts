@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 /**
  * 3rd-party imports
@@ -56,7 +56,9 @@ export class DsfrButtonComponent implements OnInit {
     if (!this.title) {
       this.title = this.label || '';
     }
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
     this.initClasses();
   }
 
@@ -65,7 +67,7 @@ export class DsfrButtonComponent implements OnInit {
   }
 
   private initClasses(): void {
-    this.classes += `fr-btn fr-btn--${this.size} fr-btn--${this.type}`;
+    this.classes = `fr-btn fr-btn--${this.size} fr-btn--${this.type}`;
 
     if (this.icon) {
       this.classes += ` fr-icon-${this.icon} `;
