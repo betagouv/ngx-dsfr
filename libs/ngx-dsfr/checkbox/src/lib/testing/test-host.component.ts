@@ -15,6 +15,7 @@ import { CheckboxItem } from '../checkbox.component';
       [legend]="testLegend"
       [legendId]="testLegendId"
       [hint]="testHint"
+      [name]="testName"
       [items]="testItems"
       [inline]="testInline"
       [disabled]="testDisabled"
@@ -22,14 +23,14 @@ import { CheckboxItem } from '../checkbox.component';
       [hasFailed]="testHasFailed"
       [failureMessage]="testFailureMessage"
       [hasSucceeded]="testHasSucceeded"
-      [successMessage]="testSuccessMessage"
-    ></dsfr-checkbox>
+      [successMessage]="testSuccessMessage"></dsfr-checkbox>
   `
 })
 export class TestHostComponent {
   @Input() testLegend = '';
   @Input() testLegendId = '';
   @Input() testHint = '';
+  @Input() testName = '';
   @Input() testItems: CheckboxItem[] = [];
   @Input() testInline = false;
   @Input() testDisabled = false;
