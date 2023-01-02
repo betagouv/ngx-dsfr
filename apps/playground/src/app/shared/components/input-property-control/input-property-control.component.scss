@@ -4,7 +4,8 @@
 // Actual styling
 .form-control {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin: var.$default-margin 0;
 
   label {
     margin: var.$default-margin;

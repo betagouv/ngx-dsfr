@@ -4,17 +4,17 @@
       [class]="
         'fr-link fr-icon-arrow-up-fill fr-link--icon-left fr-link--' + size
       "
-      href="#top">
-      Haut de page
-    </a>
+      href="#top"
+      >Haut de page</a
+    >
   </ng-container>
   <ng-container *ngSwitchCase="templateType.INTERNAL">
     <a
       [class]="classes"
       [title]="title"
-      [routerLink]="link">
-      {{ label }}
-    </a>
+      [routerLink]="link"
+      >{{ label }}</a
+    >
   </ng-container>
   <ng-container *ngSwitchCase="templateType.EXTERNAL">
     <a
@@ -22,8 +22,8 @@
       [href]="link"
       target="_blank"
       rel="noopener"
-      [title]="title + ' - ouvre une nouvelle fenêtre'">
-      {{ label }}
-    </a>
+      [title]="title + ' - ouvre une nouvelle fenêtre'"
+      >{{ label }}</a
+    >
   </ng-container>
 </ng-container>

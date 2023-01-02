@@ -1,7 +1,14 @@
 /**
  * Angular imports
  */
-import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import { ElementSize } from '@betagouv/ngx-dsfr';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -10,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  */
 export const EMPTY_LEGEND_ERROR: string =
   'You MUST provide a legend for that group of checkboxes 😡 !!!';
-export const EMPTY_FIELDSET_ID_ERROR: string =
+export const EMPTY_LEGEND_ID_ERROR: string =
   'You MUST provide a value for the legendId attribute 😡 !!!';
 export const EMPTY_ITEMS_ERROR: string =
   'You MUST provide a non-empty array for the items attribute 😡 !!!';
@@ -38,8 +45,9 @@ export interface CheckboxItem {
     }
   ]
 })
-
-export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class DsfrCheckboxComponent
+  implements ControlValueAccessor, OnInit, OnChanges
+{
   @Input() legend = '';
   @Input() legendId = '';
   @Input() hint = '';
@@ -53,8 +61,8 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   @Input() hasSucceeded = false;
   @Input() successMessage = '';
 
-  onChange = (_: string[]) => { };
-  onTouched = (_: string[]) => { };
+  onChange = (_: string[]) => {};
+  onTouched = (_: string[]) => {};
 
   fieldSetClasses: Record<string, boolean> = {};
   ariaLabelledBy: string | null = null;
@@ -71,6 +79,9 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   private _values!: string[];
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.items.length === 0) {
+      throw EMPTY_ITEMS_ERROR;
+    }
     if (this.hasFailed && !this.failureMessage) {
       throw EMPTY_FAILURE_MESSAGE_ERROR;
     }
@@ -82,18 +93,13 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
   }
 
   ngOnInit(): void {
-
     if (this.items?.length && this.items.length > 1) {
       if (!this.legend) {
         throw EMPTY_LEGEND_ERROR;
       }
       if (!this.legendId) {
-        throw EMPTY_FIELDSET_ID_ERROR;
+        throw EMPTY_LEGEND_ID_ERROR;
       }
-    }
-
-    if (this.items.length === 0) {
-      throw EMPTY_ITEMS_ERROR;
     }
   }
 
@@ -140,16 +146,17 @@ export class DsfrCheckboxComponent implements ControlValueAccessor, OnInit, OnCh
     if (event.target) {
       const value = event.target.value;
       if (this.values.includes(value)) {
-        this.values = this.values.filter((element: any) => !(element === value));
+        this.values = this.values.filter(
+          (element: any) => !(element === value)
+        );
       } else {
-        this.values.push(value)
+        this.values.push(value);
       }
-      this.onChange(this.values)
+      this.onChange(this.values);
     }
   }
 
   isChecked(value: string) {
     return this.values?.includes(value);
   }
-
 }

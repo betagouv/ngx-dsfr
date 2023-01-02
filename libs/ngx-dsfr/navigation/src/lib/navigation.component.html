@@ -115,6 +115,7 @@
                     class="fr-nav__link"
                     [routerLink]="[link.href]"
                     routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
                     ariaCurrentWhenActive="page"
                     target="_self">
                     {{ link.label }}

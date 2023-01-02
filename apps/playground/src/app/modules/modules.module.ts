@@ -36,7 +36,7 @@ import { NavigationModuleComponent } from './components/navigation-module/naviga
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
 import { SharedModule } from '../shared/shared.module';
-import { StepperModuleComponent } from "./components/stepper-module/stepper-module.component";
+import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
 import { PasswordModuleComponent } from './components/password-module/password-module.component';
@@ -61,7 +61,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    ModulesRoutingModule,
+    ModulesRoutingModule
   ],
   declarations: [
     SimulatorComponent,
@@ -80,4 +80,4 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     StepperModuleComponent
   ]
 })
-export class ModulesModule { }
+export class ModulesModule {}
