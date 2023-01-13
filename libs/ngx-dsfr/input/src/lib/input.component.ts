@@ -40,7 +40,7 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
   @Input() type: InputType = 'text';
   @Input() placeholder: string = '';
   @Input() hasFailed = false;
-  @Input() failureMessage: string | undefined;;
+  @Input() failureMessage: string | undefined;
   @Input() hasSucceeded = false;
   @Input() successMessage: string | undefined;
   @Input() icon: string | undefined;
