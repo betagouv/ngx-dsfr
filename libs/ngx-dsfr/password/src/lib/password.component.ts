@@ -32,18 +32,18 @@ export interface PasswordParams {
   minDigitalCharacters: number;
 }
 
-@Component({
+@Component( {
   selector: 'dsfr-password',
   templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss'],
+  styleUrls: [ './password.component.scss' ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DsfrPasswordComponent),
+      useExisting: forwardRef( () => DsfrPasswordComponent ),
       multi: true
     }
   ]
-})
+} )
 export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Input() label: string = '';
@@ -58,21 +58,21 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
     minDigitalCharacters: 1
   };
 
-  @Output() updatePasswordStatus = new EventEmitter<PasswordStatus>();
+  @Output() passwordStatusUpdated = new EventEmitter<PasswordStatus>();
 
-  @HostListener('window:mousedown', ['$event'])
-  onMouseDown (event: KeyboardEvent): void {
-    this.checkCapslockKey(event);
+  @HostListener( 'window:mousedown', [ '$event' ] )
+  onMouseDown( event: KeyboardEvent ): void {
+    this.checkCapslockKey( event );
   }
 
-  @HostListener('window:keydown', ['$event'])
-  onKeyDown (event: KeyboardEvent): void {
-    this.checkCapslockKey(event);
+  @HostListener( 'window:keydown', [ '$event' ] )
+  onKeyDown( event: KeyboardEvent ): void {
+    this.checkCapslockKey( event );
   }
 
-  @HostListener('window:keyup', ['$event'])
-  onKeyUp (event: KeyboardEvent): void {
-    this.checkCapslockKey(event);
+  @HostListener( 'window:keyup', [ '$event' ] )
+  onKeyUp( event: KeyboardEvent ): void {
+    this.checkCapslockKey( event );
   }
 
   inputType: string = 'password';
@@ -95,37 +95,37 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
 
   private _value!: string;
 
-  onChange = (_: string) => {
+  onChange = ( _: string ) => {
   };
-  onTouched = (_: string) => {
+  onTouched = ( _: string ) => {
   };
 
-  get value (): string {
+  get value(): string {
     return this._value;
   }
 
-  set value (val: string) {
+  set value( val: string ) {
     this._value = val;
-    this.onChange(val);
+    this.onChange( val );
   }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
 
-    if (!this.id) {
+    if ( !this.id ) {
       throw EMPTY_ID_ERROR;
     }
 
-    if (!this.label) {
+    if ( !this.label ) {
       throw EMPTY_LABEL_ERROR;
     }
   }
 
-  ngOnChanges (changes: SimpleChanges): void {
+  ngOnChanges( changes: SimpleChanges ): void {
     this.setComponentIds();
     this.setAutocompleteAttribute();
   }
 
-  private setSuccessOrErrorClasses (): void {
+  private setSuccessOrErrorClasses(): void {
     this.inputGroupClasses = {
       'fr-input-group--error': this.hasFailed,
       'fr-input-group--valid': this.hasSucceeded
@@ -138,22 +138,22 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
 
   }
 
-  private setAutocompleteAttribute (): void {
+  private setAutocompleteAttribute(): void {
     this.autocomplete = this.type === 'signup' ? 'new-password' : 'current-password';
   }
 
-  private checkCapslockKey (event: KeyboardEvent | MouseEvent): void {
-    this.capslockKeyActive = event.getModifierState('CapsLock') ? true : null;
+  private checkCapslockKey( event: KeyboardEvent | MouseEvent ): void {
+    this.capslockKeyActive = event.getModifierState( 'CapsLock' ) ? true : null;
   }
 
-  private setComponentIds (): void {
+  private setComponentIds(): void {
     this.mainInputId = `${this.id}-input`;
     this.ariaDescribedBy = `${this.id}-input-messages`;
     this.showPasswordId = `${this.id}-show`;
   }
 
-  displayPassword (): void {
-    if (this.inputType === 'password') {
+  displayPassword(): void {
+    if ( this.inputType === 'password' ) {
       this.inputType = 'text';
       this.buttonDisplayPasswordText = 'Masquer';
       this.buttonDisplayPasswordIcon = 'eye-off-fill';
@@ -164,20 +164,20 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
     }
   }
 
-  private checkSpecialCharacters (): boolean {
+  private checkSpecialCharacters(): boolean {
     let resultClass: string;
     let isValid: boolean;
     let filteredSpecial: string[] = [];
-    const regex = new RegExp(/[^A-Za-z0-9]/);
+    const regex = new RegExp( /[^A-Za-z0-9]/ );
 
-    if (this.value) {
-      const arr = this.value.split('');
-      filteredSpecial = arr.filter((character: string) =>
-        regex.test(character)
+    if ( this.value ) {
+      const arr = this.value.split( '' );
+      filteredSpecial = arr.filter( ( character: string ) =>
+        regex.test( character )
       );
     }
 
-    if (filteredSpecial.length >= this.params.minSpecialCharacters) {
+    if ( filteredSpecial.length >= this.params.minSpecialCharacters ) {
       resultClass = 'valid';
       isValid = true;
     } else {
@@ -190,18 +190,18 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
     return isValid;
   }
 
-  private checkDigitCharacters (): boolean {
+  private checkDigitCharacters(): boolean {
     let resultClass: string;
     let isValid: boolean;
     let filteredDigit: string[] = [];
-    const regex = new RegExp(/\d/);
+    const regex = new RegExp( /\d/ );
 
-    if (this.value) {
-      const arr = this.value.split('');
-      filteredDigit = arr.filter((character: string) => regex.test(character));
+    if ( this.value ) {
+      const arr = this.value.split( '' );
+      filteredDigit = arr.filter( ( character: string ) => regex.test( character ) );
     }
 
-    if (filteredDigit.length >= this.params.minDigitalCharacters) {
+    if ( filteredDigit.length >= this.params.minDigitalCharacters ) {
       resultClass = 'valid';
       isValid = true;
     } else {
@@ -214,11 +214,11 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
     return isValid;
   }
 
-  private checkLengthCharacters (): boolean {
+  private checkLengthCharacters(): boolean {
     let resultClass: string;
     let isValid: boolean;
 
-    if (this.value?.length >= this.params.minSize) {
+    if ( this.value?.length >= this.params.minSize ) {
       resultClass = 'valid';
       isValid = true;
     } else {
@@ -231,12 +231,12 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
     return isValid;
   }
 
-  handleChangePassword () {
+  handleChangePassword() {
     const isDigitConditionValid: boolean = this.checkDigitCharacters();
     const isSizeConditionValid: boolean = this.checkLengthCharacters();
     const isSpecialConditionValid: boolean = this.checkSpecialCharacters();
 
-    this.updatePasswordStatus.emit(isDigitConditionValid && isSizeConditionValid && isSpecialConditionValid ? PasswordStatus.VALID : PasswordStatus.INVALID);
+    this.passwordStatusUpdated.emit( isDigitConditionValid && isSizeConditionValid && isSpecialConditionValid ? PasswordStatus.VALID : PasswordStatus.INVALID );
 
     this.hasFailed =
       !isDigitConditionValid ||
@@ -248,15 +248,15 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
     this.setSuccessOrErrorClasses();
   }
 
-  registerOnChange (fn: (_: string) => void): void {
+  registerOnChange( fn: ( _: string ) => void ): void {
     this.onChange = fn;
   }
 
-  registerOnTouched (fn: (_: string) => void): void {
+  registerOnTouched( fn: ( _: string ) => void ): void {
     this.onTouched = fn;
   }
 
-  writeValue (value: string): void {
+  writeValue( value: string ): void {
     this._value = value;
   }
 }
