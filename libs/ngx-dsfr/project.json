@@ -7,7 +7,9 @@
   "targets": {
     "build-base": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/ngx-dsfr"
+      ],
       "options": {
         "project": "libs/ngx-dsfr/ng-package.json"
       },
@@ -23,7 +25,9 @@
     },
     "adapt-css-paths-in-icons-files": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/ngx-dsfr"
+      ],
       "options": {
         "directories": "assets/icons",
         "glob": "**/*.css",
@@ -34,9 +38,15 @@
     },
     "adapt-css-paths-in-components-files": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/ngx-dsfr"
+      ],
       "options": {
-        "directories": ["esm2020", "fesm2015", "fesm2020"],
+        "directories": [
+          "esm2020",
+          "fesm2015",
+          "fesm2020"
+        ],
         "glob": "**/*.mjs",
         "searchValues": "url\\(..\\/..\\/icons\\/.+?\\/(.+?)\\)",
         "flags": "g",
@@ -45,13 +55,21 @@
     },
     "adapt-to-shadow-dom": {
       "executor": "@ngx-dsfr/architect:mass-updator",
-      "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/ngx-dsfr"
+      ],
       "options": {
         "directories": "assets/styling",
         "glob": "core-styling.css",
-        "searchValues": [":root", "body"],
+        "searchValues": [
+          ":root",
+          "body"
+        ],
         "flags": "g",
-        "replacements": [":host", ".content-wrapper"],
+        "replacements": [
+          ":host",
+          ".content-wrapper"
+        ],
         "rewrite": false,
         "suffix": "shadow"
       }
@@ -70,7 +88,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/ngx-dsfr"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/ngx-dsfr"
+      ],
       "options": {
         "jestConfig": "libs/ngx-dsfr/jest.config.ts",
         "passWithNoTests": true
@@ -82,16 +102,30 @@
         "lintFilePatterns": [
           "libs/ngx-dsfr/src/**/*.ts",
           "libs/ngx-dsfr/src/**/*.html",
+          "libs/ngx-dsfr/alert/**/*.ts",
+          "libs/ngx-dsfr/alert/**/*.html",
+          "libs/ngx-dsfr/badge/**/*.ts",
+          "libs/ngx-dsfr/badge/**/*.html",
+          "libs/ngx-dsfr/button/**/*.ts",
+          "libs/ngx-dsfr/button/**/*.html",
+          "libs/ngx-dsfr/checkbox/**/*.ts",
+          "libs/ngx-dsfr/checkbox/**/*.html",
+          "libs/ngx-dsfr/header/**/*.ts",
+          "libs/ngx-dsfr/header/**/*.html",
+          "libs/ngx-dsfr/input/**/*.ts",
+          "libs/ngx-dsfr/input/**/*.html",
           "libs/ngx-dsfr/link/**/*.ts",
           "libs/ngx-dsfr/link/**/*.html",
+          "libs/ngx-dsfr/navigation/**/*.ts",
+          "libs/ngx-dsfr/navigation/**/*.html",
+          "libs/ngx-dsfr/password/**/*.ts",
+          "libs/ngx-dsfr/password/**/*.html",
           "libs/ngx-dsfr/radio/**/*.ts",
           "libs/ngx-dsfr/radio/**/*.html",
           "libs/ngx-dsfr/stepper/**/*.ts",
           "libs/ngx-dsfr/stepper/**/*.html",
-          "libs/ngx-dsfr/alert/**/*.ts",
-          "libs/ngx-dsfr/alert/**/*.html",
-          "libs/ngx-dsfr/header/**/*.ts",
-          "libs/ngx-dsfr/header/**/*.html"
+          "libs/ngx-dsfr/tile/**/*.ts",
+          "libs/ngx-dsfr/tile/**/*.html"
         ]
       }
     }
