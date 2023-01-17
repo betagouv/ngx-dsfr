@@ -19,6 +19,7 @@ import { InputModuleComponent } from './components/input-module/input-module.com
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
 import { PasswordModuleComponent } from './components/password-module/password-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
+import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 
 /**
  * TypeScript entities and constants
@@ -63,6 +64,10 @@ const routes: Route[] = [
   {
     path: 'radio',
     component: RadioModuleComponent
+  },
+  {
+    path: 'search-bar',
+    component: SearchBarModuleComponent
   },
   {
     path: 'stepper',

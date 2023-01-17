@@ -22,6 +22,7 @@ import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
+import { DsfrSearchBarModule } from '@betagouv/ngx-dsfr/search-bar';
 
 /**
  * Internal imports
@@ -41,6 +42,8 @@ import { InputModuleComponent } from './components/input-module/input-module.com
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
 import { PasswordModuleComponent } from './components/password-module/password-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
+import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
+import { TestSearchService } from './components/search-bar-module/search-bar-module.service';
 
 @NgModule({
   imports: [
@@ -58,6 +61,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     DsfrTileModule,
     DsfrPasswordModule,
     DsfrCheckboxModule,
+    DsfrSearchBarModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -77,7 +81,9 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
     TileModuleComponent,
     PasswordModuleComponent,
     CheckboxModuleComponent,
-    StepperModuleComponent
-  ]
+    StepperModuleComponent,
+    SearchBarModuleComponent
+  ],
+  providers: [TestSearchService]
 })
-export class ModulesModule {}
+export class ModulesModule { }
