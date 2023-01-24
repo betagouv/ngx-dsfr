@@ -22,7 +22,7 @@ import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
-import { DsfrSearchBarModule } from '@betagouv/ngx-dsfr/search-bar';
+import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
 
 /**
  * Internal imports
@@ -84,6 +84,11 @@ import { TestSearchService } from './components/search-bar-module/search-bar-mod
     StepperModuleComponent,
     SearchBarModuleComponent
   ],
-  providers: [TestSearchService]
+  providers: [
+    {
+      provide: DSFR_SEARCH_BAR_SERVICE_TOKEN,
+      useClass: TestSearchService
+    }
+  ]
 })
 export class ModulesModule { }

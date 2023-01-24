@@ -1,7 +1,19 @@
 <section class="module-description">
   <h2>DsfrSearchBarComponent</h2>
   <p>
-    The <code>DsfrSearchBarComponent</code> purpose is to represent link tile element.
+    The <code>DsfrSearchBarComponent</code> purpose is to enable the end-user
+    to access a specific content by searching keywords. It can eventually be
+    made through a selection in a list, populated with search results, via autocompletion.
+  </p>
+  <p>
+    It can be used on its own :
+  </p>
+  <ul>
+      <li>as a simple input, to retrieve the search query entered by the user after they click on the search button, hook onto the <code>searchQuerySubmitted</code> Output property</li>
+      <li>as an input with autocompletion, to retrieve the search result chosen by the user, hook onto the <code>searchResultSelected</code> Output property</li>
+  </ul>
+  <p>
+    It can also be used as a <code>FormControl</code>, with the ReactiveForms API.
   </p>
   <p>
     It is based on the
@@ -62,37 +74,32 @@
       name="displayNoResultMessage"
       type="boolean"
       default="true">
-      It displays the message 'Aucun résultat' if no result found for the current search
+      It displays the message 'Aucun résultat' if no result was found for the current search
     </play-input-property-definition>
     <play-input-property-definition
-      name="service"
-      type="DsfrAutocompleteService">
-      It takes a service with the method <code>search(query: string)</code> which call the API
-    </play-input-property-definition>
-    <play-input-property-definition
-      name="select()"
+      name="searchResultSelected"
       type="Output">
-      Emit the object of the selected item on click on the item in the autocompletion
+      Emits the object of the selected item when the user clicks on the item in the autocompletion panel
     </play-input-property-definition>
     <play-input-property-definition
-      name="submit()"
+      name="searchQuerySubmitted"
       type="Output">
-      Emit the value of the selected item on click on the button
+      Emits the value of the selected item when the user clicks on the search button
     </play-input-property-definition>
     <play-input-property-definition
       name="focus()"
       type="Output">
-      Emit the value of the input when the user focus on it
+      Emits the value of the input when the user focuses on it
     </play-input-property-definition>
     <play-input-property-definition
       name="blur()"
       type="Output">
-      Emit the value of the input on blur
+      Emits the value of the input on blur
     </play-input-property-definition>
     <play-input-property-definition
       name="keyUp()"
       type="Output">
-      Emit the value of the input on each key up
+      Emits the value of the input on each key up
     </play-input-property-definition>
   </dl>
 </section>
@@ -141,7 +148,7 @@
           <button
             mat-raised-button
             color="accent"
-            (click)="inputForm.reset()">
+            (click)="inputSearchForm.reset()">
             Reset
           </button>
         </form>
@@ -159,17 +166,19 @@
               [size]="inputSearchForm.getRawValue().size"
               [displayNoResultMessage]="inputSearchForm.getRawValue().displayNoResultMessage"
               [minCharacterForSearch]="inputSearchForm.getRawValue().minCharacterForSearch"
-              [service]="testSearchService"
               [placeholder]="inputSearchForm.getRawValue().placeholder"
-              (select)="onSelectItem($event)"
-              (submit)="onSubmitSearch($event)">
+              (searchResultSelected)="onItemSelected($event)"
+              (searchQuerySubmitted)="onSearchQuerySubmitted($event)">
             </dsfr-search-bar>
             <div class="result">
               <p>
                 The selected value is : {{ selectedItem | json }}
               </p>
               <p>
-                The submitted value is : {{ submittedItem | json }}
+                The submitted value is : {{ submittedQuery | json }}
+              </p>
+              <p>
+                The form value is : {{ inputForm.value | json }}
               </p>
             </div>
           </form>

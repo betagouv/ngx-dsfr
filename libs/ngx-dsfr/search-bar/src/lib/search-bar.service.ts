@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Injectable } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 /**
  * 3rd-party imports
@@ -13,14 +13,11 @@ import { Observable } from 'rxjs';
  */
 import { ItemResult } from './search-bar.component';
 
-@Injectable()
-export abstract class DsfrSearchBarService {
-
-  constructor() { }
-
-  /**
-   * Returns a list of the result's search
-   */
-  abstract search(query: string): Observable<ItemResult[]>;
-
+export interface DsfrSearchBarService {
+  search: (query: string) => Observable<ItemResult[]>;
 }
+
+export const DSFR_SEARCH_BAR_SERVICE_TOKEN =
+  new InjectionToken<DsfrSearchBarService>(
+    'A service that can be used by the DsfrSearchBarComponent for autocompletion'
+  );

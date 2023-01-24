@@ -1,19 +1,19 @@
 /**
  * Angular imports
  */
-import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * 3rd-party imports
  */
 import { ElementSize } from '@betagouv/ngx-dsfr';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Subject, takeUntil } from 'rxjs';
 
 /**
  * Internal imports
  */
-import { DsfrSearchBarService } from './search-bar.service';
+import { DsfrSearchBarService, DSFR_SEARCH_BAR_SERVICE_TOKEN } from './search-bar.service';
 
 /**
  * TypeScript entities and constants
@@ -22,8 +22,6 @@ export const EMPTY_ID_ERROR: string =
   'You MUST provide an id for this component 😡 !!!';
 export const EMPTY_LABEL_ERROR: string =
   'You MUST provide a label for this component 😡 !!!';
-export const EMPTY_SERVICE_ERROR: string =
-  'You MUST provide a service for this component 😡 !!!';
 export const MINIMUM_SEARCH_CHARACTER_ERROR: string =
   'You MUST provide a number greater than 0 for the  minCharacterForSearch\'s input 😡 !!!';
 
@@ -47,6 +45,8 @@ export interface ItemResult {
 })
 export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, OnChanges, AfterViewInit {
 
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>
+
   @Input() id: string | undefined;
   @Input() label: string | undefined;
   @Input() placeholder: string = '';
@@ -54,36 +54,40 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
   @Input() size: ElementSize = ElementSize.MEDIUM;
   @Input() minCharacterForSearch: number = 3;
   @Input() displayNoResultMessage: boolean = true;
-  @Input() service: DsfrSearchBarService | undefined;
 
   @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() keyUp = new EventEmitter<Event>();
+  @Output() keyup = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<FocusEvent>();
-  @Output() select = new EventEmitter<ItemResult>;
-  @Output() submit = new EventEmitter<string>;
+  @Output() searchResultSelected = new EventEmitter<ItemResult>();
+  @Output() searchQuerySubmitted = new EventEmitter<string>();
 
-  onChange = (_: string) => { };
-  onTouched = (_: string) => { };
+  onChange = (_: ItemResult | string) => { };
+  onTouched = (_: ItemResult | string) => { };
 
   private unsubscribe$ = new Subject<void>();
 
   results: ItemResult[] = [];
-  ariaDescribedby: string | null = null;
   displayResults: boolean = false;
-  onSearch = new Subject<string>();
   noResult: boolean = false;
   loading: boolean = false;
   classes: string = '';
 
-  get value(): string {
+  get value(): string | ItemResult {
     return this._value;
   }
 
-  set value(val: string) {
-    this.writeValue(val);
+  set value(val: ItemResult | string) {
+    this._value = val;
+    this.onChange(val);
   }
 
-  private _value!: string;
+  private _value!: string | ItemResult;
+
+  constructor(
+    @Inject(DSFR_SEARCH_BAR_SERVICE_TOKEN)
+    @Optional()
+    private searchService: DsfrSearchBarService
+  ) { }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -100,10 +104,6 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
       throw EMPTY_LABEL_ERROR;
     }
 
-    if (this.autocomplete && !this.service) {
-      throw EMPTY_SERVICE_ERROR;
-    }
-
     if (this.minCharacterForSearch < 1) {
       throw MINIMUM_SEARCH_CHARACTER_ERROR;
     }
@@ -118,42 +118,48 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
   }
 
   private initSearch(): void {
-    this.onSearch.pipe(
+    fromEvent(this.searchInput.nativeElement, 'input').pipe(
+      map(() => this.searchInput.nativeElement.value),
       debounceTime(400),
       distinctUntilChanged(),
       takeUntil(this.unsubscribe$)
-    ).subscribe((value: string) => {
-      this.results = [];
-      this.noResult = false;
-      if (this.value?.trim().length >= this.minCharacterForSearch) {
-        this.loading = true;
-        this.service?.search(value.trim()).subscribe(
-          (data: ItemResult[]) => {
-            this.loading = false;
-            this.results = data;
-            this.displayResults = true;
-            this.noResult = this.results.length === 0;
-          },
-          (error) => {
-            // if the API throw an error, it stops the loading message
-            this.loading = false;
-          }
-        );
+    ).subscribe(
+      (value: string) => {
+        this.results = [];
+        this.noResult = false;
+        if (value.trim().length >= this.minCharacterForSearch) {
+          this.loading = true;
+          this.searchService.search(value.trim()).subscribe({
+            next: (data: ItemResult[]) => {
+              this.loading = false;
+              this.results = data;
+              this.displayResults = true;
+              this.noResult = this.results.length === 0;
+            },
+            error: () => {
+              // If the API throws an error, we stop the loading message
+              this.loading = false;
+            }
+          });
+        }
       }
-    });
+    );
   }
 
-  registerOnChange(fn: (_: string) => void): void {
+  registerOnChange(fn: (_: ItemResult | string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: (_: string) => void): void {
+  registerOnTouched(fn: (_: ItemResult | string) => void): void {
     this.onTouched = fn;
   }
 
-  writeValue(value: string): void {
+  writeValue(value: ItemResult | string): void {
     this._value = value;
-    this.onChange(value);
+    if (value) {
+      this.searchInput.nativeElement.value =
+        typeof this.value === 'string' ? this.value : this.value.label;
+    }
   }
 
   onBlur(event: FocusEvent) {
@@ -165,25 +171,30 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
   }
 
   onKeyup(event: Event) {
-    this.keyUp.emit(event);
+    this.keyup.emit(event);
   }
 
-  onSelectOption(event: Event, itemResult: ItemResult) {
+  onSearchResultSelected(event: Event, itemResult: ItemResult) {
     /*
-      According to the [href=#], it is for accessibility:
-      each item will be accessible using tab keyboard
-    */
+      * Since we've wrapped search results into <a> tags,
+      * for accessibility ( each item will then be accessible
+      * using tab keyboard ), we have to prevent the natural
+      * behavior of the browser, which would refresh the page
+      */
     event.preventDefault();
 
     this.displayResults = false;
-    this.writeValue(itemResult.label);
-    this.select.emit(itemResult);
+    this.value = itemResult;
+    this.searchInput.nativeElement.value = this.value.label;
+    this.searchResultSelected.emit(this.value);
   }
 
-  onSubmit() {
+  onSubmit(value: string) {
     this.displayResults = false;
-    this.noResult = false;
-    this.submit.emit(this.value);
+    if (this.autocomplete) {
+      this.value = value;
+      this.searchQuerySubmitted.emit(value);
+    }
   }
 
 }

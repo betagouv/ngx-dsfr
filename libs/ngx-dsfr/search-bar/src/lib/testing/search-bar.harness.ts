@@ -30,17 +30,17 @@ export class DsfrSearchBarHarness extends ComponentHarness {
    * Retrieves the id value of the input tag
    * in the DsfrSearchBarComponent's Template
    *
-   * @returns A Promise that resolves to the id value as a strings or null
+   * @returns A Promise that resolves to the id value as a string or null
    */
   async getInputId(): Promise<(string | null)> {
     return this.getInputAttribute('id');
   }
 
   /**
-   * Retrieves the values of the input tag
+   * Retrieves the value of the input tag
    * in the DsfrSearchBarComponent's Template
    *
-   * @returns A Promise that resolves to the values as a strings or null
+   * @returnsA Promise that resolves to the value as a string or null
    */
   async getInputValue(): Promise<(string | null)> {
     return this.getInputAttribute('value');
@@ -50,7 +50,7 @@ export class DsfrSearchBarHarness extends ComponentHarness {
    * Retrieves the placeholder value of the input tag
    * in the DsfrSearchBarComponent's Template
    *
-   * @returns A Promise that resolves to the name values as a strings or null
+   * @returns A Promise that resolves to the placeholder value as a string or null
    */
   async getInputPlaceholderAttribute(): Promise<(string | null)> {
     return this.getInputAttribute('placeholder');

@@ -2,13 +2,30 @@
  * Angular imports
  */
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ItemResult } from '@betagouv/ngx-dsfr/search-bar';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+
 
 /**
  * 3rd party imports
  */
-import { TestSearchService } from './search-bar-module.service';
+import { ItemResult } from '@betagouv/ngx-dsfr/search-bar';
+import { ElementSize } from '@betagouv/ngx-dsfr';
+
+/**
+ * TypeScript entities and constants
+ */
+type FormAutocomplete = {
+  autocomplete: FormControl<string>;
+};
+
+type FormInputSearch = {
+  label: FormControl<string>,
+  placeholder: FormControl<string>,
+  size: FormControl<ElementSize>,
+  autocomplete: FormControl<boolean>,
+  displayNoResultMessage: FormControl<boolean>,
+  minCharacterForSearch: FormControl<number>,
+};
 
 @Component({
   templateUrl: './search-bar-module.component.html',
@@ -16,20 +33,16 @@ import { TestSearchService } from './search-bar-module.service';
 })
 export class SearchBarModuleComponent implements OnInit {
 
-  form: FormGroup | undefined;
-  inputForm: FormGroup | undefined;
-  inputSearchForm: FormGroup | undefined;
+  inputForm: FormGroup<FormAutocomplete> | undefined;
+  inputSearchForm: FormGroup<FormInputSearch> | undefined;
   selectedItem: ItemResult | undefined;
-  submittedItem: string | undefined;
+  submittedQuery: string | undefined;
   possibleSizes: Record<string, string> = {
     'md': 'md',
     'lg': 'lg'
   };
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public testSearchService: TestSearchService
-  ) { }
+  constructor(private formBuilder: NonNullableFormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();
@@ -43,21 +56,21 @@ export class SearchBarModuleComponent implements OnInit {
     this.inputSearchForm = this.formBuilder.group({
       label: ['Rechercher', Validators.required],
       placeholder: ['Rechercher', Validators.required],
-      size: ['lg', Validators.required],
+      size: [ElementSize.LARGE, Validators.required],
       autocomplete: [true, Validators.required],
       displayNoResultMessage: [true, Validators.required],
       minCharacterForSearch: [3, Validators.required]
     });
   }
 
-  onSelectItem(value: ItemResult): void {
+  onItemSelected(value: ItemResult): void {
     if (value.id) {
       this.selectedItem = value;
     }
   }
 
-  onSubmitSearch(value: string): void {
-    this.submittedItem = value;
+  onSearchQuerySubmitted(value: string): void {
+    this.submittedQuery = value;
   }
 
 }

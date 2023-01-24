@@ -8,11 +8,6 @@ import { Component, Input } from '@angular/core';
  */
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
-/**
- * Internal imports
- */
-import { DsfrSearchBarService } from '../search-bar.service';
-
 @Component({
   template: `
     <dsfr-search-bar
@@ -22,7 +17,6 @@ import { DsfrSearchBarService } from '../search-bar.service';
       [size]="testSize"
       [displayNoResultMessage]="testdisplayNoResultMessage"
       [minCharacterForSearch]="testminCharacterForSearch"
-      [service]="testSearchService"
       [placeholder]="testPlaceholder">
     </dsfr-search-bar>
   `
@@ -35,5 +29,4 @@ export class TestHostComponent {
   @Input() testSize: ElementSize = ElementSize.MEDIUM;
   @Input() testPlaceholder: string = '';
   @Input() testminCharacterForSearch: number = 3;
-  @Input() testSearchService: DsfrSearchBarService | undefined;
 }

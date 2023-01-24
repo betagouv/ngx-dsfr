@@ -5,7 +5,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { FormsModule } from '@angular/forms';
 
 /**
  * Internal imports
@@ -28,7 +27,6 @@ describe('DsfrSearchBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
       declarations: [
         DsfrSearchBarComponent,
         TestHostComponent
@@ -46,7 +44,7 @@ describe('DsfrSearchBarComponent', () => {
      * the Test Harness for the DsfrSearchBarComponent LATER.
      *
      * We're NOT doing both HERE since getHarness() triggers
-     * indirectly the Change Detection mechanism and this,
+     * indirectly the Change Detection mechanism and thus,
      * Data Binding and ngOnInit()...
      */
     harnessLoader = TestbedHarnessEnvironment.loader(fixture);
@@ -65,7 +63,7 @@ describe('DsfrSearchBarComponent', () => {
     }
   });
 
-  describe('only ID is provided, ', () => {
+  describe('when only ID is provided, ', () => {
     beforeEach(async () => {
       testHost.testId = testId;
     });
@@ -79,7 +77,7 @@ describe('DsfrSearchBarComponent', () => {
     });
   });
 
-  describe('put a number equal to 0 for minCharacterForSearch\'s input, ', () => {
+  describe('when id and label are provided and we put a number equal to 0 for minCharacterForSearch\'s input, ', () => {
     beforeEach(async () => {
       testHost.testId = testId;
       testHost.testLabel = testLabel;
@@ -95,7 +93,7 @@ describe('DsfrSearchBarComponent', () => {
     });
   });
 
-  describe('all required properties are provided, ', () => {
+  describe('when all required properties are provided, ', () => {
     beforeEach(async () => {
       testHost.testId = testId;
       testHost.testLabel = testLabel;
@@ -105,7 +103,7 @@ describe('DsfrSearchBarComponent', () => {
       );
     });
 
-    it('should have the right placeholder for the input attribute', async () => {
+    it('should have the right placeholder for its input tag', async () => {
       const placeholder = await dsfrSearchBarHarness.getInputPlaceholderAttribute();
       expect(placeholder).toEqual(testPlaceholder);
     });

@@ -12,15 +12,13 @@ import { Observable, of } from 'rxjs';
 /**
  * Internal imports
  */
-import { countries } from './data-mock';
+import { COUNTRIES } from './data-mock';
 
 @Injectable()
 export class TestSearchService implements DsfrSearchBarService {
 
-  constructor() { }
-
   search(query: string): Observable<ItemResult[]> {
-    const results: ItemResult[] = countries.filter((element: ItemResult) => {
+    const results: ItemResult[] = COUNTRIES.filter((element: ItemResult) => {
       return element.label.toLowerCase().includes(query.toLowerCase())
     });
     return of(results);

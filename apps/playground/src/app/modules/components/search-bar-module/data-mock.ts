@@ -1,6 +1,6 @@
 import { ItemResult } from "@betagouv/ngx-dsfr/search-bar";
 
-export const countries: ItemResult[] = [
+export const COUNTRIES: ItemResult[] = [
   { label: 'Afghanistan', id: 'AF' },
   { label: 'Åland Islands', id: 'AX' },
   { label: 'Albania', id: 'AL' },
