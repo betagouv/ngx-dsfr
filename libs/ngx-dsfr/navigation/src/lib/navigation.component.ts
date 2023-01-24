@@ -9,7 +9,7 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 /**
  * 3rd Party Imports
@@ -48,6 +48,7 @@ export type Navigation = NavigationItem[];
   styleUrls: ['./navigation.component.scss']
 })
 export class DsfrNavigationComponent implements OnInit {
+
   @ViewChildren('dropdownItem') dropdownMenus:
     | QueryList<ElementRef>
     | undefined;
@@ -59,12 +60,19 @@ export class DsfrNavigationComponent implements OnInit {
 
   expandedClass: string = 'fr-collapse--expanded';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if (!this.navigation) {
       throw EMPTY_NAVIGATION_ERROR;
     }
+
+    /** It detects when a route change, so we close the active dropdown */
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.hideActiveDropdown();
+      }
+    });
   }
 
   handleMenu(menuId: string) {
