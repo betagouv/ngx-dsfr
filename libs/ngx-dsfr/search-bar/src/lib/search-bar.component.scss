@@ -1,0 +1,50 @@
+@use "@gouvfr/dsfr/dist/component/form/form.min";
+@use "@gouvfr/dsfr/dist/component/search/search.min";
+@use "@gouvfr/dsfr/dist/component/input/input.min";
+@use "@gouvfr/dsfr/dist/component/button/button.min";
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.fr-autocompletion {
+  display: block;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+  max-height: 210px;
+  overflow: auto;
+
+  &__message {
+    padding: 8px 16px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+     li {
+      padding: 0;
+      list-style: none;
+      border-bottom: 1px solid var(--background-default-grey-hover);
+
+      a {
+        text-decoration: none;
+        display: block;
+        padding: 8px 16px;
+        border: 0;
+        line-height: 24px;
+        background-image: none;
+        color: var(--action-hight-grey);
+        cursor: pointer;
+        font-family: 'Marianne', arial, sans-serif;
+
+        &:hover {
+          background-color: var(--background-default-grey-hover);
+        }
+      }
+    }
+  }
+}

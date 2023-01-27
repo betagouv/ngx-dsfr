@@ -56,6 +56,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/radio'
       },
       {
+        label: 'Search Bar',
+        path: '/modules/search-bar'
+      },
+      {
         label: 'Stepper',
         path: '/modules/stepper'
       },

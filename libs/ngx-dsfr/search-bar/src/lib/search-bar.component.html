@@ -1,0 +1,42 @@
+<div [class]="classes" [id]="id" role="search">
+  <label class="fr-label" [for]="id + '-input'">
+    {{ label }}
+  </label>
+  <input
+    #searchInput
+    class="fr-input"
+    type="search"
+    autocomplete="off"
+    [placeholder]="placeholder"
+    [id]="id + '-input'"
+    [name]="id + '-input'"
+    (blur)="onBlur($event)"
+    (keyup)="onKeyup($event)"
+    (focus)="onFocus($event)">
+    <button class="fr-btn" title="Rechercher" (click)="onSubmit(searchInput.value)">
+    Rechercher
+  </button>
+</div>
+<ng-container *ngIf="autocomplete && displayResults">
+  <div class="fr-autocompletion">
+    <ul *ngIf="results?.length" role="listbox">
+      <li
+        *ngFor="let itemResult of results; let i = index"
+        role="option"
+        tabindex="-1"
+        [id]="itemResult.id"
+        [attr.aria-posinset]="i+1"
+        [attr.aria-setsize]="results.length">
+        <a href="#" (click)="onSearchResultSelected($event, itemResult)">
+          {{ itemResult.label }}
+        </a>
+      </li>
+    </ul>
+    <div class="fr-autocompletion__message" *ngIf="loading">
+      Recherche...
+    </div>
+    <div class="fr-autocompletion__message" *ngIf="displayNoResultMessage && noResult">
+      Aucun résultat
+    </div>
+  </div>
+</ng-container>
