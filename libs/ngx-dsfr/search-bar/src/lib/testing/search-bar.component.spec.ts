@@ -108,7 +108,7 @@ describe('DsfrSearchBarComponent', () => {
       expect(placeholder).toEqual(testPlaceholder);
     });
 
-    it('should have the right id for the input attribute', async () => {
+    it('should have the right id for its input tag', async () => {
       const id = await dsfrSearchBarHarness.getInputId();
       expect(id).toEqual(`${testId}-input`);
     });

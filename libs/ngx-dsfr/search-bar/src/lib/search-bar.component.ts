@@ -191,7 +191,7 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
 
   onSubmit(value: string) {
     this.displayResults = false;
-    if (this.autocomplete) {
+    if (!this.autocomplete) {
       this.value = value;
       this.searchQuerySubmitted.emit(value);
     }

@@ -40,7 +40,7 @@ export class DsfrSearchBarHarness extends ComponentHarness {
    * Retrieves the value of the input tag
    * in the DsfrSearchBarComponent's Template
    *
-   * @returnsA Promise that resolves to the value as a string or null
+   * @returns A Promise that resolves to the value as a string or null
    */
   async getInputValue(): Promise<(string | null)> {
     return this.getInputAttribute('value');
