@@ -27,7 +27,7 @@ export class DsfrAlertHarness extends ComponentHarness {
    * @returns A Promise that resolves to the title of the alert or
    * undefined if no title is provided
    */
-  async getAlertTitle (): Promise<string | undefined> {
+  async getAlertTitle(): Promise<string | undefined> {
     const alert: TestElement | null = await this.getAlertTitleTag();
 
     return alert?.text();
@@ -39,7 +39,7 @@ export class DsfrAlertHarness extends ComponentHarness {
    * @returns A Promise that resolves to the description of the alert or
    * undefined if no description is provided
    */
-  async getAlertDescription (): Promise<string | undefined> {
+  async getAlertDescription(): Promise<string | undefined> {
     const alert: TestElement | null = await this.getAlertDescriptionTag();
     return alert?.text();
   }
@@ -50,7 +50,7 @@ export class DsfrAlertHarness extends ComponentHarness {
    * @returns A Promise that resolves to an array of strings or an
    * empty array in there are no classes
    */
-  async getDivClasses (): Promise<string[]> {
+  async getDivClasses(): Promise<string[]> {
     const alertDiv: TestElement = await this.getAlertDivTag();
 
     const classesString = await alertDiv.getAttribute('class');

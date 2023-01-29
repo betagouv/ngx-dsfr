@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
 /**
@@ -20,25 +20,29 @@ export enum AlertType {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'dsfr-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss']
 })
-export class DsfrAlertComponent implements OnInit {
+export class DsfrAlertComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('description') description: ElementRef<HTMLInputElement> | undefined;
+
   @Input() type!: AlertType;
   @Input() title: string | undefined;
-  @Input() description = '';
   @Input() hasCloseButton = false;
   @Input() hasRole = false;
   @Input() size: Omit<ElementSize, 'LARGE'> = ElementSize.MEDIUM;
 
   classes: string = '';
   isClosed = false;
+  displayDescription: boolean = true;
 
-  ngOnInit (): void {
-    if (!this.title && !this.description) {
-      throw EMPTY_TITLE_OR_DESCRIPTION_ERROR;
-    }
+  constructor(private cd: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+
     if (!this.type) {
       throw EMPTY_TYPE_ERROR;
     }
@@ -46,7 +50,18 @@ export class DsfrAlertComponent implements OnInit {
     this.initClasses();
   }
 
-  private initClasses (): void {
+  ngAfterViewInit(): void {
+    const description = this.description?.nativeElement.innerHTML.trim();
+    this.displayDescription = !!description;
+
+    if (!this.title && !description) {
+      throw EMPTY_TITLE_OR_DESCRIPTION_ERROR;
+    }
+
+    this.cd.detectChanges();
+  }
+
+  private initClasses(): void {
     this.classes += `fr-alert fr-alert--${this.type}`;
 
     if (this.size === ElementSize.SMALL) {
