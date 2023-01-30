@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.input-wrapper {
+  margin-bottom: 0 !important;
+}
+
 .fr-autocompletion {
   display: block;
   background-color: white;
@@ -25,7 +29,7 @@
     padding: 0;
     margin: 0;
 
-     li {
+    li {
       padding: 0;
       list-style: none;
       border-bottom: 1px solid var(--background-default-grey-hover);
