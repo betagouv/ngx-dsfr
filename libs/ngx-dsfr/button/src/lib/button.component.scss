@@ -4,4 +4,9 @@
 // Actual styling
 :host {
   display: block;
+
+  button.fr-btn {
+    width: var(--dsfr-button-width, fit-content);
+    justify-content: center;
+  }
 }
