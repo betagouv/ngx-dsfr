@@ -2,6 +2,7 @@
  * Angular imports
  */
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -56,7 +57,7 @@ export interface ItemResult {
     }
   ]
 } )
-export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, OnChanges {
+export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, OnChanges, AfterViewInit {
   searchInput!: ElementRef<HTMLInputElement>;
 
   @ViewChild( 'inputWithoutSearchButton', { static: false } ) set inputWithoutSearchButtonContent( content: ElementRef<HTMLInputElement> ) {
@@ -120,7 +121,6 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
   }
 
   ngOnChanges( changes: SimpleChanges ): void {
-
     if ( !this.id ) {
       throw EMPTY_ID_ERROR;
     }
@@ -134,6 +134,11 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
     }
 
     this.classes = `fr-search-bar fr-search-bar--${this.size}`;
+  }
+
+  ngAfterViewInit(): void {
+    this.writeValue( this._value );
+    this.initSearch();
   }
 
   private setSearchInput( content: ElementRef<HTMLInputElement> ): void {
@@ -185,7 +190,7 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
 
   writeValue( value: ItemResult | string ): void {
     this._value = value;
-    if ( value ) {
+    if ( this.searchInput && value ) {
       this.searchInput.nativeElement.value =
         typeof this.value === 'string' ? this.value : this.value.label;
     }
