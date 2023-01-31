@@ -101,7 +101,7 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
       'fr-input--valid': this.hasSucceeded
     };
 
-    this.iconClass = this.icon ? 'fr-input-wrap fr-icon fr-icon-' + this.icon : '';
+    this.iconClass = this.icon ? 'fr-input-wrap fr-icon ' + this.icon : '';
   }
 
   private setAriaDescribedBy() {

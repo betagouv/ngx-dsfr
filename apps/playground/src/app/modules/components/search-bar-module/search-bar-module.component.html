@@ -17,8 +17,16 @@
     </li>
   </ul>
   <p>
-    It can also be used as a <code>FormControl</code>, with the ReactiveForms API.
+    It can also be used as a <code>FormControl</code>, with the ReactiveForms API. In that case, you should probably :
   </p>
+  <ul>
+    <li>put the <code>hasSearchButton</code> Input property to <code>false</code>. That way, no search button will be
+      present in the DOM and the responsibility to submit the value will be for the parent form's submit button
+    </li>
+    <li>pass a value to the <code>label</code> and <code>hint</code> Input properties, as this time, they will be
+      displayed
+    </li>
+  </ul>
   <p>
     It is based on the
     <a
@@ -51,11 +59,23 @@
       name='label'
       [required]='true'
       type='It takes a string.'>
-      The label of the input search, only for accessibility because it is not displayed
+      The label of the input search, necessary for accessibility. It won't be displayed unless
+      <code>hasSearchButton</code> is <code>false</code>
     </play-input-property-definition>
     <play-input-property-definition
       name='placeholder'
       type='It takes a string.'>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='hint'
+      type='string'>
+      It displays the hint under the label
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='hasSearchButton'
+      type='boolean'
+      default='false'>
+      It displays the search button or not
     </play-input-property-definition>
     <play-input-property-definition
       name='autocomplete'
@@ -150,6 +170,11 @@
             type='boolean'>
           </play-input-property-control>
           <play-input-property-control
+            formControlName='hasSearchButton'
+            name='hasSearchButton'
+            type='boolean'>
+          </play-input-property-control>
+          <play-input-property-control
             formControlName='displayNoResultMessage'
             name='displayNoResultMessage'
             type='boolean'>
@@ -167,37 +192,20 @@
           <form
             [formGroup]='inputForm'
             novalidate>
-            <div class='search-bar-wrapper'>
-              <dsfr-search-bar
-                formControlName='autocomplete1'
-                id='search-1'
-                [label]='inputSearchForm.getRawValue().label'
-                [hint]='inputSearchForm.getRawValue().hint'
-                [autocomplete]='inputSearchForm.getRawValue().autocomplete'
-                [size]='inputSearchForm.getRawValue().size'
-                [displayNoResultMessage]='inputSearchForm.getRawValue().displayNoResultMessage'
-                [minCharacterForSearch]='inputSearchForm.getRawValue().minCharacterForSearch'
-                [placeholder]='inputSearchForm.getRawValue().placeholder'
-                (searchResultSelected)='onItemSelected($event)'
-                (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
-              </dsfr-search-bar>
-            </div>
-            <div class='search-bar-wrapper'>
-              <dsfr-search-bar
-                formControlName='autocomplete1'
-                id='search-2'
-                [label]='inputSearchForm.getRawValue().label'
-                [hint]='inputSearchForm.getRawValue().hint'
-                [autocomplete]='inputSearchForm.getRawValue().autocomplete'
-                [hasSearchButton]='false'
-                [size]='inputSearchForm.getRawValue().size'
-                [displayNoResultMessage]='inputSearchForm.getRawValue().displayNoResultMessage'
-                [minCharacterForSearch]='inputSearchForm.getRawValue().minCharacterForSearch'
-                [placeholder]='inputSearchForm.getRawValue().placeholder'
-                (searchResultSelected)='onItemSelected($event)'
-                (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
-              </dsfr-search-bar>
-            </div>
+            <dsfr-search-bar
+              formControlName='autocomplete'
+              id='search'
+              [label]='inputSearchForm.getRawValue().label'
+              [hint]='inputSearchForm.getRawValue().hint'
+              [autocomplete]='inputSearchForm.getRawValue().autocomplete'
+              [hasSearchButton]='inputSearchForm.getRawValue().hasSearchButton'
+              [size]='inputSearchForm.getRawValue().size'
+              [displayNoResultMessage]='inputSearchForm.getRawValue().displayNoResultMessage'
+              [minCharacterForSearch]='inputSearchForm.getRawValue().minCharacterForSearch'
+              [placeholder]='inputSearchForm.getRawValue().placeholder'
+              (searchResultSelected)='onItemSelected($event)'
+              (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
+            </dsfr-search-bar>
             <div class='result'>
               <p>
                 The selected value is : {{ selectedItem | json }}

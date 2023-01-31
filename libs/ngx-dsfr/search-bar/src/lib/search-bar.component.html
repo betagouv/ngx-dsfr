@@ -3,7 +3,7 @@
     {{ label }}
   </label>
   <input
-    #searchInput
+    #inputWithSearchButton
     class='fr-input'
     type='search'
     autocomplete='off'
@@ -13,7 +13,7 @@
     (blur)='onBlur($event)'
     (keyup)='onKeyup($event)'
     (focus)='onFocus($event)'>
-  <button class='fr-btn' title='Rechercher' (click)='onSubmit(searchInput.value)'>
+  <button class='fr-btn' title='Rechercher' (click)='onSubmit(inputWithSearchButton.value)'>
     Rechercher
   </button>
 </div>
@@ -26,7 +26,7 @@
   </label>
   <div class='fr-input-wrap fr-icon fr-icon-search-line'>
     <input
-      #searchInput
+      #inputWithoutSearchButton
       class='fr-input'
       type='search'
       autocomplete='off'

@@ -15,8 +15,7 @@ import { ElementSize } from '@betagouv/ngx-dsfr';
  * TypeScript entities and constants
  */
 type FormAutocomplete = {
-  autocomplete1: FormControl<string>;
-  autocomplete2: FormControl<string>;
+  autocomplete: FormControl<string>;
 };
 
 type FormInputSearch = {
@@ -25,6 +24,7 @@ type FormInputSearch = {
   placeholder: FormControl<string>,
   size: FormControl<ElementSize>,
   autocomplete: FormControl<boolean>,
+  hasSearchButton: FormControl<boolean>,
   displayNoResultMessage: FormControl<boolean>,
   minCharacterForSearch: FormControl<number>,
 };
@@ -53,8 +53,7 @@ export class SearchBarModuleComponent implements OnInit {
 
   private initForms(): void {
     this.inputForm = this.formBuilder.group( {
-      autocomplete1: [ '', Validators.required ],
-      autocomplete2: [ '', Validators.required ]
+      autocomplete: [ '', Validators.required ],
     } );
 
     this.inputSearchForm = this.formBuilder.group( {
@@ -63,6 +62,7 @@ export class SearchBarModuleComponent implements OnInit {
       placeholder: [ 'Rechercher', Validators.required ],
       size: [ ElementSize.LARGE, Validators.required ],
       autocomplete: [ true, Validators.required ],
+      hasSearchButton: [ true, Validators.required ],
       displayNoResultMessage: [ true, Validators.required ],
       minCharacterForSearch: [ 3, Validators.required ]
     } );
@@ -77,5 +77,4 @@ export class SearchBarModuleComponent implements OnInit {
   onSearchQuerySubmitted( value: string ): void {
     this.submittedQuery = value;
   }
-
 }
