@@ -143,7 +143,9 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
   }
 
   private checkCapslockKey( event: KeyboardEvent | MouseEvent ): void {
-    this.capslockKeyActive = event.getModifierState( 'CapsLock' ) ? true : null;
+    if ( event.getModifierState ) {
+      this.capslockKeyActive = event.getModifierState( 'CapsLock' ) ? true : null;
+    }
   }
 
   private setComponentIds(): void {

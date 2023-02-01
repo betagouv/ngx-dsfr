@@ -8,6 +8,15 @@
   position: relative;
 }
 
+.fr-input-group.search-bar-wrapper {
+  margin-bottom: 0;
+}
+
+.input-wrapper {
+  display: flex;
+  width: 100%;
+}
+
 .fr-autocompletion {
   display: block;
   background-color: white;
@@ -25,7 +34,7 @@
     padding: 0;
     margin: 0;
 
-     li {
+    li {
       padding: 0;
       list-style: none;
       border-bottom: 1px solid var(--background-default-grey-hover);
