@@ -58,7 +58,7 @@ export interface ItemResult {
   ]
 } )
 export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, OnChanges, AfterViewInit {
-  @ViewChild( 'searchInput' ) searchInput!: ElementRef<HTMLInputElement>;
+  @ViewChild( 'searchInput', { static: true } ) searchInput!: ElementRef<HTMLInputElement>;
 
   @Input() id: string | undefined;
   @Input() label: string | undefined;
@@ -129,7 +129,6 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
   }
 
   ngAfterViewInit(): void {
-    this.writeValue( this._value );
     if ( this.autocomplete ) {
       this.initSearch();
     }
@@ -174,7 +173,7 @@ export class DsfrSearchBarComponent implements ControlValueAccessor, OnDestroy, 
 
   writeValue( value: ItemResult | string ): void {
     this._value = value;
-    if ( this.searchInput && value ) {
+    if ( value ) {
       this.searchInput.nativeElement.value =
         typeof this.value === 'string' ? this.value : this.value.label;
     }
