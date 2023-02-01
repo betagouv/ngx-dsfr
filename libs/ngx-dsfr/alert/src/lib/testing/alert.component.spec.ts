@@ -111,17 +111,13 @@ describe('DsfrAlertComponent', () => {
 
     it('shouldn\'t have a description', async () => {
       const description = await dsfrAlertHarness.getAlertDescription();
-      expect(description).toBeUndefined();
+      expect(description).toEqual('');
     });
 
     it('should have the right description', async () => {
       testHost.testDescription = testDescription;
-      // Tip for testing component which implements AfterViewInit and ViewChild,
-      // without this, the constant 'description' will be undefined
-      setTimeout(async () => {
-        const description = await dsfrAlertHarness.getAlertDescription();
-        expect(description).toEqual(testDescription);
-      }, 0);
+      const description = await dsfrAlertHarness.getAlertDescription();
+      expect(description).toEqual(testDescription);
     });
   });
 });

@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
 /**
@@ -20,7 +20,6 @@ export enum AlertType {
 }
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'dsfr-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss']
@@ -37,9 +36,6 @@ export class DsfrAlertComponent implements OnInit, AfterViewInit {
 
   classes: string = '';
   isClosed = false;
-  displayDescription: boolean = true;
-
-  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -52,13 +48,10 @@ export class DsfrAlertComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const description = this.description?.nativeElement.innerHTML.trim();
-    this.displayDescription = !!description;
 
     if (!this.title && !description) {
       throw EMPTY_TITLE_OR_DESCRIPTION_ERROR;
     }
-
-    this.cd.detectChanges();
   }
 
   private initClasses(): void {
