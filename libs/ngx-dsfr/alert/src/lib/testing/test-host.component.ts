@@ -10,10 +10,10 @@ import { AlertType } from '../alert.component';
     <dsfr-alert
       [title]="testTitle"
       [type]="testType"
-      [description]="testDescription"
       [size]="testSize"
-      [hasCloseButton]="testHasCloseButton"
-    ></dsfr-alert>
+      [hasCloseButton]="testHasCloseButton">
+      {{ testDescription }}
+    </dsfr-alert>
   `
 })
 export class TestHostComponent {
