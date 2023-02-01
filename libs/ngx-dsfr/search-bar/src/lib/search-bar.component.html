@@ -1,32 +1,13 @@
-<div *ngIf='hasSearchButton' [class]='classes' [id]='id' role='search'>
+<div [class]='classes' [id]='id' role='search'>
   <label class='fr-label' [for]="id + '-input'">
-    {{ label }}
-  </label>
-  <input
-    #inputWithSearchButton
-    class='fr-input'
-    type='search'
-    autocomplete='off'
-    [placeholder]='placeholder'
-    [id]="id + '-input'"
-    [name]="id + '-input'"
-    (blur)='onBlur($event)'
-    (keyup)='onKeyup($event)'
-    (focus)='onFocus($event)'>
-  <button class='fr-btn' title='Rechercher' (click)='onSubmit(inputWithSearchButton.value)'>
-    Rechercher
-  </button>
-</div>
-<div *ngIf='!hasSearchButton' class='input-wrapper fr-input-group'>
-  <label class='fr-label' [for]='id'>
     {{ label }}
     <span *ngIf='hint' class='fr-hint-text'>
       {{ hint }}
     </span>
   </label>
-  <div class='fr-input-wrap fr-icon fr-icon-search-line'>
+  <div [ngClass]="{'fr-input-wrap fr-icon fr-icon-search-line': !hasSearchButton, 'input-wrapper': hasSearchButton}">
     <input
-      #inputWithoutSearchButton
+      #searchInput
       class='fr-input'
       type='search'
       autocomplete='off'
@@ -36,6 +17,9 @@
       (blur)='onBlur($event)'
       (keyup)='onKeyup($event)'
       (focus)='onFocus($event)'>
+    <button *ngIf='hasSearchButton' class='fr-btn' title='Rechercher' (click)='onSubmit(searchInput.value)'>
+      Rechercher
+    </button>
   </div>
 </div>
 

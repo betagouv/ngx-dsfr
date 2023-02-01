@@ -69,13 +69,16 @@
     <play-input-property-definition
       name='hint'
       type='string'>
-      It displays the hint under the label
+      It displays the hint under the label, It won't be displayed unless <code>hasSearchButton</code> is
+      <code>false</code>
     </play-input-property-definition>
     <play-input-property-definition
       name='hasSearchButton'
       type='boolean'
       default='false'>
-      It displays the search button or not
+      Whether to display a search button or not. If you don't, the Component will be
+      considered as being used as a <code>FormControl</code>, with the ReactiveForms API, and the label, and eventually,
+      a hint, will be displayed too
     </play-input-property-definition>
     <play-input-property-definition
       name='autocomplete'
