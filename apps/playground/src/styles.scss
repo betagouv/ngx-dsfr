@@ -38,3 +38,7 @@ pre {
   color: white;
   @include mixins.badge-like;
 }
+
+::marker {
+  content: unset;
+}

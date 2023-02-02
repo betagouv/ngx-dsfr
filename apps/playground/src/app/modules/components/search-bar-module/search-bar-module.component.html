@@ -1,0 +1,228 @@
+<section class='module-description'>
+  <h2>DsfrSearchBarComponent</h2>
+  <p>
+    The <code>DsfrSearchBarComponent</code> purpose is to enable the end-user
+    to access a specific content by searching keywords. It can eventually be
+    made through a selection in a list, populated with search results, via autocompletion.
+  </p>
+  <p>
+    It can be used on its own :
+  </p>
+  <ul>
+    <li>as a simple input. To retrieve the search query entered by the user after they click on the search button, hook
+      onto the <code>searchQuerySubmitted</code> Output property
+    </li>
+    <li>as an input with autocompletion. To retrieve the search result chosen by the user, hook onto the <code>searchResultSelected</code>
+      Output property
+    </li>
+  </ul>
+  <p>
+    It can also be used as a <code>FormControl</code>, with the ReactiveForms API. In that case, you should probably :
+  </p>
+  <ul>
+    <li>put the <code>hasSearchButton</code> Input property to <code>false</code>. That way, no search button will be
+      present in the DOM and the responsibility to submit the value will be for the parent form's submit button
+    </li>
+    <li>pass a value to the <code>label</code> and <code>hint</code> Input properties, as this time, they will be
+      displayed
+    </li>
+  </ul>
+  <p>
+    It is based on the
+    <a
+      target='_blank'
+      hreflang='fr'
+      title='The documentation page for the Search Bar Component in the DSFR'
+      href='https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/barre-de-recherche/'>
+      Search Bar
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target='_blank'
+      hreflang='fr'
+      title='The DSFR documentation'
+      href='https://www.systeme-de-design.gouv.fr/'>
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It has several <code>@Input()</code> and <code>@Output()</code> properties:</p>
+  <dl class='input-properties'>
+    <play-input-property-definition
+      name='id'
+      [required]='true'
+      type="It takes a string with unique value'">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='label'
+      [required]='true'
+      type='It takes a string.'>
+      The label of the search input, necessary for accessibility. It won't be displayed unless
+      <code>hasSearchButton</code> is <code>false</code>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='placeholder'
+      type='It takes a string.'>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='hint'
+      type='string'>
+      It displays the hint under the label. It won't be displayed unless <code>hasSearchButton</code> is
+      <code>false</code>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='hasSearchButton'
+      type='boolean'
+      default='false'>
+      Whether to display a search button or not. If you don't, the Component will be
+      considered as being used as a <code>FormControl</code>, with the ReactiveForms API, and the label, and eventually,
+      a hint, will be displayed too
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='autocomplete'
+      type='boolean'
+      description='It displays the autocompletion of the search'
+      default='false'>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='size'
+      default='md'
+      type='It takes a string with 2 possible values : <code>md</code>, <code>lg</code>'>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='minCharacterForSearch'
+      default='3'
+      type='number greater than 0'>
+      Minimum characters to enter on the input for searching
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='displayNoResultMessage'
+      type='boolean'
+      default='true'>
+      It displays the message 'Aucun résultat' if no result was found for the current search
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='searchResultSelected'
+      type='Output'>
+      Emits the object of the selected item when the user clicks on the item in the autocompletion panel
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='searchQuerySubmitted'
+      type='Output'>
+      Emits the value of the selected item when the user clicks on the search button
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='focus()'
+      type='Output'>
+      Emits the value of the input when the user focuses on it
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='blur()'
+      type='Output'>
+      Emits the value of the input on blur
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='keyUp()'
+      type='Output'>
+      Emits the value of the input on each key up
+    </play-input-property-definition>
+  </dl>
+</section>
+<section class='module-simulations'>
+  <h2>Play with the Component 😃</h2>
+  <mat-card *ngIf='inputForm && inputSearchForm'>
+    <mat-card-header>
+      <mat-card-title>Search Bar</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class='simulation'>
+      <div class='settings'>
+        <form
+          [formGroup]='inputSearchForm'
+          novalidate>
+          <play-input-property-control
+            formControlName='label'
+            name='label'
+            type='string'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='hint'
+            name='hint'
+            type='string'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='placeholder'
+            name='placeholder'
+            type='string'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='minCharacterForSearch'
+            name='minCharacterForSearch'
+            type='number'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='size'
+            name='size'
+            [enum]='possibleSizes'
+            type='enum'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='autocomplete'
+            name='autocomplete'
+            type='boolean'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='hasSearchButton'
+            name='hasSearchButton'
+            type='boolean'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='displayNoResultMessage'
+            name='displayNoResultMessage'
+            type='boolean'>
+          </play-input-property-control>
+          <button
+            mat-raised-button
+            color='accent'
+            (click)='inputSearchForm.reset()'>
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class='simulator-wrapper mat-elevation-z4'>
+        <play-simulator>
+          <form
+            [formGroup]='inputForm'
+            novalidate>
+            <dsfr-search-bar
+              formControlName='autocomplete'
+              id='search'
+              [label]='inputSearchForm.getRawValue().label'
+              [hint]='inputSearchForm.getRawValue().hint'
+              [autocomplete]='inputSearchForm.getRawValue().autocomplete'
+              [hasSearchButton]='inputSearchForm.getRawValue().hasSearchButton'
+              [size]='inputSearchForm.getRawValue().size'
+              [displayNoResultMessage]='inputSearchForm.getRawValue().displayNoResultMessage'
+              [minCharacterForSearch]='inputSearchForm.getRawValue().minCharacterForSearch'
+              [placeholder]='inputSearchForm.getRawValue().placeholder'
+              (searchResultSelected)='onItemSelected($event)'
+              (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
+            </dsfr-search-bar>
+            <div class='result'>
+              <p>
+                The selected value is : {{ selectedItem | json }}
+              </p>
+              <p>
+                The submitted value is : {{ submittedQuery | json }}
+              </p>
+              <p>
+                The form value is : {{ inputForm.value | json }}
+              </p>
+            </div>
+          </form>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

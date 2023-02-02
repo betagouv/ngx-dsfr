@@ -61,6 +61,7 @@ describe('DsfrAlertComponent', () => {
   });
 
   it('should throw an error when no title is provided', async () => {
+    testHost.testType = testType;
     try {
       fixture.detectChanges();
       throw 'It should have thrown an error about "title"';
@@ -110,12 +111,11 @@ describe('DsfrAlertComponent', () => {
 
     it('shouldn\'t have a description', async () => {
       const description = await dsfrAlertHarness.getAlertDescription();
-      expect(description).toBeUndefined();
+      expect(description).toEqual('');
     });
 
     it('should have the right description', async () => {
       testHost.testDescription = testDescription;
-      fixture.detectChanges();
       const description = await dsfrAlertHarness.getAlertDescription();
       expect(description).toEqual(testDescription);
     });

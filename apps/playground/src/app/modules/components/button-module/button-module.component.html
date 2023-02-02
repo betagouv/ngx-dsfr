@@ -1,13 +1,18 @@
 <section class="module-description">
   <h2>Description</h2>
-  <p>Some description</p>
+  <p>Some description - To be completed</p>
+  <p>
+    Use the <code>--dsfr-button-width</code> CSS variable to customize the
+    button's width.
+  </p>
 </section>
 
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <div
-    class="simulation">
-    <div class="settings" *ngIf="form">
+  <div class="simulation">
+    <div
+      class="settings"
+      *ngIf="form">
       <form
         [formGroup]="form"
         novalidate>
@@ -17,11 +22,9 @@
     <play-simulator>
       <div>
         Simple Button :
-        <dsfr-button
-          [label]="'test'">
-        </dsfr-button>
+        <dsfr-button [label]="'test'"> </dsfr-button>
 
-        <hr>
+        <hr />
 
         Button with icon :
         <dsfr-button
@@ -29,7 +32,7 @@
           [label]="'test'">
         </dsfr-button>
 
-        <hr>
+        <hr />
 
         Disabled Button :
         <dsfr-button
@@ -37,7 +40,7 @@
           [label]="'This is a button'">
         </dsfr-button>
 
-        <hr>
+        <hr />
       </div>
     </play-simulator>
   </div>
