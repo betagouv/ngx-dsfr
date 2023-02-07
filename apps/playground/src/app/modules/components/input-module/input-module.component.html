@@ -1,94 +1,225 @@
 <section class="module-description">
-  <h2>Description</h2>
-  <p>Some description</p>
+  <h2>DsfrInputComponent</h2>
+  <p>
+    The <code>DsfrInputComponent</code> purpose is to represent the input form field
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Password Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/champ-de-saisie">
+      Input
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It has several <code>@Input()</code> and <code>Output()</code> properties:</p>
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="id"
+      [required]="true"
+      type="It takes a string">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="name"
+      [required]="true"
+      type="It takes a string">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="label"
+      [required]="true"
+      type="It takes a string">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="type"
+      type="It takes a string with 4 possible values : <code>text</code>, <code>textarea</code>, <code>number</code> or <code>date</code>"
+      default="text">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="placeholder"
+      type="It takes a string">
+      It will display a placeholder for the corresponding input tag
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="icon"
+      type="string">
+      It will display an icon at the right of the input tag. For date input, the calendar icon is automatically set.
+      <br>
+      <a
+        target="_blank"
+        hreflang="fr"
+        title="The documentation page for the Icons in the DSFR"
+        href="https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/icones">
+        Here
+        <mat-icon>open_in_new</mat-icon>
+      </a>
+       is the list of all the icons available.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hasFailed"
+      type="boolean">
+      It will display the component with the error state :  label, input and conditons will be in red.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="failureMessage"
+      type="string">
+      It will display the failure message below the input tag in red when the property <code>hasFailed</code> is true.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hasSucceeded"
+      type="boolean">
+      It will display the component with the success state :  label, input and success message.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="successMessage"
+      type="string">
+      It will display the success message below the input tag in green when the property <code>hasSucceeded</code> is true.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="disabled"
+      type="boolean">
+      It will disabled the input tag.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="focus()"
+      type="output">
+      Emits the value of the input when the user focuses on it
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="blur()"
+      type="output">
+      Emits the value of the input on blur
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="keyup()"
+      type="output">
+      Emits the value of the input on each key up
+    </play-input-property-definition>
+  </dl>
 </section>
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <div class="simulation">
-    <div class="settings" *ngIf="form">
-      <form
-        [formGroup]="form"
-        novalidate>
-        <input formControlName="label"/>
-      </form>
-    </div>
-    <play-simulator>
-      <div class="simulation__container" *ngIf="inputForm">
-        <form [formGroup]="inputForm">
-          <dsfr-input
-            formControlName="trytest"
-            label="This is a label"
-            id="testId"
-            hint="This is a description"
-            placeholder="Please enter a text..."
-            name="testName">
-          </dsfr-input>
-
-          <br>
-          Selected value is: {{inputForm.controls['trytest'].value}}
-
-          <hr>
-
-          <dsfr-input
-            formControlName="trytest"
-            label="Label with disabled input"
-            id="testId"
-            [disabled]="true"
-            hint="Ceci est une description"
-            placeholder="This input is disabled"
-            name="testName">
-          </dsfr-input>
-
-          <hr>
-
-          <dsfr-input
-            formControlName="trytest"
-            label="Input with error"
-            id="testId"
-            hint="Ceci est une description"
-            placeholder="Input with error"
-            [hasFailed]="true"
-            failureMessage="Failure message"
-            name="testName">
-          </dsfr-input>
-
-          <hr>
-
-          <dsfr-input
-            formControlName="trytest"
-            label="Input success"
-            id="testId"
-            hint="Ceci est une description"
-            placeholder="Input with success"
-            [hasSucceeded]="true"
-            successMessage="Success message"
-            name="testName">
-          </dsfr-input>
-
-          <hr>
-
-          <dsfr-input
-            type="textarea"
-            formControlName="trytest"
-            label="Textarea..."
-            id="testId"
-            hint="Ceci est une description"
-            placeholder="This is a textarea"
-            name="testName">
-          </dsfr-input>
-
-          <hr>
-
-          <dsfr-input
-            type="date"
-            formControlName="trytest"
-            label="It is a date"
-            id="testId"
-            hint="Ceci est une description"
-            name="testName">
-          </dsfr-input>
+  <mat-card *ngIf="inputForm">
+    <mat-card-header>
+      <mat-card-title>Input field</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <p>Example : </p>
+<pre>
+  <span class='highlight-code'>&lt;dsfr-input</span>
+    id="2"
+    type="text"
+    name="input-1-name"
+    placeholder="Enter your text..."
+    label="This is a label"
+    hint="This is a hint"
+  <span class='highlight-code'>&gt;&lt;/dsfr-input&gt;</span>
+</pre>
+      <div class="settings">
+        <form
+          [formGroup]="inputForm"
+          novalidate>
+          <play-input-property-control
+            formControlName="label"
+            name="label"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="placeholder"
+            name="placeholder"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="type"
+            name="type"
+            [enum]="possibleInputTypes"
+            type="enum">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="hint"
+            name="hint"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="icon"
+            name="icon"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="disabled"
+            name="disabled"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="hasFailed"
+            name="hasFailed"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="hasSucceeded"
+            name="hasSucceeded"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="failureMessage"
+            name="failureMessage"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="successMessage"
+            name="successMessage"
+            type="string">
+          </play-input-property-control>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="inputForm.reset()">
+            Reset
+          </button>
         </form>
       </div>
-    </play-simulator>
-  </div>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <div class="input-wrapper">
+          <play-simulator>
+            <div class="template-input" *ngIf="form">
+              <form [formGroup]="form">
+                <dsfr-input
+                  id="input-1"
+                  name="input-1-name"
+                  formControlName="input"
+                  [label]="inputForm.getRawValue().label"
+                  [disabled]="inputForm.getRawValue().disabled"
+                  [type]="inputForm.getRawValue().type"
+                  [hint]="inputForm.getRawValue().hint"
+                  [placeholder]="inputForm.getRawValue().placeholder"
+                  [hasFailed]="inputForm.getRawValue().hasFailed"
+                  [hasSucceeded]="inputForm.getRawValue().hasSucceeded"
+                  [icon]="inputForm.getRawValue().icon"
+                  [successMessage]="inputForm.getRawValue().successMessage"
+                  [failureMessage]="inputForm.getRawValue().failureMessage">
+                </dsfr-input>
+              </form>
+              <p>
+                The input value is :
+                <strong>
+                  {{ form.value.input }}
+                </strong>
+              </p>
+            </div>
+          </play-simulator>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </section>

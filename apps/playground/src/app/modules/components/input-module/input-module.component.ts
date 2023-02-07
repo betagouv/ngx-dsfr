@@ -2,7 +2,7 @@
  * Angular imports
  */
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './input-module.component.html',
@@ -10,21 +10,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class InputModuleComponent implements OnInit {
 
-  form: FormGroup | undefined;
   inputForm: FormGroup | undefined;
+  form: FormGroup | undefined;
 
-  constructor(private formBuilder: FormBuilder) { }
+  possibleInputTypes: Record<string, string> = {
+    'text': 'text',
+    'textarea': 'textarea',
+    'date': 'date',
+    'number': 'number'
+  };
+
+  constructor(private formBuilder: NonNullableFormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();
   }
 
   private initForms(): void {
-    this.form = this.formBuilder.group({
-      label: 'DSFR Input works 😁'
-    });
     this.inputForm = this.formBuilder.group({
-      trytest: ['', Validators.required]
+      label: ['This is a label', Validators.required],
+      type: ['text', Validators.required],
+      placeholder: ['This is a placeholder', Validators.required],
+      hint: ['This is a description', Validators.required],
+      icon: ['', Validators.required],
+      disabled: [false, Validators.required],
+      hasFailed: [false, Validators.required],
+      hasSucceeded: [false, Validators.required],
+      failureMessage: ['Error message', Validators.required],
+      successMessage: ['Success message', Validators.required],
     });
+
+    this.form = this.formBuilder.group({
+      input: ''
+    })
   }
 }
