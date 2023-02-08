@@ -1,47 +1,132 @@
-<section class="module-description">
-  <h2>Description</h2>
-  <p>Some description</p>
+<section class='module-description'>
+  <h2>DsfrAlertComponent</h2>
+  <p>
+    The <code>DsfrAlertComponent</code> purpose is to represent the alert
+  </p>
+  <p>
+    It is based on the
+    <a
+      target='_blank'
+      hreflang='fr'
+      title='The documentation page for the Alert Component in the DSFR'
+      href='https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/alerte/'>
+      Alerte
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target='_blank'
+      hreflang='fr'
+      title='The DSFR documentation'
+      href='https://www.systeme-de-design.gouv.fr/'>
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It has several <code>@Input()</code> properties:</p>
+  <dl class='input-properties'>
+    <play-input-property-definition
+      name='title'
+      type='It takes a string'>
+      It is required when no description is provided as content inside the component's opening and closing tags.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='type'
+      type='It takes a string with 4 possible values : <code>info</code>, <code>warning</code>, <code>success</code>, <code>error</code>'>
+      It is required.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='size'
+      type='It takes a string with 2 possible values : <code>sm</code> or <code>md</code>'
+      default='md'>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='hasCloseButton'
+      type='boolean'
+      default='false'>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name='hasRole'
+      type='boolean'
+      default='false'>
+    </play-input-property-definition>
+  </dl>
 </section>
-<section class="module-simulations">
+<section class='module-simulations'>
   <h2>Play with the Component 😃</h2>
-  <div class="simulation">
-    <play-simulator>
-      <div>
-        <p>Minimalistic error alert</p>
-        <dsfr-alert
-          title="Error alert de test"
-          [type]="errorType">
-        </dsfr-alert>
-        <hr>
-        <p>Success alert with a small description</p>
-        <dsfr-alert
-          title="Success alert de test"
-          [type]="successType">
-          This is a small description
-        </dsfr-alert>
-        <hr>
-        <p>Info alert with a long description</p>
-        <dsfr-alert
-          title="Info alert de test"
-          [type]="infoType">
-          Lorem ipsum dolor sit amet. Eum minus magnam itaque quia non quasi esse qui suscipit recusandae sit mollitia exercitationem. Qui quas nemo est quia doloribus qui exercitationem inventore non omnis libero.
-        </dsfr-alert>
-        <hr>
-        <p>Small warning alert</p>
-        <dsfr-alert
-          title="Warning alert de test"
-          [type]="warningType"
-          [size]="smallSize">
-        </dsfr-alert>
-        <hr>
-        <p>Alert with close button</p>
-        <dsfr-alert
-          title="Alert avec bouton de fermeture"
-          [type]="errorType"
-          [hasCloseButton]="true">
-          This is a small description
-        </dsfr-alert>
+  <mat-card *ngIf='alertForm'>
+    <mat-card-header>
+      <mat-card-title>Alert component</mat-card-title>
+      <mat-card-subtitle>
+        It displays an alert
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class='simulation'>
+      <p>Example : </p>
+      <pre>
+  <span class='highlight-code'>&lt;dsfr-alert</span>
+    type="info"
+    title="This is a title"
+  <span class='highlight-code'>&gt; This is the description &lt;/dsfr-alert&gt;</span>
+</pre>
+      <div class='settings'>
+        <form
+          [formGroup]='alertForm'
+          novalidate>
+          <play-input-property-control
+            formControlName='title'
+            name='title'
+            type='string'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='description'
+            name='description'
+            type='string'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='hasCloseButton'
+            name='hasCloseButton'
+            type='boolean'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='hasRole'
+            name='hasRole'
+            type='boolean'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='size'
+            [enum]='possibleSizes'
+            name='size'
+            type='enum'>
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName='type'
+            [enum]='possibleTypes'
+            name='type'
+            type='enum'>
+          </play-input-property-control>
+          <button
+            mat-raised-button
+            color='accent'
+            (click)='alertForm.reset()'>
+            Reset
+          </button>
+        </form>
       </div>
-    </play-simulator>
-  </div>
+      <div class='simulator-wrapper mat-elevation-z4'>
+        <play-simulator>
+          <div class='template-alert'>
+            <dsfr-alert
+              [title]='alertForm.getRawValue().title'
+              [hasCloseButton]='alertForm.getRawValue().hasCloseButton'
+              [hasRole]='alertForm.getRawValue().hasRole'
+              [size]='alertForm.getRawValue().size'
+              [type]='alertForm.getRawValue().type'
+            >{{alertForm.getRawValue().description}}</dsfr-alert>
+          </div>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </section>
