@@ -2,54 +2,22 @@
  * Angular imports
  */
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+
+/**
+ * 3rd-party imports
+ */
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
-@Component({
+@Component( {
   templateUrl: './checkbox-module.component.html',
-  styleUrls: ['./checkbox-module.component.scss']
-})
+  styleUrls: [ './checkbox-module.component.scss' ]
+} )
 export class CheckboxModuleComponent implements OnInit {
 
+  checkboxForm: FormGroup | undefined;
   form: FormGroup | undefined;
-
-  templateDrivenItems = [
-    {
-      label: '1',
-      id: 'Test_1',
-      value: '1',
-      name: '1'
-    },
-    {
-      label: '2',
-      id: 'Test_2',
-      value: '2',
-      name: '2'
-    }
-  ];
-
-  reactiveFormsItems = [
-    {
-      label: '1',
-      id: 'Test-1',
-      value: '1',
-      name: '1'
-    },
-    {
-      label: '2',
-      id: 'Test-2',
-      value: '2',
-      name: '2'
-    },
-    {
-      label: '3',
-      id: 'Test-3',
-      value: '3',
-      name: '3'
-    }
-  ];
-
-  inlineItemsWithHint = [
+  items = [
     {
       label: '1',
       id: 'inline_1',
@@ -66,72 +34,32 @@ export class CheckboxModuleComponent implements OnInit {
     }
   ];
 
-  successItems = [
-    {
-      label: '1',
-      id: 'success_1',
-      value: '1',
-      name: '1'
-    },
-    {
-      label: '2',
-      id: 'success_2',
-      value: '2',
-      name: '2'
-    }
-  ];
+  possibleSizes: Record<string, string> = {
+    'sm': 'sm',
+    'md': 'md'
+  };
 
-  errorItems = [
-    {
-      label: '1',
-      id: 'error_1',
-      value: '1',
-      name: '1'
-    },
-    {
-      label: '2',
-      id: 'error_2',
-      value: '2',
-      name: '2'
-    }
-  ];
-
-  disabledItems = [
-    {
-      label: '1',
-      id: 'disabled_1',
-      value: '1',
-      name: '1'
-    },
-    {
-      label: '2',
-      id: 'disabled_2',
-      value: '2',
-      name: '2'
-    }
-  ];
-
-  templateDrivenSelected = ['2'];
-  reactiveFormsGroup: FormGroup | undefined;
-  inlineModel = ['1'];
-  successModel = ['1'];
-  errorModel = ['1'];
-  disabledModel = ['1'];
-  smallSize = ElementSize.SMALL;
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor( private formBuilder: NonNullableFormBuilder ) {
+  }
 
   ngOnInit(): void {
     this.initForms();
   }
 
   private initForms(): void {
-    this.form = this.formBuilder.group({
-      label: 'DSFR checkbox works 😁'
-    });
-
-    this.reactiveFormsGroup = this.formBuilder.group({
-      checkbox: [['1']]
-    });
+    this.checkboxForm = this.formBuilder.group( {
+      legend: new FormControl( 'This is a legend', [ Validators.required ] ),
+      hint: new FormControl( 'This is a hint', [ Validators.required ] ),
+      inline: new FormControl( false, [ Validators.required ] ),
+      disabled: new FormControl( false, [ Validators.required ] ),
+      size: new FormControl( ElementSize.MEDIUM, [ Validators.required ] ),
+      hasFailed: new FormControl( false, [ Validators.required ] ),
+      failureMessage: new FormControl( 'This is a failure message', [ Validators.required ] ),
+      hasSucceeded: new FormControl( false, [ Validators.required ] ),
+      successMessage: new FormControl( 'This is a success message', [ Validators.required ] )
+    } );
+    this.form = this.formBuilder.group( {
+      checkbox: new FormControl( [] )
+    } );
   }
 }
