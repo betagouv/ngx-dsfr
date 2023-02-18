@@ -10,7 +10,7 @@
       hreflang='fr'
       title='The documentation page for the Badge Component in the DSFR'
       href='https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/badge/'>
-      Alerte
+      Badge
       <mat-icon>open_in_new</mat-icon>
     </a>
     component in the
@@ -28,14 +28,14 @@
   <dl class='input-properties'>
     <play-input-property-definition
       name='label'
-      type='It takes a string'>
-      It is required.
+      type='It takes a string'
+      [required]='true'>
     </play-input-property-definition>
     <play-input-property-definition
       name='theme'
       type='It takes a string with many possible values : <code>info</code>, <code>new</code>, <code>warning</code>, <code>success</code>, <code>error</code>
-      , ...'>
-      It is required.
+      , ...'
+      [required]='true'>
     </play-input-property-definition>
     <play-input-property-definition
       name='size'
