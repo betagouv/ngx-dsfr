@@ -31,6 +31,7 @@ export interface CheckboxItem {
   label: string;
   value: string;
   hint?: string;
+  disabled?: boolean;
 }
 
 @Component({

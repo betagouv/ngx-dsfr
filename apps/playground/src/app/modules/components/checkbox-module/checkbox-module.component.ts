@@ -9,35 +9,48 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@ang
  */
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
+interface SettingsForm {
+  legend: FormControl<string>;
+  hint: FormControl<string>;
+  inline: FormControl<boolean>;
+  disabled: FormControl<boolean>;
+  size: FormControl<ElementSize>;
+  hasFailed: FormControl<boolean>;
+  failureMessage: FormControl<string>;
+  hasSucceeded: FormControl<boolean>;
+  successMessage: FormControl<string>;
+}
+
+interface SimulationForm {
+  checkbox: FormControl<string[]>;
+}
+
 @Component( {
   templateUrl: './checkbox-module.component.html',
   styleUrls: [ './checkbox-module.component.scss' ]
 } )
 export class CheckboxModuleComponent implements OnInit {
 
-  checkboxForm: FormGroup | undefined;
-  form: FormGroup | undefined;
+  settingsForm: FormGroup<SettingsForm> | undefined;
+  simulationForm: FormGroup<SimulationForm> | undefined;
   items = [
     {
       label: '1',
       id: 'inline_1',
       value: '1',
-      name: '1',
-      hint: 'Description 1'
+      hint: 'Description 1',
+      disabled: false
     },
     {
       label: '2',
       id: 'inline_2',
       value: '2',
-      name: '2',
-      hint: 'Description 2'
+      hint: 'Description 2',
+      disabled: true
     }
   ];
 
-  possibleSizes: Record<string, string> = {
-    'sm': 'sm',
-    'md': 'md'
-  };
+  possibleSizes: typeof ElementSize = ElementSize;
 
   constructor( private formBuilder: NonNullableFormBuilder ) {
   }
@@ -47,19 +60,17 @@ export class CheckboxModuleComponent implements OnInit {
   }
 
   private initForms(): void {
-    this.checkboxForm = this.formBuilder.group( {
-      legend: new FormControl( 'This is a legend', [ Validators.required ] ),
-      hint: new FormControl( 'This is a hint', [ Validators.required ] ),
-      inline: new FormControl( false, [ Validators.required ] ),
-      disabled: new FormControl( false, [ Validators.required ] ),
-      size: new FormControl( ElementSize.MEDIUM, [ Validators.required ] ),
-      hasFailed: new FormControl( false, [ Validators.required ] ),
-      failureMessage: new FormControl( 'This is a failure message', [ Validators.required ] ),
-      hasSucceeded: new FormControl( false, [ Validators.required ] ),
-      successMessage: new FormControl( 'This is a success message', [ Validators.required ] )
+    this.settingsForm = this.formBuilder.group( {
+      legend: [ 'This is a legend', [ Validators.required ] ],
+      hint: [ 'This is a hint', [ Validators.required ] ],
+      inline: [ false, [ Validators.required ] ],
+      disabled: [ false, [ Validators.required ] ],
+      size: [ ElementSize.MEDIUM, [ Validators.required ] ],
+      hasFailed: [ false, [ Validators.required ] ],
+      failureMessage: [ 'This is a failure message', [ Validators.required ] ],
+      hasSucceeded: [ false, [ Validators.required ] ],
+      successMessage: [ 'This is a success message', [ Validators.required ] ]
     } );
-    this.form = this.formBuilder.group( {
-      checkbox: new FormControl( [] )
-    } );
+    this.simulationForm = this.formBuilder.group( { checkbox: [ [ '' ] ] } );
   }
 }

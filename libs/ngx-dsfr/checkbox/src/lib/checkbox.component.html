@@ -7,6 +7,7 @@
       [id]="items[0].id"
       type="checkbox"
       [value]="items[0].value"
+      [disabled]="items[0].disabled"
       [name]="name">
       <label class="fr-label" [for]="items[0].id">
         {{items[0].label}}
@@ -40,6 +41,7 @@
             [id]="item.id"
             type="checkbox"
             [value]="item.value"
+            [disabled]='item.disabled'
             [name]="name">
             <label class="fr-label" [for]="item.id">
               {{item.label}}
