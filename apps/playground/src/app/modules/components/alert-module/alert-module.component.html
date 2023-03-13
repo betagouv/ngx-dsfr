@@ -1,7 +1,7 @@
 <section class='module-description'>
   <h2>DsfrAlertComponent</h2>
   <p>
-    The <code>DsfrAlertComponent</code> purpose is to represent the alert
+    The <code>DsfrAlertComponent</code> purpose is to draw the user's attention on a specific piece of information.
   </p>
   <p>
     It is based on the
@@ -28,28 +28,37 @@
   <dl class='input-properties'>
     <play-input-property-definition
       name='title'
-      type='It takes a string'>
-      It is required when no description is provided as content inside the component's opening and closing tags.
+      type='It takes a string'
+      required="It is required when no description is provided as content inside the component's opening and closing
+      tags">
+      A title for the alert
     </play-input-property-definition>
     <play-input-property-definition
       name='type'
+      [required]='true'
       type='It takes a string with 4 possible values : <code>info</code>, <code>warning</code>, <code>success</code>, <code>error</code>'>
-      It is required.
+      The type will influence the general look of the alert, namely the color and the icon displayed. You can import the
+      <code>AlertType</code> enum in your app to safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
       name='size'
       type='It takes a string with 2 possible values : <code>sm</code> or <code>md</code>'
       default='md'>
+      You can import the <code>ElementSize</code> enum, from the <code>@betagouv/ngx-dsfr</code> library entry-point, in
+      your app, to safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
       name='hasCloseButton'
       type='boolean'
       default='false'>
+      Whether or not the alert will be closable by the end-user.
     </play-input-property-definition>
     <play-input-property-definition
       name='hasRole'
       type='boolean'
       default='false'>
+      Whether or not the alert block will have the <code>role="alert"</code> HTML attribute. For accessibility purposes,
+      it must have it if the alert is supposed to be displayed dynamically, during navigation.
     </play-input-property-definition>
   </dl>
 </section>
@@ -58,18 +67,16 @@
   <mat-card *ngIf='alertForm'>
     <mat-card-header>
       <mat-card-title>Alert component</mat-card-title>
-      <mat-card-subtitle>
-        It displays an alert
-      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class='simulation'>
       <p>Example : </p>
       <pre>
-  <span class='highlight-code'>&lt;dsfr-alert</span>
-    type="info"
-    title="This is a title"
-  <span class='highlight-code'>&gt; This is the description &lt;/dsfr-alert&gt;</span>
-</pre>
+        <span class='highlight-code'>&lt;dsfr-alert</span>
+          type="info"
+          title="This is a title"<span class='highlight-code'>&gt;</span>
+            This is the description
+        <span class='highlight-code'>&lt;/dsfr-alert&gt;</span>
+      </pre>
       <div class='settings'>
         <form
           [formGroup]='alertForm'

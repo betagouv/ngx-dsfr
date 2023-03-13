@@ -10,25 +10,29 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@ang
 import { ElementSize } from '@betagouv/ngx-dsfr';
 import { AlertType } from '@betagouv/ngx-dsfr/alert';
 
+/**
+ * TypeScript entities and constants
+ */
+interface AlertForm {
+  type: FormControl<AlertType>;
+  title: FormControl<string>;
+  description: FormControl<string>;
+  hasCloseButton: FormControl<boolean>;
+  hasRole: FormControl<boolean>;
+  size: FormControl<ElementSize>;
+}
+
 @Component( {
   templateUrl: './alert-module.component.html',
   styleUrls: [ './alert-module.component.scss' ]
 } )
 export class AlertModuleComponent implements OnInit {
 
-  alertForm: FormGroup | undefined;
+  alertForm: FormGroup<AlertForm> | undefined;
 
-  possibleTypes: Record<string, string> = {
-    'info': 'info',
-    'warning': 'warning',
-    'success': 'success',
-    'error': 'error'
-  };
+  possibleTypes: typeof AlertType = AlertType;
 
-  possibleSizes: Record<string, string> = {
-    'sm': 'sm',
-    'md': 'md'
-  };
+  possibleSizes: typeof ElementSize = ElementSize;
 
   constructor( private formBuilder: NonNullableFormBuilder ) {
   }
@@ -39,12 +43,12 @@ export class AlertModuleComponent implements OnInit {
 
   private initForms(): void {
     this.alertForm = this.formBuilder.group( {
-      type: new FormControl( AlertType.INFO, [ Validators.required ] ),
-      title: new FormControl( 'This is a beautiful title', [ Validators.required ] ),
-      description: new FormControl( 'This is a short description', [ Validators.required ] ),
-      hasCloseButton: new FormControl( false, [ Validators.required ] ),
-      hasRole: new FormControl( false, [ Validators.required ] ),
-      size: new FormControl( ElementSize.MEDIUM, [ Validators.required ] )
+      type: [ AlertType.INFO, [ Validators.required ] ],
+      title: [ 'This is a beautiful title', [ Validators.required ] ],
+      description: [ 'This is a short description', [ Validators.required ] ],
+      hasCloseButton: [ false, [ Validators.required ] ],
+      hasRole: [ false, [ Validators.required ] ],
+      size: [ ElementSize.MEDIUM, [ Validators.required ] ]
     } );
   }
 }

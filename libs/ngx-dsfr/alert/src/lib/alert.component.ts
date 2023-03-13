@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { ElementSize } from '@betagouv/ngx-dsfr';
 
 /**
@@ -24,7 +24,7 @@ export enum AlertType {
   templateUrl: './alert.component.html',
   styleUrls: [ './alert.component.scss' ]
 } )
-export class DsfrAlertComponent implements OnInit, AfterViewInit, OnChanges {
+export class DsfrAlertComponent implements AfterViewInit, OnChanges {
 
   @ViewChild( 'description' ) description: ElementRef<HTMLInputElement> | undefined;
 
@@ -36,15 +36,6 @@ export class DsfrAlertComponent implements OnInit, AfterViewInit, OnChanges {
 
   classes: string = '';
   isClosed = false;
-
-  ngOnInit(): void {
-
-    if ( !this.type ) {
-      throw EMPTY_TYPE_ERROR;
-    }
-
-    this.initClasses();
-  }
 
   ngOnChanges() {
     const description = this.description?.nativeElement.innerHTML.trim();
@@ -67,10 +58,12 @@ export class DsfrAlertComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private initClasses(): void {
-    this.classes += `fr-alert fr-alert--${this.type}`;
+    let classes = `fr-alert fr-alert--${this.type}`;
 
     if ( this.size === ElementSize.SMALL ) {
-      this.classes += ` fr-alert--${this.size}`;
+      classes += ` fr-alert--${this.size}`;
     }
+
+    this.classes = classes;
   }
 }
