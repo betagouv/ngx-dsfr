@@ -7,6 +7,12 @@ $primary-palette: mat.$pink-palette;
 $primary-color: mat.get-color-from-palette($primary-palette, A200);
 
 // Actual styling
+.highlight-code {
+  color: $primary-color;
+  font-weight: bold;
+  letter-spacing: 0.02rem;
+}
+
 .module-simulations {
   margin-top: 2 * var.$default-margin;
 
@@ -27,12 +33,6 @@ $primary-color: mat.get-color-from-palette($primary-palette, A200);
         padding: 2rem;
       }
 
-      .highlight-code {
-        color: $primary-color;
-        font-weight: bold;
-        letter-spacing: 0.02rem;
-      }
-
       .settings {
         margin-right: var.$default-margin;
 
@@ -51,7 +51,7 @@ $primary-color: mat.get-color-from-palette($primary-palette, A200);
   }
 }
 
-.template-alert {
+.template-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
