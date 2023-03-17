@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ElementSize, ThemeColor } from '@betagouv/ngx-dsfr';
 
 /**
@@ -16,31 +16,31 @@ export const EMPTY_LABEL_ERROR: string =
 export const EMPTY_THEME_ERROR: string =
   'You MUST provide a theme for this badge 😡 !!!';
 
-@Component({
+@Component( {
   selector: 'dsfr-badge',
   templateUrl: './badge.component.html',
-  styleUrls: ['./badge.component.scss']
-})
-export class DsfrBadgeComponent implements OnInit {
+  styleUrls: [ './badge.component.scss' ]
+} )
+export class DsfrBadgeComponent implements OnChanges {
 
   @Input() label: string | undefined;
   @Input() theme: ThemeColor | undefined;
   @Input() noIcon?: boolean = false;
-  @Input() size?: Omit<ElementSize, "LARGE"> = ElementSize.MEDIUM;
+  @Input() size?: Omit<ElementSize, 'LARGE'> = ElementSize.MEDIUM;
 
   classes: string = '';
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
 
-    if (!this.label && !this.theme) {
+    if ( !this.label && !this.theme ) {
       throw EMPTY_LABEL_AND_THEME_ERROR;
     }
 
-    if (!this.label) {
+    if ( !this.label ) {
       throw EMPTY_LABEL_ERROR;
     }
 
-    if (!this.theme) {
+    if ( !this.theme ) {
       throw EMPTY_THEME_ERROR;
     }
 
@@ -48,10 +48,11 @@ export class DsfrBadgeComponent implements OnInit {
   }
 
   private initClasses(): void {
-    this.classes += ` fr-badge fr-badge--${this.size} fr-badge--${this.theme}`;
+    let classes = `fr-badge fr-badge--${this.size} fr-badge--${this.theme}`;
 
-    if (this.noIcon) {
-      this.classes += ` fr-badge--no-icon`;
+    if ( this.noIcon ) {
+      classes += ` fr-badge--no-icon`;
     }
+    this.classes = classes;
   }
 }
