@@ -10,13 +10,27 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@ang
 import { ElementAlignment, ElementSize } from '@betagouv/ngx-dsfr';
 import { ButtonHtmlType, ButtonType } from '@betagouv/ngx-dsfr/button';
 
+/**
+ * TypeScript entities and constants
+ */
+interface ButtonForm {
+  label: FormControl<string>;
+  title: FormControl<string>;
+  disabled: FormControl<boolean>;
+  size: FormControl<ElementSize>;
+  htmlType: FormControl<ButtonHtmlType>;
+  type: FormControl<ButtonType>;
+  icon: FormControl<string>;
+  iconAlignment: FormControl<ElementAlignment>;
+}
+
 @Component({
   templateUrl: './button-module.component.html',
   styleUrls: ['./button-module.component.scss']
 })
 export class ButtonModuleComponent implements OnInit {
 
-  buttonForm: FormGroup | undefined;
+  buttonForm: FormGroup<ButtonForm> | undefined;
   nbButtonClicked: number = 0;
 
   possibleTypes: Record<string, string> = {
@@ -38,11 +52,7 @@ export class ButtonModuleComponent implements OnInit {
     'reset': 'reset'
   };
 
-  possibleSizes: Record<string, string> = {
-    'sm': 'sm',
-    'md': 'md',
-    'lg': 'lg'
-  };
+  possibleSizes: typeof ElementSize = ElementSize;
 
   constructor(private formBuilder: NonNullableFormBuilder) { }
 
@@ -52,14 +62,14 @@ export class ButtonModuleComponent implements OnInit {
 
   private initForms(): void {
     this.buttonForm = this.formBuilder.group({
-      label: new FormControl('This is a beautiful button', [Validators.required]),
-      title: new FormControl('This is a beautiful title', [Validators.required]),
-      disabled: new FormControl(false, [Validators.required]),
-      size: new FormControl(ElementSize.MEDIUM, [Validators.required]),
-      htmlType: new FormControl(ButtonHtmlType.BUTTON, [Validators.required]),
-      type: new FormControl(ButtonType.PRIMARY, [Validators.required]),
-      icon: new FormControl('fr-icon-checkbox-circle-line', [Validators.required]),
-      iconAlignment: new FormControl(ElementAlignment.LEFT, [Validators.required]),
+      label: ['This is a beautiful button', [Validators.required]],
+      title: ['This is a beautiful title', [Validators.required]],
+      disabled: [false, [Validators.required]],
+      size: [ElementSize.MEDIUM, [Validators.required]],
+      htmlType: [ButtonHtmlType.BUTTON, [Validators.required]],
+      type: [ButtonType.PRIMARY, [Validators.required]],
+      icon: ['fr-icon-checkbox-circle-line', [Validators.required]],
+      iconAlignment: [ElementAlignment.LEFT, [Validators.required]]
     });
   }
 

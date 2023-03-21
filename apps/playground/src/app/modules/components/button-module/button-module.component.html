@@ -1,7 +1,7 @@
 <section class="module-description">
   <h2>DsfrButtonComponent</h2>
   <p>
-    The <code>DsfrButtonComponent</code> purpose is to represent the button
+    The <code>DsfrButtonComponent</code> purpose is to represent a button
   </p>
   <p>
     It is based on the
@@ -32,27 +32,32 @@
   <dl class="input-properties">
     <play-input-property-definition
       name="label"
+      required="It is required when no icon is provided"
       type="It takes a string">
-      It is required when no icon is provided.
+      The text actually displayed within the button.
     </play-input-property-definition>
     <play-input-property-definition
       name="disabled"
       default="false"
       type="boolean">
+      Whether or not the button is disabled.
     </play-input-property-definition>
     <play-input-property-definition
       name="type"
       type="It takes a string with 5 possible values : <code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>tertiary-no-outline</code> or <code>close</code>"
       default="primary">
+      This property influences the look of the button, meaning : whether it has an outline, a background and the color of it. You can import the <code>ButtonType</code> enum in your app to safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
       name="size"
       type="It takes a string with 3 possible values : <code>sm</code>, <code>md</code> or <code>lg</code>">
+      You can import the <code>ElementSize</code> enum, from the <code>@betagouv/ngx-dsfr</code> library entry-point, in your app, to safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
       name="htmlType"
       default="button"
       type="It takes a string with 3 possible values : <code>button</code>, <code>submit</code> or <code>reset</code>">
+      This is the value for the <code>type</code> HTML attribute of the <code>button</code> tag. You can import the <code>ButtonHtmlType</code> enum in your app to safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
       name="icon"
@@ -73,7 +78,7 @@
       name="iconAlignment"
       default="left"
       type="It takes a string with 2 possible values : <code>right</code> or <code>left</code>">
-      It will align the provided icon at the left or right of the label. This input is not necessary if no label is provided.
+      It will align the provided icon at the left or right of the label. This input is not necessary if no label is provided. You can import the <code>ElementAlignment</code> enum, from the <code>@betagouv/ngx-dsfr</code> library entry-point, in your app, to safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
       name="title"
@@ -83,7 +88,7 @@
     <play-input-property-definition
       name="ariaControls"
       type="It takes a string">
-      For accessibility, the aria-controls attribute identifies the element whose contents or presence are controlled by the element on which the attribute is set.
+      For accessibility, the <code>aria-controls</code> attribute identifies the element whose contents or presence are controlled by the element on which the attribute is set.
     </play-input-property-definition>
     <play-input-property-definition
       name="buttonClicked"
@@ -96,17 +101,14 @@
   <h2>Play with the Component 😃</h2>
   <mat-card *ngIf="buttonForm">
     <mat-card-header>
-      <mat-card-title>Password field for sign up</mat-card-title>
-      <mat-card-subtitle>
-        It displays all the params to define and check a strong password
-      </mat-card-subtitle>
+      <mat-card-title>Button Component</mat-card-title>
     </mat-card-header>
     <mat-card-content class="simulation">
       <p>Example : </p>
 <pre>
   <span class='highlight-code'>&lt;dsfr-button</span>
     label="This is a beautiful label"
-    type="primary
+    type="primary"
     icon="fr-icon-checkbox-circle-line"
     title="This is a title"
   <span class='highlight-code'>&gt;&lt;/dsfr-button&gt;</span>
