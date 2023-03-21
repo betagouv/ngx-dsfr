@@ -31,6 +31,7 @@ export interface CheckboxItem {
   label: string;
   value: string;
   hint?: string;
+  disabled?: boolean;
 }
 
 @Component({
@@ -55,7 +56,7 @@ export class DsfrCheckboxComponent
   @Input() items: CheckboxItem[] = [];
   @Input() inline = false;
   @Input() disabled = false;
-  @Input() size = ElementSize.MEDIUM;
+  @Input() size?: Omit<ElementSize, "LARGE"> = ElementSize.MEDIUM;
   @Input() hasFailed = false;
   @Input() failureMessage = '';
   @Input() hasSucceeded = false;
