@@ -1,0 +1,104 @@
+<footer class="fr-footer" role="contentinfo" id="footer">
+  <div class="fr-footer__top">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-sm-3 fr-col-md-2" *ngFor="let category of categoriesLinks">
+          <h3 class="fr-footer__top-cat">{{ category.title }}</h3>
+          <ul class="fr-footer__top-list">
+            <li *ngFor="let itemLink of category.children">
+              <a
+                class="fr-footer__top-link"
+                [target]="itemLink.isExternal ? '_blank' : '_self'"
+                [routerLink]="[itemLink.href]">
+                {{ itemLink.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fr-container">
+    <div class="fr-footer__body">
+      <div class="fr-footer__brand fr-enlarge-link">
+        <ng-container
+          *ngIf="
+            !operatorLogoSrc;
+            then logoWithLink;
+            else logo
+          ">
+        </ng-container>
+        <ng-template #logoWithLink>
+          <a
+            [routerLink]="link"
+            [title]="'Retour à l’accueil du site - ' + appName + ' - ' + institutionInlined">
+            <ng-container *ngTemplateOutlet="logo"></ng-container>
+          </a>
+        </ng-template>
+        <ng-template #logo>
+          <p class="fr-logo">
+            <ng-container
+              *ngFor="let string of institutionArray; last as isLast">
+              {{ string }} <br *ngIf="!isLast" />
+            </ng-container>
+          </p>
+        </ng-template>
+        <ng-container *ngIf="operatorLogoSrc">
+          <a
+            *ngIf="operatorLogoSrc"
+            class="fr-footer__brand-link"
+            href="/"
+            [title]="'Retour à l’accueil du site - ' + operatorLogoAlt + ' - ' + institutionInlined">
+            <img
+              class="fr-footer__logo"
+              [src]="operatorLogoSrc"
+              [alt]="operatorLogoAlt" />
+          </a>
+        </ng-container>
+      </div>
+      <div class="fr-footer__content">
+        <p class="fr-footer__content-desc">
+          {{ description }}
+        </p>
+        <ul class="fr-footer__content-list">
+          <li class="fr-footer__content-item" *ngFor="let link of middleLinks">
+            <a class="fr-footer__content-link" target="_blank" [href]="link.href">
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="fr-footer__partners" *ngIf="brands">
+      <h4 class="fr-footer__partners-title">Nos partenaires</h4>
+      <div class="fr-footer__partners-logos">
+        <div class="fr-footer__partners-main">
+          <a class="fr-footer__partners-link" [href]="brands[0].href">
+            <img class="fr-footer__logo" style="height: 5.625rem" [src]="brands[0].image" [alt]="brands[0].alt" />
+          </a>
+        </div>
+        <div class="fr-footer__partners-sub">
+          <ul>
+            <li *ngFor="let brand of brands">
+              <a class="fr-footer__partners-link" [href]="brand.href">
+                <img class="fr-footer__logo" style="height: 5.625rem" [src]="brand.image" [alt]="brand.alt" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="fr-footer__bottom">
+      <ul class="fr-footer__bottom-list">
+        <li class="fr-footer__bottom-item" *ngFor="let link of bottomLinks">
+          <a class="fr-footer__bottom-link" [routerLink]="[link.href]">{{ link.label }}</a>
+        </li>
+      </ul>
+      <div class="fr-footer__bottom-copy">
+        <p>
+          <ng-container *ngTemplateOutlet="copyright.templateRef"></ng-container>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

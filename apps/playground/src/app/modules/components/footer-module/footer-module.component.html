@@ -1,0 +1,188 @@
+<section class="module-description">
+  <h2>DsfrFooterComponent</h2>
+  <p>
+    The <code>DsfrFooterComponent</code> purpose is to represent the footer of
+    an application.
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Footer Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/pied-de-page">
+      Footer
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It has several <code>@Input()</code> properties:</p>
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="institution"
+      type="It takes a string with <code>\n</code> characters to denote when to
+        break the lines."
+      default="'République\nFrançaise'">
+      The part of the French government ultimately in charge of the web
+      application. It must respect some
+      <a
+        href="https://www.gouvernement.fr/charte/charte-graphique-les-fondamentaux/le-bloc-marque#Les-r%C3%A8gles-de-c%C3%A9sure"
+        hreflang="fr"
+        target="_blank"
+        title="examples to display the name of several French government institutions">
+        rules on how to break lines
+        <mat-icon>open_in_new</mat-icon>
+      </a>
+      .
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="operatorLogoSrc"
+      type="It takes a string.">
+      The path on your server to the logo of the operator, the agency within the
+      institution, in charge of the web application.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="operatorLogoAlt"
+      required="Required if operatorLogoSrc has a value"
+      type="It takes a string.">
+      The alternative text for the logo of the operator. Necessary for
+      accessibility: it MUST have at least the text visible on the logo
+      illustration.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="appName"
+      type="It takes a string.">
+      The name of your web application.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="description"
+      type="It takes a string.">
+      A short description of what your application does or useful information.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="link"
+      default="'/'"
+      type="It takes a string.">
+      The path, corresponding to the Angular <code>Route</code> that you want
+      the user to be redirected to when they click on the institution,
+      operator's logo or your app's name.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="categoriesLinks"
+      type="FooterCategoryLinks[]">
+      The value must be an array of objects satisfying the <code>FooterCategoryLinks</code> interface : each object must have
+      a <code>title</code> property and a <code>children</code> property, which is an array of objects satisfying the <code>FooterLink</code>
+      interface with a <code>label</code> property, a  <code>href</code> property, and an optional <code>isExternal</code> property.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="middleLinks"
+      type="FooterLink[]">
+      The value must be an array of objects satisfying the  <code>FooterLink</code>
+      interface: each object must have a <code>label</code> property, a <code>href</code> property, and an optional <code>isExternal</code> property.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="brands"
+      type="FooterBrand[]">
+      The value must be an array of objects satisfying the  <code>FooterBrand</code>
+      interface: each object must have an <code>image</code> property (containing the path), a <code>href</code> property, and an <code>alt</code> property.
+      <br>
+      The first element of the array is the main brand, it will be displayed on the left, the others will be displayed on the right.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="bottomLinks"
+      type="FooterLink[]">
+      The value must be an array of objects satisfying the  <code>FooterLink</code>
+      interface: each object must have a <code>label</code> property, a <code>href</code> property, and an optional <code>isExternal</code> property.
+    </play-input-property-definition>
+  </dl>
+</section>
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <mat-card *ngIf="formFooter">
+    <mat-card-header>
+      <mat-card-title>Footer component</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <p>Example:</p>
+<pre>
+<span class='highlight-code'>&lt;dsfr-footer</span>
+  appName="Beautiful name"
+  description="Little description"
+  <span class='highlight-code'>&lt;ng-template dsfrFooterCopyright&gt;</span>
+    Copyright 2023 with
+    &lt;a href="#" target="_blank">link&lt;/a&gt;
+  <span class='highlight-code'>&lt;/ng-template&gt;</span>
+<span class='highlight-code'>&lt;/dsfr-footer&gt;</span>
+</pre>
+      <div class="settings">
+        <form
+          [formGroup]="formFooter"
+          novalidate>
+          <play-input-property-control
+            formControlName="institution"
+            name="institution"
+            type="enum"
+            [enum]="possibleInstitutions">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="description"
+            name="description"
+            label="Application description"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="displayBrands"
+            name="displayBrands"
+            label="Display footer brands"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="displayCategoriesLink"
+            name="displayCategoriesLink"
+            label="Display categories links block"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="displayOperator"
+            name="displayOperator"
+            label="Display operator logo"
+            type="boolean">
+          </play-input-property-control>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="formFooter.reset()">
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <play-simulator>
+          <dsfr-footer
+            [institution]="formFooter.getRawValue().institution"
+            [appName]="appName"
+            [description]="formFooter.getRawValue().description"
+            [brands]="brands"
+            [operatorLogoSrc]="operatorLogo"
+            [operatorLogoAlt]="operateurAlt"
+            [bottomLinks]="bottomLinks"
+            [middleLinks]="middleLinks"
+            [categoriesLinks]="categoriesLinks">
+            <ng-template dsfrFooterCopyright>
+              Sauf mention contraire, tous les contenus de ce site sont sous <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" target="_blank">licence etalab-2.0</a>
+            </ng-template>
+          </dsfr-footer>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

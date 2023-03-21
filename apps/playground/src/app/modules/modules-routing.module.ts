@@ -20,6 +20,7 @@ import { TileModuleComponent } from './components/tile-module/tile-module.compon
 import { PasswordModuleComponent } from './components/password-module/password-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
+import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 
 /**
  * TypeScript entities and constants
@@ -40,6 +41,10 @@ const routes: Route[] = [
   {
     path: 'checkbox',
     component: CheckboxModuleComponent
+  },
+  {
+    path: 'footer',
+    component: FooterModuleComponent
   },
   {
     path: 'header',
