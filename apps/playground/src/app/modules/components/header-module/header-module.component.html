@@ -80,6 +80,12 @@
       name="searchBar"
       default="false"
       type="It takes a boolean">
+      It will display the autocompletion of the search
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="searchBarAutoCompletion"
+      default="false"
+      type="It takes a boolean">
       It will display the search bar component on the right
       of the header.
     </play-input-property-definition>
@@ -294,6 +300,12 @@
             type="string">
           </play-input-property-control>
           <play-input-property-control
+            formControlName="searchBar"
+            name="searchBar"
+            label="Display Search Bar"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
             formControlName="operatorLogoAlt"
             name="operatorLogoAlt"
             label="Value for the alt attribute of the logo"
@@ -315,7 +327,7 @@
             [appName]="formHeaderComplete.getRawValue().appName"
             [appDescription]="formHeaderComplete.getRawValue().appDescription"
             operatorLogoSrc="assets/illustrations/Logo ANCT.svg"
-            [searchBar]="true"
+            [searchBar]="formHeaderComplete.getRawValue().searchBar"
             [operatorLogoAlt]="formHeaderComplete.getRawValue().operatorLogoAlt">
             <ng-template dsfrHeaderAction>
               <dsfr-link

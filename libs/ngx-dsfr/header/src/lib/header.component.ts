@@ -45,6 +45,7 @@ export class DsfrHeaderComponent implements OnInit, OnChanges {
   @Input() appDescription: string | undefined;
   @Input() link: string = '/';
   @Input() searchBar: boolean = false;
+  @Input() searchBarAutoCompletion: boolean = false;
 
   @Output() searchQuerySubmitted = new EventEmitter<string>();
 

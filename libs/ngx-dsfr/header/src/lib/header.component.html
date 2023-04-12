@@ -55,8 +55,8 @@
               <button
                 *ngIf="searchBar"
                 class="fr-btn--search fr-btn"
-                aria-controls="modal-575"
-                id="button-576"
+                aria-controls="searchModal"
+                id="searchButton"
                 title="Rechercher"
                 (click)="isSearchBarOpened = true">
                 Rechercher
@@ -103,13 +103,13 @@
             *ngIf="searchBar"
             [class.fr-modal--opened]="isSearchBarOpened"
             class="fr-header__search fr-modal"
-            id="modal-575">
+            id="searchModal">
             <div class="fr-container fr-container-lg--fluid">
               <dsfr-button
                 class="close-modal"
                 label="Fermer"
                 title="Fermer"
-                ariaControls="modal-575"
+                ariaControls="searchModal"
                 (click)="isSearchBarOpened = false"
                 [type]="buttonTypes.CLOSE">
               </dsfr-button>
@@ -117,7 +117,7 @@
                 id="searchHeader"
                 label="Rechercher"
                 placeholder="Rechercher"
-                [autocomplete]="false"
+                [autocomplete]="searchBarAutoCompletion"
                 [hasSearchButton]="true"
                 [size]="elementSize.SMALL"
                 (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>

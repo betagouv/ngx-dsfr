@@ -29,6 +29,7 @@ interface FormHeaderWithAppName {
 
 interface FormHeaderWithLogo extends FormHeaderWithAppName {
   operatorLogoAlt: FormControl<string>;
+  searchBar: FormControl<boolean>;
 }
 
 @Component({
@@ -150,6 +151,7 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
       institution:
         "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
       appName: '',
+      searchBar: [{ value: true, disabled: false }],
       appDescription: '',
       operatorLogoAlt: [
         'agence nationale de la cohésion des territoires',
@@ -162,6 +164,7 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
         "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
       appName: '',
       appDescription: '',
+      searchBar: [{ value: true, disabled: false }],
       operatorLogoAlt: [
         'agence nationale de la cohésion des territoires',
         Validators.required
