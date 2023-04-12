@@ -3,7 +3,6 @@
  */
 import {
   Component,
-  ContentChild,
   Input,
   OnChanges,
   OnInit,
@@ -11,16 +10,12 @@ import {
 } from '@angular/core';
 
 /**
- * Internal imports
- */
-import { DsfrFooterCopyrightDirective } from './footer-copyright.directive';
-
-/**
  * TypeScript entities and constants
  */
 export const EMPTY_ALT_ERROR: string = 'You MUST provide a value for the operatorLogoAlt attribute 😡 !!!';
+export const EMPTY_COPYRIGHT_ERROR: string = 'You MUST provide a value for the copyright attribute 😡 !!!';
 
-export interface FooterCategoryLinks {
+export interface FooterLinksCategory {
   title: string;
   children: FooterLink[];
 }
@@ -28,10 +23,11 @@ export interface FooterCategoryLinks {
 export interface FooterLink {
   label: string;
   href: string;
+  title: string;
   isExternal?: boolean;
 }
 
-export interface FooterBrand {
+export interface FooterPartner {
   image: string;
   href: string;
   alt: string;
@@ -50,16 +46,13 @@ export class DsfrFooterComponent implements OnInit, OnChanges {
   @Input() operatorLogoAlt: string | undefined;
   @Input() link: string = '/';
   @Input() description: string | undefined;
-  @Input() categoriesLinks: FooterCategoryLinks[] | undefined;
-  @Input() middleLinks: FooterLink[] | undefined;
-  @Input() brands: FooterBrand[] | undefined;
+  @Input() linksPerCategories: FooterLinksCategory[] | undefined;
+  @Input() partners: FooterPartner[] | undefined;
   @Input() bottomLinks: FooterLink[] | undefined;
-
-  @ContentChild(DsfrFooterCopyrightDirective) copyright!: DsfrFooterCopyrightDirective;
+  @Input() copyright: FooterLink | undefined;
 
   institutionArray!: string[];
   institutionInlined!: string;
-  appLinkTitle: string | undefined;
 
   ngOnInit(): void {
     this.handleInstitution();
@@ -67,6 +60,10 @@ export class DsfrFooterComponent implements OnInit, OnChanges {
     // Dealing with everything needed to represent the operator behind the app
     if (this.operatorLogoSrc && !this.operatorLogoAlt) {
       throw EMPTY_ALT_ERROR;
+    }
+
+    if (!this.copyright) {
+      throw EMPTY_COPYRIGHT_ERROR;
     }
   }
 

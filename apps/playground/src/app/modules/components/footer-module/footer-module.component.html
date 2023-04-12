@@ -79,29 +79,27 @@
     <play-input-property-definition
       name="categoriesLinks"
       type="FooterCategoryLinks[]">
-      The value must be an array of objects satisfying the <code>FooterCategoryLinks</code> interface : each object must have
-      a <code>title</code> property and a <code>children</code> property, which is an array of objects satisfying the <code>FooterLink</code>
-      interface with a <code>label</code> property, a  <code>href</code> property, and an optional <code>isExternal</code> property.
+      The value must be an array of objects satisfying the <code>FooterLinksCategory</code> interface : each object must have
+      a string <code>title</code> property and a <code>children</code> property, which is an array of objects satisfying the <code>FooterLink</code>
+      interface, with a <code>label</code> property, an <code>href</code> property ( both have string values ), and an optional <code>isExternal</code> boolean property.
     </play-input-property-definition>
     <play-input-property-definition
-      name="middleLinks"
-      type="FooterLink[]">
-      The value must be an array of objects satisfying the  <code>FooterLink</code>
-      interface: each object must have a <code>label</code> property, a <code>href</code> property, and an optional <code>isExternal</code> property.
-    </play-input-property-definition>
-    <play-input-property-definition
-      name="brands"
-      type="FooterBrand[]">
-      The value must be an array of objects satisfying the  <code>FooterBrand</code>
-      interface: each object must have an <code>image</code> property (containing the path), a <code>href</code> property, and an <code>alt</code> property.
-      <br>
-      The first element of the array is the main brand, it will be displayed on the left, the others will be displayed on the right.
+      name="partners"
+      type="FooterPartner[]">
+      The value must be an array of objects satisfying the
+      <code>FooterPartner</code> interface: each object must have an
+      <code>image</code> property (containing the path), an
+      <code>href</code> property, and an <code>alt</code> property. They all expect string values.
+      <br />
+      The first element of the array is the main partner : it will be displayed on
+      the left. The others will be displayed on the right.
     </play-input-property-definition>
     <play-input-property-definition
       name="bottomLinks"
       type="FooterLink[]">
       The value must be an array of objects satisfying the  <code>FooterLink</code>
-      interface: each object must have a <code>label</code> property, a <code>href</code> property, and an optional <code>isExternal</code> property.
+      interface: each object must have a <code>label</code> property, an <code>href</code>
+      property ( both have string values ), and an optional <code>isExternal</code> boolean property.
     </play-input-property-definition>
   </dl>
 </section>
@@ -117,10 +115,7 @@
 <span class='highlight-code'>&lt;dsfr-footer</span>
   appName="Beautiful name"
   description="Little description"
-  <span class='highlight-code'>&lt;ng-template dsfrFooterCopyright&gt;</span>
-    Copyright 2023 with
-    &lt;a href="#" target="_blank">link&lt;/a&gt;
-  <span class='highlight-code'>&lt;/ng-template&gt;</span>
+  [copyright]="copyright"
 <span class='highlight-code'>&lt;/dsfr-footer&gt;</span>
 </pre>
       <div class="settings">
@@ -140,15 +135,15 @@
             type="string">
           </play-input-property-control>
           <play-input-property-control
-            formControlName="displayBrands"
+            formControlName="displayPartners"
             name="displayBrands"
-            label="Display footer brands"
+            label="Display footer partners"
             type="boolean">
           </play-input-property-control>
           <play-input-property-control
             formControlName="displayCategoriesLink"
             name="displayCategoriesLink"
-            label="Display categories links block"
+            label="Display links per categories block"
             type="boolean">
           </play-input-property-control>
           <play-input-property-control
@@ -171,15 +166,12 @@
             [institution]="formFooter.getRawValue().institution"
             [appName]="appName"
             [description]="formFooter.getRawValue().description"
-            [brands]="brands"
+            [partners]="partners"
             [operatorLogoSrc]="operatorLogo"
-            [operatorLogoAlt]="operateurAlt"
+            [copyright]="copyright"
+            [operatorLogoAlt]="operatorAlt"
             [bottomLinks]="bottomLinks"
-            [middleLinks]="middleLinks"
-            [categoriesLinks]="categoriesLinks">
-            <ng-template dsfrFooterCopyright>
-              Sauf mention contraire, tous les contenus de ce site sont sous <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" target="_blank">licence etalab-2.0</a>
-            </ng-template>
+            [linksPerCategories]="categoriesLinks">
           </dsfr-footer>
         </play-simulator>
       </div>

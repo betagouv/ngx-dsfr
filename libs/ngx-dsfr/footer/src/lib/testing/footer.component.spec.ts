@@ -17,7 +17,6 @@ import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
 import { TestHostComponent } from './test-host.component';
 import { DsfrFooterComponent, EMPTY_ALT_ERROR } from '../footer.component';
 import { DsfrFooterHarness } from './footer.harness';
-import { DsfrFooterCopyrightDirective } from '../footer-copyright.directive';
 
 describe('DsfrFooterComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -35,7 +34,6 @@ describe('DsfrFooterComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         DsfrFooterComponent,
-        DsfrFooterCopyrightDirective,
         TestHostComponent,
         RouterLinkDirectiveStub
       ]
@@ -134,6 +132,7 @@ describe('DsfrFooterComponent', () => {
     testHost.testInstitution = testInstitution;
     testHost.testOperatorLogoSrc = testOperatorLogoSrc;
     testHost.testOperatorLogoAlt = testOperatorLogoAlt;
+    testHost.testAppName = testAppName;
     /*
      * We're retrieving the Test Harness HERE since we can now,
      * without any problem, trigger the Change Detection mechanism
