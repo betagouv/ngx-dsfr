@@ -23,6 +23,7 @@ import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
+import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
 
 /**
  * Internal imports
@@ -44,6 +45,7 @@ import { PasswordModuleComponent } from './components/password-module/password-m
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 import { TestSearchService } from './components/search-bar-module/search-bar-module.service';
+import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 
 @NgModule({
   imports: [
@@ -62,6 +64,7 @@ import { TestSearchService } from './components/search-bar-module/search-bar-mod
     DsfrPasswordModule,
     DsfrCheckboxModule,
     DsfrSearchBarModule,
+    DsfrErrorPageModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -82,7 +85,8 @@ import { TestSearchService } from './components/search-bar-module/search-bar-mod
     PasswordModuleComponent,
     CheckboxModuleComponent,
     StepperModuleComponent,
-    SearchBarModuleComponent
+    SearchBarModuleComponent,
+    ErrorPageModuleComponent
   ],
   providers: [
     {

@@ -32,6 +32,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/checkbox'
       },
       {
+        label: 'Error Page',
+        path: '/modules/error-page'
+      },
+      {
         label: 'Header',
         path: '/modules/header'
       },
