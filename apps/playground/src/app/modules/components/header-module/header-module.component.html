@@ -25,7 +25,7 @@
     </a>
     .
   </p>
-  <p>It has several <code>@Input()</code> properties:</p>
+  <p>It has several <code>@Input()</code> and <code>@Output()</code> properties:</p>
   <dl class="input-properties">
     <play-input-property-definition
       name="institution"
@@ -75,6 +75,25 @@
       The path, corresponding to the Angular <code>Route</code> that you want
       the user to be redirected to when they click on the institution,
       operator's logo or your app's name.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="searchBar"
+      default="false"
+      type="It takes a boolean">
+      It will display the search bar component on the right
+      of the header.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="searchBarAutoCompletion"
+      default="false"
+      type="It takes a boolean">
+      It will display the autocompletion of the search
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="searchQuerySubmitted()"
+      default="false"
+      type="Output()">
+      It emits the search bar value on click on the search button.
     </play-input-property-definition>
   </dl>
 </section>
@@ -185,9 +204,8 @@
             [appName]="formHeaderWithLogo.getRawValue().appName"
             [appDescription]="formHeaderWithLogo.getRawValue().appDescription"
             operatorLogoSrc="assets/illustrations/Logo ANCT.svg"
-            [operatorLogoAlt]="
-              formHeaderWithLogo.getRawValue().operatorLogoAlt
-            "></dsfr-header>
+            [operatorLogoAlt]="formHeaderWithLogo.getRawValue().operatorLogoAlt">
+          </dsfr-header>
         </play-simulator>
       </div>
     </mat-card-content>
@@ -233,6 +251,7 @@
               &lt;dsfr-link
                 label="Être tenu informé"
                 link="./"
+                [searchBar]="true"
                 [inline]="false"
                 icon="notification-3-line"
                 [iconAlignment]="iconAlignment.LEFT"&gt;
@@ -281,13 +300,19 @@
             type="string">
           </play-input-property-control>
           <play-input-property-control
+            formControlName="searchBar"
+            name="searchBar"
+            label="Display Search Bar"
+            type="boolean">
+          </play-input-property-control>
+          <play-input-property-control
             formControlName="operatorLogoAlt"
             name="operatorLogoAlt"
             label="Value for the alt attribute of the logo"
             [error]="errors['formHeaderComplete']"
             type="string">
           </play-input-property-control>
-          <button
+            <button
             mat-raised-button
             color="accent"
             (click)="formHeaderComplete.reset()">
@@ -302,9 +327,8 @@
             [appName]="formHeaderComplete.getRawValue().appName"
             [appDescription]="formHeaderComplete.getRawValue().appDescription"
             operatorLogoSrc="assets/illustrations/Logo ANCT.svg"
-            [operatorLogoAlt]="
-              formHeaderComplete.getRawValue().operatorLogoAlt
-            ">
+            [searchBar]="formHeaderComplete.getRawValue().searchBar"
+            [operatorLogoAlt]="formHeaderComplete.getRawValue().operatorLogoAlt">
             <ng-template dsfrHeaderAction>
               <dsfr-link
                 label="Être tenu informé"
