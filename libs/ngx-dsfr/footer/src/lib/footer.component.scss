@@ -3,3 +3,6 @@
 @use "@gouvfr/dsfr/dist/component/logo/logo.min";
 
 
+.fr-footer__partners-link[target=_blank]:after {
+  content: none;
+}

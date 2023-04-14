@@ -13,7 +13,6 @@ import {
  * TypeScript entities and constants
  */
 export const EMPTY_ALT_ERROR: string = 'You MUST provide a value for the operatorLogoAlt attribute 😡 !!!';
-export const EMPTY_COPYRIGHT_ERROR: string = 'You MUST provide a value for the copyright attribute 😡 !!!';
 
 export interface FooterLinksCategory {
   title: string;
@@ -49,7 +48,11 @@ export class DsfrFooterComponent implements OnInit, OnChanges {
   @Input() linksPerCategories: FooterLinksCategory[] | undefined;
   @Input() partners: FooterPartner[] | undefined;
   @Input() bottomLinks: FooterLink[] | undefined;
-  @Input() copyright: FooterLink | undefined;
+  @Input() copyright: FooterLink = {
+    href: 'https://github.com/etalab/licence-ouverte/blob/master/LO.md',
+    title: 'licence etalab-2.0 - ouvre une nouvelle fenêtre',
+    label:'licence etalab-2.0'
+  };
 
   institutionArray!: string[];
   institutionInlined!: string;
@@ -60,10 +63,6 @@ export class DsfrFooterComponent implements OnInit, OnChanges {
     // Dealing with everything needed to represent the operator behind the app
     if (this.operatorLogoSrc && !this.operatorLogoAlt) {
       throw EMPTY_ALT_ERROR;
-    }
-
-    if (!this.copyright) {
-      throw EMPTY_COPYRIGHT_ERROR;
     }
   }
 

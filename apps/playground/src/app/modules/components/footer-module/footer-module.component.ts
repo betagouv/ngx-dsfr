@@ -17,16 +17,7 @@ import { Subject, takeUntil } from 'rxjs';
 /**
  * TypeScript entities and constants
  */
-interface FormFooter {
-  institution: FormControl<string>;
-  description: FormControl<string>;
-  displayPartners: FormControl<boolean>;
-  displayCategoriesLink: FormControl<boolean>;
-  displayOperator: FormControl<boolean>;
-}
-
 const operatorLogo: string = 'assets/illustrations/Logo ANCT.svg';
-
 const linksCategories: FooterLinksCategory[] = [
   {
     title: 'Nom de la catégorie',
@@ -273,7 +264,13 @@ const partners: FooterPartner[] = [
   styleUrls: ['./footer-module.component.scss']
 })
 export class FooterModuleComponent implements OnInit, OnDestroy {
-  formFooter: FormGroup<FormFooter> | undefined;
+  formFooter: FormGroup =  this.formBuilder.group({
+    institution: ["Ministère\nde la transition\nnumérique"],
+    description: ['Lorem [...] elit ut.'],
+    displayPartners: [true],
+    displayCategoriesLink: [true],
+    displayOperator: [true]
+  });
 
   possibleInstitutions: Record<string, string> = {
     "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation":
@@ -334,14 +331,6 @@ export class FooterModuleComponent implements OnInit, OnDestroy {
   }
 
   private initForms(): void {
-    this.formFooter = this.formBuilder.group({
-      institution: ["Ministère\nde la transition\nnumérique"],
-      description: ['Lorem [...] elit ut.'],
-      displayPartners: [true],
-      displayCategoriesLink: [true],
-      displayOperator: [true]
-    });
-
     this.formFooter.valueChanges.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe({

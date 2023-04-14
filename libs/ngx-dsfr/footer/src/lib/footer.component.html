@@ -91,7 +91,7 @@
       <h4 class="fr-footer__partners-title">Nos partenaires</h4>
       <div class="fr-footer__partners-logos">
         <div class="fr-footer__partners-main">
-          <a class="fr-footer__partners-link" [href]="partners[0].href">
+          <a class="fr-footer__partners-link" [href]="partners[0].href" target="_blank">
             <img class="fr-footer__logo" style="height: 5.625rem" [src]="partners[0].image" [alt]="partners[0].alt" />
           </a>
         </div>
@@ -99,7 +99,7 @@
           <ul>
             <ng-container *ngFor="let partner of partners; let isFirst = first">
               <li *ngIf="!isFirst">
-                <a class="fr-footer__partners-link" [href]="partner.href">
+                <a class="fr-footer__partners-link" [href]="partner.href" target="_blank">
                   <img class="fr-footer__logo" style="height: 5.625rem" [src]="partner.image" [alt]="partner.alt" />
                 </a>
               </li>
@@ -116,7 +116,7 @@
       </ul>
       <div class="fr-footer__bottom-copy" *ngIf="copyright">
         <p>
-          Sauf mention contraire, tous les contenus de ce site sont sous <a [href]="copyright.href" target="_blank">{{copyright.label}}</a>
+          Sauf mention contraire, tous les contenus de ce site sont sous <a [href]="copyright.href" target="_blank" [title]="copyright.title" >{{ copyright.label }}</a>
         </p>
       </div>
     </div>
