@@ -16,7 +16,6 @@ import { FooterLink, FooterLinksCategory, FooterPartner } from '../footer.compon
       [link]="testLink"
       [operatorLogoSrc]="testOperatorLogoSrc"
       [operatorLogoAlt]="testOperatorLogoAlt"
-      [copyright]="testCopyright"
       [linksPerCategories]="testLinksPerCategories"
       [partners]="testPartners"
       [bottomLinks]="testBottomLinks"
@@ -31,7 +30,6 @@ export class TestHostComponent {
   @Input() testOperatorLogoSrc: string = '';
   @Input() testOperatorLogoAlt: string = '';
   @Input() testDescription: string = '';
-  @Input() testCopyright: FooterLink | undefined;
   @Input() testLinksPerCategories: FooterLinksCategory[] | undefined;
   @Input() testPartners: FooterPartner[] | undefined;
   @Input() testBottomLinks: FooterLink[] | undefined;
