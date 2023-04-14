@@ -25,19 +25,20 @@ export class InputModuleComponent implements OnInit, OnDestroy {
 
   inputForm = this.formBuilder.group({
     label: ['This is a label', Validators.required],
-    type: ['text' as InputType, Validators.required],
-    placeholder: ['This is a placeholder', Validators.required],
-    hint: ['This is a description', Validators.required],
-    icon: ['', Validators.required],
-    disabled: [false, Validators.required],
-    hasFailed: [false, Validators.required],
-    hasSucceeded: [false, Validators.required],
-    failureMessage: ['Error message', Validators.required],
-    successMessage: ['Success message', Validators.required]
+    type: 'text' as InputType,
+    placeholder: 'This is a placeholder',
+    hint: 'This is a description',
+    icon: '',
+    disabled: false,
+    hasFailed: false,
+    hasSucceeded: false,
+    failureMessage: 'Error message',
+    successMessage: 'Success message'
   },
   {
     validators: failureMessageRequiredWhenHasFailedValidator
   });
+
   inputFormErrors: Record<string, string> = {};
   form: FormGroup | undefined;
 
@@ -62,7 +63,7 @@ export class InputModuleComponent implements OnInit, OnDestroy {
 
     this.handleErrors('Please, enter a label for this Component', 'label');
     this.handleErrors(
-      'Please, enter a failure meessage for this Component if the hasFailed attribute is true'
+      'Please, enter a failure message for this Component if the hasFailed attribute is true'
     );
   }
 
