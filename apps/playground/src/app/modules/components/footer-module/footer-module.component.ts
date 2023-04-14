@@ -3,7 +3,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl,
   FormGroup,
   NonNullableFormBuilder,
 } from '@angular/forms';
@@ -264,7 +263,7 @@ const partners: FooterPartner[] = [
   styleUrls: ['./footer-module.component.scss']
 })
 export class FooterModuleComponent implements OnInit, OnDestroy {
-  formFooter: FormGroup =  this.formBuilder.group({
+  formFooter =  this.formBuilder.group({
     institution: ["Ministère\nde la transition\nnumérique"],
     description: ['Lorem [...] elit ut.'],
     displayPartners: [true],
