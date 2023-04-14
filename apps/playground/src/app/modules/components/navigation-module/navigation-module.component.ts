@@ -1,8 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 
 /**
  * 3rd-party imports
@@ -13,19 +12,13 @@ import { Navigation } from '@betagouv/ngx-dsfr/navigation';
   templateUrl: './navigation-module.component.html',
   styleUrls: ['./navigation-module.component.scss']
 })
-export class NavigationModuleComponent implements OnInit {
+export class NavigationModuleComponent {
 
-  form: FormGroup | undefined;
-
-  navigation: Navigation = [
+  navigationWithMegaMenus: Navigation = [
     {
       "id": "a",
-      "label": "MEGA MENU",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
-      ],
-      "href": "modules",
+      "label": "Mega menu",
+      "href": "modules/navigation",
       "child": {
         "isMega": true,
         "title": "Titre éditorialisé",
@@ -34,12 +27,12 @@ export class NavigationModuleComponent implements OnInit {
           {
             "id": "b",
             "label": "Config",
-            "href": "admin/dashboard/config",
+            "href": "modules/navigation",
             "children": [
               {
                 "id": 'c',
                 "label": "Config 1",
-                "href": "admin/dashboard/config",
+                "href": "modules/navigation",
               },
               {
                 "id": 'f',
@@ -50,18 +43,18 @@ export class NavigationModuleComponent implements OnInit {
           },
           {
             "id": "b2",
-            "label": "Config",
-            "href": "admin/dashboard/config",
+            "label": "Submenu",
+            "href": "modules/navigation",
             "children": [
               {
                 "id": 'eec',
-                "label": "ConfigEE 1",
-                "href": "admin/dashboard/config",
+                "label": "Submenu 1",
+                "href": "modules/navigation",
               },
               {
                 "id": 'fee',
-                "label": "Configee 2",
-                "href": "admin/dashboard/config"
+                "label": "Submenu 2",
+                "href": "modules/navigation"
               },
             ]
           }
@@ -70,12 +63,8 @@ export class NavigationModuleComponent implements OnInit {
     },
     {
       "id": "k",
-      "label": "MEGA MENU 2",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
-      ],
-      "href": "dash",
+      "label": "Mega menu",
+      "href": "modules/navigation",
       "child": {
         "isMega": true,
         "title": "title",
@@ -84,17 +73,17 @@ export class NavigationModuleComponent implements OnInit {
           {
             "id": "l",
             "label": "Config",
-            "href": "admin/dashboard/config",
+            "href": "modules/navigation",
             "children": [
               {
                 "id": 'm',
                 "label": "Config",
-                "href": "admin/dashboard/config",
+                "href": "modules/navigation",
               },
               {
                 "id": 'p',
                 "label": "Config",
-                "href": "admin/dashboard/config"
+                "href": "modules/navigation"
               },
             ]
           }
@@ -104,10 +93,6 @@ export class NavigationModuleComponent implements OnInit {
     {
       "id": "g",
       "label": "Simple Menu",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
-      ],
       "href": "dashboard",
       "child": {
         "isMega": false,
@@ -115,12 +100,12 @@ export class NavigationModuleComponent implements OnInit {
           {
             "id": 'h',
             "label": "Config",
-            "href": "admin/dashboard/config",
+            "href": "modules/navigation",
           },
           {
             "id": 'i',
             "label": "Config",
-            "href": "admin/dashboard/config",
+            "href": "modules/navigation",
           },
         ]
       }
@@ -128,23 +113,98 @@ export class NavigationModuleComponent implements OnInit {
     {
       "id": "j",
       "label": "Acces direct",
-      "userRoles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
-      ],
-      "href": "dashboard",
+      "href": "modules/navigation",
     },
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  navigationWithSimpleDropdownMenus: Navigation = [
+    {
+      "id": "a",
+      "label": "Simple dropdown",
+      "href": "modules/navigation",
+      "child": {
+        "isMega": false,
+        "children": [
+          {
+            "id": 'h1',
+            "label": "Config",
+            "href": "modules/navigation",
+          },
+          {
+            "id": 'i1',
+            "label": "Config",
+            "href": "modules/navigation",
+          },
+        ]
+      }
+    },
+    {
+      "id": "k",
+      "label": "Simple dropdown",
+      "href": "modules/navigation",
+      "child": {
+        "isMega": false,
+        "children": [
+          {
+            "id": 'h2',
+            "label": "Config",
+            "href": "modules/navigation",
+          },
+          {
+            "id": 'i2',
+            "label": "Config",
+            "href": "modules/navigation",
+          },
+        ]
+      }
+    },
+    {
+      "id": "g",
+      "label": "Simple dropdown",
+      "href": "modules/navigation",
+      "child": {
+        "isMega": false,
+        "children": [
+          {
+            "id": 'h',
+            "label": "Config",
+            "href": "modules/navigation",
+          },
+          {
+            "id": 'i',
+            "label": "Config",
+            "href": "modules/navigation",
+          },
+        ]
+      }
+    },
+    {
+      "id": "j",
+      "label": "Direct link",
+      "href": "modules/navigation",
+    },
+  ];
 
-  ngOnInit(): void {
-    this.initForms();
-  }
-
-  private initForms(): void {
-    this.form = this.formBuilder.group({
-      label: 'DSFR NAvigation works 😁'
-    });
-  }
+  navigationWithDirectLinks: Navigation = [
+    {
+      "id": "a",
+      "label": "Direct link",
+      "href": "modules/navigation",
+    },
+    {
+      "id": "k",
+      "label": "Direct link",
+      "href": "modules/navigation",
+    },
+    {
+      "id": "g",
+      "label": "Direct link",
+      "href": "modules/navigation",
+    },
+    {
+      "id": "j",
+      "label": "Direct link",
+      "href": "modules/navigation",
+    },
+  ];
 }

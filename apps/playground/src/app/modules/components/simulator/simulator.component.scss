@@ -8,7 +8,7 @@
   height: 100%;
   padding: var.$default-padding;
   color: black;
-  overflow: hidden;
+  overflow: visible; // if it is 'hidden', we do not see the dropdown menu of the navigation component.
 
   /*
    * Adding this to create a new stacking context and

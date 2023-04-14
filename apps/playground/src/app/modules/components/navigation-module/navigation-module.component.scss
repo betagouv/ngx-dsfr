@@ -1,13 +1,38 @@
-.simulation {
-  display: flex;
+// Imports
+@use "@angular/material" as mat;
+@use "variables" as var;
 
-  .settings {
-    width: 50%;
-    background-color: indianred;
-  }
+// Variables
+$primary-palette: mat.$pink-palette;
+$primary-color: mat.get-color-from-palette($primary-palette, A200);
 
-  play-simulator {
-    width: 50%;
-    background-color: aqua;
+// Actual styling
+.highlight-code {
+  color: $primary-color;
+  font-weight: bold;
+  letter-spacing: 0.02rem;
+}
+
+.module-simulations {
+  margin-top: 2 * var.$default-margin;
+
+  .mat-mdc-card {
+    margin: var.$default-margin 0 2 * var.$default-margin;
+
+    .simulation {
+      display: flex;
+      flex-direction: column;
+      padding: var.$default-padding;
+
+      & > * {
+        flex: 1;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        background: white;
+      }
+    }
   }
 }
