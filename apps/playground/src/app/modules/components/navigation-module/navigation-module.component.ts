@@ -18,7 +18,7 @@ export class NavigationModuleComponent {
     {
       "id": "a",
       "label": "Mega menu",
-      "href": "modules",
+      "href": "modules/navigation",
       "child": {
         "isMega": true,
         "title": "Titre éditorialisé",
@@ -48,8 +48,8 @@ export class NavigationModuleComponent {
             "children": [
               {
                 "id": 'eec',
-                "label": "submenu 1",
-                "href": "v",
+                "label": "Submenu 1",
+                "href": "modules/navigation",
               },
               {
                 "id": 'fee',
@@ -64,7 +64,7 @@ export class NavigationModuleComponent {
     {
       "id": "k",
       "label": "Mega menu",
-      "href": "dash",
+      "href": "modules/navigation",
       "child": {
         "isMega": true,
         "title": "title",
@@ -113,7 +113,7 @@ export class NavigationModuleComponent {
     {
       "id": "j",
       "label": "Acces direct",
-      "href": "dashboard",
+      "href": "modules/navigation",
     },
   ];
 
@@ -141,19 +141,19 @@ export class NavigationModuleComponent {
     {
       "id": "k",
       "label": "Simple dropdown",
-      "href": "dash",
+      "href": "modules/navigation",
       "child": {
         "isMega": false,
         "children": [
           {
             "id": 'h2',
             "label": "Config",
-            "href": "navigation/modules",
+            "href": "modules/navigation",
           },
           {
             "id": 'i2',
             "label": "Config",
-            "href": "navigation/modules",
+            "href": "modules/navigation",
           },
         ]
       }
@@ -161,19 +161,19 @@ export class NavigationModuleComponent {
     {
       "id": "g",
       "label": "Simple dropdown",
-      "href": "dashboard",
+      "href": "modules/navigation",
       "child": {
         "isMega": false,
         "children": [
           {
             "id": 'h',
             "label": "Config",
-            "href": "navigation/modules",
+            "href": "modules/navigation",
           },
           {
             "id": 'i',
             "label": "Config",
-            "href": "navigation/modules",
+            "href": "modules/navigation",
           },
         ]
       }
@@ -181,7 +181,7 @@ export class NavigationModuleComponent {
     {
       "id": "j",
       "label": "Direct link",
-      "href": "dashboard",
+      "href": "modules/navigation",
     },
   ];
 
