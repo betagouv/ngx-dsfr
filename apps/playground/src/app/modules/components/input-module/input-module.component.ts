@@ -1,37 +1,43 @@
 /**
  * Angular imports
  */
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormControlStatus, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControlStatus, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 /**
- * Angular imports
+ * 3rd-party imports
  */
 import { InputType } from '@betagouv/ngx-dsfr/input';
 import { Subject, takeUntil } from 'rxjs';
 
-interface FormInput {
-  label: FormControl<string>,
-  type: FormControl<InputType>,
-  placeholder: FormControl<string>,
-  hint: FormControl<string>,
-  icon: FormControl<string>,
-  disabled: FormControl<boolean>,
-  hasFailed: FormControl<boolean>,
-  hasSucceeded: FormControl<boolean>,
-  failureMessage: FormControl<string>,
-  successMessage: FormControl<string>,
-}
+/**
+ * Internal imports
+ */
+import { failureMessageRequiredWhenHasFailedValidator } from './failure-message-required.validator';
 
 @Component({
   templateUrl: './input-module.component.html',
   styleUrls: ['./input-module.component.scss']
 })
-export class InputModuleComponent implements OnInit {
+export class InputModuleComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  inputForm: FormGroup | undefined;
+  inputForm = this.formBuilder.group({
+    label: ['This is a label', Validators.required],
+    type: ['text' as InputType, Validators.required],
+    placeholder: ['This is a placeholder', Validators.required],
+    hint: ['This is a description', Validators.required],
+    icon: ['', Validators.required],
+    disabled: [false, Validators.required],
+    hasFailed: [false, Validators.required],
+    hasSucceeded: [false, Validators.required],
+    failureMessage: ['Error message', Validators.required],
+    successMessage: ['Success message', Validators.required]
+  },
+  {
+    validators: failureMessageRequiredWhenHasFailedValidator
+  });
   inputFormErrors: Record<string, string> = {};
   form: FormGroup | undefined;
 
@@ -49,26 +55,15 @@ export class InputModuleComponent implements OnInit {
   }
 
   private initForms(): void {
-    this.inputForm = this.formBuilder.group({
-      label: ['This is a label', Validators.required],
-      type: ['text', Validators.required],
-      placeholder: ['This is a placeholder', Validators.required],
-      hint: ['This is a description', Validators.required],
-      icon: ['', Validators.required],
-      disabled: [false, Validators.required],
-      hasFailed: [false, Validators.required],
-      hasSucceeded: [false, Validators.required],
-      failureMessage: ['Error message', Validators.required],
-      successMessage: ['Success message', Validators.required],
-    });
 
     this.form = this.formBuilder.group({
       input: ''
     });
 
-
     this.handleErrors('Please, enter a label for this Component', 'label');
-    this.handleErrors('Please, enter a failure meessage for this Component', 'failureMessage');
+    this.handleErrors(
+      'Please, enter a failure meessage for this Component if the hasFailed attribute is true'
+    );
   }
 
   private handleErrors(errorMsg: string, controlName?: string): void {
@@ -98,5 +93,10 @@ export class InputModuleComponent implements OnInit {
           }
         });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

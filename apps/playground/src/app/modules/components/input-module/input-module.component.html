@@ -1,7 +1,7 @@
 <section class="module-description">
   <h2>DsfrInputComponent</h2>
   <p>
-    The <code>DsfrInputComponent</code> purpose is to represent the input form field
+    The <code>DsfrInputComponent</code> purpose is to represent an input form field
   </p>
   <p>
     It is based on the
@@ -189,7 +189,7 @@
           <play-input-property-control
             formControlName="failureMessage"
             name="failureMessage"
-            [error]="inputFormErrors['failureMessage']"
+            [error]="inputFormErrors['_form_']"
             type="string">
           </play-input-property-control>
           <play-input-property-control
@@ -226,7 +226,7 @@
               </dsfr-input>
             </form>
             <p>
-              The input value is :
+              The input value is : <br>
               <strong>
                 {{ form.value.input }}
               </strong>
