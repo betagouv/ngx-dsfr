@@ -22,6 +22,7 @@ import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
+import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
 import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
 
 /**
@@ -44,6 +45,7 @@ import { PasswordModuleComponent } from './components/password-module/password-m
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 import { TestSearchService } from './components/search-bar-module/search-bar-module.service';
+import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 
 @NgModule({
   imports: [
@@ -62,6 +64,7 @@ import { TestSearchService } from './components/search-bar-module/search-bar-mod
     DsfrPasswordModule,
     DsfrCheckboxModule,
     DsfrSearchBarModule,
+    DsfrFooterModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -82,7 +85,8 @@ import { TestSearchService } from './components/search-bar-module/search-bar-mod
     PasswordModuleComponent,
     CheckboxModuleComponent,
     StepperModuleComponent,
-    SearchBarModuleComponent
+    SearchBarModuleComponent,
+    FooterModuleComponent
   ],
   providers: [
     {
