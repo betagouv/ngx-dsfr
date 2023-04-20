@@ -17,8 +17,10 @@ import {
 export class DsfrAlertHarness extends ComponentHarness {
   static hostSelector: string = 'dsfr-alert';
 
-  private getAlertTitleTag: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('h3');
-  private getAlertDescriptionTag: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('p');
+  private getAlertTitleTag: AsyncFactoryFn<TestElement | null> =
+    this.locatorForOptional('h3');
+  private getAlertDescriptionTag: AsyncFactoryFn<TestElement | null> =
+    this.locatorForOptional('.description');
   private getAlertDivTag: AsyncFactoryFn<TestElement> = this.locatorFor('div');
 
   /**
