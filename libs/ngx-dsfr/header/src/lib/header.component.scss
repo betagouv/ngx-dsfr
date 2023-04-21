@@ -36,11 +36,20 @@
     }
   }
 
-  .fr-modal .fr-container > dsfr-button.close-modal {
-    margin-bottom: 1.5rem;
+  .fr-modal {
 
     @media (min-width: 62em) {
-      display: none;
+      margin-right: 8px;
+      margin-top: 26px;
+    }
+
+    .fr-container > dsfr-button.close-modal {
+      margin-bottom: 1.5rem;
+
+      @media (min-width: 62em) {
+        display: none;
+      }
     }
   }
+
 }

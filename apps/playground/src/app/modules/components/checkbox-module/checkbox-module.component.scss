@@ -1,17 +1,68 @@
-.simulation {
-  display: flex;
+// Imports
+@use "@angular/material" as mat;
+@use "variables" as var;
 
-  .settings {
-    width: 50%;
-    background-color: indianred;
-  }
+// Variables
+$primary-palette: mat.$pink-palette;
+$primary-color: mat.get-color-from-palette($primary-palette, A200);
 
-  play-simulator {
-    width: 50%;
-    background-color: aqua;
+// Actual styling
+.module-simulations {
+  margin-top: 2 * var.$default-margin;
+
+  .mat-mdc-card {
+    margin: var.$default-margin 0 2 * var.$default-margin;
+
+    .simulation {
+      display: flex;
+      flex-direction: column;
+      padding: var.$default-padding;
+
+      & > * {
+        flex: 1;
+      }
+
+      .simulator-wrapper {
+        background: white;
+        padding: 2rem;
+      }
+
+      .highlight-code {
+        color: $primary-color;
+        font-weight: bold;
+        letter-spacing: 0.02rem;
+      }
+
+      .settings {
+        margin-right: var.$default-margin;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          button {
+            margin: var.$default-margin;
+            align-self: flex-end;
+          }
+        }
+      }
+    }
   }
 }
 
-.simulation__container {
-  margin: 15px;
+.template-checkbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  dsfr-checkbox {
+    display: block;
+    width: 500px;
+  }
+
+  p {
+    margin-top: 15px;
+  }
 }

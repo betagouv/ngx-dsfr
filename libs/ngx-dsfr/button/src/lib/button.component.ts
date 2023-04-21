@@ -70,7 +70,7 @@ export class DsfrButtonComponent implements OnInit {
     this.classes = `fr-btn fr-btn--${this.size} fr-btn--${this.type}`;
 
     if (this.icon) {
-      this.classes += ` fr-icon-${this.icon} `;
+      this.classes += ` ${this.icon} `;
 
       if (this.label) {
         this.classes += ` fr-btn--icon-${this.iconAlignment} `;

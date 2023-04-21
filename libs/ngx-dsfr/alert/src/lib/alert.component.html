@@ -1,8 +1,17 @@
-<div *ngIf="!isClosed" [class]="classes" [attr.role]="hasRole ? 'alert' : null">
-  <h3 *ngIf="title" class="fr-alert__title">{{title}}</h3>
-  <p #description>
+<div
+  *ngIf="!isClosed"
+  [class]="classes"
+  [attr.role]="hasRole ? 'alert' : null">
+  <h3
+    *ngIf="title"
+    class="fr-alert__title">
+    {{ title }}
+  </h3>
+  <div
+    #description
+    class="description">
     <ng-content></ng-content>
-  </p>
+  </div>
   <button
     *ngIf="hasCloseButton"
     class="fr-btn--close fr-btn"

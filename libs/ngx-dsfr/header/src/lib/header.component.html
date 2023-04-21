@@ -55,9 +55,10 @@
               <button
                 *ngIf="searchBar"
                 class="fr-btn--search fr-btn"
-                aria-controls="modal-575"
-                id="button-576"
-                title="Rechercher">
+                aria-controls="searchModal"
+                id="searchButton"
+                title="Rechercher"
+                (click)="isSearchBarOpened = true">
                 Rechercher
               </button>
               <button
@@ -100,36 +101,27 @@
           </div>
           <div
             *ngIf="searchBar"
+            [class.fr-modal--opened]="isSearchBarOpened"
             class="fr-header__search fr-modal"
-            id="modal-575">
+            id="searchModal">
             <div class="fr-container fr-container-lg--fluid">
-              <button
-                class="fr-btn--close fr-btn"
-                aria-controls="modal-575"
-                title="Fermer">
-                Fermer
-              </button>
-              <div
-                class="fr-search-bar"
-                id="search-574"
-                role="search">
-                <label
-                  class="fr-label"
-                  for="search-574-input">
-                  Rechercher
-                </label>
-                <input
-                  class="fr-input"
-                  placeholder="Rechercher"
-                  type="search"
-                  id="search-574-input"
-                  name="search-574-input" />
-                <button
-                  class="fr-btn"
-                  title="Rechercher">
-                  Rechercher
-                </button>
-              </div>
+              <dsfr-button
+                class="close-modal"
+                label="Fermer"
+                title="Fermer"
+                ariaControls="searchModal"
+                (click)="isSearchBarOpened = false"
+                [type]="buttonTypes.CLOSE">
+              </dsfr-button>
+              <dsfr-search-bar
+                id="searchHeader"
+                label="Rechercher"
+                placeholder="Rechercher"
+                [autocomplete]="searchBarAutoCompletion"
+                [hasSearchButton]="true"
+                [size]="elementSize.SMALL"
+                (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
+              </dsfr-search-bar>
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
  * 3rd-party imports
  */
 import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
+import { DsfrSearchBarModule } from '@betagouv/ngx-dsfr/search-bar';
 
 /**
  * Internal imports
@@ -19,8 +20,9 @@ import { TestHostComponent } from './testing/test-host.component';
 import { TestHostBasicComponent } from './testing/test-host-basic.component';
 import { TestHostCompleteComponent } from './testing/test-host-complete.component';
 
+
 @NgModule({
-  imports: [CommonModule, RouterModule, DsfrButtonModule],
+  imports: [CommonModule, RouterModule, DsfrButtonModule, DsfrSearchBarModule],
   declarations: [
     DsfrHeaderComponent,
     DsfrHeaderActionDirective,
@@ -30,4 +32,4 @@ import { TestHostCompleteComponent } from './testing/test-host-complete.componen
   ],
   exports: [DsfrHeaderComponent, DsfrHeaderActionDirective]
 })
-export class DsfrHeaderModule {}
+export class DsfrHeaderModule { }

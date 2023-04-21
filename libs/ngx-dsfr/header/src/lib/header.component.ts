@@ -5,9 +5,11 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   QueryList,
   SimpleChanges
 } from '@angular/core';
@@ -16,12 +18,13 @@ import {
  * 3rd-party imports
  */
 import { ButtonType } from '@betagouv/ngx-dsfr/button';
+import { DsfrNavigationComponent } from '@betagouv/ngx-dsfr/navigation';
+import { ElementSize } from '@betagouv/ngx-dsfr';
 
 /**
  * Internal imports
  */
 import { DsfrHeaderActionDirective } from './header-action.directive';
-import { DsfrNavigationComponent } from '@betagouv/ngx-dsfr/navigation';
 
 /**
  * TypeScript entities and constants
@@ -41,19 +44,22 @@ export class DsfrHeaderComponent implements OnInit, OnChanges {
   @Input() appName: string | undefined;
   @Input() appDescription: string | undefined;
   @Input() link: string = '/';
+  @Input() searchBar: boolean = false;
+  @Input() searchBarAutoCompletion: boolean = false;
+
+  @Output() searchQuerySubmitted = new EventEmitter<string>();
 
   @ContentChildren(DsfrHeaderActionDirective)
   actions!: QueryList<DsfrHeaderActionDirective>;
   @ContentChild(DsfrNavigationComponent) nav?: DsfrNavigationComponent;
-
-  // To be changed into an Input property when we add searchBar functionality
-  searchBar: boolean = false;
 
   institutionArray!: string[];
   institutionInlined!: string;
   appLinkTitle: string | undefined;
   isMobileMenuOpened: boolean = false;
   buttonTypes: typeof ButtonType = ButtonType;
+  elementSize: typeof ElementSize = ElementSize;
+  isSearchBarOpened: boolean = false;
 
   ngOnInit(): void {
     this.handleInstitution();
@@ -86,4 +92,9 @@ export class DsfrHeaderComponent implements OnInit, OnChanges {
     this.institutionArray = this.institution.split('\n');
     this.institutionInlined = this.institution.replaceAll('\n', ' ');
   }
+
+  onSearchQuerySubmitted(value: string): void {
+    this.searchQuerySubmitted.emit(value);
+  }
+
 }
