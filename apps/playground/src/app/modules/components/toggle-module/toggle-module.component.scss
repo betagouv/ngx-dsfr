@@ -1,0 +1,36 @@
+// Imports
+@use "variables" as var;
+
+// Actual styling
+.module-simulations {
+  margin-top: 2 * var.$default-margin;
+
+  .mat-card {
+    margin: var.$default-margin 0 2 * var.$default-margin;
+
+    .simulation {
+      display: flex;
+      flex-direction: column;
+      padding: var.$default-padding;
+
+      & > * {
+        flex: 1;
+      }
+
+      .settings {
+        margin-right: var.$default-margin;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          button {
+            margin: var.$default-margin;
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+  }
+}

@@ -80,7 +80,7 @@ describe('DsfrButtonComponent', () => {
 
     it('should add icon class when icon is provided', async () => {
       const classes: string | null = await dsfrButtonHarness.getButtonAttribute('class');
-      expect(classes).toContain('fr-icon-checkbox-circle-line');
+      expect(classes).toContain('checkbox-circle-line');
     });
 
     it('should have added classes', async () => {

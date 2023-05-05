@@ -1,0 +1,16 @@
+<div [class]="classes">
+  <input [checked]="value"
+         (change)="onInputChange($event)"
+         type="checkbox"
+         class="fr-toggle__input"
+         [attr.aria-describedby]="ariaDescribedBy"
+         [disabled]="disabled"
+         [id]="id">
+  <label class="fr-toggle__label"
+         [for]="id"
+         [attr.data-fr-checked-label]="checkedLabel"
+         [attr.data-fr-unchecked-label]="unCheckedLabel">{{label}}</label>
+  <p *ngIf="hint"
+     class="fr-hint-text"
+     [id]="ariaDescribedBy">{{hint}}</p>
+</div>
