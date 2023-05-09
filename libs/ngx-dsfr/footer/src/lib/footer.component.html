@@ -1,0 +1,124 @@
+<footer class="fr-footer" role="contentinfo" id="footer">
+  <div class="fr-footer__top" *ngIf="linksPerCategories?.length">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-sm-3 fr-col-md-2" *ngFor="let category of linksPerCategories">
+          <h3 class="fr-footer__top-cat">{{ category.title }}</h3>
+          <ul class="fr-footer__top-list">
+            <li *ngFor="let itemLink of category.children">
+              <ng-container *ngIf="!itemLink.isExternal; else externalLinkTemplate">
+                <a
+                  class="fr-footer__top-link"
+                  [title]="itemLink.title"
+                  [routerLink]="itemLink.href"
+                  >{{ itemLink.label }}</a
+                >
+              </ng-container>
+              <ng-template #externalLinkTemplate>
+                <a
+                class="fr-footer__top-link"
+                  [href]="itemLink.href"
+                  target="_blank"
+                  rel="noopener"
+                  [title]="itemLink.title + ' - ouvre une nouvelle fenêtre'"
+                  >{{ itemLink.label }}</a
+                >
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fr-container">
+    <div class="fr-footer__body">
+      <div class="fr-footer__brand fr-enlarge-link">
+        <ng-container
+          *ngIf="
+            !operatorLogoSrc;
+            then logoWithLink;
+            else logo
+          ">
+        </ng-container>
+        <ng-template #logoWithLink>
+          <a
+            [routerLink]="link"
+            [title]="'Retour à l’accueil du site - ' + appName + ' - ' + institutionInlined">
+            <ng-container *ngTemplateOutlet="logo"></ng-container>
+          </a>
+        </ng-template>
+        <ng-template #logo>
+          <p class="fr-logo">
+            <ng-container
+              *ngFor="let string of institutionArray; last as isLast">
+              {{ string }} <br *ngIf="!isLast" />
+            </ng-container>
+          </p>
+        </ng-template>
+        <ng-container *ngIf="operatorLogoSrc">
+          <a
+            class="fr-footer__brand-link"
+            routerLink="/"
+            [title]="'Retour à l’accueil du site - ' + operatorLogoAlt + ' - ' + institutionInlined">
+            <img
+              class="fr-footer__logo"
+              [src]="operatorLogoSrc"
+              [alt]="operatorLogoAlt" />
+          </a>
+        </ng-container>
+      </div>
+      <div class="fr-footer__content">
+        <p class="fr-footer__content-desc">
+          {{ description }}
+        </p>
+        <ul class="fr-footer__content-list">
+          <li class="fr-footer__content-item">
+              <a class="fr-footer__content-link" target="_blank" href="https://legifrance.gouv.fr">legifrance.gouv.fr</a>
+          </li>
+          <li class="fr-footer__content-item">
+              <a class="fr-footer__content-link" target="_blank" href="https://gouvernement.fr">gouvernement.fr</a>
+          </li>
+          <li class="fr-footer__content-item">
+              <a class="fr-footer__content-link" target="_blank" href="https://service-public.fr">service-public.fr</a>
+          </li>
+          <li class="fr-footer__content-item">
+              <a class="fr-footer__content-link" target="_blank" href="https://data.gouv.fr">data.gouv.fr</a>
+          </li>
+      </ul>
+      </div>
+    </div>
+    <div class="fr-footer__partners" *ngIf="partners">
+      <h4 class="fr-footer__partners-title">Nos partenaires</h4>
+      <div class="fr-footer__partners-logos">
+        <div class="fr-footer__partners-main">
+          <a class="fr-footer__partners-link" [href]="partners[0].href" target="_blank">
+            <img class="fr-footer__logo" style="height: 5.625rem" [src]="partners[0].image" [alt]="partners[0].alt" />
+          </a>
+        </div>
+        <div class="fr-footer__partners-sub">
+          <ul>
+            <ng-container *ngFor="let partner of partners; let isFirst = first">
+              <li *ngIf="!isFirst">
+                <a class="fr-footer__partners-link" [href]="partner.href" target="_blank">
+                  <img class="fr-footer__logo" style="height: 5.625rem" [src]="partner.image" [alt]="partner.alt" />
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="fr-footer__bottom">
+      <ul class="fr-footer__bottom-list">
+        <li class="fr-footer__bottom-item" *ngFor="let link of bottomLinks">
+          <a class="fr-footer__bottom-link" [routerLink]="[link.href]">{{ link.label }}</a>
+        </li>
+      </ul>
+      <div class="fr-footer__bottom-copy" *ngIf="copyright">
+        <p>
+          Sauf mention contraire, tous les contenus de ce site sont sous <a [href]="copyright.href" target="_blank" [title]="copyright.title" >{{ copyright.label }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

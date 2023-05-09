@@ -21,6 +21,7 @@ import { PasswordModuleComponent } from './components/password-module/password-m
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
+import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 
 /**
  * TypeScript entities and constants
@@ -45,6 +46,10 @@ const routes: Route[] = [
   {
     path: 'error-page',
     component: ErrorPageModuleComponent
+  },
+  {
+    path: 'footer',
+    component: FooterModuleComponent
   },
   {
     path: 'header',

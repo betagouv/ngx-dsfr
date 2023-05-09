@@ -36,6 +36,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/error-page'
       },
       {
+        label: 'Footer',
+        path: '/modules/footer'
+      },
+      {
         label: 'Header',
         path: '/modules/header'
       },

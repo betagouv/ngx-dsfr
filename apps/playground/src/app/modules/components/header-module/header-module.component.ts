@@ -29,6 +29,7 @@ interface FormHeaderWithAppName {
 
 interface FormHeaderWithLogo extends FormHeaderWithAppName {
   operatorLogoAlt: FormControl<string>;
+  searchBar: FormControl<boolean>;
 }
 
 @Component({
@@ -55,7 +56,6 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
     {
       id: 'a',
       label: 'MEGA MENU',
-      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
       href: './',
       child: {
         isMega: true,
@@ -102,7 +102,6 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
     {
       id: 'g',
       label: 'Simple menu',
-      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
       href: './',
       child: {
         isMega: false,
@@ -123,7 +122,6 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
     {
       id: 'j',
       label: 'Lien direct',
-      userRoles: ['ROLE_USER', 'ROLE_ADMIN'],
       href: './'
     }
   ];
@@ -132,7 +130,7 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  constructor(private formBuilder: NonNullableFormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();
@@ -150,6 +148,7 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
       institution:
         "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
       appName: '',
+      searchBar: [{ value: true, disabled: false }],
       appDescription: '',
       operatorLogoAlt: [
         'agence nationale de la cohésion des territoires',
@@ -162,6 +161,7 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
         "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
       appName: '',
       appDescription: '',
+      searchBar: [{ value: true, disabled: false }],
       operatorLogoAlt: [
         'agence nationale de la cohésion des territoires',
         Validators.required

@@ -17,7 +17,7 @@ export const EMPTY_FAILURE_MESSAGE_ERROR: string =
   'You MUST provide a value for the failureMessage attribute when hasFailed is true 😡 !!!';
 
 
-export type InputType = 'text' | 'textarea' | 'password' | 'number' | 'date';
+export type InputType = 'text' | 'textarea' | 'number' | 'date';
 
 @Component({
   selector: 'dsfr-input',
@@ -87,7 +87,6 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
     if (!this.name) {
       throw EMPTY_NAME_ERROR;
     }
-
   }
 
   private setSuccessOrErrorClasses() {

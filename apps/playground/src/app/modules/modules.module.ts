@@ -22,6 +22,7 @@ import { DsfrAlertModule } from '@betagouv/ngx-dsfr/alert';
 import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
+import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
 import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
 import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
 
@@ -46,6 +47,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 import { TestSearchService } from './components/search-bar-module/search-bar-module.service';
 import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
+import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 
 @NgModule({
   imports: [
@@ -65,6 +67,7 @@ import { ErrorPageModuleComponent } from './components/error-page-module/error-p
     DsfrCheckboxModule,
     DsfrSearchBarModule,
     DsfrErrorPageModule,
+    DsfrFooterModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -86,7 +89,8 @@ import { ErrorPageModuleComponent } from './components/error-page-module/error-p
     CheckboxModuleComponent,
     StepperModuleComponent,
     SearchBarModuleComponent,
-    ErrorPageModuleComponent
+    ErrorPageModuleComponent,
+    FooterModuleComponent
   ],
   providers: [
     {

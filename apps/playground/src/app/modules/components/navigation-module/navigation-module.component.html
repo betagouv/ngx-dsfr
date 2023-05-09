@@ -1,23 +1,117 @@
 <section class="module-description">
-  <h2>Description</h2>
-  <p>Some description</p>
+  <h2>DsfrNavigationComponent</h2>
+  <p>
+    The <code>DsfrNavigationComponent</code> purpose is to represent the navigation of
+    an application.
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Navigation Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/navigation-principale">
+      Navigation
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It has only one <code>@Input()</code> property:</p>
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="navigation"
+      [required]="true"
+      type="Navigation">
+      The value must satisfy the <code>Navigation</code> interface :
+ <pre>
+  <span class='highlight-code'>interface NavigationItem extends LinkNavigation</span> &#123;
+      child?: ChildNavigation;
+  &#125;
+  <span class='highlight-code'>interface LinkNavigation</span> &#123;
+      id: string;
+      label: string;
+      href: string;
+      children?: LinkNavigation[];
+      userRoles?: UserRole[];
+  &#125;
+  <span class='highlight-code'>interface ChildNavigation</span> &#123;
+      isMega?: boolean;
+      title?: string;
+      description?: string;
+      children: LinkNavigation[];
+  &#125;
+  <span class='highlight-code'>export type Navigation = NavigationItem[];</span>
+</pre>
+    </play-input-property-definition>
+  </dl>
 </section>
+
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <div
-    class="simulation"
-    *ngIf="form">
-    <div class="settings">
-      <form
-        [formGroup]="form"
-        novalidate>
-        <input formControlName="label" />
-      </form>
-    </div>
-  </div>
-  <div style="background-color: white; padding: 0px 20px; max-width: 820px;">
-    <play-simulator>
-      <dsfr-navigation [navigation]="navigation"></dsfr-navigation>
-    </play-simulator>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Navigation with direct links only</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+<pre>
+  <span class='highlight-code'>&lt;dsfr-navigation</span>
+        [navigation]="navigationWithDirectLinks"<span class='highlight-code'>&gt;</span>
+  <span class='highlight-code'>&lt;/dsfr-navigation&gt;</span>
+</pre>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <div class="nav-container">
+          <play-simulator>
+            <dsfr-navigation [navigation]="navigationWithDirectLinks"></dsfr-navigation>
+          </play-simulator>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Navigation with simple dropdown menus</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+<pre>
+<span class='highlight-code'>&lt;dsfr-navigation</span>
+  [navigation]="navigationWithSimpleDropdownMenus"&gt;
+<span class='highlight-code'>&lt;/dsfr-navigation&gt;</span>
+</pre>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <div class="nav-container">
+          <play-simulator>
+            <dsfr-navigation [navigation]="navigationWithSimpleDropdownMenus"></dsfr-navigation>
+          </play-simulator>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Navigation with mega menus</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+<pre>
+<span class='highlight-code'>&lt;dsfr-navigation</span>
+  [navigation]="navigationWithMegaMenus"&gt;
+<span class='highlight-code'>&lt;/dsfr-navigation&gt;</span>
+</pre>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <div class="nav-container">
+          <play-simulator>
+            <dsfr-navigation [navigation]="navigationWithMegaMenus"></dsfr-navigation>
+          </play-simulator>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </section>
