@@ -30,7 +30,7 @@ export class DsfrToggleHarness extends ComponentHarness {
    * Retrieves the id value of the input tag
    * in the DsfrToggleComponent's Template
    *
-   * @returns A Promise that resolves to the id value as a strings or null
+   * @returns A Promise that resolves to the id value as a string or null
    */
   async getToggleId(): Promise<(string | null)> {
     return this.getToggleInputAttribute('id');

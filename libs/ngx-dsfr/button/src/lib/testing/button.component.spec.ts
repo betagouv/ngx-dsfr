@@ -22,7 +22,7 @@ describe('DsfrButtonComponent', () => {
   let dsfrButtonHarness: DsfrButtonHarness;
 
   const testLabel = 'Test Label';
-  const testIcon = 'checkbox-circle-line'
+  const testIcon = 'fr-icon-checkbox-circle-line';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -80,7 +80,7 @@ describe('DsfrButtonComponent', () => {
 
     it('should add icon class when icon is provided', async () => {
       const classes: string | null = await dsfrButtonHarness.getButtonAttribute('class');
-      expect(classes).toContain('checkbox-circle-line');
+      expect(classes).toContain(testIcon);
     });
 
     it('should have added classes', async () => {

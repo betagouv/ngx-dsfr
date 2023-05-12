@@ -11,13 +11,15 @@ import { ElementAlignment } from '@betagouv/ngx-dsfr';
 @Component({
   template: `
     <dsfr-toggle
-      [id]="testId"
+      [toggleId]="testId"
       [checkedLabel]="testCheckedLabel"
       [unCheckedLabel]="testUnCheckedLabel"
       [label]="testLabel"
       [hint]="testHint"
       [align]="testAlign"
-      [disabled]="testDisabled">
+      [disabled]="testDisabled"
+      [neutral]="testNeutral"
+      [hideTexts]="testHideTexts">
     </dsfr-toggle>
   `
 })
@@ -29,4 +31,6 @@ export class TestHostComponent {
   @Input() testAlign: ElementAlignment = ElementAlignment.RIGHT;
   @Input() testHint = '';
   @Input() testDisabled = false;
+  @Input() testNeutral = false;
+  @Input() testHideTexts = false;
 }

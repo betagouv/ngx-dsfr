@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, EventEmitter, forwardRef, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ElementAlignment } from '@betagouv/ngx-dsfr';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -10,6 +10,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  */
 export const EMPTY_ID_ERROR: string =
   'You MUST provide a value for the id attribute 😡 !!!';
+export const EMPTY_LABEL_ERROR: string =
+  'You MUST provide a value for the label attribute 😡 !!!';
 
 @Component({
   selector: 'dsfr-toggle',
@@ -23,38 +25,39 @@ export const EMPTY_ID_ERROR: string =
     }
   ]
 })
-export class DsfrToggleComponent implements ControlValueAccessor, OnChanges {
-  @Input() id!: string;
+export class DsfrToggleComponent implements ControlValueAccessor, OnInit, OnChanges {
+  @Input() toggleId!: string;
   @Input() checkedLabel: string = '';
   @Input() unCheckedLabel: string = '';
-  @Input() label: string = '';
+  @Input() label!: string;
   @Input() hint?: string;
   @Input() align: ElementAlignment = ElementAlignment.RIGHT;
+  @Input() hideTexts = false;
   @Input() disabled? = false;
+  @Input() neutral: boolean = false;
 
-  @Output() onChanged = new EventEmitter<boolean>();
+  @Output() toggled = new EventEmitter<boolean>();
 
   classes = '';
   ariaDescribedBy = '';
 
-  onChange = (_: boolean) => {
-  };
-  onTouched = (_: boolean) => {
-  };
+  onChange = (_: boolean) => {};
+  onTouched = (_: boolean) => {};
 
-  private _value!: boolean;
+  value: boolean = false;
 
-  get value(): boolean {
-    return this._value;
-  }
-
-  set value(val: boolean) {
-    this.writeValue(val);
+  ngOnInit() {
+    if (!this.toggleId) {
+      throw EMPTY_ID_ERROR;
+    }
   }
 
   ngOnChanges(): void {
-    if (!this.id) {
+    if (!this.toggleId) {
       throw EMPTY_ID_ERROR;
+    }
+    if (!this.label) {
+      throw EMPTY_LABEL_ERROR;
     }
     this.initClasses();
     this.setAriaDescribedBy();
@@ -65,10 +68,13 @@ export class DsfrToggleComponent implements ControlValueAccessor, OnChanges {
     if (this.align === ElementAlignment.LEFT) {
       this.classes += ` fr-toggle--label-${this.align}`;
     }
+    if (this.neutral) {
+      this.classes += ` neutral`;
+    }
   }
 
   private setAriaDescribedBy() {
-    this.ariaDescribedBy = this.id + '-hint-text';
+    this.ariaDescribedBy = this.toggleId + '-hint-text';
   }
 
   registerOnChange(fn: (_: boolean) => void): void {
@@ -80,8 +86,8 @@ export class DsfrToggleComponent implements ControlValueAccessor, OnChanges {
   }
 
   writeValue(value: boolean): void {
-    this._value = value;
-    this.onChange(value);
+    this.value = value;
+    this.toggled.emit(value);
   }
 
   setDisabledState(isDisabled: boolean) {
@@ -89,7 +95,7 @@ export class DsfrToggleComponent implements ControlValueAccessor, OnChanges {
   }
 
   onInputChange(event: any) {
-    this.value = event.target.checked;
-    this.onChanged.emit(event.target.checked);
+    this.onChange(event.target.checked);
+    this.toggled.emit(event.target.checked);
   }
 }

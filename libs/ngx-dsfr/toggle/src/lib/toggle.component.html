@@ -5,12 +5,15 @@
          class="fr-toggle__input"
          [attr.aria-describedby]="ariaDescribedBy"
          [disabled]="disabled"
-         [id]="id">
+         [id]="toggleId">
   <label class="fr-toggle__label"
-         [for]="id"
+         [for]="toggleId"
          [attr.data-fr-checked-label]="checkedLabel"
-         [attr.data-fr-unchecked-label]="unCheckedLabel">{{label}}</label>
+         [attr.data-fr-unchecked-label]="unCheckedLabel">
+    <span [class.hidden]="hideTexts">{{ label }}</span>
+  </label>
   <p *ngIf="hint"
+     [class.hidden]="hideTexts"
      class="fr-hint-text"
      [id]="ariaDescribedBy">{{hint}}</p>
 </div>
