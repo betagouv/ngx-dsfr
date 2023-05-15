@@ -28,6 +28,12 @@
             "followSymlinks": true
           },
           {
+            "glob": "**/*.svg",
+            "input": "./node_modules/@betagouv/ngx-dsfr/assets/svg/",
+            "output": "/assets/svg/",
+            "followSymlinks": true
+          },
+          {
             "glob": "**/*",
             "input": "./node_modules/@betagouv/ngx-dsfr/assets/icons/",
             "output": "/assets/icons/",
