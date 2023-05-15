@@ -125,7 +125,9 @@
           "libs/ngx-dsfr/stepper/**/*.ts",
           "libs/ngx-dsfr/stepper/**/*.html",
           "libs/ngx-dsfr/tile/**/*.ts",
-          "libs/ngx-dsfr/tile/**/*.html"
+          "libs/ngx-dsfr/tile/**/*.html",
+          "libs/ngx-dsfr/toggle/**/*.ts",
+          "libs/ngx-dsfr/toggle/**/*.html"
         ]
       }
     }

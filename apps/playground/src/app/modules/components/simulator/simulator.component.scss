@@ -2,12 +2,10 @@
 @use "variables" as var;
 
 // Actual styling
-.content-wrapper {
+div.content-wrapper {
   border-radius: 2px;
-  background-color: snow;
   height: 100%;
   padding: var.$default-padding;
-  color: black;
   overflow: visible; // if it is 'hidden', we do not see the dropdown menu of the navigation component.
 
   /*

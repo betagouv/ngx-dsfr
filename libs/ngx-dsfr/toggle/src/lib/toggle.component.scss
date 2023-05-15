@@ -1,0 +1,21 @@
+// Imports
+@use "@gouvfr/dsfr/dist/component/toggle/toggle.min";
+
+// Actual Styling
+.fr-toggle {
+  &.neutral {
+    input[type="checkbox"]:checked {
+      background-color: unset;
+    }
+
+    input[type="checkbox"]:checked ~ .fr-toggle__label:after {
+      background-image: none;
+    }
+  }
+
+  .hidden {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+}
