@@ -2,7 +2,7 @@
  * Angular imports
  */
 import { Component, Input } from '@angular/core';
-import { ElementAlignment } from '@betagouv/ngx-dsfr';
+import { ErrorStatus } from '../error-page.component';
 
 /**
  * Internal imports
@@ -10,16 +10,19 @@ import { ElementAlignment } from '@betagouv/ngx-dsfr';
 
 @Component({
   template: `
-    <dsfr-error-page>
+    <dsfr-error-page
+      [title]="testTitle"
+      [appName]="testAppName"
+      [status]="testStatus"
+      [homeLink]="testHomeLink"
+      [contactUsLink]="testContactUsLink">
     </dsfr-error-page>
   `
 })
 export class TestHostComponent {
-  @Input() testLabel: string = '';
-  @Input() testLink: string = '';
   @Input() testTitle: string = '';
-  @Input() testInline: boolean = true;
-  @Input() testIcon: string | undefined;
-  @Input() testIconAlignment: ElementAlignment = ElementAlignment.RIGHT;
-  @Input() testBackToTop: boolean = false;
+  @Input() testAppName: string = '';
+  @Input() testHomeLink: string = '';
+  @Input() testContactUsLink: string = '';
+  @Input() testStatus: ErrorStatus = '404';
 }

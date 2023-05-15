@@ -10,11 +10,10 @@ import { RouterModule } from '@angular/router';
  */
 import { DsfrErrorPageComponent } from './error-page.component';
 import { TestHostComponent } from './testing/test-host.component';
-import { DsfrErrorPageDescriptionDirective, DsfrErrorPageSubDescriptionDirective } from './error-page-content.directive';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [DsfrErrorPageComponent, DsfrErrorPageDescriptionDirective, DsfrErrorPageSubDescriptionDirective , TestHostComponent],
-  exports: [DsfrErrorPageComponent, DsfrErrorPageDescriptionDirective, DsfrErrorPageSubDescriptionDirective ]
+  declarations: [DsfrErrorPageComponent, TestHostComponent],
+  exports: [DsfrErrorPageComponent]
 })
 export class DsfrErrorPageModule {}
