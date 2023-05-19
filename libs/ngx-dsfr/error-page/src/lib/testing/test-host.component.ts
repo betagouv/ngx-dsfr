@@ -12,7 +12,6 @@ import { ErrorStatus } from '../error-page.component';
   template: `
     <dsfr-error-page
       [title]="testTitle"
-      [appName]="testAppName"
       [status]="testStatus"
       [homeLink]="testHomeLink"
       [contactUsLink]="testContactUsLink">
@@ -21,7 +20,6 @@ import { ErrorStatus } from '../error-page.component';
 })
 export class TestHostComponent {
   @Input() testTitle: string = '';
-  @Input() testAppName: string = '';
   @Input() testHomeLink: string = '';
   @Input() testContactUsLink: string = '';
   @Input() testStatus: ErrorStatus = '404';

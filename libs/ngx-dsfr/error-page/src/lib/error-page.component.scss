@@ -1,2 +1,7 @@
+// Imports
 @use "@gouvfr/dsfr/dist/component/button/button.min";
-@use "@gouvfr/dsfr/dist/core/core.main.min";
+
+// Actual Styling
+.status-code {
+  color: var(--text-mention-grey);
+}

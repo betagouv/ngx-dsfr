@@ -4,10 +4,10 @@
   "projectType": "library",
   "sourceRoot": "libs/ngx-dsfr/src",
   "prefix": "dsfr",
-  "assets": [{
+"assets": [{
     "glob": "**/*.svg",
-    "input": "src/assets/svg",
-    "outputs": "/assets/svg"
+    "input": "src/assets/illustrations",
+    "outputs": "/assets/illustrations"
   }],
   "targets": {
     "build-base": {

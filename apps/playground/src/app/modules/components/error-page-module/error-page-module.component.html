@@ -24,28 +24,39 @@
     </a>
     .
   </p>
+  <p>
+    According to the status code you provide, default templates, with default
+    texts will be displayed, following the recommendations of the DSFR
+    documentation.
+  </p>
+  <p>
+    You can also provide your own template, with your own text, via
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for Content Projection in Angular"
+      href="https://angular.io/guide/content-projection">
+      Content Projection
+      <mat-icon>open_in_new</mat-icon> </a
+    >.
+  </p>
   <p>It has several <code>@Input()</code> properties:</p>
   <dl class="input-properties">
-    <play-input-property-definition
-      name="appName"
-      required='Required only if status is 503 and no content added'
-      type="It takes a string.">
-      The name of your web application. <br>
-      When a 503 error status happens, the name is displayed on the default text.
-    </play-input-property-definition>
     <play-input-property-definition
       name="title"
       required="true"
       type="It takes a string.">
-      It will be displayed on a H1 tag.
+      It will be displayed in a H1 tag
     </play-input-property-definition>
     <play-input-property-definition
       name="status"
-      type="It takes a string with 4 possible values : <code>404</code>, <code>500</code> or <code>503</code>"
+      type="It takes a string with 3 possible values : <code>404</code>, <code>500</code> or <code>503</code>"
       default="404">
+      The status code for the error we want to display
     </play-input-property-definition>
     <play-input-property-definition
       name="homeLink"
+      default="/"
       type="It takes a string.">
       Link to the homepage of your application
     </play-input-property-definition>
@@ -66,9 +77,7 @@
       <p>Example:</p>
 <pre>
 &lt;dsfr-error-page
-  appName="My wonderful app 😃"
   status="404"
-  homeLink="/"
   contactUsLink="/contact-us"&gt;
 &lt;/dsfr-error-page&gt;
 </pre>
@@ -77,12 +86,8 @@
           [formGroup]="formErrorPage"
           novalidate>
           <play-input-property-control
-            formControlName="appName"
-            name="appName"
-            type="string">
-          </play-input-property-control>
-          <play-input-property-control
             formControlName="title"
+            [error]="errors['formErrorPage']"
             name="title"
             type="string">
           </play-input-property-control>
@@ -105,7 +110,6 @@
         <play-simulator>
           <dsfr-error-page
             [title]="formErrorPage.getRawValue().title"
-            [appName]="formErrorPage.getRawValue().appName"
             [status]="formErrorPage.getRawValue().status"
             homeLink="/modules/error-page"
             contactUsLink="/modules/error-page">

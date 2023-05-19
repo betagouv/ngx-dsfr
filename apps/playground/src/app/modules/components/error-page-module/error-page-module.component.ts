@@ -3,9 +3,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl,
   FormControlStatus,
-  FormGroup,
   NonNullableFormBuilder,
   Validators
 } from '@angular/forms';
@@ -16,14 +14,6 @@ import { ErrorStatus } from '@betagouv/ngx-dsfr/error-page';
  */
 import { Subject, takeUntil } from 'rxjs';
 
-/**
- * TypeScript entities and constants
- */
-interface FormErrorPage {
-  appName: FormControl<string>;
-  title: FormControl<string>
-  status: FormControl<ErrorStatus>;
-}
 
 @Component({
   templateUrl: './error-page-module.component.html',
@@ -31,7 +21,6 @@ interface FormErrorPage {
 })
 export class ErrorPageModuleComponent implements OnInit, OnDestroy {
   formErrorPage = this.formBuilder.group({
-    appName: ['App Name', [Validators.required]],
     title: ['Page non trouvée', [Validators.required]],
     status: ['404' as ErrorStatus, [Validators.required]],
   });
@@ -40,12 +29,33 @@ export class ErrorPageModuleComponent implements OnInit, OnDestroy {
     '500': '500',
     '503': '503'
   };
+  errors: Record<string, string> = {
+    formErrorPage: ''
+  };
 
   private unsubscribe$ = new Subject<void>();
 
   constructor(private formBuilder: NonNullableFormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.handleTitleError();
+  }
+
+  private handleTitleError(): void {
+    this.formErrorPage
+      .get('title')
+      ?.statusChanges.pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (value: FormControlStatus) => {
+          if (value === 'INVALID') {
+            this.errors['formErrorPage'] =
+              'The title attribute is required';
+          } else {
+            this.errors['formErrorPage'] = '';
+          }
+        }
+      });
+  }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();

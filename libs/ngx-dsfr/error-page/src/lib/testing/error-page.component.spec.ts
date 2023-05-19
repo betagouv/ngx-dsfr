@@ -16,7 +16,6 @@ import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
  */
 import {
   DsfrErrorPageComponent,
-  EMPTY_APPNAME_503_ERROR,
   EMPTY_TITLE_ERROR
 } from '../error-page.component';
 import { TestHostComponent } from './test-host.component';
@@ -30,7 +29,6 @@ describe('DsfrErrorPageComponent', () => {
   let harnessLoader: HarnessLoader;
   let dsfrErrorPageHarness: DsfrErrorPageHarness;
 
-  const testAppName: string = 'Test Label';
   const testHomeLink: string = '/another/route';
   const testContactUsLink: string = '/another/route';
   const testTitle: string = 'Test Title';
@@ -74,17 +72,6 @@ describe('DsfrErrorPageComponent', () => {
     }
   });
 
-  it('should throw an error when no app name is provided and 503 error status is set', async () => {
-    testHost.testTitle = testTitle;
-    testHost.testStatus = '503';
-    try {
-      fixture.detectChanges();
-      throw 'It should have thrown an error about "app name"';
-    } catch (error) {
-      expect(error).toBe(EMPTY_APPNAME_503_ERROR);
-    }
-  });
-
   describe('when all required properties are provided, ', () => {
     beforeEach(async () => {
       testHost.testTitle = testTitle;
@@ -108,7 +95,7 @@ describe('DsfrErrorPageComponent', () => {
     });
 
     it('should have the right href for the home link', async () => {
-      const href = await dsfrErrorPageHarness.getContactUsLinkHrefAttribute();
+      const href = await dsfrErrorPageHarness.getHomeLinkHrefAttribute();
       expect(href).toEqual(testHomeLink);
     });
 

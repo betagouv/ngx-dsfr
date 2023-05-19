@@ -22,11 +22,11 @@ export class DsfrErrorPageHarness extends ComponentHarness {
   private getTitleElement: AsyncFactoryFn<TestElement> = this.locatorFor('h1');
 
   /**
-   * Retrieves the test for the h1 tag
+   * Retrieves the text for the h1 tag
    * in the DsfrErrorPageComponent's Template
    *
    * @returns A Promise that resolves to the value as a string or null
-   * if nothing is provided
+   * if nothing is found
    */
   async getTitleText(): Promise<string | null> {
     const element: TestElement = await this.getTitleElement();
@@ -36,7 +36,7 @@ export class DsfrErrorPageHarness extends ComponentHarness {
 
 
   /**
-   * Retrieves the value for the requested href of the a tag (home link)
+   * Retrieves the URL used by the a tag
    * in the DsfrErrorPageComponent's Template
    *
    * @returns A Promise that resolves to the value as a string or null
@@ -45,11 +45,11 @@ export class DsfrErrorPageHarness extends ComponentHarness {
   async getHomeLinkHrefAttribute(): Promise<string | null> {
     const element: TestElement = await this.getHomeLinkElement();
 
-    return element.getAttribute('href');
+    return element.getAttribute('ng-reflect-link-params');
   }
 
    /**
-   * Retrieves the value for the requested href of the a tag (contact us link)
+   * Retrieves the URL used by the a tag
    * in the DsfrErrorPageComponent's Template
    *
    * @returns A Promise that resolves to the value as a string or null
@@ -58,7 +58,7 @@ export class DsfrErrorPageHarness extends ComponentHarness {
    async getContactUsLinkHrefAttribute(): Promise<string | null> {
     const element: TestElement = await this.getContactUsLinkElement();
 
-    return element.getAttribute('href');
+    return element.getAttribute('ng-reflect-link-params');
   }
 
 }
