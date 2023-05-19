@@ -20,6 +20,7 @@ import { TileModuleComponent } from './components/tile-module/tile-module.compon
 import { PasswordModuleComponent } from './components/password-module/password-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
+import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
 
@@ -42,6 +43,10 @@ const routes: Route[] = [
   {
     path: 'checkbox',
     component: CheckboxModuleComponent
+  },
+  {
+    path: 'error-page',
+    component: ErrorPageModuleComponent
   },
   {
     path: 'footer',

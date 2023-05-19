@@ -4,6 +4,11 @@
   "projectType": "library",
   "sourceRoot": "libs/ngx-dsfr/src",
   "prefix": "dsfr",
+"assets": [{
+    "glob": "**/*.svg",
+    "input": "src/assets/illustrations",
+    "outputs": "/assets/illustrations"
+  }],
   "targets": {
     "build-base": {
       "executor": "@nrwl/angular:package",
