@@ -75,6 +75,10 @@ export const SIDE_NAV: NavItem[] = [
         label: 'Tile',
         path: '/modules/tile'
       },
+      {
+        label: 'Toggle',
+        path: '/modules/toggle'
+      }
     ]
   }
 ];

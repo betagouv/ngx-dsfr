@@ -13,6 +13,7 @@ import { DsfrPasswordComponent, EMPTY_ID_ERROR, EMPTY_LABEL_ERROR } from '../pas
 import { TestHostComponent } from './test-host.component';
 import { DsfrPasswordHarness } from './password.harness';
 import { FormsModule } from '@angular/forms';
+import { DsfrButtonModule } from '@betagouv/ngx-dsfr/button';
 
 describe('DsfrPasswordComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -27,7 +28,7 @@ describe('DsfrPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [DsfrButtonModule, FormsModule],
       declarations: [
         DsfrPasswordComponent,
         TestHostComponent

@@ -25,11 +25,13 @@ import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
 import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
 import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
+import { DsfrToggleModule } from '@betagouv/ngx-dsfr/toggle';
 
 /**
  * Internal imports
  */
 import { ModulesRoutingModule } from './modules-routing.module';
+import { SharedModule } from '../shared/shared.module';
 import { ButtonModuleComponent } from './components/button-module/button-module.component';
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { SimulatorComponent } from './components/simulator/simulator.component';
@@ -38,7 +40,6 @@ import { HeaderModuleComponent } from './components/header-module/header-module.
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
-import { SharedModule } from '../shared/shared.module';
 import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
@@ -48,6 +49,7 @@ import { SearchBarModuleComponent } from './components/search-bar-module/search-
 import { TestSearchService } from './components/search-bar-module/search-bar-module.service';
 import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
+import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
 
 @NgModule({
   imports: [
@@ -68,6 +70,7 @@ import { FooterModuleComponent } from './components/footer-module/footer-module.
     DsfrSearchBarModule,
     DsfrErrorPageModule,
     DsfrFooterModule,
+    DsfrToggleModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -90,7 +93,8 @@ import { FooterModuleComponent } from './components/footer-module/footer-module.
     StepperModuleComponent,
     SearchBarModuleComponent,
     ErrorPageModuleComponent,
-    FooterModuleComponent
+    FooterModuleComponent,
+    ToggleModuleComponent
   ],
   providers: [
     {

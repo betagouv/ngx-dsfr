@@ -22,6 +22,7 @@ import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-m
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
+import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
 
 /**
  * TypeScript entities and constants
@@ -86,6 +87,10 @@ const routes: Route[] = [
   {
     path: 'tile',
     component: TileModuleComponent
+  },
+  {
+    path: 'toggle',
+    component: ToggleModuleComponent
   }
 ];
 
