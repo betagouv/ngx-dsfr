@@ -11,7 +11,9 @@
           <a
             class="fr-nav__link"
             routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
+            [routerLinkActiveOptions]="{
+              exact: !!menuItem.routerLinkActiveExact
+            }"
             ariaCurrentWhenActive="page"
             [routerLink]="[menuItem.href]"
             target="_self">
@@ -66,7 +68,9 @@
                       <a
                         [routerLink]="[item.href]"
                         routerLinkActive="active"
-                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLinkActiveOptions]="{
+                          exact: !!item.routerLinkActiveExact
+                        }"
                         ariaCurrentWhenActive="page"
                         class="fr-nav__link"
                         target="_self">
@@ -78,7 +82,9 @@
                         <a
                           [routerLink]="[link.href]"
                           routerLinkActive="active"
-                          [routerLinkActiveOptions]="{ exact: true }"
+                          [routerLinkActiveOptions]="{
+                            exact: !!link.routerLinkActiveExact
+                          }"
                           ariaCurrentWhenActive="page"
                           class="fr-nav__link"
                           target="_self">
@@ -115,7 +121,9 @@
                     class="fr-nav__link"
                     [routerLink]="[link.href]"
                     routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
+                    [routerLinkActiveOptions]="{
+                      exact: !!link.routerLinkActiveExact
+                    }"
                     ariaCurrentWhenActive="page"
                     target="_self">
                     {{ link.label }}
