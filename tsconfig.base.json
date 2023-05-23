@@ -36,6 +36,7 @@
         "libs/ngx-dsfr/search-bar/src/index.ts"
       ],
       "@betagouv/ngx-dsfr/stepper": ["libs/ngx-dsfr/stepper/src/index.ts"],
+      "@betagouv/ngx-dsfr/tab": ["libs/ngx-dsfr/tab/src/index.ts"],
       "@betagouv/ngx-dsfr/testing": ["libs/ngx-dsfr/src/lib/testing/index.ts"],
       "@betagouv/ngx-dsfr/tile": ["libs/ngx-dsfr/tile/src/index.ts"],
       "@betagouv/ngx-dsfr/toggle": ["libs/ngx-dsfr/toggle/src/index.ts"],
