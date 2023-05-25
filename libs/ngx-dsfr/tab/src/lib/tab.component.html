@@ -27,8 +27,11 @@
     [attr.aria-labelledby]="tab.id"
     tabindex="0">
     <ng-container *ngIf="selectedTab === i">
-      <ng-container *ngIf="tab.route">
+      <ng-container *ngIf="isRoutedTab(tab)">
         <router-outlet></router-outlet>
+      </ng-container>
+      <ng-container *ngIf="!isRoutedTab(tab)">
+        <ng-container [ngTemplateOutlet]="tab.panelContent"></ng-container>
       </ng-container>
     </ng-container>
   </div>

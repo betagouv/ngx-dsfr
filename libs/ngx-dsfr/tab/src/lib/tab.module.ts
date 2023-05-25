@@ -9,10 +9,16 @@ import { RouterModule } from '@angular/router';
  * Internal imports
  */
 import { DsfrTabComponent } from './tab.component';
+import { DsfrProjectedTabDirective } from './projected-tab.directive';
+
+/**
+ * TypeScript entities and constants
+ */
+const exportableDeclarables = [DsfrTabComponent, DsfrProjectedTabDirective];
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [DsfrTabComponent],
-  exports: [DsfrTabComponent]
+  declarations: exportableDeclarables,
+  exports: exportableDeclarables
 })
 export class DsfrTabModule {}

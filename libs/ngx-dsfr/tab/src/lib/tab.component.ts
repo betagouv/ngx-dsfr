@@ -1,18 +1,27 @@
 /**
  * Angular imports
  */
-import { AfterContentInit, Component, Input } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  Input,
+  QueryList
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+/**
+ * Internal imports
+ */
+import { TabDefinition } from './tab-definition';
+import {
+  DsfrProjectedTabDirective,
+  ProjectedTabDefinition
+} from './projected-tab.directive';
 
 /**
  * TypeScript entities and constants
  */
-export interface TabDefinition {
-  id: string;
-  label: string;
-  icon?: string;
-}
-
 export interface RoutedTabDefinition extends TabDefinition {
   route: string;
 }
@@ -32,8 +41,11 @@ export class DsfrTabComponent implements AfterContentInit {
   @Input()
   initiallySelectedTab: number = 0;
 
+  @ContentChildren(DsfrProjectedTabDirective)
+  projectedTabs: QueryList<DsfrProjectedTabDirective> | undefined;
+
   selectedTab: number = this.initiallySelectedTab;
-  tabs: RoutedTabDefinition[] = [];
+  tabs: (RoutedTabDefinition | ProjectedTabDefinition)[] = [];
 
   constructor(
     private readonly router: Router,
@@ -41,15 +53,13 @@ export class DsfrTabComponent implements AfterContentInit {
   ) {}
 
   ngAfterContentInit(): void {
-    this.tabs = this.routedTabs.length > 0 ? this.routedTabs : [];
-
     if (this.routedTabs.length > 0) {
       // If we're using routed tabs...
       this.tabs = this.routedTabs;
 
       // In case of deep linking, figuring out which routed tab to display
       for (let i = 0; i < this.tabs.length; i++) {
-        const tab: RoutedTabDefinition = this.tabs[i];
+        const tab: RoutedTabDefinition = this.tabs[i] as RoutedTabDefinition;
 
         if (this.router.url.includes(tab.route)) {
           this.selectedTab = i;
@@ -57,20 +67,41 @@ export class DsfrTabComponent implements AfterContentInit {
       }
 
       // If we're not already on it, navigate to the required routed tab
-      const newRoute: string = this.tabs[this.selectedTab].route;
+      const newRoute: string = (
+        this.tabs[this.selectedTab] as RoutedTabDefinition
+      ).route;
       if (!this.router.url.includes(newRoute)) {
         this.navigateToRoutedTab(newRoute);
+      }
+    } else if (this.projectedTabs) {
+      // If we're using projected tabs...
+      this.tabs = this.projectedTabs.map(
+        (projectedTab: DsfrProjectedTabDirective) => {
+          return {
+            ...projectedTab.tabDefinition,
+            panelContent: projectedTab.panelContent
+          };
+        }
+      );
+    }
+  }
+
+  onTabClicked(
+    clickedTab: RoutedTabDefinition | ProjectedTabDefinition,
+    index: number
+  ): void {
+    if (this.selectedTab !== index) {
+      this.selectedTab = index;
+      if (this.isRoutedTab(clickedTab) && clickedTab.route) {
+        this.navigateToRoutedTab(clickedTab.route);
       }
     }
   }
 
-  onTabClicked(clickedTab: RoutedTabDefinition, index: number): void {
-    if (this.selectedTab !== index) {
-      this.selectedTab = index;
-      if (clickedTab.route) {
-        this.navigateToRoutedTab(clickedTab.route);
-      }
-    }
+  isRoutedTab(
+    tab: RoutedTabDefinition | ProjectedTabDefinition
+  ): tab is RoutedTabDefinition {
+    return 'route' in tab;
   }
 
   private navigateToRoutedTab(route: string): void {
