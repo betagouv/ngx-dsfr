@@ -1,7 +1,15 @@
 /**
  * Angular imports
  */
-import { Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
 import { ElementAlignment } from '@betagouv/ngx-dsfr';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -25,7 +33,9 @@ export const EMPTY_LABEL_ERROR: string =
     }
   ]
 })
-export class DsfrToggleComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class DsfrToggleComponent
+  implements ControlValueAccessor, OnInit, OnChanges
+{
   @Input() toggleId!: string;
   @Input() checkedLabel: string = '';
   @Input() unCheckedLabel: string = '';
@@ -44,7 +54,7 @@ export class DsfrToggleComponent implements ControlValueAccessor, OnInit, OnChan
   onChange = (_: boolean) => {};
   onTouched = (_: boolean) => {};
 
-  value: boolean = false;
+  value: boolean | null = false;
 
   ngOnInit() {
     if (!this.toggleId) {
@@ -85,9 +95,12 @@ export class DsfrToggleComponent implements ControlValueAccessor, OnInit, OnChan
     this.onTouched = fn;
   }
 
-  writeValue(value: boolean): void {
+  writeValue(value: boolean | null): void {
     this.value = value;
-    this.toggled.emit(value);
+
+    if (value !== null) {
+      this.toggled.emit(value);
+    }
   }
 
   setDisabledState(isDisabled: boolean) {
