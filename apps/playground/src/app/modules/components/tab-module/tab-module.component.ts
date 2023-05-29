@@ -1,20 +1,20 @@
 /**
  * Angular imports
  */
-import {
-  Component,
-  inject,
-  Injector,
-  OnInit,
-  runInInjectionContext
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 /**
  * 3rd-party imports
  */
 import { RoutedTabDefinition, TabDefinition } from '@betagouv/ngx-dsfr/tab';
+
+/**
+ * Internal imports
+ */
+import { createErrorHandling } from '../../validation/handle-errors';
+import { noSameRoutesValidator } from '../../validation/no-same-routes.validator';
+import { createTypeSafeTakeUntilDestroyed } from '../../utils';
 
 @Component({
   templateUrl: './tab-module.component.html',
@@ -37,14 +37,18 @@ export class TabModuleComponent implements OnInit {
   initialTab2Route: string = 'tab-content-2';
   initialTab2ProjectedText: string = 'My text, projected, for tab 2 : 🍌';
 
-  routedTabsForm = this.formBuilder.group({
-    tab1Label: this.initialTab1.label,
-    tab1Icon: this.initialTab1.icon,
-    tab1Route: this.initialTab1Route,
-    tab2Label: this.initialTab2.label,
-    tab2Icon: this.initialTab2.icon,
-    tab2Route: this.initialTab2Route
-  });
+  routedTabsForm = this.formBuilder.group(
+    {
+      tab1Label: [this.initialTab1.label, Validators.required],
+      tab1Icon: this.initialTab1.icon,
+      tab1Route: this.initialTab1Route,
+      tab2Label: [this.initialTab2.label, Validators.required],
+      tab2Icon: this.initialTab2.icon,
+      tab2Route: this.initialTab2Route
+    },
+    { validators: noSameRoutesValidator }
+  );
+  routedTabsFormErrors: Record<string, string> = {};
 
   possibleRoutes: Record<string, string> = {
     'Routed Content 1': this.initialTab1Route,
@@ -73,21 +77,30 @@ export class TabModuleComponent implements OnInit {
     tab2Icon: this.initialTab2.icon,
     tab2ProjectedText: this.initialTab2ProjectedText
   });
+  projectedTabsFormErrors: Record<string, string> = {};
 
   projectedTabs: TabDefinition[] = [
     { ...this.initialTab1, id: this.initialTab1.id + '-projected' },
     { ...this.initialTab2, id: this.initialTab2.id + '-projected' }
   ];
 
-  private readonly injector = inject(Injector);
-  private untilComponentDestroyed = <T>() =>
-    runInInjectionContext(this.injector, () => takeUntilDestroyed<T>());
+  private untilComponentDestroyed = createTypeSafeTakeUntilDestroyed(
+    inject(DestroyRef)
+  );
+
+  private readonly handleErrors = createErrorHandling(inject(DestroyRef));
 
   constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
     this.updateRoutedTabs();
     this.updateProjectedTabs();
+    this.handleRequiredErrors();
+    this.handleErrors({
+      form: this.routedTabsForm,
+      formErrors: this.routedTabsFormErrors,
+      error: 'Please choose different Routes for the Tabs'
+    });
   }
 
   private updateRoutedTabs(): void {
@@ -132,5 +145,33 @@ export class TabModuleComponent implements OnInit {
           ];
         }
       });
+  }
+
+  private handleRequiredErrors(): void {
+    const error = 'Please, enter a label for this Tab';
+    this.handleErrors({
+      form: this.routedTabsForm,
+      controlName: 'tab1Label',
+      formErrors: this.routedTabsFormErrors,
+      error
+    });
+    this.handleErrors({
+      form: this.routedTabsForm,
+      controlName: 'tab2Label',
+      formErrors: this.routedTabsFormErrors,
+      error
+    });
+    this.handleErrors({
+      form: this.projectedTabsForm,
+      controlName: 'tab1Label',
+      formErrors: this.projectedTabsFormErrors,
+      error
+    });
+    this.handleErrors({
+      form: this.projectedTabsForm,
+      controlName: 'tab2Label',
+      formErrors: this.projectedTabsFormErrors,
+      error
+    });
   }
 }

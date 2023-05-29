@@ -150,13 +150,15 @@
               formControlName="tab1Label"
               name="tab1Label"
               label="The label for tab 1"
-              type="string">
+              type="string"
+              [error]="routedTabsFormErrors['tab1Label']">
             </play-input-property-control>
             <play-input-property-control
               formControlName="tab2Label"
               name="tab2Label"
               label="The label for tab 2"
-              type="string">
+              type="string"
+              [error]="routedTabsFormErrors['tab2Label']">
             </play-input-property-control>
             <play-input-property-control
               formControlName="tab1Icon"
@@ -175,14 +177,16 @@
               name="tab1Route"
               label="The associated route for Routed Tab 1"
               type="enum"
-              [enum]="possibleRoutes">
+              [enum]="possibleRoutes"
+              [error]="routedTabsFormErrors['_form_']">
             </play-input-property-control>
             <play-input-property-control
               formControlName="tab2Route"
               name="tab2Route"
               label="The associated route for Routed Tab 2"
               type="enum"
-              [enum]="possibleRoutes">
+              [enum]="possibleRoutes"
+              [error]="routedTabsFormErrors['_form_']">
             </play-input-property-control>
           </div>
           <button
@@ -243,13 +247,15 @@
               formControlName="tab1Label"
               name="tab1Label"
               label="The label for tab 1"
-              type="string">
+              type="string"
+              [error]="projectedTabsFormErrors['tab1Label']">
             </play-input-property-control>
             <play-input-property-control
               formControlName="tab2Label"
               name="tab2Label"
               label="The label for tab 2"
-              type="string">
+              type="string"
+              [error]="projectedTabsFormErrors['tab2Label']">
             </play-input-property-control>
             <play-input-property-control
               formControlName="tab1Icon"
