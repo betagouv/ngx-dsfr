@@ -28,6 +28,9 @@ export interface RoutedTabDefinition extends TabDefinition {
   route: string;
 }
 
+export const EMPTY_ARIALABEL_ERROR: string =
+  'You MUST provide a value for the ariaLabel attribute 😡 !!!';
+
 @Component({
   selector: 'dsfr-tab',
   templateUrl: './tab.component.html',
@@ -55,6 +58,9 @@ export class DsfrTabComponent implements OnChanges, AfterContentChecked {
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
+    if (!this.ariaLabel) {
+      throw EMPTY_ARIALABEL_ERROR;
+    }
     if ('routedTabs' in changes && this.routedTabs.length > 0) {
       this.initRoutedTabs();
     }
