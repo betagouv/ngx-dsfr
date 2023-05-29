@@ -23,6 +23,10 @@ import { SearchBarModuleComponent } from './components/search-bar-module/search-
 import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
+import { TabModuleComponent } from './components/tab-module/tab-module.component';
+import { RoutedContent1Component } from './routed-content-1.component';
+import { RoutedContent2Component } from './routed-content-2.component';
+import { RoutedContent3Component } from './routed-content-3.component';
 
 /**
  * TypeScript entities and constants
@@ -85,6 +89,24 @@ const routes: Route[] = [
     component: StepperModuleComponent
   },
   {
+    path: 'tab',
+    component: TabModuleComponent,
+    children: [
+      {
+        path: 'tab-content-1',
+        component: RoutedContent1Component
+      },
+      {
+        path: 'tab-content-2',
+        component: RoutedContent2Component
+      },
+      {
+        path: 'tab-content-3',
+        component: RoutedContent3Component
+      }
+    ]
+  },
+  {
     path: 'tile',
     component: TileModuleComponent
   },
@@ -98,4 +120,4 @@ const routes: Route[] = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ModulesRoutingModule { }
+export class ModulesRoutingModule {}

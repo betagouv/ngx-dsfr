@@ -2,11 +2,13 @@
  * Angular imports
  */
 import {
-  AfterContentInit,
+  AfterContentChecked,
   Component,
   ContentChildren,
   Input,
-  QueryList
+  OnChanges,
+  QueryList,
+  SimpleChanges
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -31,7 +33,7 @@ export interface RoutedTabDefinition extends TabDefinition {
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss']
 })
-export class DsfrTabComponent implements AfterContentInit {
+export class DsfrTabComponent implements OnChanges, AfterContentChecked {
   @Input({ required: true })
   ariaLabel!: string;
 
@@ -52,27 +54,15 @@ export class DsfrTabComponent implements AfterContentInit {
     private readonly route: ActivatedRoute
   ) {}
 
-  ngAfterContentInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    if ('routedTabs' in changes && this.routedTabs.length > 0) {
+      this.initRoutedTabs();
+    }
+  }
+
+  ngAfterContentChecked(): void {
     if (this.routedTabs.length > 0) {
-      // If we're using routed tabs...
-      this.tabs = this.routedTabs;
-
-      // In case of deep linking, figuring out which routed tab to display
-      for (let i = 0; i < this.tabs.length; i++) {
-        const tab: RoutedTabDefinition = this.tabs[i] as RoutedTabDefinition;
-
-        if (this.router.url.includes(tab.route)) {
-          this.selectedTab = i;
-        }
-      }
-
-      // If we're not already on it, navigate to the required routed tab
-      const newRoute: string = (
-        this.tabs[this.selectedTab] as RoutedTabDefinition
-      ).route;
-      if (!this.router.url.includes(newRoute)) {
-        this.navigateToRoutedTab(newRoute);
-      }
+      this.initRoutedTabs();
     } else if (this.projectedTabs) {
       // If we're using projected tabs...
       this.tabs = this.projectedTabs.map(
@@ -83,6 +73,28 @@ export class DsfrTabComponent implements AfterContentInit {
           };
         }
       );
+    }
+  }
+
+  private initRoutedTabs(): void {
+    // If we're using routed tabs...
+    this.tabs = this.routedTabs;
+
+    // In case of deep linking, figuring out which routed tab to display
+    for (let i = 0; i < this.tabs.length; i++) {
+      const tab: RoutedTabDefinition = this.tabs[i] as RoutedTabDefinition;
+
+      if (this.router.url.includes(tab.route)) {
+        this.selectedTab = i;
+      }
+    }
+
+    // If we're not already on it, navigate to the required routed tab
+    const newRoute: string = (
+      this.tabs[this.selectedTab] as RoutedTabDefinition
+    ).route;
+    if (!this.router.url.includes(newRoute)) {
+      this.navigateToRoutedTab(newRoute);
     }
   }
 

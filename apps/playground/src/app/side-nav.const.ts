@@ -72,6 +72,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/stepper'
       },
       {
+        label: 'Tab',
+        path: '/modules/tab'
+      },
+      {
         label: 'Tile',
         path: '/modules/tile'
       },
