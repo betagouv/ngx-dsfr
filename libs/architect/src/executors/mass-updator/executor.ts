@@ -7,7 +7,7 @@ import * as path from 'path';
 /**
  * Nx imports
  */
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 
 /**
  * 3rd-party imports

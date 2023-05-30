@@ -1,0 +1,307 @@
+<section class="module-description">
+  <h2>DsfrTabComponent</h2>
+  <p>
+    The <code>DsfrTabComponent</code> purpose is to represent content organised
+    as tabs. You typically want to use it when you need to group different
+    topics in a limited space in the user interface. It enables the end-user to
+    navigate between different sections of content within the same page.
+  </p>
+  <p>
+    For each content to be displayed, it is comprised of a couple
+    <b>tab / panel</b>, where the <b>tab</b> is the actual button that you click
+    upon to display the content in the associated <b>panel</b>.
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Tab Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/onglet/">
+      Tab
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It can be used in 2 ways:</p>
+  <ul>
+    <li>
+      via <b>Routed Tabs</b>, where the content of each panel is nothing more
+      than a <code>&lt;router-outlet&gt;</code> and clicking on a given tab will
+      use the Angular Router to navigate to a specific Route
+    </li>
+    <li>
+      via <b>Projected Tabs</b>, where the content of each panel is provided by
+      projecting into the <code>&lt;dsfr-tab&gt;</code> tags
+      <code>&lt;ng-container&gt;</code> tags with the
+      <code>*dsfrProjectedTab</code> Structural Directive
+    </li>
+  </ul>
+  <p>It has several <code>@Input()</code> properties:</p>
+
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="ariaLabel"
+      [required]="true"
+      type="It takes a string">
+      It is required for accessibility reasons. It is used to generate the
+      <code>aria-label</code> attribute of the whole tab list
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="routedTabs"
+      default="[ ]"
+      type="It takes an array of RoutedTabDefinition">
+      <p>
+        If you provide a non-empty array to this property, the Component will
+        then enter into <b>Routed</b> mode :
+        <code>&lt;router-outlet&gt;</code> tags will be used as the content for
+        panels and clicking on a tab will trigger a navigation to the
+        <b>Route</b> provided in its definition.
+      </p>
+      <p>
+        The navigation will only be triggered if we're currently displaying
+        another tab.
+      </p>
+      <p>
+        It is compatible with deep linking, i.e. the end-user will be able to
+        click on a link that would get them directly on a specific tab.
+      </p>
+      <p>
+        ⚠️ Be careful though ⚠️: the routing will always be made
+        <b>relatively to the currently activated Route</b>... Which, in most
+        situations, basically means that you should only provide the last path
+        segment of the desired final URL.
+      </p>
+      <p>
+        It takes an array of ojects satisfying the
+        <code>RoutedTabDefinition</code> interface
+      </p>
+      <pre>
+  <span class="highlight-code">export interface RoutedTabDefinition</span> &#123;
+    id: string;
+    label: string;
+    icon?: string;
+    route: string;
+  &#125;</pre>
+      <p>
+        Where <code>id</code> is used to generate all the accessibility couples
+        <code>id / aria-controls</code> and
+        <code>id / aria-labelledby</code> between tabs and panels,
+        <code>label</code> is the text displayed in the tab and
+        <code>route</code> is where to navigate to upon click on the tab. The
+        only optional property, <code>icon</code>, lets you display an icon,
+        within the tab, at the left of the text. It will take the name of a
+        class, corresponding to a DSFR icon.
+      </p>
+      <p>
+        <a
+          target="_blank"
+          hreflang="fr"
+          title="The documentation page for the Icons in the DSFR"
+          href="https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/icone">
+          Here
+          <mat-icon>open_in_new</mat-icon>
+        </a>
+        is the list of all the icons available.
+      </p>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="initiallySelectedTab"
+      default="0"
+      type="It takes a number">
+      The index, 0-based, whether in the array provided to
+      <code>routedTabs</code> or in the order of the projected
+      <code>DsfrProjectedTabDirective</code>s, of the tab that should be
+      pre-selected
+    </play-input-property-definition>
+  </dl>
+</section>
+
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <mat-card *ngIf="routedTabsForm">
+    <mat-card-header>
+      <mat-card-title>TabComponent</mat-card-title>
+      <mat-card-subtitle> With <b>Routed Tabs</b> </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <p>Example :</p>
+      <pre>
+  <span class="highlight-code">&lt;dsfr-tab</span>
+    ariaLabel="Tabs displaying very interesting content"
+    [routedTabs]="routedTabs"
+  <span class="highlight-code">&gt;&lt;/dsfr-tab&gt;</span>
+</pre>
+      <div class="settings">
+        <form
+          [formGroup]="routedTabsForm"
+          novalidate>
+          <div class="form-fields">
+            <play-input-property-control
+              formControlName="tab1Label"
+              name="tab1Label"
+              label="The label for tab 1"
+              type="string"
+              [error]="routedTabsFormErrors['tab1Label']">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab2Label"
+              name="tab2Label"
+              label="The label for tab 2"
+              type="string"
+              [error]="routedTabsFormErrors['tab2Label']">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab1Icon"
+              name="tab1Icon"
+              label="The icon for tab 1"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab2Icon"
+              name="tab2Icon"
+              label="The icon for tab 2"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab1Route"
+              name="tab1Route"
+              label="The associated route for Routed Tab 1"
+              type="enum"
+              [enum]="possibleRoutes"
+              [error]="routedTabsFormErrors['_form_']">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab2Route"
+              name="tab2Route"
+              label="The associated route for Routed Tab 2"
+              type="enum"
+              [enum]="possibleRoutes"
+              [error]="routedTabsFormErrors['_form_']">
+            </play-input-property-control>
+          </div>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="routedTabsForm.reset()">
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <play-simulator>
+          <dsfr-tab
+            ariaLabel="Tabs displaying very interesting content"
+            [routedTabs]="routedTabs">
+          </dsfr-tab>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="projectedTabsForm">
+    <mat-card-header>
+      <mat-card-title>TabComponent</mat-card-title>
+      <mat-card-subtitle> With <b>Projected Tabs</b> </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <p>Example :</p>
+      <pre>
+  <span class="highlight-code">&lt;dsfr-tab</span>
+    ariaLabel="Tabs displaying very interesting content"<span class="highlight-code">&gt;</span>
+
+    <span class="highlight-code">&lt;ng-container *dsfrProjectedTab="projectedTabs[0]"></span>
+      <span class="highlight-code">&lt;p></span>Welcome into my projected Tab 🥳<span class="highlight-code">&gt;/p></span>
+    <span class="highlight-code">&lt;/ng-container></span>
+
+    <span class="highlight-code">&lt;ng-container *dsfrProjectedTab="projectedTabs[1]"></span>
+      <span class="highlight-code">&lt;p></span>Welcome into my projected Tab 🚀<span class="highlight-code">&gt;/p></span>
+    <span class="highlight-code">&lt;/ng-container></span>
+
+  <span class="highlight-code">&lt;/dsfr-tab&gt;</span>
+</pre>
+      <p>
+        With <code>projectedTabs</code> being an array of objects satisfying the
+        <code>TabDefinition</code> interface
+      </p>
+      <pre>
+  <span class="highlight-code">export interface TabDefinition</span> &#123;
+    id: string;
+    label: string;
+    icon?: string;
+  &#125;</pre>
+      <div class="settings">
+        <form
+          [formGroup]="projectedTabsForm"
+          novalidate>
+          <div class="form-fields">
+            <play-input-property-control
+              formControlName="tab1Label"
+              name="tab1Label"
+              label="The label for tab 1"
+              type="string"
+              [error]="projectedTabsFormErrors['tab1Label']">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab2Label"
+              name="tab2Label"
+              label="The label for tab 2"
+              type="string"
+              [error]="projectedTabsFormErrors['tab2Label']">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab1Icon"
+              name="tab1Icon"
+              label="The icon for tab 1"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab2Icon"
+              name="tab2Icon"
+              label="The icon for tab 2"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab1ProjectedText"
+              name="tab1ProjectedText"
+              label="The text projected for Tab 1"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="tab2ProjectedText"
+              name="tab2ProjectedText"
+              label="The text projected for Tab 2"
+              type="string">
+            </play-input-property-control>
+          </div>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="projectedTabsForm.reset()">
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <play-simulator>
+          <dsfr-tab ariaLabel="Tabs displaying very interesting content">
+            <ng-container *dsfrProjectedTab="projectedTabs[0]">
+              <p>{{ projectedTabsForm.getRawValue().tab1ProjectedText }}</p>
+            </ng-container>
+            <ng-container *dsfrProjectedTab="projectedTabs[1]">
+              <p>{{ projectedTabsForm.getRawValue().tab2ProjectedText }}</p>
+            </ng-container>
+          </dsfr-tab>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

@@ -11,10 +11,8 @@
           "prefix": "dsfr",
           "targets": {
             "build": {
-              "executor": "@nrwl/angular:package",
-              "outputs": [
-                "dist/libs/ngx-dsfr"
-              ],
+              "executor": "@nx/angular:package",
+              "outputs": ["dist/libs/ngx-dsfr"],
               "options": {
                 "project": "libs/ngx-dsfr/ng-package.json"
               },
@@ -29,17 +27,15 @@
               "defaultConfiguration": "production"
             },
             "test": {
-              "executor": "@nrwl/jest:jest",
-              "outputs": [
-                "coverage/libs/ngx-dsfr"
-              ],
+              "executor": "@nx/jest:jest",
+              "outputs": ["coverage/libs/ngx-dsfr"],
               "options": {
                 "jestConfig": "libs/ngx-dsfr/jest.config.ts",
                 "passWithNoTests": true
               }
             },
             "lint": {
-              "executor": "@nrwl/linter:eslint",
+              "executor": "@nx/linter:eslint",
               "options": {
                 "lintFilePatterns": [
                   "libs/ngx-dsfr/**/*.ts",
@@ -69,11 +65,7 @@
             {
               "file": "libs/ngx-dsfr/package.json",
               "hash": "3efd035486e8830fb77b818c3c23a82cb1661ee5",
-              "deps": [
-                "npm:tslib",
-                "npm:@angular/common",
-                "npm:@angular/core"
-              ]
+              "deps": ["npm:tslib", "npm:@angular/common", "npm:@angular/core"]
             },
             {
               "file": "libs/ngx-dsfr/project.json",
@@ -90,17 +82,12 @@
             {
               "file": "libs/ngx-dsfr/src/lib/ngx-dsfr.module.ts",
               "hash": "cce471703d406710d7dda1a25d94a54fb29c661e",
-              "deps": [
-                "npm:@angular/core",
-                "npm:@angular/common"
-              ]
+              "deps": ["npm:@angular/core", "npm:@angular/common"]
             },
             {
               "file": "libs/ngx-dsfr/src/test-setup.ts",
               "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-              "deps": [
-                "npm:jest-preset-angular"
-              ]
+              "deps": ["npm:jest-preset-angular"]
             },
             {
               "file": "libs/ngx-dsfr/tsconfig.json",
@@ -126,10 +113,6 @@
       "ngx-dsfr": []
     }
   },
-  "affectedProjects": [
-    "ngx-dsfr"
-  ],
-  "criticalPath": [
-    "ngx-dsfr"
-  ]
+  "affectedProjects": ["ngx-dsfr"],
+  "criticalPath": ["ngx-dsfr"]
 }

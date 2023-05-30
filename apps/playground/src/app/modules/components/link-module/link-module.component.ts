@@ -19,7 +19,7 @@ import { Subject, takeUntil } from 'rxjs';
 /**
  * Internal imports
  */
-import { titleRequiredWhenExternalValidator } from './title-required-when-external.validator';
+import { titleRequiredWhenExternalValidator } from '../../validation/title-required-when-external.validator';
 
 /**
  * TypeScript entities and constants
@@ -43,7 +43,7 @@ export class LinkModuleComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: NonNullableFormBuilder) { }
+  constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
     this.initForms();

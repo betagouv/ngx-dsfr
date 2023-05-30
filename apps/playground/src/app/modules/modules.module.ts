@@ -23,9 +23,13 @@ import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
-import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
+import {
+  DsfrSearchBarModule,
+  DSFR_SEARCH_BAR_SERVICE_TOKEN
+} from '@betagouv/ngx-dsfr/search-bar';
 import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
 import { DsfrToggleModule } from '@betagouv/ngx-dsfr/toggle';
+import { DsfrTabModule } from '@betagouv/ngx-dsfr/tab';
 
 /**
  * Internal imports
@@ -50,6 +54,10 @@ import { TestSearchService } from './components/search-bar-module/search-bar-mod
 import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
+import { TabModuleComponent } from './components/tab-module/tab-module.component';
+import { RoutedContent1Component } from './components/routed-content/routed-content-1.component';
+import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
+import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 
 @NgModule({
   imports: [
@@ -71,6 +79,7 @@ import { ToggleModuleComponent } from './components/toggle-module/toggle-module.
     DsfrErrorPageModule,
     DsfrFooterModule,
     DsfrToggleModule,
+    DsfrTabModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -94,7 +103,11 @@ import { ToggleModuleComponent } from './components/toggle-module/toggle-module.
     SearchBarModuleComponent,
     ErrorPageModuleComponent,
     FooterModuleComponent,
-    ToggleModuleComponent
+    ToggleModuleComponent,
+    TabModuleComponent,
+    RoutedContent1Component,
+    RoutedContent2Component,
+    RoutedContent3Component
   ],
   providers: [
     {
@@ -103,4 +116,4 @@ import { ToggleModuleComponent } from './components/toggle-module/toggle-module.
     }
   ]
 })
-export class ModulesModule { }
+export class ModulesModule {}
