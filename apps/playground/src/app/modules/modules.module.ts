@@ -23,12 +23,19 @@ import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
-import { DsfrSearchBarModule, DSFR_SEARCH_BAR_SERVICE_TOKEN } from '@betagouv/ngx-dsfr/search-bar';
+import {
+  DsfrSearchBarModule,
+  DSFR_SEARCH_BAR_SERVICE_TOKEN
+} from '@betagouv/ngx-dsfr/search-bar';
+import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
+import { DsfrToggleModule } from '@betagouv/ngx-dsfr/toggle';
+import { DsfrTabModule } from '@betagouv/ngx-dsfr/tab';
 
 /**
  * Internal imports
  */
 import { ModulesRoutingModule } from './modules-routing.module';
+import { SharedModule } from '../shared/shared.module';
 import { ButtonModuleComponent } from './components/button-module/button-module.component';
 import { LinkModuleComponent } from './components/link-module/link-module.component';
 import { SimulatorComponent } from './components/simulator/simulator.component';
@@ -37,7 +44,6 @@ import { HeaderModuleComponent } from './components/header-module/header-module.
 import { NavigationModuleComponent } from './components/navigation-module/navigation-module.component';
 import { RadioModuleComponent } from './components/radio-module/radio-module.component';
 import { AlertModuleComponent } from './components/alert-module/alert-module.component';
-import { SharedModule } from '../shared/shared.module';
 import { StepperModuleComponent } from './components/stepper-module/stepper-module.component';
 import { InputModuleComponent } from './components/input-module/input-module.component';
 import { TileModuleComponent } from './components/tile-module/tile-module.component';
@@ -45,7 +51,13 @@ import { PasswordModuleComponent } from './components/password-module/password-m
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
 import { TestSearchService } from './components/search-bar-module/search-bar-module.service';
+import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
+import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
+import { TabModuleComponent } from './components/tab-module/tab-module.component';
+import { RoutedContent1Component } from './components/routed-content/routed-content-1.component';
+import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
+import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 
 @NgModule({
   imports: [
@@ -64,7 +76,10 @@ import { FooterModuleComponent } from './components/footer-module/footer-module.
     DsfrPasswordModule,
     DsfrCheckboxModule,
     DsfrSearchBarModule,
+    DsfrErrorPageModule,
     DsfrFooterModule,
+    DsfrToggleModule,
+    DsfrTabModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -86,7 +101,13 @@ import { FooterModuleComponent } from './components/footer-module/footer-module.
     CheckboxModuleComponent,
     StepperModuleComponent,
     SearchBarModuleComponent,
-    FooterModuleComponent
+    ErrorPageModuleComponent,
+    FooterModuleComponent,
+    ToggleModuleComponent,
+    TabModuleComponent,
+    RoutedContent1Component,
+    RoutedContent2Component,
+    RoutedContent3Component
   ],
   providers: [
     {
@@ -95,4 +116,4 @@ import { FooterModuleComponent } from './components/footer-module/footer-module.
     }
   ]
 })
-export class ModulesModule { }
+export class ModulesModule {}

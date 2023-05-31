@@ -20,7 +20,13 @@ import { TileModuleComponent } from './components/tile-module/tile-module.compon
 import { PasswordModuleComponent } from './components/password-module/password-module.component';
 import { CheckboxModuleComponent } from './components/checkbox-module/checkbox-module.component';
 import { SearchBarModuleComponent } from './components/search-bar-module/search-bar-module.component';
+import { ErrorPageModuleComponent } from './components/error-page-module/error-page-module.component';
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
+import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
+import { TabModuleComponent } from './components/tab-module/tab-module.component';
+import { RoutedContent1Component } from './components/routed-content/routed-content-1.component';
+import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
+import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 
 /**
  * TypeScript entities and constants
@@ -41,6 +47,10 @@ const routes: Route[] = [
   {
     path: 'checkbox',
     component: CheckboxModuleComponent
+  },
+  {
+    path: 'error-page',
+    component: ErrorPageModuleComponent
   },
   {
     path: 'footer',
@@ -79,8 +89,30 @@ const routes: Route[] = [
     component: StepperModuleComponent
   },
   {
+    path: 'tab',
+    component: TabModuleComponent,
+    children: [
+      {
+        path: 'tab-content-1',
+        component: RoutedContent1Component
+      },
+      {
+        path: 'tab-content-2',
+        component: RoutedContent2Component
+      },
+      {
+        path: 'tab-content-3',
+        component: RoutedContent3Component
+      }
+    ]
+  },
+  {
     path: 'tile',
     component: TileModuleComponent
+  },
+  {
+    path: 'toggle',
+    component: ToggleModuleComponent
   }
 ];
 
@@ -88,4 +120,4 @@ const routes: Route[] = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ModulesRoutingModule { }
+export class ModulesRoutingModule {}

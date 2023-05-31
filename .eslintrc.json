@@ -1,12 +1,12 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nx"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -36,7 +36,11 @@
               },
               {
                 "sourceTag": "type:api",
-                "onlyDependOnLibsWithTags": ["type:api", "type:model", "type:util"]
+                "onlyDependOnLibsWithTags": [
+                  "type:api",
+                  "type:model",
+                  "type:util"
+                ]
               },
               {
                 "sourceTag": "type:model",
@@ -48,7 +52,10 @@
               },
               {
                 "sourceTag": "framework:angular",
-                "onlyDependOnLibsWithTags": ["framework:angular", "framework:none"]
+                "onlyDependOnLibsWithTags": [
+                  "framework:angular",
+                  "framework:none"
+                ]
               },
               {
                 "sourceTag": "*",
@@ -145,7 +152,7 @@
           },
           {
             "selector": "enumMember",
-            "format": ["UPPER_CASE","PascalCase"]
+            "format": ["UPPER_CASE", "PascalCase"]
           },
           {
             "selector": "classMethod",
@@ -242,7 +249,15 @@
         "no-console": [
           "error",
           {
-            "allow": ["debug", "error", "info", "time", "timeEnd", "trace", "warn"]
+            "allow": [
+              "debug",
+              "error",
+              "info",
+              "time",
+              "timeEnd",
+              "trace",
+              "warn"
+            ]
           }
         ],
         "no-debugger": "error",
@@ -356,12 +371,12 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "extends": ["plugin:@nx/typescript"],
       "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "extends": ["plugin:@nx/javascript"],
       "rules": {}
     }
   ]

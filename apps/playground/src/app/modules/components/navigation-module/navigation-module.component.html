@@ -1,8 +1,8 @@
 <section class="module-description">
   <h2>DsfrNavigationComponent</h2>
   <p>
-    The <code>DsfrNavigationComponent</code> purpose is to represent the navigation of
-    an application.
+    The <code>DsfrNavigationComponent</code> purpose is to represent the
+    navigation of an application.
   </p>
   <p>
     It is based on the
@@ -32,7 +32,7 @@
       [required]="true"
       type="Navigation">
       The value must satisfy the <code>Navigation</code> interface :
- <pre>
+      <pre>
   <span class='highlight-code'>interface NavigationItem extends LinkNavigation</span> &#123;
       child?: ChildNavigation;
   &#125;
@@ -40,6 +40,7 @@
       id: string;
       label: string;
       href: string;
+      routerLinkActiveExact?: boolean;
       children?: LinkNavigation[];
       userRoles?: UserRole[];
   &#125;
@@ -62,7 +63,7 @@
       <mat-card-title>Navigation with direct links only</mat-card-title>
     </mat-card-header>
     <mat-card-content class="simulation">
-<pre>
+      <pre>
   <span class='highlight-code'>&lt;dsfr-navigation</span>
         [navigation]="navigationWithDirectLinks"<span class='highlight-code'>&gt;</span>
   <span class='highlight-code'>&lt;/dsfr-navigation&gt;</span>
@@ -70,7 +71,8 @@
       <div class="simulator-wrapper mat-elevation-z4">
         <div class="nav-container">
           <play-simulator>
-            <dsfr-navigation [navigation]="navigationWithDirectLinks"></dsfr-navigation>
+            <dsfr-navigation
+              [navigation]="navigationWithDirectLinks"></dsfr-navigation>
           </play-simulator>
         </div>
       </div>
@@ -81,7 +83,7 @@
       <mat-card-title>Navigation with simple dropdown menus</mat-card-title>
     </mat-card-header>
     <mat-card-content class="simulation">
-<pre>
+      <pre>
 <span class='highlight-code'>&lt;dsfr-navigation</span>
   [navigation]="navigationWithSimpleDropdownMenus"&gt;
 <span class='highlight-code'>&lt;/dsfr-navigation&gt;</span>
@@ -89,7 +91,10 @@
       <div class="simulator-wrapper mat-elevation-z4">
         <div class="nav-container">
           <play-simulator>
-            <dsfr-navigation [navigation]="navigationWithSimpleDropdownMenus"></dsfr-navigation>
+            <dsfr-navigation
+              [navigation]="
+                navigationWithSimpleDropdownMenus
+              "></dsfr-navigation>
           </play-simulator>
         </div>
       </div>
@@ -100,7 +105,7 @@
       <mat-card-title>Navigation with mega menus</mat-card-title>
     </mat-card-header>
     <mat-card-content class="simulation">
-<pre>
+      <pre>
 <span class='highlight-code'>&lt;dsfr-navigation</span>
   [navigation]="navigationWithMegaMenus"&gt;
 <span class='highlight-code'>&lt;/dsfr-navigation&gt;</span>
@@ -108,7 +113,8 @@
       <div class="simulator-wrapper mat-elevation-z4">
         <div class="nav-container">
           <play-simulator>
-            <dsfr-navigation [navigation]="navigationWithMegaMenus"></dsfr-navigation>
+            <dsfr-navigation
+              [navigation]="navigationWithMegaMenus"></dsfr-navigation>
           </play-simulator>
         </div>
       </div>

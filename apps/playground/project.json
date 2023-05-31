@@ -28,6 +28,12 @@
             "followSymlinks": true
           },
           {
+            "glob": "**/*.svg",
+            "input": "./node_modules/@betagouv/ngx-dsfr/assets/illustrations/",
+            "output": "/assets/illustrations/",
+            "followSymlinks": true
+          },
+          {
             "glob": "**/*",
             "input": "./node_modules/@betagouv/ngx-dsfr/assets/icons/",
             "output": "/assets/icons/",
@@ -93,7 +99,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/playground/**/*.ts",
@@ -102,7 +108,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/playground"],
       "options": {
         "jestConfig": "apps/playground/jest.config.ts",

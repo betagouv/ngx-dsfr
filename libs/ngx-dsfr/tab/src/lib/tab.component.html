@@ -1,0 +1,38 @@
+<div class="fr-tabs">
+  <ul
+    class="fr-tabs__list"
+    role="tablist"
+    [attr.aria-label]="ariaLabel">
+    <li
+      role="presentation"
+      *ngFor="let tab of tabs; let i = index">
+      <button
+        [id]="tab.id"
+        [class]="'fr-tabs__tab fr-tabs__tab--icon-left ' + tab.icon"
+        role="tab"
+        (click)="onTabClicked(tab, i)"
+        [attr.aria-selected]="selectedTab === i"
+        [attr.tabindex]="selectedTab === i ? 0 : -1"
+        [attr.aria-controls]="tab.id + '-panel'">
+        {{ tab.label }}
+      </button>
+    </li>
+  </ul>
+  <div
+    *ngFor="let tab of tabs; let i = index"
+    [id]="tab.id + '-panel'"
+    class="fr-tabs__panel"
+    [class.fr-tabs__panel--selected]="selectedTab === i"
+    role="tabpanel"
+    [attr.aria-labelledby]="tab.id"
+    tabindex="0">
+    <ng-container *ngIf="selectedTab === i">
+      <ng-container *ngIf="isRoutedTab(tab)">
+        <router-outlet></router-outlet>
+      </ng-container>
+      <ng-container *ngIf="!isRoutedTab(tab)">
+        <ng-container [ngTemplateOutlet]="tab.panelContent"></ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

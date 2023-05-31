@@ -30,6 +30,7 @@ interface LinkNavigation {
   id: string;
   label: string;
   href: string;
+  routerLinkActiveExact?: boolean;
   children?: LinkNavigation[];
   userRoles?: UserRole[];
 }

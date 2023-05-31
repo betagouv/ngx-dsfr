@@ -32,6 +32,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/checkbox'
       },
       {
+        label: 'Error Page',
+        path: '/modules/error-page'
+      },
+      {
         label: 'Footer',
         path: '/modules/footer'
       },
@@ -68,9 +72,17 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/stepper'
       },
       {
+        label: 'Tab',
+        path: '/modules/tab'
+      },
+      {
         label: 'Tile',
         path: '/modules/tile'
       },
+      {
+        label: 'Toggle',
+        path: '/modules/toggle'
+      }
     ]
   }
 ];
