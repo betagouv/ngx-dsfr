@@ -24,6 +24,7 @@ import { ErrorPageModuleComponent } from './components/error-page-module/error-p
 import { FooterModuleComponent } from './components/footer-module/footer-module.component';
 import { ToggleModuleComponent } from './components/toggle-module/toggle-module.component';
 import { TabModuleComponent } from './components/tab-module/tab-module.component';
+import { TagModuleComponent } from './components/tag-module/tag-module.component';
 import { RoutedContent1Component } from './components/routed-content/routed-content-1.component';
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
@@ -105,6 +106,10 @@ const routes: Route[] = [
         component: RoutedContent3Component
       }
     ]
+  },
+  {
+    path: 'tag',
+    component: TagModuleComponent
   },
   {
     path: 'tile',
