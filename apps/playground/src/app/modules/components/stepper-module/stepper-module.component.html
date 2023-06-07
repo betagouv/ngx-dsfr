@@ -1,28 +1,121 @@
 <section class="module-description">
-  <h2>Description</h2>
-  <p>Some description</p>
+  <h2>DsfrStepperComponent</h2>
+  <p>The <code>DsfrStepperComponent</code> purpose is to represent a stepper</p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Button Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/indicateur-d-etapes/">
+      Stepper
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>
+    It has several <code>@Input()</code> properties:
+  </p>
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="stepTitle"
+      [required]="true"
+      type="It takes a string">
+      The title of the step that the stepper is on.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="stepNumber"
+      default="1"
+      type="number">
+      The number of the step the stepper is on.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="numberOfSteps"
+      [required]="true"
+      type="number">
+      The total number of steps.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="nextStepTitle"
+      type="It takes a string">
+      The title of the next step, it's not required only if the stepper is on the last step (stepNumber = numberOfSteps)
+    </play-input-property-definition>
+  </dl>
 </section>
 
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <div class="simulation">
-    <play-simulator>
-      <div>
-        <h3>Stepper without stepNumber's value</h3>
-        <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="3"
-                      nextStepTitle="Next step's title"></dsfr-stepper>
+  <mat-card *ngIf="formStepper">
+    <mat-card-header>
+      <mat-card-title>Stepper element</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <p>Example :</p>
+      <pre>
+  <span class="highlight-code">&lt;dsfr-stepper</span>
+    [stepTitle]="This is the actual step's title"
+    [stepNumber]="1"
+    [numberOfSteps]="3"
+    [nextStepTitle]="This is the next step's title"
+  <span class="highlight-code">&gt;&lt;/dsfr-stepper&gt;</span>
+</pre>
+      <div class="settings">
+        <form
+          [formGroup]="formStepper"
+          novalidate>
+          <play-input-property-control
+            formControlName="stepTitle"
+            name="stepTitle"
+            label="Step title"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="stepNumber"
+            name="stepNumber"
+            label="Step number"
+            type="number">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="numberOfSteps"
+            name="numberOfSteps"
+            label="Number of steps"
+            type="number">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="nextStepTitle"
+            name="nextStepTitle"
+            label="Next step's title"
+            type="string">
+          </play-input-property-control>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="formStepper.reset()">
+            Reset
+          </button>
+        </form>
       </div>
-      <hr>
-      <div>
-        <h3>Stepper with stepNumber's value</h3>
-        <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="4" nextStepTitle="Next step's title"
-                      [stepNumber]="2"></dsfr-stepper>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <play-simulator>
+          <div>
+            <dsfr-stepper
+              [stepTitle]="formStepper.getRawValue().stepTitle"
+              [stepNumber]="formStepper.getRawValue().stepNumber"
+              [numberOfSteps]="formStepper.getRawValue().numberOfSteps"
+              [nextStepTitle]="formStepper.getRawValue().nextStepTitle">
+            </dsfr-stepper>
+          </div>
+        </play-simulator>
       </div>
-      <hr>
-      <div>
-        <h3>Stepper in the last step</h3>
-        <dsfr-stepper stepTitle="Actual step's title" [numberOfSteps]="5" [stepNumber]="5"></dsfr-stepper>
-      </div>
-    </play-simulator>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </section>
