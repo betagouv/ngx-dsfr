@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * 3rd-party imports

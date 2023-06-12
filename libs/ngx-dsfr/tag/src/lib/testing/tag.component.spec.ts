@@ -90,33 +90,21 @@ describe('DsfrTagComponent', () => {
     });
 
     it('should add the right classes when an icon is requested', async () => {
-      testHost.testLabel = testLabel;
       testHost.testIcon = testIcon;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
       const classes = await dsfrTagHarness.getTagPAttribute('class');
       expect(classes).toContain('fr-tag--icon-left');
       expect(classes).toContain(testIcon);
     });
 
     it('should add the right class when we want a small tag', async () => {
-      testHost.testLabel = testLabel;
       testHost.testSize = ElementSize.SMALL;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
       const classes = await dsfrTagHarness.getTagPAttribute('class');
       expect(classes).toContain('fr-tag--sm');
     });
 
     it('should use the proper template when we want a clickable tag', async () => {
-      testHost.testLabel = testLabel;
       testHost.testType = TagType.CLICKABLE;
       testHost.testLink = testLink;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
       const pTagText = await dsfrTagHarness.getPTagText();
       expect(pTagText).toBeNull();
       const aTagText = await dsfrTagHarness.getATagText();
@@ -124,11 +112,7 @@ describe('DsfrTagComponent', () => {
     });
 
     it('should use the proper template when we want a selectable tag', async () => {
-      testHost.testLabel = testLabel;
       testHost.testType = TagType.SELECTABLE;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
       const pTagText = await dsfrTagHarness.getPTagText();
       expect(pTagText).toBeNull();
       const buttonTagText = await dsfrTagHarness.getButtonTagText();
@@ -136,11 +120,7 @@ describe('DsfrTagComponent', () => {
     });
 
     it('should use the proper template, with the right class, when we want a deletable tag', async () => {
-      testHost.testLabel = testLabel;
       testHost.testType = TagType.DELETABLE;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
       const pTagText = await dsfrTagHarness.getPTagText();
       expect(pTagText).toBeNull();
       const buttonTagText = await dsfrTagHarness.getButtonTagText();
@@ -150,7 +130,6 @@ describe('DsfrTagComponent', () => {
     });
 
     it('should send a selected event when we select a tag', async () => {
-      testHost.testLabel = testLabel;
       testHost.testType = TagType.SELECTABLE;
       testHost.testSelected = testSelected;
       dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
@@ -166,7 +145,6 @@ describe('DsfrTagComponent', () => {
     });
 
     it('should send a deleted event when we delete a tag', async () => {
-      testHost.testLabel = testLabel;
       testHost.testType = TagType.DELETABLE;
       testHost.testDeleted = testDeleted;
       dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(

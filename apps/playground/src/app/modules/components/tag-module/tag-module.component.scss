@@ -40,6 +40,11 @@ b {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+
+          button {
+            margin: var.$default-margin;
+            align-self: flex-end;
+          }
         }
       }
     }
