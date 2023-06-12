@@ -1,13 +1,17 @@
 /**
  * Angular imports
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+
+/**
+ * 3rd-party imports
+ */
 import { ElementSize } from '@betagouv/ngx-dsfr';
-import { TagType } from '../tag.component';
 
 /**
  * Internal imports
  */
+import { TagType } from '../tag.component';
 
 @Component({
   template: `
@@ -18,6 +22,8 @@ import { TagType } from '../tag.component';
       [type]="testType"
       [link]="testLink"
       [isSelected]="testIsSelected"
+      (selected)="testSelected()"
+      (deleted)="testDeleted()"
     ></dsfr-tag>
   `
 })
@@ -28,4 +34,6 @@ export class TestHostComponent {
   @Input() testLink = '';
   @Input() testType = TagType.NON_CLICKABLE;
   @Input() testIsSelected = false;
+  @Input() testSelected = () => {};
+  @Input() testDeleted = () => {};
 }

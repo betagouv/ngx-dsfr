@@ -8,16 +8,13 @@ import { NonNullableFormBuilder } from '@angular/forms';
  * 3rd-party imports
  */
 import { ElementSize } from '@betagouv/ngx-dsfr';
-import { TagType } from '../../../../../../../libs/ngx-dsfr/tag/src/lib/tag.component';
+import { TagType } from '@betagouv/ngx-dsfr/tag';
 
 @Component({
   templateUrl: './tag-module.component.html',
   styleUrls: ['./tag-module.component.scss']
 })
 export class TagModuleComponent {
-  form = this.formBuilder.group({
-    tag: true
-  });
   formTag = this.formBuilder.group({
     label: 'Tag label',
     type: TagType.NON_CLICKABLE,

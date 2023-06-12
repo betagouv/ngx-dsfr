@@ -30,7 +30,7 @@ export enum TagType {
 })
 
 export class DsfrTagComponent implements OnChanges {
-  @Input() label = '';
+  @Input({ required: true }) label!: string;
   @Input() icon: string | null = null;
   @Input() size: Omit<ElementSize, ElementSize.LARGE> = ElementSize.MEDIUM;
   @Input() link: string | null = null;
@@ -40,6 +40,7 @@ export class DsfrTagComponent implements OnChanges {
   @Output() selected = new EventEmitter<boolean>();
   @Output() deleted = new EventEmitter<void>();
 
+  possibleTypes: typeof TagType = TagType;
   isDeleted = false;
   classes = '';
 
@@ -64,10 +65,10 @@ export class DsfrTagComponent implements OnChanges {
         if (this.icon) {
           this.classes += ` ${this.icon} fr-tag--icon-left`;
         }
-        return;
+        break;
       case TagType.DELETABLE:
         this.classes += ' fr-tag--dismiss';
-        return;
+        break;
     }
   }
 

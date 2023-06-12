@@ -1,11 +1,9 @@
 <ng-container [ngSwitch]="type">
-  <ng-container *ngSwitchCase="'NON_CLICKABLE'"
-                [ngTemplateOutlet]="nonClickableTagTemplate"></ng-container>
-  <ng-container *ngSwitchCase="'CLICKABLE'"
+  <ng-container *ngSwitchCase="possibleTypes.CLICKABLE"
                 [ngTemplateOutlet]="clickableTagTemplate"></ng-container>
-  <ng-container *ngSwitchCase="'SELECTABLE'"
+  <ng-container *ngSwitchCase="possibleTypes.SELECTABLE"
                 [ngTemplateOutlet]="selectableTagTemplate"></ng-container>
-  <ng-container *ngSwitchCase="'DELETABLE'"
+  <ng-container *ngSwitchCase="possibleTypes.DELETABLE"
                 [ngTemplateOutlet]="deletableTagTemplate"></ng-container>
   <ng-container *ngSwitchDefault
                 [ngTemplateOutlet]="nonClickableTagTemplate"></ng-container>
@@ -15,9 +13,12 @@
   <p [class]="classes">{{label}}</p>
 </ng-template>
 <ng-template #clickableTagTemplate>
-  <a [href]="link"
-     [class]="classes"
-     target="_self">{{label}}</a>
+  <a
+    [routerLink]="[link]"
+    [class]="classes"
+    target="_self">
+    {{ label }}
+  </a>
 </ng-template>
 <ng-template #selectableTagTemplate>
   <button [class]="classes"
@@ -26,7 +27,8 @@
   </button>
 </ng-template>
 <ng-template #deletableTagTemplate>
-  <button *ngIf="!isDeleted" [class]="classes"
+  <button *ngIf="!isDeleted"
+          [class]="classes"
           [attr.aria-label]="'Retirer ' + label"
           (click)="delete()">{{label}}
   </button>
