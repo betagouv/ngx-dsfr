@@ -132,9 +132,7 @@ describe('DsfrTagComponent', () => {
     it('should send a selected event when we select a tag', async () => {
       testHost.testType = TagType.SELECTABLE;
       testHost.testSelected = testSelected;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
+      fixture.detectChanges();
       const button = fixture.debugElement.nativeElement.querySelector(
         'button.fr-tag'
       );
@@ -147,9 +145,7 @@ describe('DsfrTagComponent', () => {
     it('should send a deleted event when we delete a tag', async () => {
       testHost.testType = TagType.DELETABLE;
       testHost.testDeleted = testDeleted;
-      dsfrTagHarness = await harnessLoader.getHarness<DsfrTagHarness>(
-        DsfrTagHarness
-      );
+      fixture.detectChanges();
       const button = fixture.debugElement.nativeElement.querySelector(
         'button.fr-tag'
       );
