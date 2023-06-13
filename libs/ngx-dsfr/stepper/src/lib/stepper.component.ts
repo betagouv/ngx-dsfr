@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 /**
  * TypeScript entities and constants
@@ -18,13 +18,13 @@ export const EMPTY_STEPS_ERROR: string =
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss']
 })
-export class DsfrStepperComponent implements OnInit {
-  @Input() stepTitle = '';
+export class DsfrStepperComponent implements OnChanges {
+  @Input({required: true}) stepTitle!: string;
   @Input() stepNumber = 1;
-  @Input() numberOfSteps!: number;
+  @Input({required: true}) numberOfSteps!: number;
   @Input() nextStepTitle = '';
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if (!this.stepTitle) {
       throw EMPTY_TITLE_ERROR;
     }
