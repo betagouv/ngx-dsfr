@@ -96,11 +96,53 @@ to your `angular.json` or `project.json`, just like stated in the **Pre-requisit
 
 ## Available DSFR Components in this library
 
-| Component | DSFR Documentation | Import path  | Available in this library  |
-|-----------|--------------------|:------------:|:--------------------------:|
-| col 1 is  | left-aligned       |    $1600     |             ✅              |
-| col 2 is  | centered           |     $12      |             🚫             |
-| col 3 is  | right-aligned      |      $1      |                            |
+| **Component**            | **DSFR Documentation**                                                                                          |         **Available in this library**          |          **Import path**          |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------|:----------------------------------------------:|:---------------------------------:|
+| **Accordion**            | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/accordeon                                 |                       🚫                       |               _NA_                |
+| **Alert**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/alerte                                    |                       ✅                        |    `@betagouv/ngx-dsfr/alert`     |
+| **Back to top**          | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/retour-en-haut-de-page                    | ✅ (_as a possible type in the Link Component_) |     `@betagouv/ngx-dsfr/link`     |
+| **Badge**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/badge                                     |                       ✅                        |    `@betagouv/ngx-dsfr/badge`     |
+| **Breadcrumb**           | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/fil-d-ariane                              |                       🚫                       |               _NA_                |
+| **Button**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/bouton                                    |                       ✅                        |    `@betagouv/ngx-dsfr/button`    |
+| **Button group**         | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/groupe-de-boutons                         |                       🚫                       |               _NA_                |
+| **Callout**              | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/mise-en-avant                             |                       🚫                       |               _NA_                |
+| **Card**                 | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/carte                                     |                       🚫                       |               _NA_                |
+| **Checkbox**             | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/case-a-cocher                             |                       ✅                        |   `@betagouv/ngx-dsfr/checkbox`   |
+| **Consent banner**       | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/gestionnaire-de-consentement              |                       🚫                       |               _NA_                |
+| **Content**              | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/contenu-medias                            |                       🚫                       |               _NA_                |
+| **Display**              | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/parametre-d-affichage                     |                       🚫                       |               _NA_                |
+| **Download**             | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/telechargement-de-fichier                 |                       🚫                       |               _NA_                |
+| **Error pages**          | https://www.systeme-de-design.gouv.fr/elements-d-interface/modeles/page-d-erreurs                               |                       ✅                        |  `@betagouv/ngx-dsfr/error-page`  |
+| **Footer**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/pied-de-page                              |                       ✅                        |    `@betagouv/ngx-dsfr/footer`    |
+| **FranceConnect button** | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/bouton-franceconnect                      |                       🚫                       |               _NA_                |
+| **Header**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/en-tete                                   |                       ✅                        |    `@betagouv/ngx-dsfr/header`    |
+| **Highlight**            | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/mise-en-exergue                           |                       🚫                       |               _NA_                |
+| **Input**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/champ-de-saisie                           |                       ✅                        |    `@betagouv/ngx-dsfr/input`     |
+| **Link**                 | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/lien                                      |                       ✅                        |     `@betagouv/ngx-dsfr/link`     |
+| **Modal**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/modale                                    |                       🚫                       |               _NA_                |
+| **Navigation**           | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/navigation-principale                     |                       ✅                        |  `@betagouv/ngx-dsfr/navigation`  |
+| **Newsletter**           | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/lettre-d-information-et-reseaux-sociaux   |                       🚫                       |               _NA_                |
+| **Notice**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/bandeau-d-information-importante          |                       🚫                       |               _NA_                |
+| **Pagination**           | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/pagination                                |                       🚫                       |               _NA_                |
+| **Password**             | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/mot-de-passe                              |                       ✅                        |   `@betagouv/ngx-dsfr/password`   |
+| **Quote**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/citation                                  |                       🚫                       |               _NA_                |
+| **Radio button**         | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/bouton-radio                              |                       ✅                        |    `@betagouv/ngx-dsfr/radio`     |
+| **Radio rich button**    | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/bouton-radio-riche                        |                       🚫                       |               _NA_                |
+| **Search**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/barre-de-recherche                        |                       ✅                        |  `@betagouv/ngx-dsfr/search-bar`  |
+| **Select**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/liste-deroulante                          |                       🚫                       |               _NA_                |
+| **Share**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/partage                                   |                       🚫                       |               _NA_                |
+| **Sidemenu**             | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/menu-lateral                              |                       🚫                       |               _NA_                |
+| **Skiplink**             | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/lien-d-evitement                          |                       🚫                       |               _NA_                |
+| **Stepper**              | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/indicateur-d-etapes                       |                       ✅                        |   `@betagouv/ngx-dsfr/stepper`    |
+| **Summary**              | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/sommaire                                  |                       🚫                       |               _NA_                |
+| **Tab**                  | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/onglet                                    |                       ✅                        |     `@betagouv/ngx-dsfr/tab`      |
+| **Table**                | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/tableau                                   |                       🚫                       |               _NA_                |
+| **Tag**                  | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/tag                                       |                       ✅                        |     `@betagouv/ngx-dsfr/tag`      |
+| **Tile**                 | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/tuile                                     |                       ✅                        |     `@betagouv/ngx-dsfr/tile`     |
+| **Toggle**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/interrupteur                              |                       ✅                        |    `@betagouv/ngx-dsfr/toggle`    |
+| **Transcription**        | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/transcription                             |                       🚫                       |               _NA_                |
+| **Translate**            | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/selecteur-de-langue                       |                       🚫                       |               _NA_                |
+| **Upload**               | https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/ajout-de-fichier                          |                       🚫                       |               _NA_                |
 
 <hr>
 
