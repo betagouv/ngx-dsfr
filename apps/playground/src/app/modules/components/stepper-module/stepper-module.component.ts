@@ -2,7 +2,7 @@
  * Angular imports
  */
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './stepper-module.component.html',
@@ -10,9 +10,9 @@ import { NonNullableFormBuilder } from '@angular/forms';
 })
 export class StepperModuleComponent {
   formStepper = this.formBuilder.group({
-    stepTitle: 'The step\'s title',
+    stepTitle: ['The step\'s title', Validators.required],
     stepNumber: 1,
-    numberOfSteps: 3,
+    numberOfSteps: [3, Validators.required],
     nextStepTitle: 'The next step\'s title'
   });
 
