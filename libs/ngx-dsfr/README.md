@@ -6,7 +6,7 @@ The DSFR is the official Design System to be used in any web app linked to the F
 
 This project is built on top of the [@gouvfr/dsfr](https://www.npmjs.com/package/@gouvfr/dsfr) package and currently uses the version **1.7.2**.
 
-## How to update to a new version of the DSFR ?
+## How to update to a new version of the DSFR while working on this library ?
 
 1. Update the NPM package
    ```shell
@@ -28,7 +28,7 @@ This project is built on top of the [@gouvfr/dsfr](https://www.npmjs.com/package
    npm link @betagouv/ngx-dsfr # Inside the root of this workspace
    ```
 
-## How to use it ?
+## How to use this library ?
 
 ### Pre-requisites
 
@@ -93,6 +93,14 @@ _For instance_, if you need to use the `ancient-gate-fill` icon, you'll first ne
 ```
 
 to your `angular.json` or `project.json`, just like stated in the **Pre-requisites** section.
+
+## Available DSFR Components in this library
+
+| Component | DSFR Documentation | Import path  | Available in this library  |
+|-----------|--------------------|:------------:|:--------------------------:|
+| col 1 is  | left-aligned       |    $1600     |             ✅              |
+| col 2 is  | centered           |     $12      |             🚫             |
+| col 3 is  | right-aligned      |      $1      |                            |
 
 <hr>
 
