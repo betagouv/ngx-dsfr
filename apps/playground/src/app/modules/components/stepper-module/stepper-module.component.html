@@ -76,7 +76,8 @@
             formControlName="stepTitle"
             name="stepTitle"
             label="Current step title"
-            type="string">
+            type="string"
+            [error]="stepperFormErrors['stepTitle']">
           </play-input-property-control>
           <play-input-property-control
             formControlName="stepNumber"
@@ -88,7 +89,8 @@
             formControlName="numberOfSteps"
             name="numberOfSteps"
             label="Number of steps"
-            type="number">
+            type="number"
+            [error]="stepperFormErrors['numberOfSteps']">
           </play-input-property-control>
           <play-input-property-control
             formControlName="nextStepTitle"
