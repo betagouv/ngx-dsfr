@@ -1,6 +1,6 @@
 # Ngx-DSFR
 
-This MonoRepo holds everything pertaining to the development of the adaptation of the official French State Design System
+This MonoRepo holds everything pertaining to the development of the adaptation of the official [French State Design System](https://www.systeme-de-design.gouv.fr/)
 ( _aka **DSFR**_ ).
 
 See individual `README` files in each folder within the `apps/` and `libs/` directories for further details about each of these
