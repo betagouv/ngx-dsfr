@@ -1,5 +1,8 @@
-<div class="fr-tabs">
+<div
+  class="fr-tabs"
+  [style]="'--tabs-height: ' + tabsHeight + 'px'">
   <ul
+    #tabsList
     class="fr-tabs__list"
     role="tablist"
     [attr.aria-label]="ariaLabel">
@@ -18,21 +21,22 @@
       </button>
     </li>
   </ul>
-  <div
-    *ngFor="let tab of tabs; let i = index"
-    [id]="tab.id + '-panel'"
-    class="fr-tabs__panel"
-    [class.fr-tabs__panel--selected]="selectedTab === i"
-    role="tabpanel"
-    [attr.aria-labelledby]="tab.id"
-    tabindex="0">
+  <ng-container *ngFor="let tab of tabs; let i = index">
     <ng-container *ngIf="selectedTab === i">
-      <ng-container *ngIf="isRoutedTab(tab)">
-        <router-outlet></router-outlet>
-      </ng-container>
-      <ng-container *ngIf="!isRoutedTab(tab)">
-        <ng-container [ngTemplateOutlet]="tab.panelContent"></ng-container>
-      </ng-container>
+      <div
+        #selectedTabPanel
+        [id]="tab.id + '-panel'"
+        class="fr-tabs__panel fr-tabs__panel--selected"
+        role="tabpanel"
+        [attr.aria-labelledby]="tab.id"
+        tabindex="0">
+        <ng-container *ngIf="isRoutedTab(tab)">
+          <router-outlet></router-outlet>
+        </ng-container>
+        <ng-container *ngIf="!isRoutedTab(tab)">
+          <ng-container [ngTemplateOutlet]="tab.panelContent"></ng-container>
+        </ng-container>
+      </div>
     </ng-container>
-  </div>
+  </ng-container>
 </div>
