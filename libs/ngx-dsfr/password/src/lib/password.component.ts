@@ -11,7 +11,6 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ButtonType } from '@betagouv/ngx-dsfr/button';
 
 /**
  * TypeScript entities and constants
@@ -86,12 +85,10 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
   autocomplete: string = '';
   inputGroupClasses: Record<string, boolean> = {};
   inputClasses: Record<string, boolean> = {};
-  buttonType: typeof ButtonType = ButtonType;
-  buttonDisplayPasswordText: string = 'Afficher';
-  buttonDisplayPasswordIcon: string = 'eye-fill';
   capslockKeyActive: boolean | null = null;
   hasFailed: boolean = false;
   hasSucceeded: boolean = false;
+  isPasswordDisplayed: boolean = false;
 
   private _value!: string;
 
@@ -157,12 +154,10 @@ export class DsfrPasswordComponent implements ControlValueAccessor, OnInit, OnCh
   displayPassword(): void {
     if ( this.inputType === 'password' ) {
       this.inputType = 'text';
-      this.buttonDisplayPasswordText = 'Masquer';
-      this.buttonDisplayPasswordIcon = 'eye-off-fill';
+      this.isPasswordDisplayed = true;
     } else {
       this.inputType = 'password';
-      this.buttonDisplayPasswordText = 'Afficher';
-      this.buttonDisplayPasswordIcon = 'eye-fill';
+      this.isPasswordDisplayed = false;
     }
   }
 

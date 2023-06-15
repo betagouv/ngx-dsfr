@@ -2,13 +2,17 @@
  * Angular imports
  */
 import {
-  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
   Component,
   ContentChildren,
+  ElementRef,
   Input,
   OnChanges,
   QueryList,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -36,7 +40,9 @@ export const EMPTY_ARIALABEL_ERROR: string =
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss']
 })
-export class DsfrTabComponent implements OnChanges, AfterContentChecked {
+export class DsfrTabComponent
+  implements OnChanges, AfterContentInit, AfterViewInit
+{
   @Input({ required: true })
   ariaLabel!: string;
 
@@ -47,10 +53,17 @@ export class DsfrTabComponent implements OnChanges, AfterContentChecked {
   initiallySelectedTab: number = 0;
 
   @ContentChildren(DsfrProjectedTabDirective)
-  projectedTabs: QueryList<DsfrProjectedTabDirective> | undefined;
+  projectedTabs!: QueryList<DsfrProjectedTabDirective>;
+
+  @ViewChild('tabsList', { static: true })
+  tabsList!: ElementRef<HTMLElement>;
+
+  @ViewChildren('selectedTabPanel')
+  selectedTabPanel: QueryList<ElementRef<HTMLElement>> | undefined;
 
   selectedTab: number = this.initiallySelectedTab;
   tabs: (RoutedTabDefinition | ProjectedTabDefinition)[] = [];
+  tabsHeight: number = 48;
 
   constructor(
     private readonly router: Router,
@@ -66,10 +79,10 @@ export class DsfrTabComponent implements OnChanges, AfterContentChecked {
     }
   }
 
-  ngAfterContentChecked(): void {
-    if (this.routedTabs.length > 0) {
+  ngAfterContentInit(): void {
+    if (this.routedTabs.length > 0 && this.tabs.length === 0) {
       this.initRoutedTabs();
-    } else if (this.projectedTabs) {
+    } else if (this.projectedTabs.length > 0) {
       // If we're using projected tabs...
       this.tabs = this.projectedTabs.map(
         (projectedTab: DsfrProjectedTabDirective) => {
@@ -80,6 +93,16 @@ export class DsfrTabComponent implements OnChanges, AfterContentChecked {
         }
       );
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.setTabsHeight();
+
+    this.selectedTabPanel!.changes.subscribe({
+      next: () => {
+        this.setTabsHeight();
+      }
+    });
   }
 
   private initRoutedTabs(): void {
@@ -120,6 +143,15 @@ export class DsfrTabComponent implements OnChanges, AfterContentChecked {
     tab: RoutedTabDefinition | ProjectedTabDefinition
   ): tab is RoutedTabDefinition {
     return 'route' in tab;
+  }
+
+  private setTabsHeight(): void {
+    const tabsListHeight = this.tabsList.nativeElement.offsetHeight;
+    const selectedTabPanelHeight =
+      this.selectedTabPanel!.first.nativeElement.offsetHeight;
+    setTimeout(() => {
+      this.tabsHeight = tabsListHeight + selectedTabPanelHeight;
+    }, 0);
   }
 
   private navigateToRoutedTab(route: string): void {
