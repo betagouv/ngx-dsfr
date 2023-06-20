@@ -4,6 +4,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ObserversModule } from '@angular/cdk/observers';
 
 /**
  * Internal imports
@@ -18,7 +19,7 @@ import { TestHostComponent } from './testing/test-host.component';
 const exportableDeclarables = [DsfrTabComponent, DsfrProjectedTabDirective];
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ObserversModule],
   declarations: [...exportableDeclarables, TestHostComponent],
   exports: exportableDeclarables
 })

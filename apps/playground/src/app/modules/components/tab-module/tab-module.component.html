@@ -123,6 +123,23 @@
       <code>DsfrProjectedTabDirective</code>s, of the tab that should be
       pre-selected
     </play-input-property-definition>
+    <play-input-property-definition
+      name="dynamicHeight"
+      default="false"
+      type="It takes a boolean">
+      <p>
+        By default, if the Component displays panels with a height that can
+        change during its lifecycle ( maybe more content can be added to it ),
+        this is <b>NOT</b> taken into account and the overall height will be the
+        one of the <b>currently</b> selected panel <b>WHEN</b> its tab was
+        clicked upon.
+      </p>
+      <p>
+        Give this property a value of <code>true</code> to make sure that height
+        of the <b>currently</b> selected panel is tracked for the whole time it
+        is being displayed.
+      </p>
+    </play-input-property-definition>
   </dl>
 </section>
 

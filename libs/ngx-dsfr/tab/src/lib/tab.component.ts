@@ -4,6 +4,7 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
@@ -52,6 +53,9 @@ export class DsfrTabComponent
   @Input()
   initiallySelectedTab: number = 0;
 
+  @Input()
+  dynamicHeight: boolean = false;
+
   @ContentChildren(DsfrProjectedTabDirective)
   projectedTabs!: QueryList<DsfrProjectedTabDirective>;
 
@@ -67,7 +71,8 @@ export class DsfrTabComponent
 
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -139,6 +144,12 @@ export class DsfrTabComponent
     }
   }
 
+  onTabPanelContentChanged(): void {
+    if (this.dynamicHeight) {
+      this.setTabsHeight();
+    }
+  }
+
   isRoutedTab(
     tab: RoutedTabDefinition | ProjectedTabDefinition
   ): tab is RoutedTabDefinition {
@@ -151,6 +162,7 @@ export class DsfrTabComponent
       this.selectedTabPanel!.first.nativeElement.offsetHeight;
     setTimeout(() => {
       this.tabsHeight = tabsListHeight + selectedTabPanelHeight;
+      this.cdr.detectChanges();
     }, 0);
   }
 
