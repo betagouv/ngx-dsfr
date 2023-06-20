@@ -52,9 +52,10 @@ export class DsfrTabHarness extends ComponentHarness {
    * Retrieves the text inside a Panel
    * in the DsfrTabComponent's Template
    *
-   * @returns A Promise that resolves to the text of a Panel as a string or null
+   * @returns A Promise that resolves to the text of a Panel as a string or null,
+   * if the text isn't found, or undefined, if the panel isn't found
    */
-  async getPanelText(panelIndex: number): Promise<string | null> {
+  async getPanelText(panelIndex: number): Promise<string | null | undefined> {
     return (await this.getPanels())[panelIndex]?.text();
   }
 }

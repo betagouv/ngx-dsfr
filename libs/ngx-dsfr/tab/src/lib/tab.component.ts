@@ -87,7 +87,7 @@ export class DsfrTabComponent
   ngAfterContentInit(): void {
     if (this.routedTabs.length > 0 && this.tabs.length === 0) {
       this.initRoutedTabs();
-    } else if (this.projectedTabs.length > 0) {
+    } else if (this.projectedTabs.length > 0 && this.tabs.length === 0) {
       // If we're using projected tabs...
       this.tabs = this.projectedTabs.map(
         (projectedTab: DsfrProjectedTabDirective) => {
