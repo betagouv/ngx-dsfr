@@ -25,6 +25,7 @@
     <ng-container *ngIf="selectedTab === i">
       <div
         #selectedTabPanel
+        (cdkObserveContent)="onTabPanelContentChanged()"
         [id]="tab.id + '-panel'"
         class="fr-tabs__panel fr-tabs__panel--selected"
         role="tabpanel"

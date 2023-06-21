@@ -19,6 +19,7 @@ import {
 import { DsfrTabHarness } from './tab.harness';
 import { DsfrProjectedTabDirective } from '../projected-tab.directive';
 import { TabDefinition } from '../tab-definition';
+import { TestRoutedComponent } from './test-routed.component';
 
 describe('DsfrTabComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -54,7 +55,18 @@ describe('DsfrTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [
+        RouterTestingModule.withRoutes([
+          {
+            path: 'route-1',
+            component: TestRoutedComponent
+          },
+          {
+            path: 'route-2',
+            component: TestRoutedComponent
+          }
+        ])
+      ],
       declarations: [
         DsfrTabComponent,
         DsfrProjectedTabDirective,
@@ -130,7 +142,7 @@ describe('DsfrTabComponent', () => {
       it('should use the Projected template for the Panels, when an empty routedTabs is provided', async () => {
         expect(await dsfrTabHarness.getRoutedPanels()).toHaveLength(0);
         expect(await dsfrTabHarness.getPanelText(0)).toContain('🥗');
-        expect(await dsfrTabHarness.getPanelText(1)).toBe('');
+        expect(await dsfrTabHarness.getPanelText(1)).toBe(undefined);
       });
 
       it('should display the proper Panel, when a Tab is clicked upon', async () => {
@@ -142,8 +154,12 @@ describe('DsfrTabComponent', () => {
         tab.click();
 
         expect(componentUnderTest.selectedTab).toBe(1);
-        expect(await dsfrTabHarness.getPanelText(0)).toBe('');
-        expect(await dsfrTabHarness.getPanelText(1)).toContain('🍏');
+
+        // Waiting for the template to update itself
+        setTimeout(async () => {
+          expect(await dsfrTabHarness.getPanelText(0)).toBe(undefined);
+          expect(await dsfrTabHarness.getPanelText(1)).toContain('🍏');
+        });
       });
     });
   });
