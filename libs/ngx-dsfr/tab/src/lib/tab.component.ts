@@ -101,7 +101,9 @@ export class DsfrTabComponent
   }
 
   ngAfterViewInit(): void {
-    this.setTabsHeight();
+    setTimeout(() => {
+      this.setTabsHeight();
+    }, 0);
 
     this.selectedTabPanel!.changes.subscribe({
       next: () => {
@@ -160,10 +162,8 @@ export class DsfrTabComponent
     const tabsListHeight = this.tabsList.nativeElement.offsetHeight;
     const selectedTabPanelHeight =
       this.selectedTabPanel!.first.nativeElement.offsetHeight;
-    setTimeout(() => {
-      this.tabsHeight = tabsListHeight + selectedTabPanelHeight;
-      this.cdr.detectChanges();
-    }, 0);
+    this.tabsHeight = tabsListHeight + selectedTabPanelHeight;
+    this.cdr.detectChanges();
   }
 
   private navigateToRoutedTab(route: string): void {
