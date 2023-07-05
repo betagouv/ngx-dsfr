@@ -90,6 +90,12 @@
       It will display the autocompletion of the search
     </play-input-property-definition>
     <play-input-property-definition
+      name="miniMobileHeader"
+      default="false"
+      type="It takes a boolean">
+      It will display a minimalistic header on mobile if set to true.
+    </play-input-property-definition>
+    <play-input-property-definition
       name="searchQuerySubmitted()"
       default="false"
       type="Output()">
@@ -131,6 +137,12 @@
             label="Application description"
             type="string">
           </play-input-property-control>
+          <play-input-property-control
+            formControlName="miniMobileHeader"
+            name="miniMobileHeader"
+            label="Mini mobile header"
+            type="boolean">
+          </play-input-property-control>
           <button
             mat-raised-button
             color="accent"
@@ -146,7 +158,8 @@
             [appName]="formHeaderWithAppName.getRawValue().appName"
             [appDescription]="
               formHeaderWithAppName.getRawValue().appDescription
-            "></dsfr-header>
+            "
+            [miniMobileHeader]="formHeaderWithAppName.getRawValue().miniMobileHeader"></dsfr-header>
         </play-simulator>
       </div>
     </mat-card-content>
@@ -189,6 +202,12 @@
             [error]="errors['formHeaderWithLogo']"
             type="string">
           </play-input-property-control>
+          <play-input-property-control
+            formControlName="miniMobileHeader"
+            name="miniMobileHeader"
+            label="Mini mobile header"
+            type="boolean">
+          </play-input-property-control>
           <button
             mat-raised-button
             color="accent"
@@ -204,7 +223,8 @@
             [appName]="formHeaderWithLogo.getRawValue().appName"
             [appDescription]="formHeaderWithLogo.getRawValue().appDescription"
             operatorLogoSrc="assets/illustrations/Logo ANCT.svg"
-            [operatorLogoAlt]="formHeaderWithLogo.getRawValue().operatorLogoAlt">
+            [operatorLogoAlt]="formHeaderWithLogo.getRawValue().operatorLogoAlt"
+            [miniMobileHeader]="formHeaderWithLogo.getRawValue().miniMobileHeader">
           </dsfr-header>
         </play-simulator>
       </div>
@@ -240,14 +260,15 @@
           title="The documentation page for content projection in Angular"
           href="https://angular.io/guide/content-projection">
           content projection
-          <mat-icon>open_in_new</mat-icon> </a
+          <mat-icon>open_in_new</mat-icon>
+        </a
         >.
       </p>
       <p>Example:</p>
       <pre>
         &lt;dsfr-header
           appName="My wonderful app 😃"&gt;
-          <span class='highlight-code'>&lt;ng-template dsfrHeaderAction&gt;</span>
+          <span class="highlight-code">&lt;ng-template dsfrHeaderAction&gt;</span>
               &lt;dsfr-link
                 label="Être tenu informé"
                 link="./"
@@ -256,8 +277,8 @@
                 icon="notification-3-line"
                 [iconAlignment]="iconAlignment.LEFT"&gt;
               &lt;/dsfr-link&gt;
-          <span class='highlight-code'>&lt;/ng-template&gt;</span>
-          <span class='highlight-code'>&lt;ng-template dsfrHeaderAction&gt;</span>
+          <span class="highlight-code">&lt;/ng-template&gt;</span>
+          <span class="highlight-code">&lt;ng-template dsfrHeaderAction&gt;</span>
               &lt;dsfr-link
                 label="Aide et documentation"
                 link="./"
@@ -265,16 +286,16 @@
                 icon="information-line"
                 [iconAlignment]="iconAlignment.LEFT"&gt;
               &lt;/dsfr-link&gt;
-          <span class='highlight-code'>&lt;/ng-template&gt;</span>
-          <span class='highlight-code'>&lt;ng-template dsfrHeaderAction&gt;</span>
+          <span class="highlight-code">&lt;/ng-template&gt;</span>
+          <span class="highlight-code">&lt;ng-template dsfrHeaderAction&gt;</span>
               &lt;dsfr-button
                 label="Se connecter"
                 [type]="buttonTypes.TERTIARY"
                 icon="account-line"
                 [iconAlignment]="iconAlignment.LEFT"&gt;
               &lt;/dsfr-button&gt;
-          <span class='highlight-code'>&lt;/ng-template&gt;</span>
-          <span class='highlight-code'>&lt;dsfr-navigation [navigation]="navigation"&gt;&lt;/dsfr-navigation&gt;</span>
+          <span class="highlight-code">&lt;/ng-template&gt;</span>
+          <span class="highlight-code">&lt;dsfr-navigation [navigation]="navigation"&gt;&lt;/dsfr-navigation&gt;</span>
         &lt;/dsfr-header&gt;
       </pre>
       <div class="settings">
@@ -312,7 +333,13 @@
             [error]="errors['formHeaderComplete']"
             type="string">
           </play-input-property-control>
-            <button
+          <play-input-property-control
+            formControlName="miniMobileHeader"
+            name="miniMobileHeader"
+            label="Mini mobile header"
+            type="boolean">
+          </play-input-property-control>
+          <button
             mat-raised-button
             color="accent"
             (click)="formHeaderComplete.reset()">
@@ -328,7 +355,8 @@
             [appDescription]="formHeaderComplete.getRawValue().appDescription"
             operatorLogoSrc="assets/illustrations/Logo ANCT.svg"
             [searchBar]="formHeaderComplete.getRawValue().searchBar"
-            [operatorLogoAlt]="formHeaderComplete.getRawValue().operatorLogoAlt">
+            [operatorLogoAlt]="formHeaderComplete.getRawValue().operatorLogoAlt"
+            [miniMobileHeader]="formHeaderComplete.getRawValue().miniMobileHeader">
             <ng-template dsfrHeaderAction>
               <dsfr-link
                 label="Être tenu informé"

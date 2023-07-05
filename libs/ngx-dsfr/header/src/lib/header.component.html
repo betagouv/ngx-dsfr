@@ -22,7 +22,22 @@
                 </a>
               </ng-template>
               <ng-template #logo>
-                <p class="fr-logo">
+                <div *ngIf="appName"
+                     class="fr-logo"
+                     [class]="{'mini-mobile-header': miniMobileHeader, 'mini-mobile-header__hidden': !miniMobileHeader}">
+                  <a
+                    [routerLink]="link"
+                    [title]="appLinkTitle">
+                    <p class="fr-header__service-title">{{ appName }}</p>
+                  </a>
+                  <p
+                    class="fr-header__service-tagline"
+                    *ngIf="appDescription">
+                    {{ appDescription }}
+                  </p>
+                </div>
+                <p class="fr-logo"
+                   [class]="{'mini-mobile-header__app-name': miniMobileHeader}">
                   <ng-container
                     *ngFor="let string of institutionArray; last as isLast">
                     {{ string }} <br *ngIf="!isLast" />
@@ -74,6 +89,7 @@
             </div>
           </div>
           <div
+            [class]="{'mini-mobile-header__app-name': miniMobileHeader}"
             class="fr-header__service"
             *ngIf="appName">
             <a
@@ -120,7 +136,7 @@
                 [autocomplete]="searchBarAutoCompletion"
                 [hasSearchButton]="true"
                 [size]="elementSize.SMALL"
-                (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
+                (searchQuerySubmitted)="onSearchQuerySubmitted($event)">
               </dsfr-search-bar>
             </div>
           </div>

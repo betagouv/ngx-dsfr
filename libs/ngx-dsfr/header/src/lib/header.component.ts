@@ -46,11 +46,11 @@ export class DsfrHeaderComponent implements OnInit, OnChanges {
   @Input() link: string = '/';
   @Input() searchBar: boolean = false;
   @Input() searchBarAutoCompletion: boolean = false;
+  @Input() miniMobileHeader: boolean = false;
 
   @Output() searchQuerySubmitted = new EventEmitter<string>();
 
-  @ContentChildren(DsfrHeaderActionDirective)
-  actions!: QueryList<DsfrHeaderActionDirective>;
+  @ContentChildren(DsfrHeaderActionDirective) actions!: QueryList<DsfrHeaderActionDirective>;
   @ContentChild(DsfrNavigationComponent) nav?: DsfrNavigationComponent;
 
   institutionArray!: string[];
@@ -96,5 +96,4 @@ export class DsfrHeaderComponent implements OnInit, OnChanges {
   onSearchQuerySubmitted(value: string): void {
     this.searchQuerySubmitted.emit(value);
   }
-
 }

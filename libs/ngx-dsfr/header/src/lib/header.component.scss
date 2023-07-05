@@ -5,6 +5,37 @@
 
 // Actual styling
 .fr-header {
+  .mini-mobile-header {
+    display: flex;
+    align-items: center;
+    text-transform: none;
+
+    &::before {
+      margin-bottom: -0.1rem;
+      margin-right: 1rem;
+    }
+
+    &::after {
+      background: none;
+      content: none;
+    }
+
+    @media (min-width: 62em) {
+      display: none;
+    }
+  }
+
+  .mini-mobile-header__hidden {
+    display: none;
+  }
+
+  .mini-mobile-header__app-name {
+    display: none;
+    @media (min-width: 62em) {
+      display: block;
+    }
+  }
+
   .fr-header__actions {
     display: flex;
     flex-wrap: wrap;
@@ -37,7 +68,6 @@
   }
 
   .fr-modal {
-
     @media (min-width: 62em) {
       margin-top: 26px;
     }
@@ -50,5 +80,4 @@
       }
     }
   }
-
 }
