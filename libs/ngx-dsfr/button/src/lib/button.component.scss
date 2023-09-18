@@ -8,5 +8,9 @@
   button.fr-btn {
     width: var(--dsfr-button-width, fit-content);
     justify-content: center;
+
+    &.icon-only:before {
+      margin-right: 0;
+    }
   }
 }
