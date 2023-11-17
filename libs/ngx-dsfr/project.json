@@ -16,7 +16,8 @@
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/libs/ngx-dsfr"],
       "options": {
-        "project": "libs/ngx-dsfr/ng-package.json"
+        "project": "libs/ngx-dsfr/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "configurations": {
         "production": {
