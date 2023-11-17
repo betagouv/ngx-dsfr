@@ -1,13 +1,6 @@
 {
   "migrations": [
     {
-      "version": "17.0.0-rc.1",
-      "description": "Migration for v17.0.0-rc.1",
-      "implementation": "./src/migrations/update-17-0-0/rm-default-collection-npm-scope",
-      "package": "nx",
-      "name": "rm-default-collection-npm-scope"
-    },
-    /*{
       "cli": "nx",
       "version": "16.4.0-beta.10",
       "description": "Remove tsconfig.e2e.json and add settings to project tsconfig.json. tsConfigs executor option is now deprecated. The project level tsconfig.json file should be used instead.",
@@ -15,7 +8,7 @@
       "package": "@nx/cypress",
       "name": "update-16-3-0-remove-old-tsconfigs"
     },
-    {
+    /*{
       "cli": "nx",
       "version": "16.8.0-beta.4",
       "description": "Update to Cypress v13. Most noteable change is video recording is off by default. This migration will only update if the workspace is already on Cypress v12. https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-130",
