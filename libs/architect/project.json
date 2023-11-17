@@ -47,8 +47,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/architect"],
       "options": {
-        "jestConfig": "libs/architect/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/architect/jest.config.ts"
       }
     }
   },

@@ -111,8 +111,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/playground"],
       "options": {
-        "jestConfig": "apps/playground/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/playground/jest.config.ts"
       }
     }
   },

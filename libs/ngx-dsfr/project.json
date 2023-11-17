@@ -79,8 +79,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/ngx-dsfr"],
       "options": {
-        "jestConfig": "libs/ngx-dsfr/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/ngx-dsfr/jest.config.ts"
       }
     },
     "lint": {
