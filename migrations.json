@@ -2,21 +2,13 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "16.8.0-beta.4",
-      "description": "Update to Cypress v13. Most noteable change is video recording is off by default. This migration will only update if the workspace is already on Cypress v12. https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-130",
-      "implementation": "./src/migrations/update-16-8-0/cypress-13",
-      "package": "@nx/cypress",
-      "name": "update-16-8-0-cypress-13"
-    },
-    /*{
-      "cli": "nx",
       "version": "16.5.0-beta.2",
       "description": "Add test-setup.ts to ignored files in production input",
       "implementation": "./src/migrations/update-16-5-0/add-test-setup-to-inputs-ignore",
       "package": "@nx/jest",
       "name": "add-test-setup-to-inputs-ignore"
     },
-    {
+    /*{
       "version": "17.1.0-beta.2",
       "description": "Move jest executor options to nx.json targetDefaults",
       "implementation": "./src/migrations/update-17-1-0/move-options-to-target-defaults",
