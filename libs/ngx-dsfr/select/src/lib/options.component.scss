@@ -1,0 +1,116 @@
+:host {
+  width: 100%;
+}
+
+.options-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid #E3E3FD;
+  background: #FFF;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 36, 0.12);
+}
+
+.option-wrapper {
+  cursor: pointer;
+  align-self: stretch;
+  height: 48px;
+  background: #FFF;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+
+  &:hover {
+    background-color: #EEE;
+  }
+}
+
+.option-container {
+  align-self: stretch;
+  height: 48px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.option-label-container {
+  align-self: stretch;
+  padding: 12px 16px 11px;
+  justify-content: flex-start;
+  align-items: center;
+  display: inline-flex;
+}
+
+.option-label {
+  flex: 1 1 0;
+  font-size: 14px;
+  font-family: Marianne, sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  word-wrap: break-word;
+}
+
+.option-label-selected {
+  color: #000091;
+}
+
+.option-label-unselected {
+  color: #161616;
+}
+
+.divider-container {
+  align-self: stretch;
+  height: 1px;
+  padding-left: 16px;
+  padding-right: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.divider {
+  align-self: stretch;
+  height: 1px;
+  background: #DDDDDD;
+}
+
+.icon-wrapper {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.fr-icon-check-line {
+  color: #000091;
+}
+
+.fr-icon-check-line::before {
+  content: "";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --idle: transparent;
+  --hover: var(--background-default-grey-hover);
+  --active: var(--background-default-grey-active);
+  color: var(--text-default-grey);
+  font-family: Marianne, arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-mask-image: url("../../../assets/icons/system/check-line.svg");
+  mask-image: url("../../../assets/icons/system/check-line.svg");
+  --icon-size: 1.5rem;
+  background-color: #000091;
+  display: inline-block;
+  flex: 0 0 auto;
+  height: var(--icon-size);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  vertical-align: calc((0.75em - var(--icon-size)) * .5);
+  width: var(--icon-size);
+}

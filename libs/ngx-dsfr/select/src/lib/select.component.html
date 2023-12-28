@@ -1,0 +1,44 @@
+<div class="fr-select-group"
+     [ngClass]="divClasses">
+  <label class="fr-label"
+         [for]="id">
+    {{ label }}
+    @if (hint) {
+      <span class="fr-hint-text">{{ hint }}</span>
+    }
+  </label>
+
+  <div class="fr-select"
+       [ngClass]="selectClasses"
+       #selectOverlayOrigin
+       [attr.aria-labelledby]="ariaLabelledBy"
+       [id]="id"
+       (click)="toggleDropdown()">
+    {{ placeholder }}
+  </div>
+
+  @if (hasFailed) {
+    <p [id]="id + '-desc-error'"
+       class="fr-error-text">
+      {{ failureMessage }}
+    </p>
+  }
+
+  @if (hasSucceeded) {
+    <p [id]="id + '-desc-valid'"
+       class="fr-valid-text">
+      {{ successMessage }}
+    </p>
+  }
+  @if (showSelectedOptions) {
+    <div class="selected-wrapper">
+      @for (option of values;track option) {
+        <dsfr-tag
+          [label]="option"
+          [type]="tagType"
+          (deleted)="onOptionDeleted(option)">
+        </dsfr-tag>
+      }
+    </div>
+  }
+</div>

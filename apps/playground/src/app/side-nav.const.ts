@@ -86,6 +86,10 @@ export const SIDE_NAV: NavItem[] = [
       {
         label: 'Toggle',
         path: '/modules/toggle'
+      },
+      {
+        label: 'Select',
+        path: '/modules/select'
       }
     ]
   }

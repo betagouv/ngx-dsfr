@@ -1,0 +1,23 @@
+<div class="options-panel">
+  @for (option of options;track option.id) {
+    <div class="option-wrapper"
+         (click)="selectOption(option)">
+      <div class="option-container">
+        <div class="option-label-container">
+          <div class="option-label">
+            <span [class]="{'option-label-selected': selected.includes(option.label), 'option-label-unselected': !selected.includes(option.label)}">{{ option.label }}</span>
+          </div>
+          @if (selected.includes( option.label )) {
+            <div class="icon-wrapper">
+              <span class="fr-icon-check-line"
+                    aria-hidden="true"></span>
+            </div>
+          }
+        </div>
+        <div class="divider-container">
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

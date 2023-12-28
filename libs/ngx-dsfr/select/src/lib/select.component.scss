@@ -1,0 +1,26 @@
+@use "@gouvfr/dsfr/dist/component/form/form.min";
+@use "@gouvfr/dsfr/dist/component/select/select.min";
+@use "@gouvfr/dsfr/dist/component/tag/tag.min.css";
+
+.fr-select {
+  cursor: pointer;
+}
+
+.fr-select--disabled {
+  --data-uri-svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns= 'http://www.w3.org/2000/svg' viewBox= '0 0 24 24' %3E%3Cpath fill= '%23929292' d= 'm12 13.1 5-4.9 1.4 1.4-6.4 6.3-6.4-6.4L7 8.1l5 5z' /%3E%3C/svg%3E");
+  background-image: var(--data-uri-svg);
+  box-shadow: inset 0 -2px 0 0 var(--border-disabled-grey);
+  color: var(--text-disabled-grey);
+  cursor: not-allowed;
+}
+
+.selected-wrapper {
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  dsfr-tag {
+    padding: 4px 2px;
+  }
+}
