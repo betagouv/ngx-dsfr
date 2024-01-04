@@ -60,6 +60,8 @@ import { RoutedContent1Component } from './components/routed-content/routed-cont
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 import { TagModuleComponent } from './components/tag-module/tag-module.component';
+import { UploadModuleComponent } from './components/upload-module/upload-module.component';
+import { DsfrUploadModule } from '@betagouv/ngx-dsfr/upload';
 
 @NgModule({
   imports: [
@@ -83,6 +85,7 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
     DsfrToggleModule,
     DsfrTabModule,
     DsfrTagModule,
+    DsfrUploadModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -109,6 +112,7 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
     ToggleModuleComponent,
     TabModuleComponent,
     TagModuleComponent,
+    UploadModuleComponent,
     RoutedContent1Component,
     RoutedContent2Component,
     RoutedContent3Component

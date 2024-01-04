@@ -1,0 +1,27 @@
+// Imports
+@use "variables" as var;
+
+// Actual styling
+.simulation {
+  display: flex;
+  padding: var.$default-padding;
+
+  & > * {
+    flex: 1;
+  }
+
+  .settings {
+    margin-right: var.$default-margin;
+
+    hr {
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.5);
+      margin: 8px auto 20px;
+      width: 50%;
+    }
+
+    button {
+      margin-top: var.$default-margin;
+    }
+  }
+}

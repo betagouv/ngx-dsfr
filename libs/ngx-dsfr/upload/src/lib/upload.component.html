@@ -1,0 +1,23 @@
+<div class="fr-upload-group">
+  <label class="fr-label" for="file-upload">
+    @if (isMultipeFiles) {
+      Ajouter des fichiers
+    } @else {
+      Ajouter un fichier
+    }
+    @if (hint) {
+      <span class="fr-hint-text">
+      {{ hint }}
+    </span>
+    }
+  </label>
+  <input
+    class="fr-upload"
+    type="file"
+    id="file-upload"
+    name="file-upload"
+    [multiple]="isMultipeFiles">
+  <p id="file-upload-with-error-desc-error" class="fr-error-text">
+    Format de fichier non supporté
+  </p>
+</div>
