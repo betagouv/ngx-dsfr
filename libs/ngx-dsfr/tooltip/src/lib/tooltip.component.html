@@ -1,0 +1,34 @@
+<ng-container [ngSwitch]="triggerOn">
+  <ng-container *ngSwitchCase="possibleTriggerTypes.HOVER"
+                [ngTemplateOutlet]="hoverTooltipTemplate"></ng-container>
+  <ng-container *ngSwitchCase="possibleTriggerTypes.CLICK"
+                [ngTemplateOutlet]="clickTooltipTemplate"></ng-container>
+</ng-container>
+
+<ng-template #hoverTooltipTemplate>
+  <a class="fr-link"
+     [attr.aria-describedby]="id"
+     aria-describedby="tooltip-2989"
+     href
+     (click)="onLinkCLick($event)"
+     (mouseover)="showTooltip($event)"
+     (mouseout)="hideTooltip()">
+    {{ triggerText }}
+  </a>
+</ng-template>
+<ng-template #clickTooltipTemplate>
+  <button class="fr-btn--tooltip fr-btn"
+          (click)="onButtonCLick($event)"
+          [attr.aria-describedby]="id">
+    {{ triggerText }}
+  </button>
+</ng-template>
+
+<span class="fr-tooltip fr-placement fr-placement--top"
+      [ngClass]="{'fr-tooltip--shown' :isTooltipShown}"
+      [ngStyle]="{'transform': 'translate(calc(-50% - ' + tooltipCarriersHalfWidth + 'px), -90%)'}"
+      [id]="id"
+      role="tooltip"
+      aria-hidden="true">
+  {{ tooltipText }}
+</span>
