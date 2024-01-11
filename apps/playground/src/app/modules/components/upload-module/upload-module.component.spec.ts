@@ -6,18 +6,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 /**
  * Internal imports
  */
-import { LinkModuleComponent } from './link-module.component';
+import { UploadModuleComponent } from './upload-module.component';
 
-describe('LinkModuleComponent', () => {
-  let component: LinkModuleComponent;
-  let fixture: ComponentFixture<LinkModuleComponent>;
+describe('UploadModuleComponent', () => {
+  let component: UploadModuleComponent;
+  let fixture: ComponentFixture<UploadModuleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LinkModuleComponent]
+      declarations: [UploadModuleComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LinkModuleComponent);
+    fixture = TestBed.createComponent(UploadModuleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

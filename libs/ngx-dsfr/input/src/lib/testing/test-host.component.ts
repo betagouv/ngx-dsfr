@@ -2,6 +2,10 @@
  * Angular imports
  */
 import { Component, Input } from '@angular/core';
+
+/**
+ * Internal imports
+ */
 import { InputType } from '../input.component';
 
 @Component({
@@ -28,7 +32,7 @@ export class TestHostComponent {
   @Input() testType: InputType = 'text';
   @Input() testPlaceholder: string = '';
   @Input() testHasFailed = false;
-  @Input() testFailureMessage: string | undefined;;
+  @Input() testFailureMessage: string | undefined;
   @Input() testHasSucceeded = false;
   @Input() testSuccessMessage: string | undefined;
   @Input() testIcon?: string | undefined;

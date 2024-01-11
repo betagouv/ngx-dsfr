@@ -1,10 +1,8 @@
-<div class="fr-upload-group">
-  <label class="fr-label" for="file-upload">
-    @if (isMultipeFiles) {
-      Ajouter des fichiers
-    } @else {
-      Ajouter un fichier
-    }
+<div
+  class="fr-upload-group"
+  [ngClass]="inputGroupClasses">
+  <label class="fr-label" [for]="id">
+    {{ label  }}
     @if (hint) {
       <span class="fr-hint-text">
       {{ hint }}
@@ -14,10 +12,15 @@
   <input
     class="fr-upload"
     type="file"
-    id="file-upload"
-    name="file-upload"
-    [multiple]="isMultipeFiles">
-  <p id="file-upload-with-error-desc-error" class="fr-error-text">
-    Format de fichier non supporté
-  </p>
+    [id]="id"
+    [name]="name ? name : ''"
+    [attr.aria-describedby]="ariaDescribedby"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    [(ngModel)]="value">
+  @if (hasFailed) {
+    <p [id]="id + '-error'" class="fr-error-text">
+      {{ failureMessage }}
+    </p>
+  }
 </div>

@@ -1,27 +1,56 @@
 // Imports
+@use "@angular/material" as mat;
 @use "variables" as var;
 
+// Variables
+$primary-palette: mat.$pink-palette;
+$primary-color: mat.get-color-from-palette($primary-palette, A200);
+
 // Actual styling
-.simulation {
-  display: flex;
-  padding: var.$default-padding;
+.module-simulations {
+  margin-top: 2 * var.$default-margin;
 
-  & > * {
-    flex: 1;
-  }
+  .mat-mdc-card {
+    margin: var.$default-margin 0 2 * var.$default-margin;
 
-  .settings {
-    margin-right: var.$default-margin;
+    .simulation {
+      display: flex;
+      flex-direction: column;
+      padding: var.$default-padding;
 
-    hr {
-      height: 1px;
-      background-color: rgba(255, 255, 255, 0.5);
-      margin: 8px auto 20px;
-      width: 50%;
+      & > * {
+        flex: 1;
+      }
+
+      .simulator-wrapper {
+        background: white;
+        padding: 2rem;
+      }
+
+      .highlight-code {
+        color: $primary-color;
+        font-weight: bold;
+        letter-spacing: 0.02rem;
+      }
+
+      .settings {
+        margin-right: var.$default-margin;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          button {
+            margin: var.$default-margin;
+            align-self: flex-end;
+          }
+        }
+      }
     }
-
-    button {
-      margin-top: var.$default-margin;
-    }
   }
+}
+
+hr {
+  margin-top: 25px;
 }

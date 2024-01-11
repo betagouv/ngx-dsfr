@@ -9,7 +9,7 @@ import {
 
 /**
  * This class inherits from ComponentHarness and its purpose
- * is to serve as a wrapper around an instance of DsfrFooterComponent
+ * is to serve as a wrapper around an instance of DsfrUploadComponent
  * within Unit Tests
  *
  * To see more : https://material.angular.io/cdk/test-harnesses/overview
@@ -17,36 +17,22 @@ import {
 export class DsfrUploadHarness extends ComponentHarness {
   static hostSelector: string = 'dsfr-upload';
 
-  private getInstitutionElement: AsyncFactoryFn<TestElement> = this.locatorFor('.fr-footer__brand .fr-logo');
+  private getInputElement: AsyncFactoryFn<TestElement> = this.locatorFor('input');
 
-  getInstitutionElementBrs: AsyncFactoryFn<TestElement[]> = this.locatorForAll('.fr-footer__brand .fr-logo br');
-  getInstitutionAnchorElement: AsyncFactoryFn<TestElement | null> = this.locatorForOptional('.fr-footer__brand > a');
+  private async getInputAttribute(name: string): Promise<(string | null)> {
+    const input: TestElement = await this.getInputElement();
+    const attribute = await input.getAttribute(name);
 
-  /**
-   * Retrieves the institution actually displayed
-   * in the DsfrFooterComponent's Template
-   *
-   * @returns A Promise that resolves to the institution as a string
-   */
-  async getInstitution(): Promise<string> {
-    const element: TestElement = await this.getInstitutionElement();
-
-    return element.text();
+    return attribute;
   }
 
   /**
-   * Retrieves the title attribute's value for the <a> tag between
-   * the institution, the operator and the service,
-   * in the DsfrFooterComponent's Template
+   * Retrieves the id value of the input tag
+   * in the DsfrUploadComponent's Template
    *
-   * @returns A Promise that resolves to the title as a string
+   * @returns A Promise that resolves to the id value as a strings or null
    */
-  async getLinkTitle(): Promise<string | null> {
-    const institutionAnchorElement: TestElement | null =
-      await this.getInstitutionAnchorElement();
-    if (institutionAnchorElement) {
-      return await institutionAnchorElement.getAttribute('title');
-    }
-    return null;
+  async getInputId(): Promise<(string | null)> {
+    return this.getInputAttribute('id');
   }
 }
