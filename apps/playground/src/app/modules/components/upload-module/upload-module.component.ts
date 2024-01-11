@@ -3,9 +3,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl,
   FormControlStatus,
-  FormGroup,
   NonNullableFormBuilder,
   Validators
 } from '@angular/forms';
@@ -14,16 +12,6 @@ import {
  * 3rd-party imports
  */
 import { Subject, takeUntil } from 'rxjs';
-
-/**
- * Internal imports
- */
-
-
-/**
- * TypeScript entities and constants
- */
-
 
 @Component({
   templateUrl: './upload-module.component.html',
