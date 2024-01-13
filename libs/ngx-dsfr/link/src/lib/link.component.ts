@@ -17,7 +17,8 @@ export const EMPTY_TITLE_ERROR: string =
 enum TemplateType {
   BACK_TO_TOP,
   INTERNAL,
-  EXTERNAL
+  EXTERNAL,
+  DOWNLOAD
 }
 
 @Component({
@@ -34,6 +35,8 @@ export class DsfrLinkComponent implements OnChanges {
   @Input() iconAlignment: ElementAlignment = ElementAlignment.RIGHT;
   @Input() backToTop: boolean = false;
   @Input() size: ElementSize = ElementSize.MEDIUM;
+  @Input() download: boolean = false;
+  @Input() detail: string = '';
 
   template: TemplateType = TemplateType.INTERNAL;
   templateType: typeof TemplateType = TemplateType;
@@ -41,9 +44,10 @@ export class DsfrLinkComponent implements OnChanges {
   classes: string = '';
 
   ngOnChanges(): void {
-    if (this.backToTop) {
-      this.template = TemplateType.BACK_TO_TOP;
-    } else {
+    this.setTemplateType();
+
+     if (!this.backToTop) {
+
       if (!this.label) {
         throw EMPTY_LABEL_ERROR;
       }
@@ -51,14 +55,9 @@ export class DsfrLinkComponent implements OnChanges {
         throw EMPTY_LINK_ERROR;
       }
 
-      this.isExternal = this.link.indexOf('http') > -1;
       if (this.isExternal && !this.title) {
         throw EMPTY_TITLE_ERROR;
       }
-
-      this.template = this.isExternal
-        ? TemplateType.EXTERNAL
-        : TemplateType.INTERNAL;
 
       this.classes = '';
 
@@ -68,11 +67,32 @@ export class DsfrLinkComponent implements OnChanges {
     }
   }
 
+  private setTemplateType(): void {
+    this.template = TemplateType.INTERNAL;
+
+    if (this.link.indexOf('http') > -1 && !this.download) {
+      this.template = TemplateType.EXTERNAL
+    }
+
+    if (this.download) {
+      this.template = TemplateType.DOWNLOAD;
+    }
+
+    if (this.backToTop) {
+      this.template = TemplateType.BACK_TO_TOP;
+    }
+  }
+
   private initClasses(): void {
     this.classes += `fr-link fr-link--${this.size}`;
+
+    if (this.download) {
+      this.classes += ` fr-link--download`;
+    }
 
     if (this.icon) {
       this.classes += ` fr-icon-${this.icon} fr-link--icon-${this.iconAlignment}`;
     }
   }
+
 }
