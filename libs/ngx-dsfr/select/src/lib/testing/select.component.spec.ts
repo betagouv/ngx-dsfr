@@ -5,19 +5,27 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { OverlayModule } from '@angular/cdk/overlay';
+
 /**
  * Internal imports
  */
-import { DsfrSelectComponent, EMPTY_LABEL_ERROR, SelectOption } from '../select.component';
+import {
+  DEFAULT_PLACEHOLDER,
+  DsfrSelectComponent,
+  EMPTY_LABEL_ERROR,
+  SelectOption
+} from '../select.component';
 import { TestHostComponent } from './test-host.component';
 import { DsfrSelectHarness } from './select.harness';
-import { FormsModule } from '@angular/forms';
+import { DsfrSelectOverlayHarness } from './select-overlay.harness';
 
-describe('DsfrRadioComponent', () => {
+describe('DsfrSelectComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
   let componentUnderTest: DsfrSelectComponent;
   let harnessLoader: HarnessLoader;
+  let rootLoader: HarnessLoader;
   let dsfrSelectHarness: DsfrSelectHarness;
 
   const testLabel = 'testLabel';
@@ -35,7 +43,7 @@ describe('DsfrRadioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [OverlayModule],
       declarations: [
         DsfrSelectComponent,
         TestHostComponent
@@ -57,6 +65,7 @@ describe('DsfrRadioComponent', () => {
      * Data Binding and ngOnInit()...
      */
     harnessLoader = TestbedHarnessEnvironment.loader(fixture);
+    rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
 
   it('should be created', () => {
@@ -89,15 +98,32 @@ describe('DsfrRadioComponent', () => {
 
     it('should have the default placeholder', async () => {
       const placeholder = await dsfrSelectHarness.getPlaceholder();
-      expect(placeholder).toEqual('Selectionnez une option')
+      expect(placeholder).toEqual(DEFAULT_PLACEHOLDER);
     });
 
     it('should have the right placeholder', async () => {
-      const testDescription =  'test description';
-      testHost.testDescription = testDescription;
+      const testDefaultPlaceholder = 'default placeholder';
+      testHost.testDefaultPlaceholder = testDefaultPlaceholder;
       fixture.detectChanges();
       const placeholder = await dsfrSelectHarness.getPlaceholder();
-      expect(placeholder).toEqual(testDescription)
+      expect(placeholder).toEqual(testDefaultPlaceholder);
+    });
+
+    it('should have the right number of options', async () => {
+      await dsfrSelectHarness.clickSelectDiv();
+      const selectOverlayHarness = await rootLoader.getHarness(DsfrSelectOverlayHarness);
+      const options = await selectOverlayHarness.getAllOptions();
+      expect(options.length).toEqual(testOptions.length);
+    });
+
+    it('should have the right values when we select specific options', async () => {
+      const indexToSelect = 0;
+      await dsfrSelectHarness.clickSelectDiv();
+      const selectOverlayHarness = await rootLoader.getHarness(DsfrSelectOverlayHarness);
+      await selectOverlayHarness.selectAnOption(indexToSelect);
+      await dsfrSelectHarness.clickSelectDiv();
+      const selectedValues = await selectOverlayHarness.getSelectedValues();
+      expect(selectedValues[indexToSelect]).toEqual(testOptions[indexToSelect].label);
     });
   });
 });

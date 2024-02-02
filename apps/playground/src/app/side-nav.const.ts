@@ -68,6 +68,10 @@ export const SIDE_NAV: NavItem[] = [
         path: '/modules/search-bar'
       },
       {
+        label: 'Select',
+        path: '/modules/select'
+      },
+      {
         label: 'Stepper',
         path: '/modules/stepper'
       },
@@ -86,10 +90,6 @@ export const SIDE_NAV: NavItem[] = [
       {
         label: 'Toggle',
         path: '/modules/toggle'
-      },
-      {
-        label: 'Select',
-        path: '/modules/select'
       }
     ]
   }

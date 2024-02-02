@@ -1,26 +1,72 @@
+// Imports
 @use "@gouvfr/dsfr/dist/component/form/form.min";
 @use "@gouvfr/dsfr/dist/component/select/select.min";
-@use "@gouvfr/dsfr/dist/component/tag/tag.min.css";
 
+// Actual styling
 .fr-select {
   cursor: pointer;
+
+  &.fr-select--disabled {
+    --data-uri-svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns= 'http://www.w3.org/2000/svg' viewBox= '0 0 24 24' %3E%3Cpath fill= '%23929292' d= 'm12 13.1 5-4.9 1.4 1.4-6.4 6.3-6.4-6.4L7 8.1l5 5z' /%3E%3C/svg%3E");
+    background-image: var(--data-uri-svg);
+    box-shadow: inset 0 -2px 0 0 var(--border-disabled-grey);
+    color: var(--text-disabled-grey);
+    cursor: not-allowed;
+  }
 }
 
-.fr-select--disabled {
-  --data-uri-svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns= 'http://www.w3.org/2000/svg' viewBox= '0 0 24 24' %3E%3Cpath fill= '%23929292' d= 'm12 13.1 5-4.9 1.4 1.4-6.4 6.3-6.4-6.4L7 8.1l5 5z' /%3E%3C/svg%3E");
-  background-image: var(--data-uri-svg);
-  box-shadow: inset 0 -2px 0 0 var(--border-disabled-grey);
-  color: var(--text-disabled-grey);
-  cursor: not-allowed;
-}
-
-.selected-wrapper {
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: inline-flex;
+.selected-values-wrapper {
+  display: flex;
   flex-wrap: wrap;
-  padding: 4px;
-  dsfr-tag {
-    padding: 4px 2px;
+  padding-top: 16px;
+  gap: 8px;
+}
+
+.options-panel {
+  width: 100%;
+  background: var(--light-decisions-background-background-default-grey, #fff);
+  cursor: pointer;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 36, 0.12);
+  border-top: 1px solid
+  var(--light-decisions-border-border-open-blue-france, #e3e3fd);
+
+  .option-wrapper {
+    display: flex;
+    height: 48px;
+    padding: 12px 16px;
+
+    &.option-selected {
+      color: var(--light-decisions-text-text-action-high-blue-france, #000091);
+    }
+
+    &.option-unselected {
+      color: var(--light-decisions-text-text-action-high-grey, #161616);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    .option-label {
+      flex: 1;
+      font-size: 14px;
+      font-family: Marianne, sans-serif;
+      line-height: 24px;
+      margin-right: 10px;
+    }
+
+    .fr-icon-check-line:before {
+      --icon-size: 16px;
+    }
+  }
+
+  .divider {
+    height: 1px;
+    margin: 0 16px;
+    background-color: var(--border-default-grey, #dddddd);
   }
 }

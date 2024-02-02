@@ -1,8 +1,8 @@
 /**
  * Angular imports
  */
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 /**
  * 3rd-party imports
@@ -10,31 +10,24 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@ang
 import { TagType } from '@betagouv/ngx-dsfr/tag';
 import { SelectOption } from '@betagouv/ngx-dsfr/select';
 
-interface SettingsForm {
-  label: FormControl<string>;
-  description: FormControl<string>;
-  hint: FormControl<string>;
-  disabled: FormControl<boolean>;
-  multiple: FormControl<boolean>;
-  showSelectedOptions: FormControl<boolean>
-  hasFailed: FormControl<boolean>;
-  failureMessage: FormControl<string>;
-  hasSucceeded: FormControl<boolean>;
-  successMessage: FormControl<string>;
-}
-
-interface SimulationForm {
-  select: FormControl<string[]>;
-}
-
 @Component({
   templateUrl: './select-module.component.html',
   styleUrls: ['./select-module.component.scss']
 })
-export class SelectModuleComponent implements OnInit {
-
-  settingsForm: FormGroup<SettingsForm> | undefined;
-  simulationForm: FormGroup<SimulationForm> | undefined;
+export class SelectModuleComponent {
+  settingsForm = this.formBuilder.group({
+    label: ['This is a label', [Validators.required]],
+    defaultPlaceholder: ['This is a placeholder', [Validators.required]],
+    hint: ['This is a hint', [Validators.required]],
+    disabled: [false, [Validators.required]],
+    multiple: [false, [Validators.required]],
+    showSelectedValues: [false, [Validators.required]],
+    hasFailed: [false, [Validators.required]],
+    failureMessage: ['This is a failure message', [Validators.required]],
+    hasSucceeded: [false, [Validators.required]],
+    successMessage: ['This is a success message', [Validators.required]]
+  });
+  simulationForm = this.formBuilder.group({select: [['Option 3']]});
 
   options: SelectOption[] = [
     {
@@ -72,29 +65,9 @@ export class SelectModuleComponent implements OnInit {
 
   constructor(private formBuilder: NonNullableFormBuilder) {}
 
-  ngOnInit(): void {
-    this.initForms();
-  }
-
-  private initForms(): void {
-    this.settingsForm = this.formBuilder.group({
-      label: ['This is a label', [Validators.required]],
-      description: ['This is a description', [Validators.required]],
-      hint: ['This is a hint', [Validators.required]],
-      disabled: [false, [Validators.required]],
-      multiple: [false, [Validators.required]],
-      showSelectedOptions: [false, [Validators.required]],
-      hasFailed: [false, [Validators.required]],
-      failureMessage: ['This is a failure message', [Validators.required]],
-      hasSucceeded: [false, [Validators.required]],
-      successMessage: ['This is a success message', [Validators.required]]
-    });
-    this.simulationForm = this.formBuilder.group({select: [['Option 3']]});
-  }
-
-  onTagDelete(option: string) {
+  onValueDelete(value: string) {
     const selected = this.simulationForm?.getRawValue().select || [];
-    const index = selected.indexOf(option);
+    const index = selected.indexOf(value);
     selected.splice(index, 1);
     this.simulationForm?.setValue({select: selected});
   }

@@ -62,7 +62,6 @@ import { RoutedContent2Component } from './components/routed-content/routed-cont
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 import { TagModuleComponent } from './components/tag-module/tag-module.component';
 import { SelectModuleComponent } from './components/select-module/select-module.component';
-import { DsfrSelectComponent } from '../../../../../libs/ngx-dsfr/select/src/lib/select.component';
 
 @NgModule({
   imports: [

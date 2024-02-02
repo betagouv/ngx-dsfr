@@ -2,28 +2,20 @@
  * Angular imports
  */
 import {
-  Component, ElementRef,
-  forwardRef, Injector,
+  Component,
+  ElementRef,
+  forwardRef,
+  HostListener,
   Input,
   OnChanges,
-  OnInit,
-  SimpleChanges, ViewChild
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 
 /**
  * 3rd party imports
  */
 import { TagType } from '@betagouv/ngx-dsfr/tag';
-
-/**
- * Internal imports
- */
-import { DsfrOptionsComponent } from './options.component';
-import { COMPONENT_PORTAL_DATA } from '../index';
 
 /**
  * TypeScript entities and constants
@@ -35,11 +27,13 @@ export const EMPTY_ID_ERROR: string =
 export const EMPTY_OPTIONS_ERROR: string =
   'You MUST provide a value for the options attribute 😡 !!!';
 export const MULTIPLE_SELECTED_ERROR: string =
-  'You MUST select only one option 😡 !!!';
+  'You MUST select only one option if the multiple attribute is false 😡 !!!';
 export const EMPTY_FAILURE_MESSAGE_ERROR: string =
   'You MUST provide a value for the failureMessage attribute when hasFailed is true 😡 !!!';
 export const EMPTY_SUCCESS_MESSAGE_ERROR: string =
   'You MUST provide a value for the successMessage attribute when hasSucceeded is true 😡 !!!';
+
+export const DEFAULT_PLACEHOLDER: string = 'Sélectionnez une option';
 
 export interface SelectOption {
   id: string;
@@ -60,11 +54,11 @@ export interface SelectOption {
   ]
 })
 
-export class DsfrSelectComponent implements ControlValueAccessor, OnInit, OnChanges {
-  @Input({required: true}) label!: string;
-  @Input({required: true}) id!: string;
-  @Input({required: true}) options: SelectOption[] = [];
-  @Input() description = 'Selectionnez une option';
+export class DsfrSelectComponent implements ControlValueAccessor, OnChanges {
+  @Input({ required: true }) label!: string;
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) options: SelectOption[] = [];
+  @Input() defaultPlaceholder = DEFAULT_PLACEHOLDER;
   @Input() multiple = false;
   @Input() hint = '';
   @Input() disabled = false;
@@ -72,32 +66,34 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() failureMessage = '';
   @Input() hasSucceeded = false;
   @Input() successMessage = '';
-  @Input() showSelectedOptions: boolean = false;
-  onChange = (_: string[]) => {
-  };
-  onTouched = (_: string[]) => {
-  };
-  selectedCount = 0;
+  @Input() showSelectedValues: boolean = false;
+
+  onChange = (_: string[]) => {};
+  onTouched = () => {};
+
   placeholder!: string;
   divClasses: Record<string, boolean> = {};
   selectClasses: Record<string, boolean> = {};
-  ariaLabelledBy: string | null = null;
+  ariaDescribedBy: string | null = null;
   tagType = TagType.DELETABLE;
+  isOptionsPanelOpened: boolean = false;
 
-  private selectOverlay: OverlayRef = this.overlayService.create({
-    hasBackdrop: true,
-    backdropClass: ''
-  });
+  @ViewChild('select', { static: true })
+  select!: ElementRef;
 
-  @ViewChild('selectOverlayOrigin', {static: true})
-  private selectOverlayTrigger!: ElementRef;
+  @ViewChild('optionsPanel')
+  optionsPanel?: ElementRef;
 
-  private takeUntilDestroyed = takeUntilDestroyed();
-
-  constructor(
-    private readonly overlayService: Overlay,
-    private elementRef: ElementRef
-  ) {}
+  @HostListener('document:mousedown', ['$event'])
+  onClickOutsideOptionsPanel(event: MouseEvent): void {
+    if (
+      this.optionsPanel &&
+      !this.optionsPanel.nativeElement.contains(event.target) &&
+      !this.select.nativeElement.contains(event.target)
+    ) {
+      this.isOptionsPanelOpened = false;
+    }
+  }
 
   get values(): string[] {
     return this._values;
@@ -109,28 +105,15 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnInit, OnChan
 
   private _values!: string[];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.description) {
-      this.description = 'Selectionnez une option';
-    }
-    if (this.hasFailed && !this.failureMessage) {
-      throw EMPTY_FAILURE_MESSAGE_ERROR;
-    }
-    if (this.hasSucceeded && !this.successMessage) {
-      throw EMPTY_SUCCESS_MESSAGE_ERROR;
-    }
-    this.setClasses();
-    this.setAriaLabelledBy();
-    this.handlePlaceholder();
+  get selectedCount(): number {
+    return this.values?.length || 0;
   }
 
-  ngOnInit(): void {
-    this.selectOverlay.updateSize({width: this.elementRef.nativeElement.clientWidth});
+  constructor(public elementRef: ElementRef) {}
+
+  ngOnChanges(): void {
     if (!this.label) {
       throw EMPTY_LABEL_ERROR;
-    }
-    if (!this.multiple && this.selectedCount > 1) {
-      throw MULTIPLE_SELECTED_ERROR;
     }
     if (!this.id) {
       throw EMPTY_ID_ERROR;
@@ -138,11 +121,22 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnInit, OnChan
     if (this.options.length === 0) {
       throw EMPTY_OPTIONS_ERROR;
     }
+    if (!this.defaultPlaceholder) {
+      this.defaultPlaceholder = DEFAULT_PLACEHOLDER;
+    }
+    if (this.hasFailed && !this.failureMessage) {
+      throw EMPTY_FAILURE_MESSAGE_ERROR;
+    }
+    if (this.hasSucceeded && !this.successMessage) {
+      throw EMPTY_SUCCESS_MESSAGE_ERROR;
+    }
+    if (!this.multiple && this.selectedCount > 1) {
+      throw MULTIPLE_SELECTED_ERROR;
+    }
 
-    this.createSelectOverlay(
-      this.selectOverlay,
-      this.selectOverlayTrigger
-    );
+    this.setClasses();
+    this.setAriaDescribedBy();
+    this.handlePlaceholder();
   }
 
   private setClasses() {
@@ -158,101 +152,68 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnInit, OnChan
     };
   }
 
-  private setAriaLabelledBy() {
+  private setAriaDescribedBy() {
     if (this.hasFailed) {
-      this.ariaLabelledBy = `${this.id}-desc-error`;
+      this.ariaDescribedBy = `${this.id}-desc-error`;
       return;
     }
     if (this.hasSucceeded) {
-      this.ariaLabelledBy = `${this.id}-desc-valid`;
+      this.ariaDescribedBy = `${this.id}-desc-valid`;
     }
   }
 
   private handlePlaceholder() {
-    this.selectedCount = this.values?.length || 0;
-    this.placeholder = this.selectedCount === 0 ? this.description : `${this.selectedCount} options selectionées`;
+    const plural: string = this.selectedCount > 1 ? 's' : '';
+    this.placeholder =
+      this.selectedCount === 0
+        ? this.defaultPlaceholder
+        : `${this.selectedCount} option${plural} sélectionnée${plural}`;
   }
 
   registerOnChange(fn: (_: string[]) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: (_: string[]) => void): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  writeValue(value: string[]): void {
-    this._values = value;
+  writeValue(values: string[]): void {
+    this._values = values;
     this.handlePlaceholder();
   }
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+    this.setClasses();
   }
 
-  private createSelectOverlay(
-    overlayRef: OverlayRef,
-    overlayTrigger: ElementRef
-  ): void {
-    overlayRef.updatePositionStrategy(
-      this.overlayService
-        .position()
-        .flexibleConnectedTo(overlayTrigger)
-        .withPositions([
-          {originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top'}
-        ])
-    );
+  selectOption(option: SelectOption) {
+    if (this.multiple) {
+      const alreadySelected = this.values.includes(option.label);
+      this.values = alreadySelected
+        ? [...this.values].filter((sel) => sel !== option.label)
+        : [...this.values, option.label];
+    } else {
+      this.values = [option.label];
+      this.isOptionsPanelOpened = false;
+    }
 
-    overlayRef
-      .outsidePointerEvents()
-      .pipe(this.takeUntilDestroyed)
-      .subscribe({
-        next: (event: any) => {
-          // If we're clicking outside and NOT on the trigger, close the overlay
-          if (!overlayTrigger.nativeElement.contains(event.target)) {
-            overlayRef.detach();
-          }
-        }
-      });
+    this.onChange(this.values);
   }
 
   toggleDropdown() {
     if (this.disabled) {
       return;
     }
-    if (this.selectOverlay.hasAttached()) {
-      this.selectOverlay.detach();
-    } else {
-      const portalInjector = Injector.create({
-        providers: [
-          {
-            provide: COMPONENT_PORTAL_DATA,
-            useValue: {
-              options: this.options,
-              selected: this.values,
-              multiple: this.multiple
-            }
-          }
-        ]
-      });
-      const componentRef = this.selectOverlay.attach(
-        new ComponentPortal(DsfrOptionsComponent, null, portalInjector)
-      );
-      componentRef.instance.optionSelected.subscribe((selected) => {
-        if (!this.multiple) {
-          this.selectOverlay.detach();
-        }
-        this.values = selected;
-        this.onChange(this.values);
-      });
-    }
+    this.isOptionsPanelOpened = !this.isOptionsPanelOpened;
   }
 
-  onOptionDeleted(selected: string) {
-    const selectedOptions = [...this.values];
-    const index = selectedOptions.indexOf(selected);
-    selectedOptions.splice(index, 1);
-    this.values = selectedOptions;
+  onValueDeleted(value: string) {
+    const selectedValues = [...this.values];
+    const index = selectedValues.indexOf(value);
+    selectedValues.splice(index, 1);
+    this.values = selectedValues;
     this.onChange(this.values);
   }
 }

@@ -25,20 +25,31 @@ export class DsfrSelectHarness extends ComponentHarness {
    *
    * @returns A Promise that resolves to the string representing the text inside the label tag
    */
-  async getLabelValue (): Promise<string> {
+  async getLabelValue(): Promise<string> {
     const label: TestElement = await this.getLabelElement();
 
     return label.text();
   }
 
   /**
-   * Retrieves the placeholder on the DsfrRadioComponent's Template
+   * Retrieves the placeholder on the DsfrSelectComponent's Template
    *
    * @returns A Promise that resolves to the string representing the placeholder on the select
    */
-  async getPlaceholder (): Promise<string> {
+  async getPlaceholder(): Promise<string> {
     const selectDiv: TestElement = await this.getSelectDivElement();
 
     return selectDiv.text();
+  }
+
+  /**
+   * Simulates the click on the select div on the DsfrSelectComponent's Template
+   *
+   * @returns A Promise that resolves to void
+   */
+  async clickSelectDiv(): Promise<void> {
+    const selectDiv: TestElement = await this.getSelectDivElement();
+
+    await selectDiv.click();
   }
 }

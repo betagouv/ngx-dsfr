@@ -1,104 +1,110 @@
-<section class='module-description'>
+<section class="module-description">
   <h2>DsfrSelectComponent</h2>
   <p>
-    The <code>DsfrSelectComponent</code> purpose is to represent a select form field.
+    The <code>DsfrSelectComponent</code> purpose is to represent a select form
+    field.
   </p>
   <p>
     It is based on the
     <a
-      target='_blank'
-      hreflang='fr'
-      title='The documentation page for the Select Component in the DSFR'
-      href='https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/liste-deroulante'>
-      Liste déroulante/
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Select Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/liste-deroulante">
+      Liste déroulante
       <mat-icon>open_in_new</mat-icon>
     </a>
     component in the
     <a
-      target='_blank'
-      hreflang='fr'
-      title='The DSFR documentation'
-      href='https://www.systeme-de-design.gouv.fr/'>
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
       DSFR
       <mat-icon>open_in_new</mat-icon>
     </a>
     .
   </p>
   <p>It has several <code>&#64;Input()</code> properties:</p>
-  <dl class='input-properties'>
+  <dl class="input-properties">
     <play-input-property-definition
-      name='label'
-      [required]='true'
-      type='It takes a string'>
+      name="label"
+      [required]="true"
+      type="It takes a string">
       The label of the select component
     </play-input-property-definition>
     <play-input-property-definition
-      name='id'
-      [required]='true'
-      type='It takes a string'>
-      The ID used for the <code>id</code> HTML tag .
+      name="id"
+      [required]="true"
+      type="It takes a string">
+      The ID used for a specific instance of the
+      <code>DsfrSelectComponent</code>.
     </play-input-property-definition>
     <play-input-property-definition
-      name='hint'
-      type='It takes a string'>
-      An optional text to help end-users understand the purpose of a select. It is a way to give more
-      details and complement the label.
+      name="options"
+      [required]="true"
+      type="SelectOption[]">
+      The value must be an array of objects satisfying the
+      <code>SelectOption</code> interface : each object must have an
+      <code>id</code> property, a <code>label</code> property and a
+      <code>value</code> property. All these properties have string values. They
+      represent the different options we can select from the Component.
     </play-input-property-definition>
     <play-input-property-definition
-      name='options'
-      [required]='true'
-      type='SelectOption[]'>
-      The value must be an array of objects satisfying the <code>SelectOption</code> interface : each object must have
-      an <code>id</code> property, a <code>label</code> property and a <code>value</code> property. All these properties
-      have string values.
+      name="defaultPlaceholder"
+      type="It takes a string"
+      default="Sélectionnez une option">
+      An optional text that is displayed in the Component by default, when no
+      option is selected yet.
     </play-input-property-definition>
     <play-input-property-definition
-      name='description'
-      type='It takes a string'
-      default='Selectionnez une option'>
-      An optional text that is selected by default.
-    </play-input-property-definition>
-    <play-input-property-definition
-      name='disabled'
-      type='boolean'
-      default='false'>
-      Whether a select is disabled or not.
-    </play-input-property-definition>
-    <play-input-property-definition
-      name='multiple'
-      type='boolean'
-      default='false'>
+      name="multiple"
+      type="boolean"
+      default="false">
       Whether we can select multiple options or not.
     </play-input-property-definition>
     <play-input-property-definition
-      name='showSelectedOptions'
-      type='boolean'
-      default='false'>
-      Whether to show the selected options as deletable tags under the select or not.
+      name="hint"
+      type="It takes a string">
+      An optional text to help end-users understand the purpose of a select. It
+      is a way to give more details and complement the label.
     </play-input-property-definition>
     <play-input-property-definition
-      name='hasFailed'
-      type='boolean'
-      default='false'>
+      name="disabled"
+      type="boolean"
+      default="false">
+      Whether a select is disabled or not.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hasFailed"
+      type="boolean"
+      default="false">
       Whether the control is in error mode or not.
     </play-input-property-definition>
     <play-input-property-definition
-      name='failureMessage'
-      required='Required when hasFailed is set to true'
-      type='It takes a string'>
+      name="failureMessage"
+      required="Required when hasFailed is set to true"
+      type="It takes a string">
       The error message to be displayed when in error mode.
     </play-input-property-definition>
     <play-input-property-definition
-      name='hasSucceeded'
-      type='boolean'
-      default='false'>
+      name="hasSucceeded"
+      type="boolean"
+      default="false">
       Whether the control is in success mode or not.
     </play-input-property-definition>
     <play-input-property-definition
-      name='successMessage'
-      required='Required when hasSucceeded is set to true'
-      type='It takes a string'>
+      name="successMessage"
+      required="Required when hasSucceeded is set to true"
+      type="It takes a string">
       The success message to be displayed when in success mode.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="showSelectedValues"
+      type="boolean"
+      default="false">
+      Whether to show the selected values as deletable tags under the select or
+      not.
     </play-input-property-definition>
   </dl>
 </section>
@@ -110,25 +116,26 @@
         <mat-card-title>Select component</mat-card-title>
       </mat-card-header>
       <mat-card-content class="simulation">
-        <p>Example : </p>
+        <p>Example :</p>
         <pre>
           <span class="highlight-code">&lt;dsfr-select</span>
             formControlName="select"
             id="select"
             [label]="label"
             [options]="options"
-            [description]="description"
+            [defaultPlaceholder]="defaultPlaceholder"
             [hint]="hint"
             [multiple]="multiple"
-            [showSelectedOptions]="showSelectedOptions"
+            [showSelectedValues]="showSelectedValues"
             [disabled]="disabled"
             [hasFailed]="hasFailed"
             [failureMessage]="failureMessage"
             [hasSucceeded]="hasSucceeded"
             [successMessage]="successMessage"
           <span class="highlight-code">&lt;/dsfr-select&gt;</span>
+
           // Where options could be
-          <span class="highlight-code">options</span> =
+          <span class="highlight-code">const options</span> =
           [&#123;
             label: '1',
             id: '1',
@@ -138,15 +145,20 @@
             label: '2',
             id: '2',
             value: '2'
-          &#125;]
+          &#125;];
         </pre>
         <div class="settings">
           <form
             [formGroup]="settingsForm"
             novalidate>
             <play-input-property-control
-              formControlName="description"
-              name="description"
+              formControlName="label"
+              name="label"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="defaultPlaceholder"
+              name="defaultPlaceholder"
               type="string">
             </play-input-property-control>
             <play-input-property-control
@@ -165,8 +177,8 @@
               type="boolean">
             </play-input-property-control>
             <play-input-property-control
-              formControlName="showSelectedOptions"
-              name="showSelectedOptions"
+              formControlName="showSelectedValues"
+              name="showSelectedValues"
               type="boolean">
             </play-input-property-control>
             <play-input-property-control
@@ -207,25 +219,33 @@
                     id="select"
                     [label]="settingsForm.getRawValue().label"
                     [options]="options"
-                    [description]="settingsForm.getRawValue().description"
+                    [defaultPlaceholder]="
+                      settingsForm.getRawValue().defaultPlaceholder
+                    "
                     [hint]="settingsForm.getRawValue().hint"
                     [multiple]="settingsForm.getRawValue().multiple"
-                    [showSelectedOptions]="settingsForm.getRawValue().showSelectedOptions"
+                    [showSelectedValues]="
+                      settingsForm.getRawValue().showSelectedValues
+                    "
                     [disabled]="settingsForm.getRawValue().disabled"
                     [hasFailed]="settingsForm.getRawValue().hasFailed"
                     [failureMessage]="settingsForm.getRawValue().failureMessage"
                     [hasSucceeded]="settingsForm.getRawValue().hasSucceeded"
-                    [successMessage]="settingsForm.getRawValue().successMessage"
-                  >
+                    [successMessage]="
+                      settingsForm.getRawValue().successMessage
+                    ">
                   </dsfr-select>
                 </form>
                 <p>
                   Selected values are :
-                  @for (selected of simulationForm.value.select;track selected) {
+                  @for (
+                      selected of simulationForm.value.select;
+                    track selected
+                    ) {
                     <dsfr-tag
                       [label]="selected"
                       [type]="tagType"
-                      (deleted)="onTagDelete(selected)">
+                      (deleted)="onValueDelete(selected)">
                     </dsfr-tag>
                   }
                 </p>
