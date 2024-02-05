@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 /**
  * Internal imports
@@ -30,9 +32,17 @@ const exportableDeclarations = [
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCardModule,
+    MatIconModule
   ],
   declarations: exportableDeclarations,
-  exports: [CommonModule, ReactiveFormsModule, ...exportableDeclarations]
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatIconModule,
+    ...exportableDeclarations
+  ]
 })
 export class SharedModule {}
