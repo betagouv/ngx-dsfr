@@ -23,6 +23,7 @@ import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
+import { DsfrSelectModule } from '@betagouv/ngx-dsfr/select';
 import {
   DsfrSearchBarModule,
   DSFR_SEARCH_BAR_SERVICE_TOKEN
@@ -61,7 +62,6 @@ import { RoutedContent1Component } from './components/routed-content/routed-cont
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 import { TagModuleComponent } from './components/tag-module/tag-module.component';
-import { CardModuleComponent } from './components/card-module/card-module.component';
 
 @NgModule({
   imports: [
@@ -85,6 +85,7 @@ import { CardModuleComponent } from './components/card-module/card-module.compon
     DsfrToggleModule,
     DsfrTabModule,
     DsfrTagModule,
+    DsfrSelectModule,
     DsfrCardModule,
     MatCardModule,
     MatIconModule,
@@ -110,6 +111,7 @@ import { CardModuleComponent } from './components/card-module/card-module.compon
     ErrorPageModuleComponent,
     FooterModuleComponent,
     ToggleModuleComponent,
+    SelectModuleComponent,
     TabModuleComponent,
     TagModuleComponent,
     CardModuleComponent,
