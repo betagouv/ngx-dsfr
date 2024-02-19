@@ -28,6 +28,7 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
 import { RoutedContent1Component } from './components/routed-content/routed-content-1.component';
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
+import { CardModuleComponent } from './components/card-module/card-module.component';
 
 /**
  * TypeScript entities and constants
@@ -44,6 +45,10 @@ const routes: Route[] = [
   {
     path: 'button',
     component: ButtonModuleComponent
+  },
+  {
+    path: 'card',
+    component: CardModuleComponent
   },
   {
     path: 'checkbox',

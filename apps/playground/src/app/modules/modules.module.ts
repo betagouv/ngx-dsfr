@@ -31,6 +31,7 @@ import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
 import { DsfrToggleModule } from '@betagouv/ngx-dsfr/toggle';
 import { DsfrTabModule } from '@betagouv/ngx-dsfr/tab';
 import { DsfrTagModule } from '@betagouv/ngx-dsfr/tag';
+import { DsfrCardModule } from '@betagouv/ngx-dsfr/card';
 
 /**
  * Internal imports
@@ -60,6 +61,7 @@ import { RoutedContent1Component } from './components/routed-content/routed-cont
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 import { TagModuleComponent } from './components/tag-module/tag-module.component';
+import { CardModuleComponent } from './components/card-module/card-module.component';
 
 @NgModule({
   imports: [
@@ -83,6 +85,7 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
     DsfrToggleModule,
     DsfrTabModule,
     DsfrTagModule,
+    DsfrCardModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -109,6 +112,7 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
     ToggleModuleComponent,
     TabModuleComponent,
     TagModuleComponent,
+    CardModuleComponent,
     RoutedContent1Component,
     RoutedContent2Component,
     RoutedContent3Component

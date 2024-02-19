@@ -11,6 +11,7 @@ import {
  * 3rd-party imports
  */
 import { Subject, takeUntil } from 'rxjs';
+import { TemplateAlignment } from '@betagouv/ngx-dsfr';
 
 @Component({
   templateUrl: './tile-module.component.html',
@@ -21,9 +22,9 @@ export class TileModuleComponent implements OnInit, OnDestroy {
   formTileWithoutImage: FormGroup | undefined;
   formTileGrid: FormGroup | undefined;
 
-  possibleAlignment: Record<string, string> = {
-    "horizontal": "horizontal",
-    "vertical": "vertical",
+  possibleAlignment: Record<string, TemplateAlignment> = {
+    'horizontal': TemplateAlignment.HORIZONTAL,
+    'vertical': TemplateAlignment.VERTICAL
   };
 
   possiblesNbTiles: Record<string, number> = {

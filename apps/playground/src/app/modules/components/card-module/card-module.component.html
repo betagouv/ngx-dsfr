@@ -1,0 +1,373 @@
+<section class="module-description">
+  <h2>DsfrTileComponent</h2>
+  <p>
+    The <code>DsfrCardComponent</code> purpose is to represent card element.
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Card Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/carte">
+      Card
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>.
+  </p>
+  <p>It has several <code>&#64;Input()</code> and <code>&#64;Output()</code> properties:</p>
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="label"
+      [required]="true"
+      type="It takes a string">
+      The label is the title, it's displayed in an H3 tag.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="link"
+      [required]="true"
+      type="It takes a string, it can be routerLink or external like 'http://...'">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="linkTitle"
+      [required]="true"
+      type="It takes a string.">
+      The title of the card link.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="image"
+      type="It takes a string which is the image's path.">
+      Image to add a design element to the card.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="imageAlt"
+      type="It takes a string.">
+      It's displayed in the image alt attribute (accessibility).
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="description"
+      type="It takes a string.">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="detail"
+      type="It takes a string.">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="detailIcon"
+      type="It takes a string.">
+      It must be an icon class, begin with 'fr-icon'
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="bottomDetail"
+      type="It takes a string.">
+      It can be used to display file information when download input is true.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="bottomDetailIcon"
+      type="It takes a string.">
+      It must be an icon class, begin with 'fr-icon'
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="align"
+      default="vertical"
+      type="It takes a string with only 2 possible values : <code>horizontal</code> or <code>vertical</code>">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="border"
+      type="It takes a string with only 2 possible values : <code>no-border</code> or <code>shadow</code>">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="background"
+      type="It takes a string with only 2 possible values : <code>no-background</code> or <code>grey</code>">
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="size"
+      type="It takes a string with 2 possible values : <code>sm</code> or <code>lg</code>"
+      default="lg">
+      Whether the badge is small or not
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="imageRatio"
+      type="It takes a string with 2 possible values : <code>half</code> (ratio 50/50) or <code>tier</code> (ratio 33/66%)">
+      It is used only if <code>align</code> is set to <code>horizontal</code>.
+      By default this value is undefined, its ration is 40%.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="download"
+      type="boolean"
+      default="false">
+      It displayed the download design card
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hasFooter"
+      type="boolean"
+      default="false">
+      It displayed a footer above the card.
+      The content of the footer is displayed by ng-content.
+      You can refer to DSFR Documentation to see how to add some content (buttons, links, ...)
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="topBadges"
+      type="DsfrBadge[]">
+      It display a list of DsfrBadge on the top of the card.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="badges"
+      type="DsfrBadge[]">
+      It display a list of DsfrBadge on the content of the card.
+      Badges can't be displayed with tags.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="tags"
+      type="DsfrTag[]">
+      It display a list of DsfrTag on the content of the card.
+      Tags can't be displayed with badges.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="cardSelected()"
+      type="Output()">
+      It emits on click on the card.
+    </play-input-property-definition>
+  </dl>
+</section>
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Card</mat-card-title>
+      <mat-card-subtitle>
+        Complete Card component
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <div class="settings">
+        @if (formCard) {
+          <form
+            [formGroup]="formCard"
+            novalidate>
+            <play-input-property-control
+              formControlName="label"
+              name="label"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="link"
+              name="link"
+              label="Link"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="linkTitle"
+              name="linkTitle"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="description"
+              name="description"
+              label="Tile description"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="detail"
+              name="detail"
+              label="detail"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="detailIcon"
+              name="detailIcon"
+              label="detailIcon"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="bottomDetail"
+              name="bottomDetail"
+              label="bottomDetail"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="bottomDetailIcon"
+              name="bottomDetailIcon"
+              label="bottomDetailIcon"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="align"
+              name="align"
+              label="Tile alignment"
+              type="enum"
+              [enum]="possibleAlignment">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="topBadges"
+              name="topBadges"
+              label="topBadges"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="download"
+              name="download"
+              label="download"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="hasFooter"
+              name="hasFooter"
+              label="hasFooter"
+              type="boolean">
+            </play-input-property-control>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="formCard.reset()">
+              Reset
+            </button>
+          </form>
+        }
+      </div>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <play-simulator>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-6">
+              <dsfr-card
+                [label]="formCard.getRawValue().label"
+                [align]="formCard.getRawValue().align"
+                [tags]="tags"
+                [detail]="formCard.getRawValue().detail"
+                [bottomDetail]="formCard.getRawValue().bottomDetail"
+                [detailIcon]="formCard.getRawValue().detailIcon"
+                [bottomDetailIcon]="formCard.getRawValue().bottomDetailIcon"
+                [title]="formCard.getRawValue().linkTitle"
+                [hasFooter]="formCard.getRawValue().hasFooter"
+                image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
+                [description]="formCard.getRawValue().description"
+                [download]="formCard.getRawValue().download"
+                linkTitle="Link title"
+                [link]="formCard.getRawValue().link">
+                @if (formCard.getRawValue().hasFooter) {
+                  <ul class="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
+                    <li>
+                      <button class="fr-btn fr-btn--secondary">
+                        Label
+                      </button>
+                    </li>
+                    <li>
+                      <button class="fr-btn">
+                        Label
+                      </button>
+                    </li>
+                  </ul>
+                }
+              </dsfr-card>
+            </div>
+            <div class="fr-col-6">
+              <dsfr-card
+                [label]="formCard.getRawValue().label"
+                [align]="formCard.getRawValue().align"
+                [badges]="badges"
+                linkTitle="Link title"
+                [topBadges]="formCard.getRawValue().topBadges"
+                [detail]="formCard.getRawValue().detail"
+                [bottomDetail]="formCard.getRawValue().bottomDetail"
+                [detailIcon]="formCard.getRawValue().detailIcon"
+                [bottomDetailIcon]="formCard.getRawValue().bottomDetailIcon"
+                [title]="formCard.getRawValue().linkTitle"
+                [hasFooter]="formCard.getRawValue().hasFooter"
+                image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
+                [description]="formCard.getRawValue().description"
+                [download]="formCard.getRawValue().download"
+                [link]="formCard.getRawValue().link">
+                @if (formCard.getRawValue().hasFooter) {
+                  <ul class="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
+                    <li>
+                      <button class="fr-btn fr-btn--secondary">
+                        Label
+                      </button>
+                    </li>
+                    <li>
+                      <button class="fr-btn">
+                        Label
+                      </button>
+                    </li>
+                  </ul>
+                }
+              </dsfr-card>
+            </div>
+          </div>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  @if (formCardGrid) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Grid cards</mat-card-title>
+        <mat-card-subtitle>
+          You can select the number of cards you want in your row to see the rendering.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="simulation">
+        <div class="settings">
+          <form
+            [formGroup]="formCardGrid"
+            novalidate>
+            <play-input-property-control
+              formControlName="nbCards"
+              name="Number of cards"
+              label="Number of cards"
+              [enum]="possiblesNbCards"
+              type="enum">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="align"
+              name="align"
+              label="Tile alignment"
+              type="enum"
+              [enum]="possibleAlignment">
+            </play-input-property-control>
+          </form>
+        </div>
+        <div class="simulator-wrapper mat-elevation-z4">
+          <play-simulator>
+            <div class="fr-grid-row fr-grid-row--gutters">
+              @for (card of nbCardsIteration; track card) {
+                <div [class]="colClass">
+                  <dsfr-card
+                    label="This is a title"
+                    linkTitle="Link title"
+                    [align]="formCardGrid.getRawValue().align"
+                    image="https://www.gouvernement.fr/sites/default/files/static_assets/placeholder.1x1.png"
+                    description="This is a description"
+                    link="/modules/card">
+                    @if (formCard.getRawValue().hasFooter) {
+                      <ul class="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
+                        <li>
+                          <button class="fr-btn fr-btn--secondary">
+                            Label
+                          </button>
+                        </li>
+                        <li>
+                          <button class="fr-btn">
+                            Label
+                          </button>
+                        </li>
+                      </ul>
+                    }
+                  </dsfr-card>
+                </div>
+              }
+            </div>
+          </play-simulator>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</section>

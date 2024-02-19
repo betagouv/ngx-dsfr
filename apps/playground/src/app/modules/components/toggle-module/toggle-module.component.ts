@@ -25,7 +25,6 @@ export class ToggleModuleComponent {
     hint: 'This is a hint',
     align: ElementAlignment.RIGHT,
     disabled: false,
-    neutral: false,
     hideTexts: false
   });
 

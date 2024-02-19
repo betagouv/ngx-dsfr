@@ -18,7 +18,6 @@ import { ElementAlignment } from '@betagouv/ngx-dsfr';
       [hint]="testHint"
       [align]="testAlign"
       [disabled]="testDisabled"
-      [neutral]="testNeutral"
       [hideTexts]="testHideTexts">
     </dsfr-toggle>
   `
@@ -31,6 +30,5 @@ export class TestHostComponent {
   @Input() testAlign: ElementAlignment = ElementAlignment.RIGHT;
   @Input() testHint = '';
   @Input() testDisabled = false;
-  @Input() testNeutral = false;
   @Input() testHideTexts = false;
 }

@@ -2,7 +2,7 @@
  * Angular imports
  */
 import { Component, Input, OnChanges } from '@angular/core';
-import { Breakpoint } from '@betagouv/ngx-dsfr';
+import { Breakpoint, TemplateAlignment } from '@betagouv/ngx-dsfr';
 
 /**
  * TypeScript entities and constants
@@ -11,8 +11,6 @@ export const EMPTY_LINK_ERROR: string =
   'You MUST provide a value for the link attribute 😡 !!!';
 export const EMPTY_TITLE_ERROR: string =
   'You MUST provide a value for the title attribute 😡 !!!';
-
-export type TemplateAlign = 'horizontal' | 'vertical';
 
 enum TemplateType {
   INTERNAL,
@@ -26,7 +24,7 @@ enum TemplateType {
 })
 export class DsfrTileComponent implements OnChanges {
 
-  @Input() align: TemplateAlign = 'vertical';
+  @Input() align: TemplateAlignment = TemplateAlignment.VERTICAL;
   @Input() breakpoint: Breakpoint | undefined;
   @Input() link: string | undefined;
   @Input() title: string | undefined;
@@ -56,7 +54,7 @@ export class DsfrTileComponent implements OnChanges {
   private initClasses(): void {
     this.classes = `fr-tile fr-enlarge-link fr-tile--${this.align}`;
     if (this.breakpoint) {
-      this.classes += `-${this.breakpoint}`;
+      this.classes += ` fr-tile--${this.breakpoint}`;
     }
   }
 

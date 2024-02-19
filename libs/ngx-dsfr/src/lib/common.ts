@@ -13,6 +13,11 @@ export enum ElementSize {
   LARGE = 'lg'
 }
 
+export enum TemplateAlignment {
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal'
+}
+
 export enum ThemeColor {
   INFO = 'info',
   NEW = 'new',
