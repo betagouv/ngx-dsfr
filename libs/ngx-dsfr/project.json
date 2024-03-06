@@ -117,7 +117,9 @@
           "libs/ngx-dsfr/tab/**/*.ts",
           "libs/ngx-dsfr/tab/**/*.html",
           "libs/ngx-dsfr/tag/**/*.ts",
-          "libs/ngx-dsfr/tag/**/*.html"
+          "libs/ngx-dsfr/tag/**/*.html",
+          "libs/ngx-dsfr/select/**/*.ts",
+          "libs/ngx-dsfr/select/**/*.html"
         ]
       }
     }
