@@ -44,7 +44,6 @@ export class DsfrToggleComponent
   @Input() align: ElementAlignment = ElementAlignment.RIGHT;
   @Input() hideTexts = false;
   @Input() disabled? = false;
-  @Input() neutral: boolean = false;
 
   @Output() toggled = new EventEmitter<boolean>();
 
@@ -77,9 +76,6 @@ export class DsfrToggleComponent
     this.classes = 'fr-toggle';
     if (this.align === ElementAlignment.LEFT) {
       this.classes += ` fr-toggle--label-${this.align}`;
-    }
-    if (this.neutral) {
-      this.classes += ` neutral`;
     }
   }
 

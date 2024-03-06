@@ -89,17 +89,6 @@
       <code>input</code> tag
     </play-input-property-definition>
     <play-input-property-definition
-      name="neutral"
-      default="false"
-      type="boolean">
-      Whether or not the element will display like a toggle ( choose to activate
-      something or not ) or like a switch ( choose between 2 equally legitimate
-      possibilities ). When set to <code>true</code>, the toggle will not take
-      any color when checked ( or in its activated state ) and the only visual
-      clue that it has changed will be that its round part will have slid to the
-      right
-    </play-input-property-definition>
-    <play-input-property-definition
       name="toggled()"
       type="Output">
       Emits the value of the toggle as boolean when the user toggles it
@@ -172,11 +161,6 @@
             type="boolean">
           </play-input-property-control>
           <play-input-property-control
-            formControlName="neutral"
-            name="neutral"
-            type="boolean">
-          </play-input-property-control>
-          <play-input-property-control
             formControlName="hideTexts"
             name="hideTexts"
             type="boolean">
@@ -202,7 +186,6 @@
                 [hint]="formToggle.getRawValue().hint"
                 [align]="formToggle.getRawValue().align"
                 [disabled]="formToggle.getRawValue().disabled"
-                [neutral]="formToggle.getRawValue().neutral"
                 [hideTexts]="formToggle.getRawValue().hideTexts">
               </dsfr-toggle>
             </form>

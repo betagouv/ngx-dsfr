@@ -1,0 +1,94 @@
+<div [ngClass]="classes">
+  <div class="fr-card__body">
+    <div class="fr-card__content">
+      <h3 class="fr-card__title">
+        @if (link) {
+          <dsfr-link
+            [label]="label"
+            [title]="linkTitle ?? ''"
+            [link]="link">
+          </dsfr-link>
+        }
+      </h3>
+      @if (description) {
+        <p class="fr-card__desc">
+          {{ description }}
+        </p>
+      }
+
+      @if (bottomDetail) {
+        <div class="fr-card__end">
+          <p class="fr-card__detail" [ngClass]="bottomDetailClass">
+            {{ bottomDetail }}
+          </p>
+        </div>
+      }
+
+      @if (badges || tags || detail) {
+        <div class="fr-card__start">
+          @if (tags) {
+            <ul class="fr-tags-group">
+              @for (tag of tags; track tag) {
+                <li>
+                  <dsfr-tag
+                    [label]="tag.label"
+                    [size]="tag?.size ?? ElementSize.LARGE"
+                    [icon]="tag?.icon ?? null">
+                  </dsfr-tag>
+                </li>
+              }
+            </ul>
+          } @else if (badges && !topBadges) {
+            <ul class="fr-badges-group">
+              @for (badge of badges; track badge) {
+                <li>
+                  <dsfr-badge
+                    [label]="badge.label"
+                    [noIcon]="badge?.noIcon"
+                    [size]="badge?.size ?? ElementSize.MEDIUM"
+                    [theme]="badge?.theme">
+                  </dsfr-badge>
+                </li>
+              }
+            </ul>
+          }
+
+          @if (detail) {
+            <p [ngClass]="detailClass">
+              {{ detail }}
+            </p>
+          }
+        </div>
+      }
+    </div>
+    @if (hasFooter) {
+      <div class="fr-card__footer">
+        <ng-content></ng-content>
+      </div>
+    }
+  </div>
+  <div class="fr-card__header">
+    @if (image) {
+      <div class="fr-card__img">
+        <img
+          class="fr-responsive-img"
+          [src]="image"
+          [alt]="imageAlt">
+      </div>
+    }
+    @if (topBadges) {
+      <ul class="fr-badges-group">
+        @for (badge of badges; track badge) {
+          <li>
+            <dsfr-badge
+              [noIcon]="badge.noIcon"
+              [size]="badge.size"
+              [theme]="badge.theme"
+              [label]="badge.label">
+            </dsfr-badge>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>

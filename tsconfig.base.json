@@ -19,22 +19,17 @@
       "@betagouv/ngx-dsfr/alert": ["libs/ngx-dsfr/alert/src/index.ts"],
       "@betagouv/ngx-dsfr/badge": ["libs/ngx-dsfr/badge/src/index.ts"],
       "@betagouv/ngx-dsfr/button": ["libs/ngx-dsfr/button/src/index.ts"],
+      "@betagouv/ngx-dsfr/card": ["libs/ngx-dsfr/card/src/index.ts"],
       "@betagouv/ngx-dsfr/checkbox": ["libs/ngx-dsfr/checkbox/src/index.ts"],
-      "@betagouv/ngx-dsfr/error-page": [
-        "libs/ngx-dsfr/error-page/src/index.ts"
-      ],
+      "@betagouv/ngx-dsfr/error-page": ["libs/ngx-dsfr/error-page/src/index.ts"],
       "@betagouv/ngx-dsfr/footer": ["libs/ngx-dsfr/footer/src/index.ts"],
       "@betagouv/ngx-dsfr/header": ["libs/ngx-dsfr/header/src/index.ts"],
       "@betagouv/ngx-dsfr/input": ["libs/ngx-dsfr/input/src/index.ts"],
       "@betagouv/ngx-dsfr/link": ["libs/ngx-dsfr/link/src/index.ts"],
-      "@betagouv/ngx-dsfr/navigation": [
-        "libs/ngx-dsfr/navigation/src/index.ts"
-      ],
+      "@betagouv/ngx-dsfr/navigation": ["libs/ngx-dsfr/navigation/src/index.ts"],
       "@betagouv/ngx-dsfr/password": ["libs/ngx-dsfr/password/src/index.ts"],
       "@betagouv/ngx-dsfr/radio": ["libs/ngx-dsfr/radio/src/index.ts"],
-      "@betagouv/ngx-dsfr/search-bar": [
-        "libs/ngx-dsfr/search-bar/src/index.ts"
-      ],
+      "@betagouv/ngx-dsfr/search-bar": ["libs/ngx-dsfr/search-bar/src/index.ts"],
       "@betagouv/ngx-dsfr/select": ["libs/ngx-dsfr/select/src/index.ts"],
       "@betagouv/ngx-dsfr/stepper": ["libs/ngx-dsfr/stepper/src/index.ts"],
       "@betagouv/ngx-dsfr/tab": ["libs/ngx-dsfr/tab/src/index.ts"],

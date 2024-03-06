@@ -28,6 +28,7 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
 import { RoutedContent1Component } from './components/routed-content/routed-content-1.component';
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
+import { CardModuleComponent } from './components/card-module/card-module.component';
 import { SelectModuleComponent } from './components/select-module/select-module.component';
 
 /**
@@ -45,6 +46,10 @@ const routes: Route[] = [
   {
     path: 'button',
     component: ButtonModuleComponent
+  },
+  {
+    path: 'card',
+    component: CardModuleComponent
   },
   {
     path: 'checkbox',
@@ -87,6 +92,10 @@ const routes: Route[] = [
     component: SearchBarModuleComponent
   },
   {
+    path: 'select',
+    component: SelectModuleComponent
+  },
+  {
     path: 'stepper',
     component: StepperModuleComponent
   },
@@ -119,10 +128,6 @@ const routes: Route[] = [
   {
     path: 'toggle',
     component: ToggleModuleComponent
-  },
-  {
-    path: 'select',
-    component: SelectModuleComponent
   }
 ];
 

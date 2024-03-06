@@ -6,12 +6,7 @@ import { Component, Input } from '@angular/core';
 /**
  * 3rd party imports
  */
-import { Breakpoint } from '@betagouv/ngx-dsfr';
-
-/**
- * Internal imports
- */
-import { TemplateAlign } from '../tile.component';
+import { Breakpoint, TemplateAlignment } from '@betagouv/ngx-dsfr';
 
 @Component({
   template: `
@@ -30,6 +25,6 @@ export class TestHostComponent {
   @Input() testTitle: string = '';
   @Input() testDescription: string = '';
   @Input() testBreakpoint: Breakpoint = 'md';
-  @Input() testAlign: TemplateAlign = 'vertical';
+  @Input() testAlign: TemplateAlignment = TemplateAlignment.VERTICAL;
   @Input() testImage: string = '';
 }
