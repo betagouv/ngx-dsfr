@@ -119,7 +119,9 @@
           "libs/ngx-dsfr/tag/**/*.ts",
           "libs/ngx-dsfr/tag/**/*.html",
           "libs/ngx-dsfr/tooltip/**/*.ts",
-          "libs/ngx-dsfr/tooltip/**/*.html"
+          "libs/ngx-dsfr/tooltip/**/*.html",
+          "libs/ngx-dsfr/select/**/*.ts",
+          "libs/ngx-dsfr/select/**/*.html"
         ]
       }
     }
