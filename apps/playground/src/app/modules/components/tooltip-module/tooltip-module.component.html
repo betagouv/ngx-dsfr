@@ -1,0 +1,128 @@
+<section class="module-description">
+  <h2>DsfrTooltipComponent</h2>
+  <p>
+    The <code>DsfrTooltipComponent</code> purpose is to represent a tooltip element.
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Tag Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/infobulle">
+      Tag
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>
+    It has several <code>&#64;Input()</code> properties:
+  </p>
+
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="tooltipText"
+      [required]="true"
+      type="It takes a string">
+      The text displayed inside the tooltip. It is mandatory.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="triggerText"
+      [required]="true"
+      type="It takes a string">
+      The text displayed in the link that triggers the tooltip. It is mandatory.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="id"
+      [required]="true"
+      type="It takes a string">
+      The id of the tooltip. It is mandatory.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="triggerOn"
+      default="HOVER"
+      type="It takes an enum with only 2 possible values : <code>HOVER</code> or <code>CLICK</code>">
+      You can import the <code>TooltipTriggerType</code> enum, from the
+      <code>&#64;betagouv/ngx-dsfr/tooltip</code>, in your app, to
+      safely provide a value for this property.
+    </play-input-property-definition>
+  </dl>
+</section>
+
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  <mat-card *ngIf="settingsForm">
+    <mat-card-header>
+      <mat-card-title>Tooltip Component</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="simulation">
+      <p>Example :</p>
+      <pre>
+        <span class="highlight-code">&lt;dsfr-tooltip</span>
+          [id]="This is the tooltip id"
+          [tooltipText]="This is a text inside the tooltip"
+          [triggerText]="This is a text on the tooltip trigger"
+          [triggerOn]="tooltipTriggerType.HOVER"
+        <span class="highlight-code">&gt;&lt;/dsfr-tooltip&gt;</span>
+      </pre>
+      <div class="settings">
+        <form
+          [formGroup]="settingsForm"
+          novalidate>
+          <play-input-property-control
+            formControlName="id"
+            name="id"
+            label="Tooltip's id"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="tooltipText"
+            name="tooltipText"
+            label="Tooltip's text"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="triggerText"
+            name="triggerText"
+            label="Tooltip's trigger text"
+            type="string">
+          </play-input-property-control>
+          <play-input-property-control
+            formControlName="triggerOn"
+            name="triggerOn"
+            label="Tooltip's trigger type"
+            type="enum"
+            [enum]="possibleTriggerTypes">
+          </play-input-property-control>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="settingsForm.reset()">
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="simulator-wrapper mat-elevation-z4">
+        <play-simulator>
+          <div class="tooltip-wrapper">
+            <dsfr-tooltip
+              [id]="settingsForm.getRawValue().id"
+              [tooltipText]="settingsForm.getRawValue().tooltipText"
+              [triggerText]="settingsForm.getRawValue().triggerText"
+              [triggerOn]="settingsForm.getRawValue().triggerOn">
+            </dsfr-tooltip>
+          </div>
+        </play-simulator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

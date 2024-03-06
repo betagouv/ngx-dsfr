@@ -1,0 +1,9 @@
+@use "@gouvfr/dsfr/dist/component/tooltip/tooltip.min";
+@use "@gouvfr/dsfr/dist/component/link/link.min";
+@use "@gouvfr/dsfr/dist/component/button/button.min";
+
+.fr-tooltip {
+  display: inline-block;
+  --arrow-x: 0px;
+  position: absolute;
+}
