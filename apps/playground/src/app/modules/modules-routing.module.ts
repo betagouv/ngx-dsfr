@@ -29,6 +29,7 @@ import { RoutedContent1Component } from './components/routed-content/routed-cont
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 import { UploadModuleComponent } from './components/upload-module/upload-module.component';
+import { SelectModuleComponent } from './components/select-module/select-module.component';
 
 /**
  * TypeScript entities and constants
@@ -85,6 +86,10 @@ const routes: Route[] = [
   {
     path: 'search-bar',
     component: SearchBarModuleComponent
+  },
+  {
+    path: 'select',
+    component: SelectModuleComponent
   },
   {
     path: 'stepper',

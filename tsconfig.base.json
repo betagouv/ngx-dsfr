@@ -29,6 +29,7 @@
       "@betagouv/ngx-dsfr/password": ["libs/ngx-dsfr/password/src/index.ts"],
       "@betagouv/ngx-dsfr/radio": ["libs/ngx-dsfr/radio/src/index.ts"],
       "@betagouv/ngx-dsfr/search-bar": ["libs/ngx-dsfr/search-bar/src/index.ts"],
+      "@betagouv/ngx-dsfr/select": ["libs/ngx-dsfr/select/src/index.ts"],
       "@betagouv/ngx-dsfr/stepper": ["libs/ngx-dsfr/stepper/src/index.ts"],
       "@betagouv/ngx-dsfr/tab": ["libs/ngx-dsfr/tab/src/index.ts"],
       "@betagouv/ngx-dsfr/tag": ["libs/ngx-dsfr/tag/src/index.ts"],
