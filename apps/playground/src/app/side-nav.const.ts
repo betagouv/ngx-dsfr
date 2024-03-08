@@ -90,6 +90,10 @@ export const SIDE_NAV: NavItem[] = [
       {
         label: 'Toggle',
         path: '/modules/toggle'
+      },
+      {
+        label: 'Upload',
+        path: '/modules/upload'
       }
     ]
   }

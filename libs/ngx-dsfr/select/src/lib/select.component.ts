@@ -95,7 +95,7 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnChanges {
     }
   }
 
-  get values(): string[] {
+  get values(): string[] | undefined {
     return this._values;
   }
 
@@ -103,7 +103,7 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnChanges {
     this.writeValue(val);
   }
 
-  private _values!: string[];
+  private _values: string[] | undefined;
 
   get selectedCount(): number {
     return this.values?.length || 0;
@@ -189,13 +189,16 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnChanges {
   }
 
   selectOption(option: SelectOption) {
-    if (this.multiple) {
+    if (this.multiple && this.values) {
       const alreadySelected = this.values.includes(option.label);
       this.values = alreadySelected
         ? [...this.values].filter((sel) => sel !== option.label)
         : [...this.values, option.label];
     } else {
       this.values = [option.label];
+    }
+
+    if (!this.multiple) {
       this.isOptionsPanelOpened = false;
     }
 
@@ -210,7 +213,7 @@ export class DsfrSelectComponent implements ControlValueAccessor, OnChanges {
   }
 
   onValueDeleted(value: string) {
-    const selectedValues = [...this.values];
+    const selectedValues = [...this.values!];
     const index = selectedValues.indexOf(value);
     selectedValues.splice(index, 1);
     this.values = selectedValues;
