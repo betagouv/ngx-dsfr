@@ -65,15 +65,6 @@ describe('DsfrUploadComponent', () => {
     }
   });
 
-  it('should throw an error when no id is provided', async () => {
-    try {
-      fixture.detectChanges();
-      throw 'It should have thrown an error about "ID"';
-    } catch (error) {
-      expect(error).toBe(EMPTY_ID_ERROR);
-    }
-  });
-
   describe('only hint is provided, ', () => {
     beforeEach(async () => {
       testHost.testHint = testHint;

@@ -119,14 +119,4 @@ export class DsfrUploadComponent implements ControlValueAccessor, OnInit, OnChan
     this.onChange(files);
     this.filesSelected.emit(files);
   }
-
-  private setErrorClasses() {
-    this.inputGroupClasses = {
-      'fr-input-group--error': this.hasFailed,
-      'fr-input-group--disabled': this.disabled
-    };
-  }
-
-
-
 }
