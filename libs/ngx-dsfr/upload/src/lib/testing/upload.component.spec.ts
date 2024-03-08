@@ -5,39 +5,34 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { FormsModule } from '@angular/forms';
-
-/**
- * 3rd-party imports
- */
-import { RouterLinkDirectiveStub } from '@betagouv/ngx-dsfr/testing';
 
 /**
  * Internal imports
  */
 import { TestHostComponent } from './test-host.component';
-import { DsfrUploadComponent, EMPTY_ID_ERROR, EMPTY_NAME_ERROR } from '../upload.component';
+import {
+  DsfrUploadComponent,
+  EMPTY_ID_ERROR,
+  EMPTY_HINT_ERROR,
+  EMPTY_FAILURE_MESSAGE_ERROR
+} from '../upload.component';
 import { DsfrUploadHarness } from './upload.harness';
 
-describe('DsfrFooterComponent', () => {
+describe('DsfrUploadComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
   let componentUnderTest: DsfrUploadComponent;
   let harnessLoader: HarnessLoader;
   let dsfrUploadHarness: DsfrUploadHarness;
 
-  const testName = 'testName';
+  const testHint = 'testHint';
   const testLabel = 'testLabel';
   const testId = 'testId'
+  const testFailureMessage = 'testFailureMessage';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [
-        DsfrUploadComponent,
-        TestHostComponent,
-        RouterLinkDirectiveStub
-      ]
+      declarations: [DsfrUploadComponent, TestHostComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -61,6 +56,15 @@ describe('DsfrFooterComponent', () => {
     expect(componentUnderTest).toBeTruthy();
   });
 
+  it('should throw an error when no hint is provided', async () => {
+    try {
+      fixture.detectChanges();
+      throw 'It should have thrown an error about "HINT"';
+    } catch (error) {
+      expect(error).toBe(EMPTY_HINT_ERROR);
+    }
+  });
+
   it('should throw an error when no id is provided', async () => {
     try {
       fixture.detectChanges();
@@ -70,25 +74,26 @@ describe('DsfrFooterComponent', () => {
     }
   });
 
-  describe('only ID is provided, ', () => {
+  describe('only hint is provided, ', () => {
     beforeEach(async () => {
-      testHost.testId = testId;
+      testHost.testHint = testHint;
     });
-    it('should throw an error when no name is provided', async () => {
+    it('should throw an error when no id is provided', async () => {
       try {
         fixture.detectChanges();
-        throw 'It should have thrown an error about "NAME"';
+        throw 'It should have thrown an error about "ID"';
       } catch (error) {
-        expect(error).toBe(EMPTY_NAME_ERROR);
+        expect(error).toBe(EMPTY_ID_ERROR);
       }
     });
   });
 
   describe('all required properties are provided, ', () => {
     beforeEach(async () => {
-      testHost.testName = testName;
+      testHost.testHint = testHint;
       testHost.testId = testId;
       testHost.testLabel = testLabel;
+
 
       dsfrUploadHarness = await harnessLoader.getHarness<DsfrUploadHarness>(
         DsfrUploadHarness
@@ -99,5 +104,27 @@ describe('DsfrFooterComponent', () => {
       const id = await dsfrUploadHarness.getInputId();
       expect(id).toEqual(testId);
     });
+
+    it('should throw an error when hasFailed is true and failureMessage is not provided', async () => {
+      try {
+        testHost.testHasFailed = true;
+        fixture.detectChanges();
+        throw 'It should have thrown an error about "failureMessage"';
+      } catch (error) {
+        expect(error).toBe(EMPTY_FAILURE_MESSAGE_ERROR);
+      }
+    });
+
+    it('should have the proper class and aria-describedby when there is an error', async () => {
+      testHost.testFailureMessage = testFailureMessage;
+      testHost.testHasFailed = true;
+
+      const inputClassAtribute = await dsfrUploadHarness.getInputClass();
+      const inputAriaDescribedByAtribute = await dsfrUploadHarness.getInputAriaDescribedBy();
+
+      expect(inputClassAtribute).toContain('error');
+      expect(inputAriaDescribedByAtribute).toContain('error');
+    });
+
   });
 });

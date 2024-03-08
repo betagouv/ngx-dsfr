@@ -2,11 +2,13 @@
  * Angular imports
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 /**
  * Internal imports
  */
 import { UploadModuleComponent } from './upload-module.component';
+import { ModulesModule } from '../../modules.module';
 
 describe('UploadModuleComponent', () => {
   let component: UploadModuleComponent;
@@ -14,7 +16,7 @@ describe('UploadModuleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UploadModuleComponent]
+      imports: [NoopAnimationsModule, ModulesModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UploadModuleComponent);

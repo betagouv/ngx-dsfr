@@ -1,23 +1,23 @@
 <div
   class="fr-upload-group"
-  [ngClass]="inputGroupClasses">
+  [class]="inputGroupClasses">
   <label class="fr-label" [for]="id">
     {{ label  }}
-    @if (hint) {
-      <span class="fr-hint-text">
+    <span class="fr-hint-text">
       {{ hint }}
     </span>
-    }
   </label>
   <input
+    #fileInput
     class="fr-upload"
     type="file"
     [id]="id"
-    [name]="name ? name : ''"
+    [accept]="accept"
     [attr.aria-describedby]="ariaDescribedby"
     [disabled]="disabled"
     [multiple]="multiple"
-    [(ngModel)]="value">
+    (blur)="onControlTouched()"
+    (change)="onFilesSelected(fileInput.files!)" />
   @if (hasFailed) {
     <p [id]="id + '-error'" class="fr-error-text">
       {{ failureMessage }}

@@ -23,6 +23,19 @@
     </a>
     .
   </p>
+  <p>
+    As it implements the
+    <a
+      target="_blank"
+      hreflang="en"
+      href="https://angular.dev/api/forms/ControlValueAccessor?tab=api">
+      <code>ControlValueAccessor</code>
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    interface, you can make this Component disabled by stating it when defining
+    its associated
+    <code>FormControl</code>.
+  </p>
   <p>It has several <code>&#64;Input()</code>  and <code>Output()</code> properties:</p>
   <dl class="input-properties">
     <play-input-property-definition
@@ -35,30 +48,52 @@
       the error message if needed.
     </play-input-property-definition>
     <play-input-property-definition
-      name="name"
-      [required]="true"
-      type="It takes a string">
-      It is used for the <code>name</code> attribute of the underlying
-      <code>input</code> tag
-    </play-input-property-definition>
-    <play-input-property-definition
       name="label"
-      [required]="true"
+      default="'Ajouter un fichier' or 'Ajouter des fichiers' if multiple is true"
       type="It takes a string">
       The label that will be displayed on top of the form field
     </play-input-property-definition>
     <play-input-property-definition
       name="hint"
-      [required]="false"
+      [required]="true"
       type="It takes a string">
-      The descriptive text that will be displayed above the label.
-      It must contain all the expected formats/weights/sizes
+      <p>
+        The text that will be displayed beneath the label. It MUST describe all
+        the expected restrictions about formats and sizes.
+      </p>
+      <p>
+        ⚠️Be careful ⚠️, these restrictions are not implemented within this
+        Component. It is still your responsibility to check them on the server
+        level
+      </p>
     </play-input-property-definition>
     <play-input-property-definition
-      name="multipe"
+      name="accept"
+      type="string">
+      <p>
+        A list of comma-separated extensions so that the dialog box opened by
+        clicking on this Component will only let you choose the expected files.
+        For instance : ".jpg, .jpeg, .png"
+      </p>
+      <p>
+        ⚠️Be careful ⚠️, it is still possible to manually change the extension
+        in the name of the file and make it available for choosing. This
+        attribute should NOT be seen as a security check but rather like a
+        user-experience bonus
+      </p>
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="multiple"
       default="false"
       type="boolean">
-      It will allow the fact that the user can upload more than only 1 file
+      It will allow a user to upload more than 1 file
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="name"
+      [required]="true"
+      type="It takes a string">
+      It is used for the <code>name</code> attribute of the underlying
+      <code>input</code> tag
     </play-input-property-definition>
     <play-input-property-definition
       name="hasFailed"
@@ -81,9 +116,10 @@
       <code>input</code> tag
     </play-input-property-definition>
     <play-input-property-definition
-      name="onFileChange()"
-      type="output">
-      Emits the value of the input on change event.
+      name="filesSelected"
+      type="Output">
+      Emits a <code>FileList</code> object representing the currently selected
+      files, after each <code>change</code> event.
     </play-input-property-definition>
   </dl>
 </section>
@@ -98,7 +134,6 @@
       <pre>
   <span class='highlight-code'>&lt;dsfr-upload</span>
     id="2"
-    name="upload-1-name"
     label="This is a label"
     hint="This is a hint"
   <span class='highlight-code'>&gt;&lt;/dsfr-upload&gt;</span>
@@ -115,6 +150,7 @@
           </play-input-property-control>
           <play-input-property-control
             formControlName="hint"
+            [error]="inputFormErrors['hint']"
             name="hint"
             type="string">
           </play-input-property-control>
@@ -153,25 +189,22 @@
             <form [formGroup]="form">
               <dsfr-upload
                 id="input-1"
-                name="input-1-name"
                 formControlName="input"
                 [label]="inputForm.getRawValue().label"
                 [multiple]="inputForm.getRawValue().multiple"
-                [disabled]="inputForm.getRawValue().disabled"
                 [hint]="inputForm.getRawValue().hint"
                 [hasFailed]="inputForm.getRawValue().hasFailed"
                 [failureMessage]="inputForm.getRawValue().failureMessage"
-                (change)="onFileChange($event)">
+                (filesSelected)="selectedFiles = $event">
               </dsfr-upload>
             </form>
           }
           <hr>
           <p>
-            Here the selected
             @if (inputForm.value.multiple) {
-              files :
+              Here are the selected files :
             } @else {
-              file :
+              Here is the selected file :
             }
           </p>
           <ul>

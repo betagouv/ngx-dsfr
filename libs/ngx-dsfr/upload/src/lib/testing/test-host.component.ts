@@ -7,10 +7,8 @@ import { Component, Input } from '@angular/core';
   template: `
     <dsfr-upload
       [label]="testLabel"
-      [name]="testName"
       [id]="testId"
       [hint]="testHint"
-      [disabled]="testDisabled"
       [hasFailed]="testHasFailed"
       [multiple]="testMultiple"
       [failureMessage]="testFailureMessage">
@@ -19,11 +17,9 @@ import { Component, Input } from '@angular/core';
 })
 export class TestHostComponent {
   @Input() testLabel: string = '';
-  @Input() testName: string | undefined;
-  @Input() testId: string | undefined;
+  @Input() testId!: string;
   @Input() testHasFailed = false;
   @Input() testFailureMessage: string | undefined;
-  @Input() testHint?: string | undefined;
-  @Input() testDisabled: boolean = false;
+  @Input() testHint!: string;
   @Input() testMultiple: boolean = false;
 }

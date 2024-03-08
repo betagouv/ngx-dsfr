@@ -1,7 +1,7 @@
 /**
  * Angular imports
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   FormControlStatus,
   NonNullableFormBuilder,
@@ -9,27 +9,33 @@ import {
 } from '@angular/forms';
 
 /**
- * 3rd-party imports
+ * Internal imports
  */
-import { Subject, takeUntil } from 'rxjs';
+import { failureMessageRequiredWhenHasFailedValidator } from '../input-module/failure-message-required.validator';
+import { createTypeSafeTakeUntilDestroyed } from '../../utils';
 
 @Component({
   templateUrl: './upload-module.component.html',
   styleUrls: ['./upload-module.component.scss']
 })
-export class UploadModuleComponent implements OnInit, OnDestroy {
+export class UploadModuleComponent implements OnInit {
 
-  private unsubscribe$ = new Subject<void>();
+  private untilComponentDestroyed = createTypeSafeTakeUntilDestroyed(
+    inject(DestroyRef)
+  );
 
-  inputForm = this.formBuilder.group({
-    label: ['Ajouter un fichier', Validators.required],
-    hint: 'This is a description',
-    name: 'input-name',
-    multiple: false,
-    disabled: false,
-    hasFailed: false,
-    failureMessage: 'Error message',
-  });
+  inputForm = this.formBuilder.group(
+    {
+      label: ['Ajouter un fichier', Validators.required],
+      hint: ['This is a description', Validators.required],
+      multiple: false,
+      hasFailed: false,
+      failureMessage: 'Error message'
+    },
+    {
+      validators: failureMessageRequiredWhenHasFailedValidator
+    }
+  );
 
   form = this.formBuilder.group({
     input: ''
@@ -46,13 +52,20 @@ export class UploadModuleComponent implements OnInit, OnDestroy {
 
   private initForms(): void {
     this.handleErrors('Please, enter a label for this Component', 'label');
+    this.handleErrors(
+      'Please, enter a hint message for this Component',
+      'hint'
+    );
+    this.handleErrors(
+      'Please, enter a failure message for this Component if the hasFailed attribute is true'
+    );
   }
 
   private handleErrors(errorMsg: string, controlName?: string): void {
     if (controlName) {
       this.inputForm
         ?.get(controlName)
-        ?.statusChanges.pipe(takeUntil(this.unsubscribe$))
+        ?.statusChanges.pipe(this.untilComponentDestroyed())
         .subscribe({
           next: (value: FormControlStatus) => {
             if (value === 'INVALID') {
@@ -64,7 +77,7 @@ export class UploadModuleComponent implements OnInit, OnDestroy {
         });
     } else {
       this.inputForm?.statusChanges
-        .pipe(takeUntil(this.unsubscribe$))
+        .pipe(this.untilComponentDestroyed())
         .subscribe({
           next: (value: FormControlStatus) => {
             if (value === 'INVALID') {
@@ -75,15 +88,5 @@ export class UploadModuleComponent implements OnInit, OnDestroy {
           }
         });
     }
-  }
-
-  onFileChange(event: Event) {
-    const target = <HTMLInputElement>event.target;
-    this.selectedFiles = target.files;
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }
