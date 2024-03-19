@@ -23,6 +23,7 @@ import { DsfrInputModule } from '@betagouv/ngx-dsfr/input';
 import { DsfrTileModule } from '@betagouv/ngx-dsfr/tile';
 import { DsfrPasswordModule } from '@betagouv/ngx-dsfr/password';
 import { DsfrFooterModule } from '@betagouv/ngx-dsfr/footer';
+import { DsfrSelectModule } from '@betagouv/ngx-dsfr/select';
 import {
   DsfrSearchBarModule,
   DSFR_SEARCH_BAR_SERVICE_TOKEN
@@ -31,6 +32,7 @@ import { DsfrErrorPageModule } from '@betagouv/ngx-dsfr/error-page';
 import { DsfrToggleModule } from '@betagouv/ngx-dsfr/toggle';
 import { DsfrTabModule } from '@betagouv/ngx-dsfr/tab';
 import { DsfrTagModule } from '@betagouv/ngx-dsfr/tag';
+import { DsfrUploadModule } from '@betagouv/ngx-dsfr/upload';
 
 /**
  * Internal imports
@@ -60,6 +62,8 @@ import { RoutedContent1Component } from './components/routed-content/routed-cont
 import { RoutedContent2Component } from './components/routed-content/routed-content-2.component';
 import { RoutedContent3Component } from './components/routed-content/routed-content-3.component';
 import { TagModuleComponent } from './components/tag-module/tag-module.component';
+import { SelectModuleComponent } from './components/select-module/select-module.component';
+import { UploadModuleComponent } from './components/upload-module/upload-module.component';
 
 @NgModule({
   imports: [
@@ -83,6 +87,8 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
     DsfrToggleModule,
     DsfrTabModule,
     DsfrTagModule,
+    DsfrUploadModule,
+    DsfrSelectModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -107,8 +113,10 @@ import { TagModuleComponent } from './components/tag-module/tag-module.component
     ErrorPageModuleComponent,
     FooterModuleComponent,
     ToggleModuleComponent,
+    SelectModuleComponent,
     TabModuleComponent,
     TagModuleComponent,
+    UploadModuleComponent,
     RoutedContent1Component,
     RoutedContent2Component,
     RoutedContent3Component

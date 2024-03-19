@@ -1,7 +1,14 @@
 /**
  * Angular imports
  */
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 
 /**
  * 3rd-party imports
@@ -74,6 +81,8 @@ export class DsfrButtonComponent implements OnInit {
 
       if (this.label) {
         this.classes += ` fr-btn--icon-${this.iconAlignment} `;
+      } else {
+        this.classes += ' icon-only';
       }
     }
   }

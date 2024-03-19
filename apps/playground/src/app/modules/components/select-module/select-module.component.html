@@ -1,0 +1,259 @@
+<section class="module-description">
+  <h2>DsfrSelectComponent</h2>
+  <p>
+    The <code>DsfrSelectComponent</code> purpose is to represent a select form
+    field.
+  </p>
+  <p>
+    It is based on the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The documentation page for the Select Component in the DSFR"
+      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/liste-deroulante">
+      Liste déroulante
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    component in the
+    <a
+      target="_blank"
+      hreflang="fr"
+      title="The DSFR documentation"
+      href="https://www.systeme-de-design.gouv.fr/">
+      DSFR
+      <mat-icon>open_in_new</mat-icon>
+    </a>
+    .
+  </p>
+  <p>It has several <code>&#64;Input()</code> properties:</p>
+  <dl class="input-properties">
+    <play-input-property-definition
+      name="label"
+      [required]="true"
+      type="It takes a string">
+      The label of the select component
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="id"
+      [required]="true"
+      type="It takes a string">
+      The ID used for a specific instance of the
+      <code>DsfrSelectComponent</code>.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="options"
+      [required]="true"
+      type="SelectOption[]">
+      The value must be an array of objects satisfying the
+      <code>SelectOption</code> interface : each object must have an
+      <code>id</code> property, a <code>label</code> property and a
+      <code>value</code> property. All these properties have string values. They
+      represent the different options we can select from the Component.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="defaultPlaceholder"
+      type="It takes a string"
+      default="Sélectionnez une option">
+      An optional text that is displayed in the Component by default, when no
+      option is selected yet.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="multiple"
+      type="boolean"
+      default="false">
+      Whether we can select multiple options or not.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hint"
+      type="It takes a string">
+      An optional text to help end-users understand the purpose of a select. It
+      is a way to give more details and complement the label.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="disabled"
+      type="boolean"
+      default="false">
+      Whether a select is disabled or not.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hasFailed"
+      type="boolean"
+      default="false">
+      Whether the control is in error mode or not.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="failureMessage"
+      required="Required when hasFailed is set to true"
+      type="It takes a string">
+      The error message to be displayed when in error mode.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="hasSucceeded"
+      type="boolean"
+      default="false">
+      Whether the control is in success mode or not.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="successMessage"
+      required="Required when hasSucceeded is set to true"
+      type="It takes a string">
+      The success message to be displayed when in success mode.
+    </play-input-property-definition>
+    <play-input-property-definition
+      name="showSelectedValues"
+      type="boolean"
+      default="false">
+      Whether to show the selected values as deletable tags under the select or
+      not.
+    </play-input-property-definition>
+  </dl>
+</section>
+<section class="module-simulations">
+  <h2>Play with the Component 😃</h2>
+  @if (settingsForm) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Select component</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="simulation">
+        <p>Example :</p>
+        <pre>
+          <span class="highlight-code">&lt;dsfr-select</span>
+            formControlName="select"
+            id="select"
+            [label]="label"
+            [options]="options"
+            [defaultPlaceholder]="defaultPlaceholder"
+            [hint]="hint"
+            [multiple]="multiple"
+            [showSelectedValues]="showSelectedValues"
+            [disabled]="disabled"
+            [hasFailed]="hasFailed"
+            [failureMessage]="failureMessage"
+            [hasSucceeded]="hasSucceeded"
+            [successMessage]="successMessage"
+          <span class="highlight-code">&lt;/dsfr-select&gt;</span>
+
+          // Where options could be
+          <span class="highlight-code">const options</span> =
+          [&#123;
+            label: '1',
+            id: '1',
+            value: '1'
+          &#125;,
+          &#123;
+            label: '2',
+            id: '2',
+            value: '2'
+          &#125;];
+        </pre>
+        <div class="settings">
+          <form
+            [formGroup]="settingsForm"
+            novalidate>
+            <play-input-property-control
+              formControlName="label"
+              name="label"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="defaultPlaceholder"
+              name="defaultPlaceholder"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="hint"
+              name="hint"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="disabled"
+              name="disabled"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="multiple"
+              name="multiple"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="showSelectedValues"
+              name="showSelectedValues"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="hasFailed"
+              name="hasFailed"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="failureMessage"
+              name="failureMessage"
+              type="string">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="hasSucceeded"
+              name="hasSucceeded"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="successMessage"
+              name="successMessage"
+              type="string">
+            </play-input-property-control>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="settingsForm.reset()">
+              Reset
+            </button>
+          </form>
+        </div>
+        <div class="simulator-wrapper mat-elevation-z4">
+          <play-simulator>
+            @if (simulationForm) {
+              <div class="template-select">
+                <form [formGroup]="simulationForm">
+                  <dsfr-select
+                    formControlName="select"
+                    id="select"
+                    [label]="settingsForm.getRawValue().label"
+                    [options]="options"
+                    [defaultPlaceholder]="
+                      settingsForm.getRawValue().defaultPlaceholder
+                    "
+                    [hint]="settingsForm.getRawValue().hint"
+                    [multiple]="settingsForm.getRawValue().multiple"
+                    [showSelectedValues]="
+                      settingsForm.getRawValue().showSelectedValues
+                    "
+                    [disabled]="settingsForm.getRawValue().disabled"
+                    [hasFailed]="settingsForm.getRawValue().hasFailed"
+                    [failureMessage]="settingsForm.getRawValue().failureMessage"
+                    [hasSucceeded]="settingsForm.getRawValue().hasSucceeded"
+                    [successMessage]="
+                      settingsForm.getRawValue().successMessage
+                    ">
+                  </dsfr-select>
+                </form>
+                <p>
+                  Selected values are :
+                  @for (
+                      selected of simulationForm.value.select;
+                    track selected
+                    ) {
+                    <dsfr-tag
+                      [label]="selected"
+                      [type]="tagType"
+                      (deleted)="onValueDelete(selected)">
+                    </dsfr-tag>
+                  }
+                </p>
+              </div>
+            }
+          </play-simulator>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</section>

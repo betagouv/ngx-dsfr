@@ -79,12 +79,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/ngx-dsfr"],
       "options": {
-        "jestConfig": "libs/ngx-dsfr/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/ngx-dsfr/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/ngx-dsfr/src/**/*.ts",
@@ -118,7 +117,9 @@
           "libs/ngx-dsfr/tab/**/*.ts",
           "libs/ngx-dsfr/tab/**/*.html",
           "libs/ngx-dsfr/tag/**/*.ts",
-          "libs/ngx-dsfr/tag/**/*.html"
+          "libs/ngx-dsfr/tag/**/*.html",
+          "libs/ngx-dsfr/select/**/*.ts",
+          "libs/ngx-dsfr/select/**/*.html"
         ]
       }
     }

@@ -27,7 +27,14 @@
     button's width.
   </p>
   <p>
-    It has several <code>@Input()</code> and <code>@Output()</code> properties:
+    Use the <code>--dsfr-button-color</code> CSS variable to customize the button's text and outline color.
+  </p>
+  <p>
+    Use the <code>--dsfr-button-background-color</code> CSS variable to customize the button's background color ( only
+    works when the button has type <code>primary</code> ).
+  </p>
+  <p>
+    It has several <code>&#64;Input()</code> and <code>&#64;Output()</code> properties:
   </p>
   <dl class="input-properties">
     <play-input-property-definition
@@ -55,7 +62,7 @@
       name="size"
       type="It takes a string with 3 possible values : <code>sm</code>, <code>md</code> or <code>lg</code>">
       You can import the <code>ElementSize</code> enum, from the
-      <code>@betagouv/ngx-dsfr</code> library entry-point, in your app, to
+      <code>&#64;betagouv/ngx-dsfr</code> library entry-point, in your app, to
       safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
@@ -90,7 +97,7 @@
       It will align the provided icon at the left or right of the label. This
       input is not necessary if no label is provided. You can import the
       <code>ElementAlignment</code> enum, from the
-      <code>@betagouv/ngx-dsfr</code> library entry-point, in your app, to
+      <code>&#64;betagouv/ngx-dsfr</code> library entry-point, in your app, to
       safely provide a value for this property.
     </play-input-property-definition>
     <play-input-property-definition
@@ -121,12 +128,12 @@
     <mat-card-content class="simulation">
       <p>Example :</p>
       <pre>
-  <span class='highlight-code'>&lt;dsfr-button</span>
+  <span class="highlight-code">&lt;dsfr-button</span>
     label="This is a beautiful label"
     type="primary"
     icon="fr-icon-checkbox-circle-line"
     title="This is a title"
-  <span class='highlight-code'>&gt;&lt;/dsfr-button&gt;</span>
+  <span class="highlight-code">&gt;&lt;/dsfr-button&gt;</span>
 </pre>
       <div class="settings">
         <form
@@ -198,9 +205,11 @@
               [iconAlignment]="buttonForm.getRawValue().iconAlignment"
               (buttonClicked)="handleClick()"></dsfr-button>
             <p>
-              You clicked on me {{ nbButtonClicked }} time<ng-container
+              You clicked on me {{ nbButtonClicked }} time
+              <ng-container
                 *ngIf="nbButtonClicked > 1"
-                >s</ng-container
+              >s
+              </ng-container
               >
               !
               <ng-container *ngIf="nbButtonClicked > 10">
