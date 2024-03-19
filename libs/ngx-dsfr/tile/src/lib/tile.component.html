@@ -1,30 +1,53 @@
 <div [class]="classes">
   <div class="fr-tile__body">
-    <h4 class="fr-tile__title">
-      <ng-container [ngSwitch]="template">
-        <ng-container *ngSwitchCase="templateType.INTERNAL">
-          <a
-            class="fr-tile__link"
-            [routerLink]="link">
-            {{ title }}
-          </a>
-        </ng-container>
-        <ng-container *ngSwitchCase="templateType.EXTERNAL">
-          <a
-            class="fr-tile__link"
-            [href]="link"
-            target="_blank">
-            {{ title }}
-          </a>
-        </ng-container>
-      </ng-container>
-    </h4>
-    <p class="fr-tile__desc" *ngIf="description">
-      {{ description }}
-    </p>
+    <div class="fr-tile__content">
+      <h3 class="fr-tile__title">
+        @switch (template) {
+          @case (templateType.INTERNAL) {
+            @if (link) {
+              <a
+                class="fr-tile__link"
+                [routerLink]="link">
+                {{ title }}
+              </a>
+            }
+          }
+          @case (templateType.EXTERNAL) {
+            <a
+              class="fr-tile__link"
+              [href]="link"
+              target="_blank">
+              {{ title }}
+            </a>
+          }
+          @case (templateType.DOWNLOAD) {
+            <a
+              [href]="link"
+              download
+              target="_blank">
+              {{ title }}
+            </a>
+          }
+        }
+      </h3>
+      @if (description) {
+        <p class="fr-tile__desc">
+          {{ description }}
+        </p>
+      }
+      @if (detail) {
+        <p class="fr-tile__detail">
+          {{ detail }}
+        </p>
+      }
+    </div>
   </div>
-  <div class="fr-tile__img" *ngIf="image">
-    <img [src]="image" class="fr-responsive-img" alt="">
-    <!-- ALT must be empty because this image is just a design element and does not need to be restituted by assistive technology -->
-  </div>
+  @if (image) {
+    <div class="fr-tile__header">
+      <div class="fr-tile__img">
+        <img [src]="image" class="fr-responsive-img" alt="">
+        <!-- ALT must be empty because this image is just a design element and does not need to be restituted by assistive technology -->
+      </div>
+    </div>
+  }
 </div>

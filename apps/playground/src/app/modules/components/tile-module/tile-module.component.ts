@@ -1,25 +1,43 @@
 /**
  * Angular imports
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  NonNullableFormBuilder
-} from '@angular/forms';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * 3rd-party imports
  */
-import { Subject, takeUntil } from 'rxjs';
+import { TemplateAlign } from '@betagouv/ngx-dsfr/tile';
+import { Breakpoint } from '@betagouv/ngx-dsfr';
 
 @Component({
   templateUrl: './tile-module.component.html',
   styleUrls: ['./tile-module.component.scss']
 })
-export class TileModuleComponent implements OnInit, OnDestroy {
-  formTileDescriptionAndTitle: FormGroup | undefined;
-  formTileWithoutImage: FormGroup | undefined;
-  formTileGrid: FormGroup | undefined;
+export class TileModuleComponent implements OnInit {
+  formTileDescriptionAndTitle = this.formBuilder.group({
+    title: 'This is a title',
+    description: 'This is a description',
+    align: 'vertical' as TemplateAlign,
+    download: false,
+    detail: 'this is a detail',
+    link: '/modules/tile',
+    breakpoint: 'md' as Breakpoint
+  });
+
+  formTileWithoutImage = this.formBuilder.group({
+    title: 'This is a title',
+    description: 'This is a description',
+    align: 'vertical' as TemplateAlign,
+    download: false,
+    detail: 'this is a detail',
+  });
+
+  formTileGrid = this.formBuilder.group({
+    nbTiles: 3,
+    align: 'vertical' as TemplateAlign
+  });
 
   possibleAlignment: Record<string, string> = {
     "horizontal": "horizontal",
@@ -43,7 +61,7 @@ export class TileModuleComponent implements OnInit, OnDestroy {
   colClass: string = 'fr-col-4';
   nbTilesIteration: number[] = [0, 1, 2];
 
-  private unsubscribe$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
 
   constructor(private formBuilder: NonNullableFormBuilder) { }
 
@@ -52,36 +70,13 @@ export class TileModuleComponent implements OnInit, OnDestroy {
   }
 
   private initForms(): void {
-    this.formTileDescriptionAndTitle = this.formBuilder.group({
-      title: 'This is a title',
-      description: 'This is a description',
-      align: 'vertical',
-      link: '/modules/tile',
-      breakpoint: 'md'
-    });
-
-    this.formTileWithoutImage = this.formBuilder.group({
-      title: 'This is a title',
-      description: 'This is a description',
-      align: 'vertical'
-    });
-
-    this.formTileGrid = this.formBuilder.group({
-      nbTiles: 3,
-      align: 'vertical'
-    });
-
     this.formTileGrid?.valueChanges
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((data) => {
-        this.nbTilesIteration = Array(data.nbTiles).fill(0).map((x, i) => i);
-        this.colClass = 'fr-col-' + (12 / data.nbTiles);
+        if (data.nbTiles) {
+          this.nbTilesIteration = Array(data.nbTiles).fill(0).map((x, i) => i);
+          this.colClass = 'fr-col-' + (12 / data.nbTiles);
+        }
       });
-  }
-
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }
