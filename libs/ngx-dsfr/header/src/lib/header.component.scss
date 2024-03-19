@@ -10,6 +10,8 @@
       flex-wrap: nowrap;
 
       .fr-header__brand-top {
+        width: auto;
+
         .fr-header__logo {
           padding-right: 0;
           margin-right: -8px;
@@ -69,17 +71,6 @@
           }
         }
       }
-    }
-  }
-
-  .mini-mobile-header__hidden {
-    display: none;
-  }
-
-  .mini-mobile-header__app-name {
-    display: none;
-    @media (min-width: 62em) {
-      display: block;
     }
   }
 
