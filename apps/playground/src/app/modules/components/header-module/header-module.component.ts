@@ -3,7 +3,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl,
   FormControlStatus,
   FormGroup,
   NonNullableFormBuilder,
@@ -18,28 +17,42 @@ import { Navigation } from '@betagouv/ngx-dsfr/navigation';
 import { ElementAlignment } from '@betagouv/ngx-dsfr';
 import { ButtonType } from '@betagouv/ngx-dsfr/button';
 
-/**
- * TypeScript entities and constants
- */
-interface FormHeaderWithAppName {
-  institution: FormControl<string>;
-  appName: FormControl<string>;
-  appDescription: FormControl<string>;
-}
-
-interface FormHeaderWithLogo extends FormHeaderWithAppName {
-  operatorLogoAlt: FormControl<string>;
-  searchBar: FormControl<boolean>;
-}
-
 @Component({
   templateUrl: './header-module.component.html',
   styleUrls: ['./header-module.component.scss']
 })
 export class HeaderModuleComponent implements OnInit, OnDestroy {
-  formHeaderWithAppName: FormGroup<FormHeaderWithAppName> | undefined;
-  formHeaderWithLogo: FormGroup<FormHeaderWithLogo> | undefined;
-  formHeaderComplete: FormGroup<FormHeaderWithLogo> | undefined;
+  formHeaderWithAppName = this.formBuilder.group({
+    institution:
+      'Ministère\nde l\'enseignement\nsupérieur,\nde la recherche\net de l\'innovation',
+    appName: '',
+    appDescription: '',
+    miniMobileHeader: false
+  });
+  formHeaderWithLogo = this.formBuilder.group({
+    institution:
+      'Ministère\nde l\'enseignement\nsupérieur,\nde la recherche\net de l\'innovation',
+    appName: '',
+    searchBar: [{value: true, disabled: false}],
+    appDescription: '',
+    operatorLogoAlt: [
+      'agence nationale de la cohésion des territoires',
+      Validators.required
+    ],
+    miniMobileHeader: false
+  });
+  formHeaderComplete = this.formBuilder.group({
+    institution:
+      'Ministère\nde l\'enseignement\nsupérieur,\nde la recherche\net de l\'innovation',
+    appName: '',
+    appDescription: '',
+    searchBar: [{value: true, disabled: false}],
+    operatorLogoAlt: [
+      'agence nationale de la cohésion des territoires',
+      Validators.required
+    ],
+    miniMobileHeader: false
+  });
   errors: Record<string, string> = {
     formHeaderWithLogo: '',
     formHeaderComplete: ''
@@ -130,44 +143,13 @@ export class HeaderModuleComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: NonNullableFormBuilder) { }
+  constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
     this.initForms();
   }
 
   private initForms(): void {
-    this.formHeaderWithAppName = this.formBuilder.group({
-      institution:
-        "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
-      appName: '',
-      appDescription: ''
-    });
-
-    this.formHeaderWithLogo = this.formBuilder.group({
-      institution:
-        "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
-      appName: '',
-      searchBar: [{ value: true, disabled: false }],
-      appDescription: '',
-      operatorLogoAlt: [
-        'agence nationale de la cohésion des territoires',
-        Validators.required
-      ]
-    });
-
-    this.formHeaderComplete = this.formBuilder.group({
-      institution:
-        "Ministère\nde l'enseignement\nsupérieur,\nde la recherche\net de l'innovation",
-      appName: '',
-      appDescription: '',
-      searchBar: [{ value: true, disabled: false }],
-      operatorLogoAlt: [
-        'agence nationale de la cohésion des territoires',
-        Validators.required
-      ]
-    });
-
     this.handleError(this.formHeaderWithLogo, 'formHeaderWithLogo');
     this.handleError(this.formHeaderComplete, 'formHeaderComplete');
   }
