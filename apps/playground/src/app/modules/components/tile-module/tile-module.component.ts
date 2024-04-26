@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
  * 3rd-party imports
  */
 import { TemplateAlign } from '@betagouv/ngx-dsfr/tile';
-import { Breakpoint } from '@betagouv/ngx-dsfr';
+import { Breakpoint, DownloadOptions } from '@betagouv/ngx-dsfr';
 
 @Component({
   templateUrl: './tile-module.component.html',
@@ -60,6 +60,10 @@ export class TileModuleComponent implements OnInit {
 
   colClass: string = 'fr-col-4';
   nbTilesIteration: number[] = [0, 1, 2];
+  downloadExample: DownloadOptions = {
+    fileType: 'jpg',
+    fileWeight: '42 Ko'
+  };
 
   private destroyRef = inject(DestroyRef);
 
