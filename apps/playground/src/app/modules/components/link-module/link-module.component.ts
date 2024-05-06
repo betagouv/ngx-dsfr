@@ -11,7 +11,7 @@ import {
 /**
  * 3rd-party imports
  */
-import { ElementAlignment, ElementSize } from '@betagouv/ngx-dsfr';
+import { DownloadOptions, ElementAlignment, ElementSize } from '@betagouv/ngx-dsfr';
 import { Subject, takeUntil } from 'rxjs';
 
 /**
@@ -26,19 +26,22 @@ import { titleRequiredWhenExternalValidator } from '../../validation/title-requi
 export class LinkModuleComponent implements OnInit, OnDestroy {
   iconAlignment: typeof ElementAlignment = ElementAlignment;
   linkSize: typeof ElementSize = ElementSize;
-  formInlineTrue = this.formBuilder.group(
+  linkForm = this.formBuilder.group(
     {
-      inline: [{ value: true, disabled: false }],
+      inline: true,
       label: ['DSFR Link works 😁', Validators.required],
       link: ['https://www.systeme-de-design.gouv.fr/', Validators.required],
       backToTop: false,
       download: false,
-      detail: '',
       title: 'the documentation about the DSFR'
     },
     { validators: titleRequiredWhenExternalValidator }
   );
-  formInlineTrueErrors: Record<string, string> = {};
+  linkFormErrors: Record<string, string> = {};
+  downloadExample: DownloadOptions = {
+    fileType: 'jpg',
+    fileWeight: '42 Ko'
+  };
 
   private unsubscribe$ = new Subject<void>();
 
@@ -56,28 +59,28 @@ export class LinkModuleComponent implements OnInit, OnDestroy {
 
   private handleErrors(errorMsg: string, controlName?: string): void {
     if (controlName) {
-      this.formInlineTrue
+      this.linkForm
         ?.get(controlName)
         ?.statusChanges
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (value: FormControlStatus) => {
             if (value === 'INVALID') {
-              this.formInlineTrueErrors[controlName] = errorMsg;
+              this.linkFormErrors[controlName] = errorMsg;
             } else {
-              this.formInlineTrueErrors = {};
+              this.linkFormErrors = {};
             }
           }
         });
     } else {
-      this.formInlineTrue?.statusChanges
+      this.linkForm?.statusChanges
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (value: FormControlStatus) => {
             if (value === 'INVALID') {
-              this.formInlineTrueErrors['_form_'] = errorMsg;
+              this.linkFormErrors['_form_'] = errorMsg;
             } else {
-              this.formInlineTrueErrors = {};
+              this.linkFormErrors = {};
             }
           }
         });

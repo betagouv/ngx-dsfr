@@ -4,18 +4,15 @@
       <h3 class="fr-tile__title">
         @switch (template) {
           @case (templateType.INTERNAL) {
-            @if (link) {
-              <a
-                class="fr-tile__link"
-                [routerLink]="link">
-                {{ title }}
-              </a>
-            }
+            <a
+              [routerLink]="link">
+              {{ title }}
+            </a>
           }
           @case (templateType.EXTERNAL) {
             <a
-              class="fr-tile__link"
               [href]="link"
+              rel="noopener"
               target="_blank">
               {{ title }}
             </a>
@@ -23,9 +20,10 @@
           @case (templateType.DOWNLOAD) {
             <a
               [href]="link"
-              download
-              target="_blank">
-              {{ title }}
+              [attr.download]="download?.open ? null : download?.fileName"
+              [attr.target]="download?.open && download?.openOnAnotherPage ? '_blank' : null"
+              [hreflang]="download?.fileLang">
+              Télécharger {{ title }}
             </a>
           }
         }
@@ -35,7 +33,13 @@
           {{ description }}
         </p>
       }
-      @if (detail) {
+      @if (download) {
+        <p class="fr-tile__detail">
+          {{ download.fileType.toUpperCase() }} -
+          {{ download.fileWeight }}
+          {{ download.fileDesc ? "/ " + download.fileDesc : "" }}
+        </p>
+      } @else if (detail) {
         <p class="fr-tile__detail">
           {{ detail }}
         </p>

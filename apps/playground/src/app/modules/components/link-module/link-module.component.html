@@ -4,7 +4,7 @@
     The <code>DsfrLinkComponent</code> purpose is to represent a link to a
     specific URL, either within or outside the application.
   </p>
-  <p>
+  <p id="top">
     It is based on the
     <a
       target="_blank"
@@ -29,17 +29,22 @@
       name="label"
       required="It is required when the property backToTop is false"
       type="It takes a string">
-      The text actually displayed within the link.
+      The text actually displayed within the link.<br />
+      ⚠️Note that this value will be prefixed by "Télécharger" if the
+      <code>download</code> property is <code>true</code>
     </play-input-property-definition>
     <play-input-property-definition
       name="inline"
       default="false"
       type="boolean">
-      Whether the link is supposed to be displayed within a text or not
+      Whether the link is supposed to be displayed within a text or not.<br />
+      ⚠️Note that this value will be set to <code>false</code> no matter what,
+      if one of the <code>download</code> or <code>backToTop</code>property is
+      <code>true</code>
     </play-input-property-definition>
     <play-input-property-definition
       name="link"
-      [required]="true"
+      required="It is required when the property backToTop is false"
       type="It takes a string">
       It is added to the href attribute, it can be internal or external.
       When the link is external (begins by <code>http://</code> or <code>https://</code>) the target attribute is set to <code>_blank</code>
@@ -55,14 +60,17 @@
       name="backToTop"
       default="false"
       type="boolean">
-      This input permits to set the component as a link which when the user
-      click on it, it scrolls to the top of the current page.
+      This input enables to set the component as a link which when being click
+      upon, scrolls to the "top" in the current page.<br />
+      ⚠️ Keep in mind that you need to add the "top" ID attribute to an element
+      of your choice in the document of your page, in order for it to work as
+      expected
     </play-input-property-definition>
     <play-input-property-definition
       name="icon"
       type="It takes a string">
-      It will display an icon, alone if no label provided, or at the left or
-      right according to the <code>iconAlignment</code> Input.
+      It will display an icon at the left or right of the label, according to
+      the <code>iconAlignment</code> Input.
       <br />
       <a
         target="_blank"
@@ -78,8 +86,8 @@
       name="iconAlignment"
       default="left"
       type="It takes a string with 2 possible values : <code>right</code> or <code>left</code>">
-      It will align the provided icon at the left or right of the label. This
-      input is not necessary if no label is provided. You can import the
+      It will align the provided icon at the left or right of the label. You can
+      import the
       <code>ElementAlignment</code> enum, from the
       <code>&#64;betagouv/ngx-dsfr</code> library entry-point, in your app, to
       safely provide a value for this property.
@@ -91,28 +99,48 @@
     </play-input-property-definition>
     <play-input-property-definition
       name="download"
-      default="false"
-      type="boolean">
-      It is used to permits to the end-users to download a file.
-      The property <code>link</code> value must be the path of the corresponding file.
-    </play-input-property-definition>
-    <play-input-property-definition
-      name="detail"
-      type="It takes a string">
-      An optional text to help end-users understand the purpose of a link.
-      It also can be used to display the file information when it is a download link.
+      type="DownloadOptions">
+      It is used to enable the end-users to download a file. The value must
+      satisfy the <code>DownloadOptions</code> interface :
+      <pre>
+<span class='highlight-code'>export interface DownloadOptions</span> &#123;
+open?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be downloaded and opened right away</span>
+openOnAnotherPage?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be opened on another page</span>
+fileName?: string; <span class='highlight-comment'>// The name of the file when downloaded. Leave empty to keep the name from the server</span>
+fileLang?: string; <span class='highlight-comment'>// The language of the downloaded file</span>
+fileDesc?: string; <span class='highlight-comment'>// An optional description of the file</span>
+  fileType: string; <span class='highlight-comment'>// The extension of the file</span>
+  fileWeight: string; <span class='highlight-comment'>// The expected weight for the file, ex: '42 Ko'</span>
+  &#125;</pre>
+      ⚠️ Please be aware that <code>fileType</code> and
+      <code>fileWeight</code> are mandatory.<br />
+      By default, the other properties of the interface, if not provided, will
+      be set to the values :
+      <pre>
+  &#123;
+open: false,
+  openOnAnotherPage: true,
+  fileName: '',
+  fileLang: 'fr'
+&#125;
+      </pre>
+      The property
+      <code>link</code> must hold the path of the corresponding file. The
+      property <code>label</code> will be prefixed with the mention
+      "Télécharger"
     </play-input-property-definition>
   </dl>
 </section>
 <section class="module-simulations">
   <h2>Play with the Component 😃</h2>
-  <mat-card *ngIf="formInlineTrue">
-    <mat-card-header>
-      <mat-card-title>Link within text</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="simulation">
-      <p>Example :</p>
-<pre>
+  @if (linkForm) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Link Component</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="simulation">
+        <p>Example :</p>
+        <pre>
 <span class='highlight-code'>&lt;dsfr-link</span>
   label="This is a beautiful label"
   link="/homepage"
@@ -120,89 +148,86 @@
   title="This is a title"<span class='highlight-code'>&gt;
 &lt;/dsfr-link&gt;</span>
 </pre>
-      <div class="settings">
-        <form
-          [formGroup]="formInlineTrue"
-          novalidate>
-          <play-input-property-control
-            formControlName="inline"
-            name="inline"
-            type="boolean">
-          </play-input-property-control>
-          <hr />
-          <play-input-property-control
-            formControlName="label"
-            name="label"
-            type="string"
-            [error]="formInlineTrueErrors['label']">
-          </play-input-property-control>
-          <hr />
-          <play-input-property-control
-            formControlName="link"
-            name="link"
-            type="string"
-            [error]="formInlineTrueErrors['link']">
-          </play-input-property-control>
-          <hr />
-          <play-input-property-control
-            formControlName="title"
-            name="title"
-            type="string"
-            [error]="formInlineTrueErrors['_form_']">
-          </play-input-property-control>
-          <hr />
-          <play-input-property-control
-            formControlName="download"
-            name="download"
-            type="boolean">
-          </play-input-property-control>
-          <play-input-property-control
-            formControlName="detail"
-            name="detail"
-            type="string">
-          </play-input-property-control>
-          <play-input-property-control
-            formControlName="backToTop"
-            name="backToTop"
-            type="boolean">
-          </play-input-property-control>
-          <button
-            mat-button
-            (click)="formInlineTrue.reset()">
-            Reset
-          </button>
-        </form>
-      </div>
-      <div class="simulator-wrapper mat-elevation-z4">
-        <play-simulator>
-          <p>
-            @if (
-              !formInlineTrue.getRawValue().backToTop &&
-              !formInlineTrue.getRawValue().download
-            ) {
-              Just some text before,
-            }
-            <dsfr-link
-              [label]="formInlineTrue.getRawValue().label"
-              [title]="formInlineTrue.getRawValue().title"
-              [inline]="formInlineTrue.getRawValue().inline"
-              [backToTop]="formInlineTrue.getRawValue().backToTop"
-              [download]="formInlineTrue.getRawValue().download"
-              [detail]="formInlineTrue.getRawValue().detail"
-              [iconAlignment]="iconAlignment.RIGHT"
-              icon="ancient-gate-fill"
-              [size]="linkSize.MEDIUM"
-              [link]="formInlineTrue.getRawValue().link">
-            </dsfr-link>
-            @if (
-              !formInlineTrue.getRawValue().backToTop &&
-              !formInlineTrue.getRawValue().download
-            ) {
-              ... and after
-            }
-          </p>
-        </play-simulator>
-      </div>
-    </mat-card-content>
-  </mat-card>
+        <div class="settings">
+          <form
+            [formGroup]="linkForm"
+            novalidate>
+            <play-input-property-control
+              formControlName="inline"
+              name="inline"
+              type="boolean">
+            </play-input-property-control>
+            <hr />
+            <play-input-property-control
+              formControlName="label"
+              name="label"
+              type="string"
+              [error]="linkFormErrors['label']">
+            </play-input-property-control>
+            <hr />
+            <play-input-property-control
+              formControlName="link"
+              name="link"
+              type="string"
+              [error]="linkFormErrors['link']">
+            </play-input-property-control>
+            <hr />
+            <play-input-property-control
+              formControlName="title"
+              name="title"
+              type="string"
+              [error]="linkFormErrors['_form_']">
+            </play-input-property-control>
+            <hr />
+            <play-input-property-control
+              formControlName="download"
+              label="Download"
+              name="download"
+              type="boolean">
+            </play-input-property-control>
+            <play-input-property-control
+              formControlName="backToTop"
+              name="backToTop"
+              type="boolean">
+            </play-input-property-control>
+            <button
+              mat-button
+              (click)="linkForm.reset()">
+              Reset
+            </button>
+          </form>
+        </div>
+        <div class="simulator-wrapper mat-elevation-z4">
+          <play-simulator>
+            <p>
+              @if (
+                !linkForm.getRawValue().backToTop &&
+                !linkForm.getRawValue().download &&
+                linkForm.getRawValue().inline
+                ) {
+              <dsfr-link
+                [label]="linkForm.getRawValue().label"
+                [title]="linkForm.getRawValue().title"
+                [inline]="linkForm.getRawValue().inline"
+                [backToTop]="linkForm.getRawValue().backToTop"
+                [download]="linkForm.getRawValue().download ? downloadExample : undefined"
+                [iconAlignment]="iconAlignment.RIGHT"
+                icon="ancient-gate-fill"
+                [size]="linkSize.MEDIUM"
+                [link]="linkForm.getRawValue().link">
+              </dsfr-link>
+                @if (
+                  !linkForm.getRawValue().backToTop &&
+                  !linkForm.getRawValue().download &&
+                  linkForm.getRawValue().inline
+                  ) {
+                ... and after
+                }
+              }
+            </p>
+          </play-simulator>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
 </section>

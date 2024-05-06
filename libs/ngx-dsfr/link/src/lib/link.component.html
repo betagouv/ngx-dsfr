@@ -1,8 +1,10 @@
 @switch (template) {
   @case (templateType.BACK_TO_TOP) {
     <a
-      [class]="'fr-link fr-icon-arrow-up-fill fr-link--icon-left fr-link--' + size"
-      href="#top">
+      [class]="classes"
+      routerLink="."
+      fragment="top"
+      (click)="onBackToTop()">
       Haut de page
     </a>
   }
@@ -28,14 +30,18 @@
     <a
       [class]="classes"
       [href]="link"
-      [download]="download"
-      [title]="title + ' - ' + link">
-      {{ label }}
-      @if (detail) {
-        <span class="fr-link__detail">
-          {{ detail }}
-        </span>
-      }
+      [attr.download]="download?.open ? null : download?.fileName"
+      [attr.target]="
+        download?.open && download?.openOnAnotherPage ? '_blank' : null
+      "
+      [hreflang]="download?.fileLang"
+      [title]="title">
+      Télécharger {{ label }}
+      <span class="fr-link__detail">
+        {{ download?.fileType?.toUpperCase() }} -
+        {{ download?.fileWeight }}
+        {{ download?.fileDesc ? "/ " + download?.fileDesc : "" }}
+      </span>
     </a>
   }
 }
