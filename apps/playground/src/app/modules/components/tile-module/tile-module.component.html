@@ -1,7 +1,7 @@
 <section class="module-description">
   <h2>DsfrTileComponent</h2>
   <p>
-    The <code>DsfrTileComponent</code> purpose is to represent link tile element.
+    The <code>DsfrTileComponent</code> purpose is to represent a link as a tile element.
   </p>
   <p>
     It is based on the
@@ -49,7 +49,7 @@
     <play-input-property-definition
       name="align"
       default="vertical"
-      type="It takes a string with only 2 possible values : <code>horizontal</code> or <code>vertical</code>" >
+      type="It takes a string with only 2 possible values : <code>horizontal</code> or <code>vertical</code>">
     </play-input-property-definition>
     <play-input-property-definition
       name="size"
@@ -64,24 +64,16 @@
       type="It takes a string with 5 possible values : <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>">
       You can see the
       <a
-      target="_blank"
-      hreflang="fr"
-      title="The documentation page for the breakpoint rules in the DSFR"
-      href="https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/grille-et-points-de-rupture/">
-      current breakpoint rules documentation in the DSFR
-      <mat-icon>open_in_new</mat-icon>
-    </a>. By default, the Tile Component will be either vertical or horizontal (
+        target="_blank"
+        hreflang="fr"
+        title="The documentation page for the breakpoint rules in the DSFR"
+        href="https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/grille-et-points-de-rupture/">
+        current breakpoint rules documentation in the DSFR
+        <mat-icon>open_in_new</mat-icon>
+      </a>. By default, the Tile Component will be either vertical or horizontal (
       depending on the <code>align</code> property ), whatever the screen size.
       If you need to have it take the other alignment for screens with widths
       greater than one of these breakpoints, you can use this property.
-    </play-input-property-definition>
-    <play-input-property-definition
-      name="download"
-      default="false"
-      type="boolean">
-      It is used to permits to the end-users to download a file. <br>
-      The property <code>link</code> value must be the path of the corresponding file. <br>
-      When this property is true, the alignment is automatically set to <code>horizontal</code>, even if <code>vertical</code> is selected.
     </play-input-property-definition>
     <play-input-property-definition
       name="detail"
@@ -100,26 +92,25 @@
       satisfy the <code>DownloadOptions</code> interface :
       <pre>
 <span class='highlight-code'>export interface DownloadOptions</span> &#123;
-    open?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be downloaded and opened right away</span>
-    openOnAnotherPage?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be opened on another page</span>
-    fileName?: string; <span class='highlight-comment'>// The name of the file when downloaded. Leave empty to keep the name from the server</span>
-    fileLang?: string; <span class='highlight-comment'>// The language of the downloaded file</span>
-    fileDesc?: string; <span class='highlight-comment'>// An optional description of the file</span>
+  open?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be downloaded and opened right away</span>
+  openOnAnotherPage?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be opened on another page</span>
+  fileName?: string; <span class='highlight-comment'>// The name of the file when downloaded. Leave empty to keep the name from the server</span>
+  fileLang?: string; <span class='highlight-comment'>// The language of the downloaded file</span>
+  fileDesc?: string; <span class='highlight-comment'>// An optional description of the file</span>
     fileType: string; <span class='highlight-comment'>// The extension of the file</span>
     fileWeight: string; <span class='highlight-comment'>// The expected weight for the file, ex: '42 Ko'</span>
-&#125;</pre>
+&#125;
+      </pre>
       ⚠️ Please be aware that <code>fileType</code> and
       <code>fileWeight</code> are mandatory.<br />
       By default, the other properties of the interface, if not provided, will
       be set to the values :
-      <pre>
-&#123;
+      <pre>&#123;
     open: false,
     openOnAnotherPage: true,
     fileName: '',
     fileLang: 'fr'
-&#125;</pre
-      >
+&#125;</pre>
       The property
       <code>link</code> must hold the path of the corresponding file. The
       property <code>title</code> will be prefixed with the mention
@@ -285,7 +276,7 @@
                 [title]="formTileWithoutImage.getRawValue().title"
                 [align]="formTileWithoutImage.getRawValue().align"
                 [download]="
-                formTileDescriptionAndTitle.getRawValue().download
+                formTileWithoutImage.getRawValue().download
                   ? downloadExample
                   : undefined
               "
@@ -300,7 +291,7 @@
     </mat-card>
   }
 
-  @if(formTileGrid) {
+  @if (formTileGrid) {
     <mat-card>
       <mat-card-header>
         <mat-card-title>Grid tiles</mat-card-title>

@@ -38,7 +38,7 @@ enum TemplateType {
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss']
 })
-export class DsfrLinkComponent extends DownloadEnablerDirective implements OnChanges  {
+export class DsfrLinkComponent extends DownloadEnablerDirective implements OnChanges {
   @Input() label: string = '';
   @Input() link: string = '';
   @Input() title: string = '';
@@ -54,15 +54,15 @@ export class DsfrLinkComponent extends DownloadEnablerDirective implements OnCha
   isExternal: boolean = false;
   classes: string = '';
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor (@Inject(DOCUMENT) private document: Document) {
     super();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges (): void {
     this.setTemplateType();
     this.setDownloadOptions();
 
-     if (!this.backToTop) {
+    if (!this.backToTop) {
 
       if (!this.label) {
         throw EMPTY_LABEL_ERROR;
@@ -70,24 +70,24 @@ export class DsfrLinkComponent extends DownloadEnablerDirective implements OnCha
       if (!this.link) {
         throw EMPTY_LINK_ERROR;
       }
+    }
 
-      if (this.isExternal && !this.title) {
-        throw EMPTY_TITLE_ERROR;
-      }
+    if (this.isExternal && !this.title) {
+      throw EMPTY_TITLE_ERROR;
+    }
 
-      this.classes = '';
+    this.classes = '';
 
-      if (!this.inline) {
-        this.initClasses();
-      }
+    if (!this.inline) {
+      this.initClasses();
     }
   }
 
-  private setTemplateType(): void {
+  private setTemplateType (): void {
     this.template = TemplateType.INTERNAL;
 
     if (this.link.indexOf('http') > -1 && !this.download) {
-      this.template = TemplateType.EXTERNAL
+      this.template = TemplateType.EXTERNAL;
     }
 
     if (this.download) {
@@ -100,10 +100,9 @@ export class DsfrLinkComponent extends DownloadEnablerDirective implements OnCha
       this.inline = false;
     }
 
-
   }
 
-  private initClasses(): void {
+  private initClasses (): void {
     this.classes += `fr-link fr-link--${this.size}`;
 
     if (this.download) {
@@ -122,7 +121,7 @@ export class DsfrLinkComponent extends DownloadEnablerDirective implements OnCha
     }
   }
 
-  onBackToTop() {
+  onBackToTop () {
     const anchor: HTMLElement | null = this.document.getElementById('top');
     if (anchor) {
       anchor.scrollIntoView({ behavior: 'smooth' });

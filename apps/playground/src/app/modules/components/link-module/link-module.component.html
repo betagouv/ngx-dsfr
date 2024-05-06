@@ -47,7 +47,8 @@
       required="It is required when the property backToTop is false"
       type="It takes a string">
       It is added to the href attribute, it can be internal or external.
-      When the link is external (begins by <code>http://</code> or <code>https://</code>) the target attribute is set to <code>_blank</code>
+      When the link is external (begins by <code>http://</code> or <code>https://</code>) the target attribute is set to
+      <code>_blank</code>
     </play-input-property-definition>
     <play-input-property-definition
       name="size"
@@ -104,26 +105,25 @@
       satisfy the <code>DownloadOptions</code> interface :
       <pre>
 <span class='highlight-code'>export interface DownloadOptions</span> &#123;
-open?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be downloaded and opened right away</span>
-openOnAnotherPage?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be opened on another page</span>
-fileName?: string; <span class='highlight-comment'>// The name of the file when downloaded. Leave empty to keep the name from the server</span>
-fileLang?: string; <span class='highlight-comment'>// The language of the downloaded file</span>
-fileDesc?: string; <span class='highlight-comment'>// An optional description of the file</span>
-  fileType: string; <span class='highlight-comment'>// The extension of the file</span>
-  fileWeight: string; <span class='highlight-comment'>// The expected weight for the file, ex: '42 Ko'</span>
-  &#125;</pre>
+  open?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be downloaded and opened right away</span>
+  openOnAnotherPage?: boolean; <span class='highlight-comment'>// Whether or not you want the file to be opened on another page</span>
+  fileName?: string; <span class='highlight-comment'>// The name of the file when downloaded. Leave empty to keep the name from the server</span>
+  fileLang?: string; <span class='highlight-comment'>// The language of the downloaded file</span>
+  fileDesc?: string; <span class='highlight-comment'>// An optional description of the file</span>
+    fileType: string; <span class='highlight-comment'>// The extension of the file</span>
+    fileWeight: string; <span class='highlight-comment'>// The expected weight for the file, ex: '42 Ko'</span>
+&#125;
+      </pre>
       ⚠️ Please be aware that <code>fileType</code> and
       <code>fileWeight</code> are mandatory.<br />
       By default, the other properties of the interface, if not provided, will
       be set to the values :
-      <pre>
-  &#123;
-open: false,
+      <pre>&#123;
+  open: false,
   openOnAnotherPage: true,
   fileName: '',
   fileLang: 'fr'
-&#125;
-      </pre>
+&#125;</pre>
       The property
       <code>link</code> must hold the path of the corresponding file. The
       property <code>label</code> will be prefixed with the mention
@@ -200,28 +200,24 @@ open: false,
         <div class="simulator-wrapper mat-elevation-z4">
           <play-simulator>
             <p>
-              @if (
-                !linkForm.getRawValue().backToTop &&
+              @if (!linkForm.getRawValue().backToTop &&
+              !linkForm.getRawValue().download &&
+              linkForm.getRawValue().inline) {
+                <dsfr-link
+                  [label]="linkForm.getRawValue().label"
+                  [title]="linkForm.getRawValue().title"
+                  [inline]="linkForm.getRawValue().inline"
+                  [backToTop]="linkForm.getRawValue().backToTop"
+                  [download]="linkForm.getRawValue().download ? downloadExample : undefined"
+                  [iconAlignment]="iconAlignment.RIGHT"
+                  icon="ancient-gate-fill"
+                  [size]="linkSize.MEDIUM"
+                  [link]="linkForm.getRawValue().link">
+                </dsfr-link>
+                @if (!linkForm.getRawValue().backToTop &&
                 !linkForm.getRawValue().download &&
-                linkForm.getRawValue().inline
-                ) {
-              <dsfr-link
-                [label]="linkForm.getRawValue().label"
-                [title]="linkForm.getRawValue().title"
-                [inline]="linkForm.getRawValue().inline"
-                [backToTop]="linkForm.getRawValue().backToTop"
-                [download]="linkForm.getRawValue().download ? downloadExample : undefined"
-                [iconAlignment]="iconAlignment.RIGHT"
-                icon="ancient-gate-fill"
-                [size]="linkSize.MEDIUM"
-                [link]="linkForm.getRawValue().link">
-              </dsfr-link>
-                @if (
-                  !linkForm.getRawValue().backToTop &&
-                  !linkForm.getRawValue().download &&
-                  linkForm.getRawValue().inline
-                  ) {
-                ... and after
+                linkForm.getRawValue().inline) {
+                  ... and after
                 }
               }
             </p>
