@@ -1,30 +1,57 @@
 <div [class]="classes">
   <div class="fr-tile__body">
-    <h4 class="fr-tile__title">
-      <ng-container [ngSwitch]="template">
-        <ng-container *ngSwitchCase="templateType.INTERNAL">
-          <a
-            class="fr-tile__link"
-            [routerLink]="link">
-            {{ title }}
-          </a>
-        </ng-container>
-        <ng-container *ngSwitchCase="templateType.EXTERNAL">
-          <a
-            class="fr-tile__link"
-            [href]="link"
-            target="_blank">
-            {{ title }}
-          </a>
-        </ng-container>
-      </ng-container>
-    </h4>
-    <p class="fr-tile__desc" *ngIf="description">
-      {{ description }}
-    </p>
+    <div class="fr-tile__content">
+      <h3 class="fr-tile__title">
+        @switch (template) {
+          @case (templateType.INTERNAL) {
+            <a
+              [routerLink]="link">
+              {{ title }}
+            </a>
+          }
+          @case (templateType.EXTERNAL) {
+            <a
+              [href]="link"
+              rel="noopener"
+              target="_blank">
+              {{ title }}
+            </a>
+          }
+          @case (templateType.DOWNLOAD) {
+            <a
+              [href]="link"
+              [attr.download]="download?.open ? null : download?.fileName"
+              [attr.target]="download?.open && download?.openOnAnotherPage ? '_blank' : null"
+              [hreflang]="download?.fileLang">
+              Télécharger {{ title }}
+            </a>
+          }
+        }
+      </h3>
+      @if (description) {
+        <p class="fr-tile__desc">
+          {{ description }}
+        </p>
+      }
+      @if (download) {
+        <p class="fr-tile__detail">
+          {{ download.fileType.toUpperCase() }} -
+          {{ download.fileWeight }}
+          {{ download.fileDesc ? "/ " + download.fileDesc : "" }}
+        </p>
+      } @else if (detail) {
+        <p class="fr-tile__detail">
+          {{ detail }}
+        </p>
+      }
+    </div>
   </div>
-  <div class="fr-tile__img" *ngIf="image">
-    <img [src]="image" class="fr-responsive-img" alt="">
-    <!-- ALT must be empty because this image is just a design element and does not need to be restituted by assistive technology -->
-  </div>
+  @if (image) {
+    <div class="fr-tile__header">
+      <div class="fr-tile__img">
+        <img [src]="image" class="fr-responsive-img" alt="">
+        <!-- ALT must be empty because this image is just a design element and does not need to be restituted by assistive technology -->
+      </div>
+    </div>
+  }
 </div>
