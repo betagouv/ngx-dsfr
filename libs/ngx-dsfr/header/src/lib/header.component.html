@@ -1,159 +1,176 @@
 <header
   role="banner"
+  [class]="{ 'mini-mobile-header': miniMobileHeader }"
   class="fr-header">
   <div class="fr-header__body">
     <div class="fr-container">
       <div class="fr-header__body-row">
         <div class="fr-header__brand fr-enlarge-link">
           <div class="fr-header__brand-top">
+            <!-- GOVERNMENT LOGO -->
             <div class="fr-header__logo">
-              <ng-container
-                *ngIf="
-                  !operatorLogoSrc && !appName;
-                  then logoWithLink;
-                  else logo
-                ">
-              </ng-container>
-              <ng-template #logoWithLink>
+              @if (!operatorLogoSrc && !appName) {
                 <a
                   [routerLink]="link"
                   [title]="'Accueil - ' + institutionInlined">
                   <ng-container *ngTemplateOutlet="logo"></ng-container>
                 </a>
-              </ng-template>
+              } @else {
+                <ng-container *ngTemplateOutlet="logo"></ng-container>
+              }
               <ng-template #logo>
-                <p class="fr-logo">
-                  <ng-container
-                    *ngFor="let string of institutionArray; last as isLast">
-                    {{ string }} <br *ngIf="!isLast" />
-                  </ng-container>
-                </p>
+                <div class="fr-logo">
+                  <div class="institution">
+                    @for (
+                        string of institutionArray;
+                      track $index;
+                      let isLast = $last
+                      ) {
+                      {{ string }} <br *ngIf="!isLast" />
+                    }
+                  </div>
+                </div>
               </ng-template>
             </div>
-            <div
-              class="fr-header__operator"
-              *ngIf="operatorLogoSrc">
-              <ng-container *ngIf="!appName; then imgWithLink; else img">
-              </ng-container>
-              <ng-template #imgWithLink>
-                <a
-                  [routerLink]="link"
-                  [title]="
-                    'Accueil - ' + operatorLogoAlt + ' - ' + institutionInlined
-                  ">
+            <!-- OPERATOR LOGO -->
+            @if (operatorLogoSrc) {
+              <div class="fr-header__operator">
+                @if (!appName) {
+                  <a
+                    [routerLink]="link"
+                    [title]="
+                      'Accueil - ' +
+                      operatorLogoAlt +
+                      ' - ' +
+                      institutionInlined
+                    ">
+                    <ng-container *ngTemplateOutlet="img"></ng-container>
+                  </a>
+                } @else {
                   <ng-container *ngTemplateOutlet="img"></ng-container>
-                </a>
-              </ng-template>
-              <ng-template #img>
-                <img
-                  class="fr-responsive-img"
-                  [src]="operatorLogoSrc"
-                  [alt]="operatorLogoAlt" />
-              </ng-template>
-            </div>
+                }
+                <ng-template #img>
+                  <img
+                    class="fr-responsive-img"
+                    [src]="operatorLogoSrc"
+                    [alt]="operatorLogoAlt" />
+                </ng-template>
+              </div>
+            }
+
             <div class="fr-header__navbar">
-              <button
-                *ngIf="searchBar"
-                class="fr-btn--search fr-btn"
-                aria-controls="searchModal"
-                id="searchButton"
-                title="Rechercher"
-                (click)="isSearchBarOpened = true">
-                Rechercher
-              </button>
-              <button
-                *ngIf="actions.length || nav"
-                class="fr-btn--menu fr-btn"
-                aria-controls="responsive-popup-menu"
-                aria-haspopup="menu"
-                id="button-burger-menu"
-                (click)="isMobileMenuOpened = true"
-                title="Menu">
-                Menu
-              </button>
+              @if (searchBar) {
+                <button
+                  class="fr-btn--search fr-btn"
+                  aria-controls="searchModal"
+                  id="searchButton"
+                  title="Rechercher"
+                  (click)="isSearchBarOpened = true">
+                  Rechercher
+                </button>
+              }
+              @if (actions.length || nav) {
+                <button
+                  class="fr-btn--menu fr-btn"
+                  aria-controls="responsive-popup-menu"
+                  aria-haspopup="menu"
+                  id="button-burger-menu"
+                  (click)="isMobileMenuOpened = true"
+                  title="Menu">
+                  Menu
+                </button>
+              }
             </div>
           </div>
-          <div
-            class="fr-header__service"
-            *ngIf="appName">
-            <a
-              [routerLink]="link"
-              [title]="appLinkTitle">
-              <p class="fr-header__service-title">{{ appName }}</p>
-            </a>
-            <p
-              class="fr-header__service-tagline"
-              *ngIf="appDescription">
-              {{ appDescription }}
-            </p>
-          </div>
+          <!-- SERVICE NAME -->
+          @if (appName) {
+            <div class="fr-header__service">
+              <a
+                [routerLink]="link"
+                [title]="appLinkTitle">
+                <p class="fr-header__service-title">{{ appName }}</p>
+              </a>
+              @if (appDescription) {
+                <p class="fr-header__service-tagline">
+                  {{ appDescription }}
+                </p>
+              }
+            </div>
+          }
         </div>
-        <div
-          class="fr-header__tools"
-          *ngIf="actions.length">
-          <div class="fr-header__tools-links">
-            <ul class="fr-header__actions">
-              <li *ngFor="let action of actions">
+        @if (actions.length) {
+          <div class="fr-header__tools">
+            <div class="fr-header__tools-links">
+              <ul class="fr-header__actions">
+                @for (action of actions; track $index) {
+                  <li>
+                    <ng-container
+                      *ngTemplateOutlet="action.templateRef"></ng-container>
+                  </li>
+                }
+              </ul>
+            </div>
+            @if (searchBar) {
+              <div
+                [class.fr-modal--opened]="isSearchBarOpened"
+                class="fr-header__search fr-modal"
+                id="searchModal">
+                <div class="fr-container fr-container-lg--fluid">
+                  <dsfr-button
+                    class="close-modal"
+                    label="Fermer"
+                    title="Fermer"
+                    ariaControls="searchModal"
+                    (click)="isSearchBarOpened = false"
+                    [type]="buttonTypes.CLOSE">
+                  </dsfr-button>
+                  <dsfr-search-bar
+                    id="searchHeader"
+                    label="Rechercher"
+                    placeholder="Rechercher"
+                    [autocomplete]="searchBarAutoCompletion"
+                    [hasSearchButton]="true"
+                    [size]="elementSize.SMALL"
+                    (searchQuerySubmitted)="onSearchQuerySubmitted($event)">
+                  </dsfr-search-bar>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  @if (actions.length || nav) {
+    <div
+      class="fr-header__menu fr-modal"
+      [class.fr-modal--opened]="isMobileMenuOpened"
+      id="responsive-popup-menu"
+      role="dialog"
+      [attr.aria-modal]="isMobileMenuOpened ? 'true' : undefined"
+      [attr.open]="isMobileMenuOpened ? 'true' : undefined"
+      aria-labelledby="button-burger-menu">
+      <div class="fr-container">
+        <dsfr-button
+          class="close-modal"
+          label="Fermer"
+          title="Fermer"
+          ariaControls="responsive-popup-menu"
+          (click)="isMobileMenuOpened = false"
+          [type]="buttonTypes.CLOSE">
+        </dsfr-button>
+        <div class="fr-header__menu-links">
+          <ul class="fr-header__actions">
+            @for (action of actions; track $index) {
+              <li>
                 <ng-container
                   *ngTemplateOutlet="action.templateRef"></ng-container>
               </li>
-            </ul>
-          </div>
-          <div
-            *ngIf="searchBar"
-            [class.fr-modal--opened]="isSearchBarOpened"
-            class="fr-header__search fr-modal"
-            id="searchModal">
-            <div class="fr-container fr-container-lg--fluid">
-              <dsfr-button
-                class="close-modal"
-                label="Fermer"
-                title="Fermer"
-                ariaControls="searchModal"
-                (click)="isSearchBarOpened = false"
-                [type]="buttonTypes.CLOSE">
-              </dsfr-button>
-              <dsfr-search-bar
-                id="searchHeader"
-                label="Rechercher"
-                placeholder="Rechercher"
-                [autocomplete]="searchBarAutoCompletion"
-                [hasSearchButton]="true"
-                [size]="elementSize.SMALL"
-                (searchQuerySubmitted)='onSearchQuerySubmitted($event)'>
-              </dsfr-search-bar>
-            </div>
-          </div>
+            }
+          </ul>
         </div>
+        <ng-content select="dsfr-navigation"></ng-content>
       </div>
     </div>
-  </div>
-  <div
-    *ngIf="actions.length || nav"
-    class="fr-header__menu fr-modal"
-    [class.fr-modal--opened]="isMobileMenuOpened"
-    id="responsive-popup-menu"
-    role="dialog"
-    [attr.aria-modal]="isMobileMenuOpened ? 'true' : undefined"
-    [attr.open]="isMobileMenuOpened ? 'true' : undefined"
-    aria-labelledby="button-burger-menu">
-    <div class="fr-container">
-      <dsfr-button
-        class="close-modal"
-        label="Fermer"
-        title="Fermer"
-        ariaControls="responsive-popup-menu"
-        (click)="isMobileMenuOpened = false"
-        [type]="buttonTypes.CLOSE">
-      </dsfr-button>
-      <div class="fr-header__menu-links">
-        <ul class="fr-header__actions">
-          <li *ngFor="let action of actions">
-            <ng-container *ngTemplateOutlet="action.templateRef"></ng-container>
-          </li>
-        </ul>
-      </div>
-      <ng-content select="dsfr-navigation"></ng-content>
-    </div>
-  </div>
+  }
 </header>

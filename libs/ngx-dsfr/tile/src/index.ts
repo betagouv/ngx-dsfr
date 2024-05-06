@@ -1,2 +1,2 @@
-export { DsfrTileComponent } from './lib/tile.component';
+export { DsfrTileComponent, TemplateAlign } from './lib/tile.component';
 export * from './lib/tile.module';

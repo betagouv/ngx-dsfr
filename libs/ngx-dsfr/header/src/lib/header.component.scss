@@ -5,6 +5,75 @@
 
 // Actual styling
 .fr-header {
+  &.mini-mobile-header {
+    .fr-header__brand {
+      flex-wrap: nowrap;
+
+      .fr-header__brand-top {
+        width: auto;
+
+        .fr-header__logo {
+          padding-right: 0;
+          margin-right: -8px;
+
+          @media (min-width: 62em) {
+            padding-right: 1rem;
+            margin-right: 0.5rem;
+          }
+
+          .fr-logo {
+            &::before {
+              margin-bottom: -0.1rem;
+              margin-right: 1rem;
+
+              @media (min-width: 62em) {
+                margin-bottom: 0.25rem;
+                margin-right: unset;
+              }
+            }
+
+            &::after {
+              content: none;
+
+              @media (min-width: 62em) {
+                content: "";
+              }
+            }
+          }
+        }
+
+        .institution,
+        .fr-header__operator {
+          display: none;
+
+          @media (min-width: 62em) {
+            display: block;
+          }
+        }
+      }
+
+      .fr-header__service {
+        box-shadow: none;
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+        padding: 1rem 0;
+
+        @media (min-width: 62em) {
+          padding: 1rem;
+        }
+
+        .fr-header__service-tagline {
+          display: none;
+
+          @media (min-width: 62em) {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
   .fr-header__actions {
     display: flex;
     flex-wrap: wrap;
@@ -37,7 +106,6 @@
   }
 
   .fr-modal {
-
     @media (min-width: 62em) {
       margin-top: 26px;
     }
@@ -50,5 +118,4 @@
       }
     }
   }
-
 }
