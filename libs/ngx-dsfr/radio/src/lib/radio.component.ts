@@ -25,6 +25,7 @@ export interface RadioItem {
   id: string;
   label: string;
   value: string;
+  disabled?: boolean
   hint?: string;
 }
 
