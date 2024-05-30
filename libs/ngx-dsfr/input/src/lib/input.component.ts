@@ -16,7 +16,6 @@ export const EMPTY_NAME_ERROR: string =
 export const EMPTY_FAILURE_MESSAGE_ERROR: string =
   'You MUST provide a value for the failureMessage attribute when hasFailed is true 😡 !!!';
 
-
 export type InputType = 'text' | 'textarea' | 'number' | 'date';
 
 @Component({
@@ -92,7 +91,8 @@ export class DsfrInputComponent implements ControlValueAccessor, OnInit, OnChang
   private setSuccessOrErrorClasses() {
     this.inputGroupClasses = {
       'fr-input-group--error': this.hasFailed,
-      'fr-input-group--valid': this.hasSucceeded
+      'fr-input-group--valid': this.hasSucceeded,
+      'fr-input-group--disabled': this.disabled
     };
 
     this.inputClasses = {
